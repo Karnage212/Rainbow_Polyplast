@@ -50,6 +50,9 @@
     ::-webkit-scrollbar-track { background: #0B2545; }
     ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #70A443; }
+    video::-webkit-media-controls { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; opacity: 0; }
+    video { pointer-events: none; }
   </style>
   <script type="importmap">
     {
@@ -451,7 +454,14 @@
       const imagesRef = useRef([]);
       const [scrollPercent, setScrollPercent] = useState(0);
       const [isMobile, setIsMobile] = useState(false);
+      const mobileVideoRef = useRef(null);
       const frameCount = 108;
+
+      useEffect(() => {
+        if (isMobile && mobileVideoRef.current) {
+          mobileVideoRef.current.play().catch(e => console.log("iOS Auto-play prevented (Low Power Mode)."));
+        }
+      }, [isMobile]);
       useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
@@ -531,7 +541,7 @@
           <div className="bg-slate-900 min-h-screen font-sans">
             <div className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-24 text-center overflow-hidden">
               <div className="absolute inset-0 z-0">
-                <video src="./assets/mobile_bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" className="w-full h-full object-cover opacity-70 mix-blend-screen"></video>
+                <video ref=${mobileVideoRef} src="./assets/mobile_bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
               </div>
               <${motion.div}
