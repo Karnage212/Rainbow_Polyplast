@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainbow Polypack | Premium PET Preform Manufacturers</title>
+  <meta name="description" content="Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance 15g, 24g, 26g CTC 29/21mm, Alaska Short Neck, and 63mm Food Jar preforms utilizing advanced Hot Runner Moulds.">
+  <meta name="keywords" content="PET preform manufacturer Gujarat, CTC 29/21 preform, Alaska short neck preform, 63mm jar preform, Chhatral GIDC plastics, Rainbow Polypack">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B2545',
+              green: '#70A443'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          blur: {
+            'xs': '2px',
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    @media (pointer: fine) {
+      body, a, button, input, select, textarea {
+        cursor: none !important;
+      }
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F3F4F6;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      color: #0B2545;
+    }
+    .font-mono-hud { font-family: 'JetBrains Mono', monospace; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0B2545; }
+    ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #70A443; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "framer-motion": "https://esm.sh/framer-motion@10.16.4?deps=react@18.2.0,react-dom@18.2.0",
+        "react-router-dom": "https://esm.sh/react-router-dom@6.22.1?deps=react@18.2.0,react-dom@18.2.0",
+        "htm": "https://esm.sh/htm@3.1.1"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module">
+    import React, { useEffect, useState, useRef, useMemo } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { useScroll, useTransform, motion, useMotionValueEvent, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
+    import { HashRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+    import htm from 'htm';
+    const html = htm.bind(React.createElement);
+    function MagneticButton({ children, className, onClick, type = "button" }) {
+      return html`
+        <${motion.button}
+          type=${type}
+          onClick=${onClick}
+          whileHover=${{ scale: 1.03, y: -2 }}
+          whileTap=${{ scale: 0.97 }}
+          transition=${{ type: "spring", stiffness: 400, damping: 17 }}
+          className=${className}
+        >
+          ${children}
+        <//>
+      `;
+    }
+    function MagneticLink({ children, className, to }) {
+      return html`
+        <${Link} to=${to} className="inline-block">
+          <${motion.div}
+            whileHover=${{ scale: 1.03, y: -2 }}
+            whileTap=${{ scale: 0.97 }}
+            transition=${{ type: "spring", stiffness: 400, damping: 17 }}
+            className=${className}
+          >
+            ${children}
+          <//>
+        <//>
+      `;
+    }
+    function TiltCard({ children, className, style = {} }) {
+      const ref = useRef(null);
+      const x = useMotionValue(0);
+      const y = useMotionValue(0);
+      const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
+      const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
+      const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+      const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+      const [position, setPosition] = useState({ x: 0, y: 0 });
+      const [opacity, setOpacity] = useState(0);
+      const handleMouseMove = (e) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        x.set(mouseX / width - 0.5);
+        y.set(mouseY / height - 0.5);
+        setPosition({ x: mouseX, y: mouseY });
+      };
+      const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+        setOpacity(0);
+      };
+      return html`
+        <${motion.div}
+          ref=${ref}
+          onMouseMove=${handleMouseMove}
+          onMouseEnter=${() => setOpacity(1)}
+          onMouseLeave=${handleMouseLeave}
+          style=${{ rotateX, rotateY, transformStyle: "preserve-3d", ...style }}
+          whileHover=${{ scale: 1.02, zIndex: 10 }}
+          className=${"relative group perspective-1000 bg-white/90 backdrop-blur-sm border border-white/60 shadow-[0_8px_32px_rgba(11,37,69,0.08)] overflow-hidden " + className}
+        >
+          <div
+            className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
+            style=${{
+              opacity,
+              background: 'radial-gradient(800px circle at ' + position.x + 'px ' + position.y + 'px, rgba(255,105,180,0.08), rgba(0,255,255,0.08) 30%, rgba(255,255,0,0.08) 60%, transparent 80%)'
+            }}
+          ></div>
+          <div className="relative z-10 w-full h-full flex flex-col">
+            ${children}
+          </div>
+        <//>
+      `;
+    }
+    function QCAccordion() {
+      const [activeIndex, setActiveIndex] = useState(0);
+      const items = [
+        {
+          title: "Polarized Light Optical Inspection",
+          content: "Every batch is examined under polarized light to ensure absolute zero stress crystallinity, guaranteeing brilliant, cloud-free transparency in your final blown bottles."
+        },
+        {
+          title: "Precision Gate Vestige Control",
+          content: "Utilizing 100% hot runner moulds guarantees a smooth, ultra-flush gate finish (≤0.1mm) on the preform base, eliminating the risk of pinhole leaks during the high-pressure blowing phase."
+        },
+        {
+          title: "Drop & Top-Load Testing",
+          content: "Preforms undergo rigorous drop simulations and top-load structural testing to ensure wall uniformity, meaning your filled bottles can survive extreme transit and stacking stress."
+        }
+      ];
+      return html`
+        <div className="w-full max-w-3xl mx-auto space-y-4">
+          ${items.map((item, index) => html`
+            <div key=${index} className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <button
+                onClick=${() => setActiveIndex(activeIndex === index ? -1 : index)}
+                className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
+              >
+                <span className="text-lg font-black text-brand-navy">${item.title}</span>
+                <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-navy border-brand-navy text-white" : "border-slate-300 text-slate-500 group-hover:border-brand-navy")}>
+                  <svg className=${"w-5 h-5 transition-transform duration-300 " + (activeIndex === index ? "rotate-180" : "rotate-0")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </button>
+              <${AnimatePresence}>
+                ${activeIndex === index && html`
+                  <${motion.div}
+                    initial=${{ height: 0, opacity: 0 }}
+                    animate=${{ height: "auto", opacity: 1 }}
+                    exit=${{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-8 pb-6 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                      ${item.content}
+                    </div>
+                  <//>
+                `}
+              <//>
+            </div>
+          `)}
+        </div>
+      `;
+    }
+    function StartupAgility() {
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      };
+      const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+      };
+      return html`
+        <div className="bg-[#F3F4F6] py-32 border-y border-slate-200 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_rgba(112,164,67,0.05),_transparent_50%)] pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
+              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono-hud shadow-lg">Why Partner With Us</span>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-navy tracking-tight mb-6">The Startup Agility Advantage</h2>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
+                We are a modern, agile manufacturing firm unburdened by legacy bureaucracy. Experience rapid turnarounds, flexible MOQs, and direct access to technical founders.
+              </p>
+            </div>
+            <${motion.div}
+              variants=${containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport=${{ once: true, margin: "-50px" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32"
+            >
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-8 rounded-3xl border border-slate-200 shadow-md h-full hover:border-brand-green/30">
+                  <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-6 border border-brand-green/20">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </div>
+                  <h3 className="text-xl font-black text-brand-navy mb-3">48-Hour Sample Dispatch</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                    Test our preforms on your lines immediately. We guarantee lightning-fast sample dispatch without multi-week legacy sales cycles.
+                  </p>
+                <//>
+              <//>
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-8 rounded-3xl border border-slate-200 shadow-md h-full hover:border-brand-green/30">
+                  <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-6 border border-brand-green/20">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                  </div>
+                  <h3 className="text-xl font-black text-brand-navy mb-3">Flexible Startup MOQs</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                    Whether you are a growing craft beverage brand or launching a pilot product line, our agile production runs are tailored to your scaling needs.
+                  </p>
+                <//>
+              <//>
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-8 rounded-3xl border border-slate-200 shadow-md h-full hover:border-brand-green/30">
+                  <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-6 border border-brand-green/20">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                  </div>
+                  <h3 className="text-xl font-black text-brand-navy mb-3">Direct Technical Consultation</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                    Bypass bureaucratic sales reps. Speak directly with our founding engineering team to solve your specific blowing and packaging challenges.
+                  </p>
+                <//>
+              <//>
+            <//>
+            <div className="text-center mb-16">
+              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono-hud shadow-lg">Zero-Defect Commitment</span>
+              <h2 className="text-4xl md:text-5xl font-black text-brand-navy tracking-tight mb-6">Zero-Defect Quality Protocol</h2>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+                Speed means nothing without structural perfection. Every batch undergoes rigorous mechanical and optical testing before it leaves our facility.
+              </p>
+            </div>
+            <${QCAccordion} />
+          </div>
+        </div>
+      `;
+    }
+    function Footer() {
+      return html`
+        <footer className="bg-[#0B2545] text-slate-300 py-24 relative overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+              <div className="md:col-span-2">
+                <div className="flex items-center mb-8 relative">
+                  <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 pointer-events-none"></div>
+                  <img src="./assets/rainbow-polypack-logo.svg" className="h-16 md:h-20 w-auto mr-6 object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo" />
+                  <span className="text-xl md:text-2xl font-black text-white tracking-widest relative z-10">RAINBOW POLYPACK</span>
+                </div>
+                <p className="text-slate-400 mb-8 max-w-md leading-relaxed text-sm font-medium">
+                  High-precision PET packaging solutions engineered for automated blowing lines. Delivering excellence in optical clarity, dimensional stability, and zero-defect manufacturing.
+                </p>
+                <div className="flex space-x-4">
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-sm font-extrabold text-white uppercase tracking-wider mb-6">Quick Links</h3>
+                <ul className="space-y-4 text-sm font-medium text-slate-400">
+                  <li><${Link} to="/" className="hover:text-brand-green transition-colors">Home<//></li>
+                  <li><${Link} to="/products" className="hover:text-brand-green transition-colors">Products<//></li>
+                  <li><${Link} to="/about" className="hover:text-brand-green transition-colors">About Us<//></li>
+                  <li><${Link} to="/brochure" className="hover:text-brand-green transition-colors">Smart RFQ<//></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-sm font-extrabold text-white uppercase tracking-wider mb-6">Headquarters</h3>
+                <ul className="space-y-4 text-sm font-medium text-slate-400">
+                  <li className="flex items-start group">
+                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span className="group-hover:text-white transition-colors">GIDC Industrial Estate, Chhatral,<br/>Gandhinagar Highway,<br/>Gujarat, India</span>
+                  </li>
+                  <li className="flex items-center group cursor-pointer">
+                    <svg className="w-5 h-5 mr-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span className="group-hover:text-white transition-colors">sales@rainbowpolypack.com</span>
+                  </li>
+                  <li className="flex items-center group cursor-pointer">
+                    <svg className="w-5 h-5 mr-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <span className="group-hover:text-white transition-colors">+91 (Sales Team)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-500">
+              <p>© ${new Date().getFullYear()} Rainbow Polypack. All rights reserved.</p>
+              <div className="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      `;
+    }
+    function CustomCursor() {
+      const [isVisible, setIsVisible] = useState(false);
+      const cursorX = useMotionValue(-100);
+      const cursorY = useMotionValue(-100);
+      const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
+      const cursorXSpring = useSpring(cursorX, springConfig);
+      const cursorYSpring = useSpring(cursorY, springConfig);
+      useEffect(() => {
+        const moveCursor = (e) => {
+          cursorX.set(e.clientX);
+          cursorY.set(e.clientY);
+          if (!isVisible) setIsVisible(true);
+        };
+        const handleMouseLeave = () => setIsVisible(false);
+        const handleMouseEnter = () => setIsVisible(true);
+        window.addEventListener('mousemove', moveCursor);
+        document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+        document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+        return () => {
+          window.removeEventListener('mousemove', moveCursor);
+          document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+          document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
+        };
+      }, [isVisible]);
+      return html`
+        <div className="hidden lg:block pointer-events-none z-[100] fixed inset-0">
+          <${motion.div}
+            className="w-2 h-2 bg-white rounded-full fixed top-0 left-0 -ml-1 -mt-1 shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+            style=${{
+              x: cursorX,
+              y: cursorY,
+              opacity: isVisible ? 1 : 0
+            }}
+          />
+          <${motion.div}
+            className="w-8 h-8 border border-white/40 rounded-full fixed top-0 left-0 -ml-4 -mt-4"
+            style=${{
+              x: cursorXSpring,
+              y: cursorYSpring,
+              opacity: isVisible ? 1 : 0,
+              boxShadow: isVisible ? '2px 2px 10px rgba(255, 0, 128, 0.4), -2px -2px 10px rgba(0, 255, 255, 0.4), 2px -2px 10px rgba(255, 255, 0, 0.4), -2px 2px 10px rgba(0, 255, 0, 0.4)' : 'none'
+            }}
+          />
+        </div>
+      `;
+    }
+    function Navbar() {
+      const location = useLocation();
+      const navigate = useNavigate();
+      const [isOpen, setIsOpen] = useState(false);
+      const links = [
+        { path: "/", label: "Home" },
+        { path: "/#products", label: "Products" },
+        { path: "/about", label: "About" },
+        { path: "/brochure", label: "Enquiry" }
+      ];
+      const handleNav = (path) => {
+        setIsOpen(false);
+        if(path.startsWith('/#')) {
+           if (location.pathname !== '/') {
+              navigate('/');
+           }
+           setTimeout(() => {
+              const el = document.getElementById(path.substring(2));
+              if(el) el.scrollIntoView({ behavior: 'smooth' });
+           }, 100);
+        } else {
+           navigate(path);
+           window.scrollTo(0,0);
+        }
+      };
+      const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in your PET preforms.");
+      const waLink = `https://wa.me/910000000000?text=${waText}`;
+      return html`
+        <div className="fixed top-8 right-8 z-[60]">
+          <div
+            onClick=${() => setIsOpen(!isOpen)}
+            className="bg-slate-900/60 backdrop-blur-md border border-white/20 text-white rounded-full px-6 py-3 cursor-pointer hover:bg-slate-800 transition-colors flex items-center gap-3 shadow-2xl"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d=${isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path></svg>
+            <span className="font-extrabold uppercase tracking-widest text-sm hidden md:inline-block">Menu</span>
+          </div>
+          <${AnimatePresence}>
+            ${isOpen && html`
+              <${motion.div}
+                initial=${{ opacity: 0, y: -20, scale: 0.95 }}
+                animate=${{ opacity: 1, y: 0, scale: 1 }}
+                exit=${{ opacity: 0, y: -20, scale: 0.95 }}
+                transition=${{ type: "spring", stiffness: 400, damping: 30 }}
+                className="absolute top-16 right-0 w-64 bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+              >
+                <div className="p-4 space-y-2">
+                  ${links.map(link => html`
+                    <div
+                      key=${link.path}
+                      onClick=${() => handleNav(link.path)}
+                      className="cursor-pointer block px-5 py-3 rounded-2xl text-base font-extrabold transition-colors text-white hover:bg-white/10 hover:text-brand-green"
+                    >
+                      ${link.label}
+                    </div>
+                  `)}
+                  <div className="pt-4 mt-2 border-t border-white/10">
+                    <button onClick=${() => window.open(waLink, '_blank')} className="w-full bg-brand-green text-white px-5 py-3 rounded-2xl text-sm font-extrabold hover:bg-white hover:text-brand-green transition-colors">
+                      WhatsApp Us
+                    </button>
+                  </div>
+                </div>
+              <//>
+            `}
+          <//>
+        </div>
+      `;
+    }
+    function Home() {
+      const containerRef = useRef(null);
+      const canvasRef = useRef(null);
+      const imagesRef = useRef([]);
+      const [scrollPercent, setScrollPercent] = useState(0);
+      const [isMobile, setIsMobile] = useState(false);
+      const frameCount = 108;
+      useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+      }, []);
+      const drawImage = (index) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const img = imagesRef.current[index];
+        if (!img || !img.complete) return;
+        const hRatio = canvas.width / img.width;
+        const vRatio = canvas.height / img.height;
+        const ratio  = Math.max(hRatio, vRatio);
+        const centerShift_x = (canvas.width - img.width * ratio) / 2;
+        const centerShift_y = (canvas.height - img.height * ratio) / 2;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, img.width, img.height,
+                      centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+      };
+      useEffect(() => {
+        if (isMobile) return;
+        const loadImages = () => {
+          for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            const paddedIndex = i.toString().padStart(5, '0');
+            img.src = `./assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
+            imagesRef.current[i] = img;
+            if (i === 1) {
+              img.onload = () => requestAnimationFrame(() => drawImage(1));
+            }
+          }
+        };
+        loadImages();
+        const handleResize = () => {
+          if (canvasRef.current) {
+            canvasRef.current.width = window.innerWidth;
+            canvasRef.current.height = window.innerHeight;
+            requestAnimationFrame(() => drawImage(1));
+          }
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, [isMobile]);
+      const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+      });
+      const smoothProgress = useSpring(scrollYProgress, { stiffness: 45, damping: 35, restDelta: 0.0001 });
+      useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        setScrollPercent(Math.min(100, Math.max(0, Math.round(latest * 100))));
+        if (!isMobile && canvasRef.current) {
+          let p = latest; // Ensure the animation reaches 100% completion before the outro fade out begins
+          if (p > 1) p = 1;
+          const frameIndex = Math.min(frameCount, Math.max(1, Math.round(p * frameCount)));
+          requestAnimationFrame(() => drawImage(frameIndex));
+        }
+      });
+      const introOpacity = useTransform(smoothProgress, [0, 0.035], [1, 0]);
+      const introScale = useTransform(smoothProgress, [0, 0.035], [1, 1.15]);
+      const phase1Opacity = useTransform(smoothProgress, [0.04, 0.07, 0.16, 0.19], [0, 1, 1, 0]);
+      const phase2Opacity = useTransform(smoothProgress, [0.20, 0.24, 0.38, 0.42], [0, 1, 1, 0]);
+      const phase3Opacity = useTransform(smoothProgress, [0.43, 0.47, 0.63, 0.67], [0, 1, 1, 0]);
+      const phase4Opacity = useTransform(smoothProgress, [0.68, 0.72, 0.88, 0.92], [0, 1, 1, 0]);
+      const phase5Opacity = useTransform(smoothProgress, [0.93, 0.96, 1, 1], [0, 1, 1, 1]);
+      const p1y = useTransform(smoothProgress, [0.04, 0.07, 0.16, 0.19], [40, 0, 0, -40]);
+      const p2y = useTransform(smoothProgress, [0.20, 0.24, 0.38, 0.42], [40, 0, 0, -40]);
+      const p3y = useTransform(smoothProgress, [0.43, 0.47, 0.63, 0.67], [40, 0, 0, -40]);
+      const p4y = useTransform(smoothProgress, [0.68, 0.72, 0.88, 0.92], [40, 0, 0, -40]);
+      const p5y = useTransform(smoothProgress, [0.93, 0.96, 1, 1], [40, 0, 0, 0]);
+      const videoOpacity = useTransform(smoothProgress, [0.88, 0.98], [1, 0]);
+      const bgBridge = useTransform(smoothProgress, [0.85, 1], ["rgba(11, 37, 69, 1)", "rgba(243, 244, 246, 1)"]);
+      if (isMobile) {
+        return html`
+          <div className="bg-slate-900 min-h-screen font-sans">
+            <div className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-24 text-center overflow-hidden">
+              <div className="absolute inset-0 z-0">
+                <video src="./assets/Preform_Mould_video.mp4" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" className="w-full h-full object-cover opacity-70 mix-blend-screen"></video>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
+              </div>
+              <${motion.div}
+                initial=${{opacity: 0, scale: 0.9}}
+                animate=${{opacity: 1, scale: 1}}
+                transition=${{duration: 1}}
+                className="relative z-10 w-full max-w-xs mx-auto mb-10 mt-12"
+              >
+                <div className="absolute inset-0 bg-slate-900/60 blur-[40px] rounded-full scale-125 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-brand-green/20 blur-[60px] rounded-full scale-150 pointer-events-none"></div>
+                <img src="./assets/rainbow-polypack-logo.svg" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo" />
+              <//>
+              <${motion.h1}
+                initial=${{opacity: 0, y: 20}}
+                animate=${{opacity: 1, y: 0}}
+                transition=${{duration: 0.8, delay: 0.2}}
+                className="relative z-10 text-4xl font-black text-white tracking-tight leading-[1.15] mb-6 drop-shadow-2xl"
+              >
+                Precision <br/><span className="text-brand-green">PET Preforms</span>
+              <//>
+              <${motion.p}
+                initial=${{opacity: 0, y: 20}}
+                animate=${{opacity: 1, y: 0}}
+                transition=${{duration: 0.8, delay: 0.4}}
+                className="relative z-10 text-lg text-slate-300 font-medium mb-12 max-w-sm mx-auto leading-relaxed"
+              >
+                Premium PET Preform Manufacturers. Engineered for high-speed automated blowing lines with zero-defect quality standards.
+              <//>
+              <${motion.div}
+                initial=${{opacity: 0, y: 20}}
+                animate=${{opacity: 1, y: 0}}
+                transition=${{duration: 0.8, delay: 0.6}}
+                className="relative z-10 w-full px-2 mb-12"
+              >
+                 <${MagneticLink} to="/brochure" className="block w-full px-8 py-4 bg-brand-green text-white rounded-full font-extrabold text-lg shadow-[0_10px_30px_rgba(112,164,67,0.3)] border border-brand-green/50">
+                  Ask for Quotation
+                <//>
+              <//>
+            </div>
+            <div className="py-20 px-8 bg-slate-900 border-t border-white/5 relative z-10">
+              <div className="space-y-24">
+                <${motion.div}
+                  initial=${{opacity: 0, y: 40}}
+                  whileInView=${{opacity: 1, y: 0}}
+                  viewport=${{once: true, margin: "-50px"}}
+                  transition=${{duration: 0.8}}
+                  className="text-center"
+                >
+                  <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest shadow-sm">
+                    Neck Finish
+                  </div>
+                  <h3 className="text-3xl font-black text-white mb-4">CTC 29/21mm</h3>
+                  <p className="text-slate-400 text-lg leading-relaxed">Precision-molded threads designed for absolute sealing integrity. Flawless gate quality and strict dimensional tolerances ensure zero leakage.</p>
+                <//>
+                <${motion.div}
+                  initial=${{opacity: 0, y: 40}}
+                  whileInView=${{opacity: 1, y: 0}}
+                  viewport=${{once: true, margin: "-50px"}}
+                  transition=${{duration: 0.8}}
+                  className="text-center"
+                >
+                  <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest shadow-sm">
+                    Mold Systems
+                  </div>
+                  <h3 className="text-3xl font-black text-white mb-4">100% Hot Runner Systems</h3>
+                  <p className="text-slate-400 text-lg leading-relaxed">Zero cold runner scrap. Maximum consistency. By utilizing advanced hot runner technology, we eliminate material degradation.</p>
+                <//>
+                <${motion.div}
+                  initial=${{opacity: 0, y: 40}}
+                  whileInView=${{opacity: 1, y: 0}}
+                  viewport=${{once: true, margin: "-50px"}}
+                  transition=${{duration: 0.8}}
+                  className="text-center"
+                >
+                  <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest shadow-sm">
+                    Material Distribution
+                  </div>
+                  <h3 className="text-3xl font-black text-white mb-4">Blow-Up Ratio Perfection</h3>
+                  <p className="text-slate-400 text-lg leading-relaxed">Optimal material distribution ensures your final stretch-blown containers possess superior top-load strength and brilliant transparency.</p>
+                <//>
+              </div>
+            </div>
+            <div className="bg-[#F3F4F6] pt-12 pb-0 relative z-20">
+              <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-slate-900 to-transparent -translate-y-full"></div>
+              <${Products} isIntegrated=${true} />
+              <${StartupAgility} />
+            </div>
+          </div>
+        `;
+      }
+      return html`
+        <div>
+          <${motion.div} ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[500vh] md:h-[800vh]">
+            <div className="sticky top-0 h-screen w-screen overflow-hidden">
+              <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-10 mix-blend-overlay scale-150 blur-xs brightness-0 invert">
+                <img src="./assets/rainbow-polypack-logo.svg" className="w-full h-auto max-w-none" alt="Watermark" />
+              </div>
+              <${motion.canvas}
+                ref=${canvasRef}
+                style=${{ opacity: videoOpacity }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+              />
+              <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-slate-900/20 backdrop-blur-sm">
+                <div className="relative mb-12">
+                  <div className="absolute -inset-20 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.5)_0%,_transparent_70%)] pointer-events-none -z-10 blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-brand-green/10 to-cyan-500/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
+                  <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-[500px] xl:w-[600px] object-contain drop-shadow-[0_0_50px_rgba(255,255,255,0.4)] relative z-10" alt="Rainbow Polypack Huge Logo" />
+                </div>
+                <button
+                  onClick=${() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="absolute bottom-8 left-8 pointer-events-auto bg-brand-navy/80 hover:bg-brand-navy backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono-hud text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer"
+                >
+                  View Catalog
+                </button>
+                <div className="absolute bottom-12 left-0 w-full flex flex-col items-center justify-center animate-bounce z-50">
+                  <span className="text-white text-xs font-extrabold uppercase tracking-widest font-mono-hud mb-3">Scroll to Explore</span>
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </div>
+              <//>
+              <div className="fixed top-0 left-0 h-screen w-full pointer-events-none z-20">
+                <${motion.div}
+                  style=${{ opacity: phase1Opacity, y: p1y }}
+                  className="absolute inset-0 flex items-center justify-between px-6 sm:px-12 md:px-16 lg:px-24 pointer-events-none z-30"
+                >
+                  <div className="w-full max-w-sm md:max-w-md lg:max-w-lg pointer-events-auto text-left flex flex-col justify-center">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_8px_24px_rgba(0,0,0,0.9)]">
+                      <span className="text-white">Rainbow</span> <span className="text-[#1E3A8A] drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">Polypack</span>
+                    </h1>
+                    <div className="w-20 h-1 bg-gradient-to-r from-[#1E3A8A] to-transparent shadow-[0_0_12px_rgba(30,58,138,0.8)] mb-6"></div>
+                    <p className="text-slate-100 font-bold text-base sm:text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_8px_20px_rgba(0,0,0,0.9)] leading-relaxed">
+                      Engineered for high-speed automated blowing lines with zero-defect quality standards and absolute dimensional stability.
+                    </p>
+                  </div>
+                  <div className="hidden lg:flex items-center gap-4 pointer-events-auto text-right max-w-xs xl:max-w-sm justify-end">
+                    <div className="w-12 h-12 rounded-xl bg-[#1E3A8A]/20 flex items-center justify-center text-[#1E3A8A] shrink-0 border border-[#1E3A8A]/50 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <div className="text-white font-black text-2xl tracking-tight leading-snug drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_8px_24px_rgba(0,0,0,0.9)]">Chhatral, Gujarat</div>
+                    </div>
+                  </div>
+                <//>
+                <${motion.div} style=${{ opacity: phase2Opacity, y: p2y }} className="absolute inset-0 flex items-end justify-end px-8 md:px-16 lg:px-24 pb-24 pointer-events-none">
+                  <div className="max-w-xl pointer-events-auto text-right flex flex-col items-end relative z-10">
+                    <div className="absolute -inset-10 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.6)_0%,_transparent_70%)] pointer-events-none -z-10 blur-md"></div>
+                    <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1] mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+                      CTC 29/21mm Neck Finish
+                    </h1>
+                    <div className="flex items-center justify-end gap-4 mb-4 w-full">
+                      <div className="w-16 h-px bg-brand-green shadow-[0_0_8px_rgba(112,164,67,0.8)]"></div>
+                    </div>
+                    <p className="text-slate-200 font-medium text-lg drop-shadow-[0_4px_12px_rgba(0,0,0,1)] max-w-sm text-right">
+                      Precision-molded threads designed for absolute sealing integrity. Flawless gate quality and strict dimensional tolerances ensure zero leakage.
+                    </p>
+                  </div>
+                <//>
+                <${motion.div} style=${{ opacity: phase3Opacity, y: p3y }} className="absolute inset-0 flex items-end justify-start px-8 md:px-16 lg:px-24 pb-24 pointer-events-none">
+                  <div className="max-w-xl pointer-events-auto relative z-10 text-left">
+                    <div className="absolute -inset-10 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.6)_0%,_transparent_70%)] pointer-events-none -z-10 blur-md"></div>
+                    <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1] mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+                      100% Hot Runner Systems
+                    </h1>
+                    <div className="flex items-center justify-start gap-4 mb-4">
+                      <div className="w-16 h-px bg-brand-green shadow-[0_0_8px_rgba(112,164,67,0.8)]"></div>
+                    </div>
+                    <p className="text-slate-200 font-medium text-lg drop-shadow-[0_4px_12px_rgba(0,0,0,1)] max-w-sm">
+                      Zero cold runner scrap. Maximum consistency. By utilizing advanced hot runner technology, we eliminate material degradation.
+                    </p>
+                  </div>
+                <//>
+                <${motion.div} style=${{ opacity: phase4Opacity, y: p4y }} className="absolute inset-0 flex items-end justify-end px-8 md:px-16 lg:px-24 pb-24 pointer-events-none">
+                  <div className="max-w-xl pointer-events-auto text-right flex flex-col items-end relative z-10">
+                    <div className="absolute -inset-10 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.6)_0%,_transparent_70%)] pointer-events-none -z-10 blur-md"></div>
+                    <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1] mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+                      Blow-Up Ratio Perfection
+                    </h1>
+                    <div className="flex items-center justify-end gap-4 mb-4 w-full">
+                      <div className="w-16 h-px bg-brand-green shadow-[0_0_8px_rgba(112,164,67,0.8)]"></div>
+                    </div>
+                    <p className="text-slate-200 font-medium text-lg drop-shadow-[0_4px_12px_rgba(0,0,0,1)] max-w-sm text-right">
+                      Optimal material distribution ensures your final stretch-blown containers possess superior top-load strength and brilliant transparency.
+                    </p>
+                  </div>
+                <//>
+              </div>
+              <${motion.div} style=${{ opacity: phase5Opacity, y: p5y }} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pt-20">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,37,69,0.8)_0%,_transparent_60%)] pointer-events-none -z-10"></div>
+                <div className="text-center px-4 w-full flex flex-col items-center">
+                  <div className="relative mb-8">
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-brand-green/10 to-cyan-500/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
+                    <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-96 h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo" />
+                  </div>
+                  <h2 className="text-5xl md:text-8xl font-black text-white tracking-[0.2em] mb-12 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
+                    RAINBOW POLYPACK
+                  </h2>
+                  <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] inline-block px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer">
+                    📝 Submit an Enquiry
+                  <//>
+                </div>
+              <//>
+            </div>
+          <//>
+          <div className="relative z-30 -mt-24 bg-gradient-to-b from-transparent via-[#F3F4F6]/90 to-[#F3F4F6] pt-24 pb-0">
+             <${Products} isIntegrated=${true} />
+             <${StartupAgility} />
+          </div>
+        </div>
+      `;
+    }
+    function ProductCard({ p }) {
+      const waSampleText = encodeURIComponent(`Hello Rainbow Polypack Team, I would like to request a sample of the ${p.title} (${p.weight}g) PET Preform.`);
+      const waSampleLink = `https://wa.me/910000000000?text=${waSampleText}`;
+      const waTDSText = encodeURIComponent(`Hello Rainbow Polypack Team, please share the official Technical Data Sheet (TDS) for the ${p.title} (${p.weight}g) PET Preform.`);
+      const waTDSLink = `https://wa.me/910000000000?text=${waTDSText}`;
+      return html`
+        <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white border border-slate-200">
+          <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200 border border-slate-100 text-brand-navy">
+            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          </div>
+          <h3 className="text-2xl font-black text-brand-navy mb-5">${p.title}</h3>
+          <div className="space-y-4 text-sm mt-auto font-medium mb-8">
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">IV (Intrinsic Viscosity)</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">0.80 - 0.84 dl/g</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">AA Level</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${"<"} 1.0 ppm</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Weight Tolerance</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">± 0.15g</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">Resin</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">100% Virgin Clear PET</span></div>
+          </div>
+          <div className="mt-auto pt-4 flex flex-col gap-3">
+            <button onClick=${() => window.open(waSampleLink, '_blank')} className="w-full text-center py-3 rounded-xl border-2 border-brand-green text-brand-green font-extrabold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer">
+              💬 Request Sample
+            </button>
+            <button onClick=${() => window.open(waTDSLink, '_blank')} className="w-full text-center py-3 rounded-xl bg-slate-100 text-slate-600 font-extrabold text-sm hover:bg-slate-200 transition-colors cursor-pointer">
+              📄 Download TDS
+            </button>
+          </div>
+        <//>
+      `;
+    }
+    function Products({ isIntegrated = false }) {
+      useEffect(() => {
+        if(!isIntegrated) window.scrollTo(0, 0);
+      }, [isIntegrated]);
+      const allProducts = [
+        { id: 1, title: "CTC 29/21mm - 15g", weight: "15", neck: "CTC 29/21mm" },
+        { id: 2, title: "CTC 29/21mm - 24g", weight: "24", neck: "CTC 29/21mm" },
+        { id: 3, title: "CTC 29/21mm - 26g", weight: "26", neck: "CTC 29/21mm" },
+      ];
+      const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
+      const waKitLink = `https://wa.me/910000000000?text=${waKitText}`;
+      return html`
+        <div id="products" className=${"pb-24 bg-[#F3F4F6] relative overflow-hidden " + (isIntegrated ? "pt-12" : "pt-36 min-h-screen")}>
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="mb-12 border-b border-slate-200 pb-6">
+              <h2 className="text-4xl font-black text-brand-navy tracking-tight mb-2">B2B Product Catalog</h2>
+              <p className="text-slate-600 font-medium">Full Range: CTC 29/21mm Neck Finishes</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+              ${allProducts.map((p) => html`
+                <${ProductCard} key=${p.id} p=${p} />
+              `)}
+            </div>
+            <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
+              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+              <div className="relative z-10 text-left">
+                <span className="inline-block px-4 py-1.5 rounded-md bg-brand-green/20 border border-brand-green/40 text-brand-green font-mono-hud text-xs font-extrabold uppercase tracking-widest mb-4">Fast-Track Verification</span>
+                <h3 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">Rainbow Polypack Trial Sample Box</h3>
+                <p className="text-slate-300 font-medium text-lg max-w-xl">
+                  A pre-packed, premium box containing 5 pieces of every CTC SKU (15g, 24g, 26g, 28g). Dispatched within 48 hours for your internal quality and blowing tests.
+                </p>
+              </div>
+              <div className="relative z-10 w-full md:w-auto">
+                <button
+                  onClick=${() => window.open(waKitLink, '_blank')}
+                  className="w-full md:w-auto px-10 py-5 bg-brand-green text-white rounded-2xl font-extrabold text-lg shadow-[0_15px_30px_rgba(112,164,67,0.4)] hover:bg-white hover:text-brand-green transition-all cursor-pointer whitespace-nowrap"
+                >
+                  📦 Claim Trial Sample Kit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    function AboutUs() {
+      useEffect(() => { window.scrollTo(0, 0); }, []);
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      };
+      const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+      };
+      return html`
+        <div className="pt-32 pb-24 bg-[#F3F4F6] relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <${motion.div}
+              variants=${containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport=${{ once: true }}
+              className="flex flex-col items-center text-center"
+            >
+              <${motion.div}
+                variants=${itemVariants}
+                className="mb-12"
+                animate=${{ y: [0, -10, 0] }}
+                transition=${{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <img src="./assets/rainbow-polypack-logo.svg" className="w-[300px] md:w-[500px] lg:w-[600px] h-auto drop-shadow-2xl opacity-90" alt="Rainbow Polypack Logo" />
+              </${motion.div}>
+              <${motion.div} variants=${itemVariants} className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-8 tracking-widest uppercase font-mono-hud">
+                Company Profile
+              </${motion.div}>
+              <${motion.h1} variants=${itemVariants} className="text-5xl md:text-6xl font-black text-brand-navy mb-8 leading-[1.1] tracking-tight">
+                Precision Packaging from Gujarat to the World
+              </${motion.h1}>
+              <${motion.p} variants=${itemVariants} className="text-xl text-slate-800 mb-6 leading-relaxed font-medium max-w-3xl">
+                Located in the industrial hub of Chhatral, Gujarat, Rainbow Polypack has established itself as a premier agile manufacturer of high-quality PET preforms for the food, beverage, and chemical industries.
+              </${motion.p}>
+              <${motion.p} variants=${itemVariants} className="text-lg text-slate-700 mb-12 leading-relaxed font-medium max-w-3xl">
+                We are driven by a commitment to zero-defect manufacturing and startup agility. By exclusively utilizing state-of-the-art <strong>Hot Runner Moulds</strong> and 100% Virgin PET resins, we ensure that every preform that leaves our facility meets the rigorous dimensional tolerances required by high-speed blowing lines, without the bureaucratic legacy delays.
+              </${motion.p}>
+              <${motion.div} variants=${itemVariants} className="grid grid-cols-2 gap-6 bg-white p-8 rounded-3xl shadow-xl border border-slate-200 w-full max-w-3xl text-left relative overflow-hidden mb-8">
+                <div className="border-l-4 border-brand-green pl-5 relative z-10">
+                  <div className="text-4xl font-black text-brand-navy mb-2">100%</div>
+                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Virgin PET</div>
+                </div>
+                <div className="border-l-4 border-brand-navy pl-5 relative z-10">
+                  <div className="text-4xl font-black text-brand-navy mb-2">0%</div>
+                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Cold Runner Waste</div>
+                </div>
+              </${motion.div}>
+              <${motion.div} variants=${itemVariants} className="bg-brand-navy text-white p-12 rounded-3xl shadow-xl border border-white/10 flex flex-col md:flex-row items-center justify-center text-center md:text-left w-full max-w-3xl gap-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+                <div className="w-24 h-24 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center shrink-0 border border-brand-green/40 shadow-[0_0_20px_rgba(112,164,67,0.3)] relative z-10">
+                  <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-sm font-extrabold text-brand-green tracking-widest uppercase mb-2">Location & Manufacturing</h3>
+                  <h4 className="text-3xl font-black mb-2 text-white">Based in Chhatral, Gujarat</h4>
+                  <p className="text-base text-slate-300 font-bold tracking-wider uppercase">GIDC Industrial Estate</p>
+                </div>
+              </${motion.div}>
+            </${motion.div}>
+          </div>
+        </div>
+      `;
+    }
+    function EBrochure() {
+      useEffect(() => { window.scrollTo(0, 0); }, []);
+      const [submitted, setSubmitted] = useState(false);
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+      };
+      const containerVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.1 } }
+      };
+      const childVariants = {
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0 }
+      };
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-[#F3F4F6] flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl -translate-x-1/2 pointer-events-none"></div>
+          <${motion.div}
+            variants=${containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full max-w-3xl mx-auto px-4 relative z-10"
+          >
+            <${motion.div} variants=${childVariants} className="text-center mb-16">
+              <h1 className="text-5xl font-black text-brand-navy mb-6 tracking-tight">Submit an Enquiry</h1>
+              <p className="text-xl text-slate-700 max-w-2xl mx-auto font-medium">Enter your procurement requirements to access our full technical catalog and receive a prioritized quotation from our engineering team.</p>
+            <//>
+            <${motion.div} variants=${childVariants} className="bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden relative">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-navy to-brand-green"></div>
+              <div className="p-10 md:p-14">
+                ${!submitted ? html`
+                  <form onSubmit=${handleSubmit} className="space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Full Name <span className="text-brand-green">*</span></label>
+                        <input type="text" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" placeholder="John Doe" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Email Address <span className="text-brand-green">*</span></label>
+                        <input type="email" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" placeholder="john@example.com" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Company Name <span className="text-brand-green">*</span></label>
+                        <input type="text" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" placeholder="Acme Packaging" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Location / City <span className="text-brand-green">*</span></label>
+                        <input type="text" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" placeholder="Mumbai, India" />
+                      </div>
+                    </div>
+                    <div className="border-t border-slate-200 my-10"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Product Interest</label>
+                        <select className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
+                          <option>CTC 29/21mm - 15g</option>
+                          <option>CTC 29/21mm - 24g</option>
+                          <option>CTC 29/21mm - 26g</option>
+                          <option>Multiple / Undecided</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Estimated Monthly Volume</label>
+                        <select className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
+                          <option>${"<"} 50,000 units</option>
+                          <option>50,000 - 200,000 units</option>
+                          <option>200,000 - 500,000 units</option>
+                          <option>500,000+ units</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-extrabold text-brand-navy mb-3">Custom Technical Requirements</label>
+                      <textarea rows="4" className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm resize-none" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
+                    </div>
+                    <${MagneticButton} type="submit" className="w-full py-5 bg-brand-navy text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-navy/20 mt-4 border border-brand-navy/50 hover:bg-brand-green transition-colors">
+                      Submit Enquiry
+                    <//>
+                    <p className="text-center text-xs font-extrabold text-slate-500 mt-6 uppercase tracking-wider font-mono-hud">Confidential Technical Inquiry</p>
+                  </form>
+                ` : html`
+                  <${motion.div}
+                    initial=${{ opacity: 0, scale: 0.9 }}
+                    animate=${{ opacity: 1, scale: 1 }}
+                    className="text-center py-16"
+                  >
+                    <div className="w-28 h-28 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner border border-brand-green/20">
+                      <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h3 className="text-4xl font-black text-brand-navy mb-4 tracking-tight">Request Received</h3>
+                    <p className="text-xl text-slate-700 mb-10 max-w-md mx-auto font-medium">Thank you for your interest. Our technical sales team will review your requirements and respond within 24 hours.</p>
+                    <${MagneticLink} to="#" className="inline-flex items-center px-10 py-5 bg-brand-green text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-green/20 hover:bg-brand-navy transition-colors">
+                      <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download PDF Brochure
+                    <//>
+                  <//>
+                `}
+              </div>
+            <//>
+          <//>
+        </div>
+      `;
+    }
+    function App() {
+      const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
+      const waLink = `https://wa.me/910000000000?text=${waText}`;
+      return html`
+        <${HashRouter}>
+          <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-navy">
+            <${CustomCursor} />
+            <${Navbar} />
+            <main className="flex-grow">
+              <${AnimatePresence} mode="wait">
+                <${Routes}>
+                  <${Route} path="/" element=${html`<${Home} />`} />
+                  <${Route} path="/about" element=${html`<${AboutUs} />`} />
+                  <${Route} path="/brochure" element=${html`<${EBrochure} />`} />
+                <//>
+              <//>
+            </main>
+            <${Footer} />
+            <${MagneticButton} onClick=${() => window.open(waLink, '_blank')} className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] group border border-[#25D366]/20 cursor-pointer">
+              <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+            <//>
+          </div>
+        <//>
+      `;
+    }
+    const root = createRoot(document.getElementById('root'));
+    root.render(html`<${App} />`);
+  </script>
+</body>
+</html>
