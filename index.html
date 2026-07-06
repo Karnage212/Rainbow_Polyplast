@@ -45,7 +45,6 @@
       overflow-x: hidden;
       color: #0B2545;
     }
-    .font-mono-hud { font-family: 'JetBrains Mono', monospace; }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0B2545; }
     ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
@@ -216,7 +215,7 @@
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_rgba(112,164,67,0.05),_transparent_50%)] pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono-hud shadow-lg">Why Partner With Us</span>
+              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">Why Partner With Us</span>
               <h2 className="text-4xl md:text-5xl font-black text-brand-navy tracking-tight mb-6">The Startup Agility Advantage</h2>
               <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
                 We are a modern, agile manufacturing firm unburdened by legacy bureaucracy. Experience rapid turnarounds, flexible MOQs, and direct access to technical founders.
@@ -264,7 +263,7 @@
               <//>
             <//>
             <div className="text-center mb-16">
-              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono-hud shadow-lg">Zero-Defect Commitment</span>
+              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">Zero-Defect Commitment</span>
               <h2 className="text-4xl md:text-5xl font-black text-brand-navy tracking-tight mb-6">Zero-Defect Quality Protocol</h2>
               <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
                 Speed means nothing without structural perfection. Every batch undergoes rigorous mechanical and optical testing before it leaves our facility.
@@ -567,7 +566,7 @@
                 transition=${{duration: 0.8, delay: 0.4}}
                 className="relative z-10 text-lg text-slate-300 font-medium mb-12 max-w-sm mx-auto leading-relaxed"
               >
-                Premium PET Preform Manufacturers. Engineered for high-speed automated blowing lines with zero-defect quality standards.
+                Premium PET Preform Manufacturers. Engineered for high-speed automated blowing lines with zero-defect quality standards at highly competitive pricing.
               <//>
               <${motion.div}
                 initial=${{opacity: 0, y: 20}}
@@ -651,12 +650,12 @@
                 </div>
                 <button
                   onClick=${() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute bottom-8 left-8 pointer-events-auto bg-brand-navy/80 hover:bg-brand-navy backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono-hud text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer"
+                  className="absolute bottom-8 left-8 pointer-events-auto bg-brand-navy/80 hover:bg-brand-navy backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer"
                 >
                   View Catalog
                 </button>
                 <div className="absolute bottom-12 left-0 w-full flex flex-col items-center justify-center animate-bounce z-50">
-                  <span className="text-white text-xs font-extrabold uppercase tracking-widest font-mono-hud mb-3">Scroll to Explore</span>
+                  <span className="text-white text-xs font-extrabold uppercase tracking-widest font-mono mb-3">Scroll to Explore</span>
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                 </div>
               <//>
@@ -799,7 +798,6 @@
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="mb-12 border-b border-slate-200 pb-6">
               <h2 className="text-4xl font-black text-brand-navy tracking-tight mb-2">B2B Product Catalog</h2>
-              <p className="text-slate-600 font-medium">Full Range: CTC 29/21mm Neck Finishes</p>
             </div>
             <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 mb-16">
               ${allProducts.map((p) => html`
@@ -825,10 +823,8 @@
                       <tr className="hover:bg-slate-50 transition-colors">
                         <td className="px-5 py-4 font-black text-brand-navy text-lg">${p.weight}g</td>
                         <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.usage}</td>
-                        <td className="px-5 py-4 text-right">
-                          <span className="bg-brand-green/10 text-brand-green border border-brand-green/20 px-3 py-1.5 rounded-lg text-[10px] font-extrabold uppercase whitespace-nowrap inline-block mt-1">
-                            ${p.apps}
-                          </span>
+                        <td className="px-5 py-4 text-right text-xs font-semibold text-slate-700 max-w-[140px] leading-relaxed">
+                          ${p.apps}
                         </td>
                       </tr>
                     `)}
@@ -845,7 +841,7 @@
             <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
               <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
               <div className="relative z-10 text-left">
-                <span className="inline-block px-4 py-1.5 rounded-md bg-brand-green/20 border border-brand-green/40 text-brand-green font-mono-hud text-xs font-extrabold uppercase tracking-widest mb-4">Fast-Track Verification</span>
+                <span className="inline-block px-4 py-1.5 rounded-md bg-brand-green/20 border border-brand-green/40 text-brand-green font-mono text-xs font-extrabold uppercase tracking-widest mb-4">Fast-Track Verification</span>
                 <h3 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">Rainbow Polypack Trial Sample Box</h3>
                 <p className="text-slate-300 font-medium text-lg max-w-xl">
                   A pre-packed, premium box containing 5 pieces of every CTC SKU (15g, 23.5g, 26g). Dispatched within 48 hours for your internal quality and blowing tests.
@@ -894,7 +890,7 @@
                   <img src="./assets/rainbow-polypack-logo.svg" className="w-[300px] md:w-[500px] lg:w-[600px] h-auto drop-shadow-2xl opacity-90 hover:scale-105 transition-transform cursor-pointer" alt="Rainbow Polypack Logo" />
                 <//>
               </${motion.div}>
-              <${motion.div} variants=${itemVariants} className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-8 tracking-widest uppercase font-mono-hud">
+              <${motion.div} variants=${itemVariants} className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-8 tracking-widest uppercase font-mono">
                 Company Profile
               </${motion.div}>
               <${motion.h1} variants=${itemVariants} className="text-5xl md:text-6xl font-black text-brand-navy mb-8 leading-[1.1] tracking-tight">
@@ -904,7 +900,7 @@
                 Located in the industrial hub of Chhatral, Gujarat, Rainbow Polypack has established itself as a premier agile manufacturer of high-quality PET preforms for the food, beverage, and chemical industries.
               </${motion.p}>
               <${motion.p} variants=${itemVariants} className="text-lg text-slate-700 mb-12 leading-relaxed font-medium max-w-3xl">
-                We are driven by a commitment to zero-defect manufacturing and startup agility. By exclusively utilizing state-of-the-art <strong>Hot Runner Moulds</strong> and 100% Virgin PET resins, we ensure that every preform that leaves our facility meets the rigorous dimensional tolerances required by high-speed blowing lines, without the bureaucratic legacy delays.
+                We are driven by a commitment to zero-defect manufacturing, startup agility, and highly competitive pricing. By exclusively utilizing state-of-the-art <strong>Hot Runner Moulds</strong> and 100% Virgin PET resins, we ensure that every preform that leaves our facility meets the rigorous dimensional tolerances required by high-speed blowing lines, without the bureaucratic legacy delays.
               </${motion.p}>
               <${motion.div} variants=${itemVariants} className="grid grid-cols-2 gap-6 bg-white p-8 rounded-3xl shadow-xl border border-slate-200 w-full max-w-3xl text-left relative overflow-hidden mb-8">
                 <div className="border-l-4 border-brand-green pl-5 relative z-10">
@@ -1015,7 +1011,7 @@
                     <${MagneticButton} type="submit" className="w-full py-5 bg-brand-navy text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-navy/20 mt-4 border border-brand-navy/50 hover:bg-brand-green transition-colors">
                       Submit Enquiry
                     <//>
-                    <p className="text-center text-xs font-extrabold text-slate-500 mt-6 uppercase tracking-wider font-mono-hud">Confidential Technical Inquiry</p>
+                    <p className="text-center text-xs font-extrabold text-slate-500 mt-6 uppercase tracking-wider font-mono">Confidential Technical Inquiry</p>
                   </form>
                 ` : html`
                   <${motion.div}
