@@ -765,9 +765,10 @@
           </div>
           <h3 className="text-2xl font-black text-brand-navy mb-5">${p.title}</h3>
           <div className="space-y-4 text-sm mt-auto font-medium mb-8">
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Bottle Usage</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${p.usage}</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Applications</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${p.apps}</span></div>
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">IV (Intrinsic Viscosity)</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">0.80 - 0.84 dl/g</span></div>
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">AA Level</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${"<"} 1.0 ppm</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Weight Tolerance</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">± 0.15g</span></div>
             <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">Resin</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">100% Virgin Clear PET</span></div>
           </div>
           <div className="mt-auto pt-4 flex flex-col gap-3">
@@ -786,9 +787,9 @@
         if(!isIntegrated) window.scrollTo(0, 0);
       }, [isIntegrated]);
       const allProducts = [
-        { id: 1, title: "CTC 29/21mm - 15g", weight: "15", neck: "CTC 29/21mm" },
-        { id: 2, title: "CTC 29/21mm - 23.5g", weight: "23.5", neck: "CTC 29/21mm" },
-        { id: 3, title: "CTC 29/21mm - 26g", weight: "26", neck: "CTC 29/21mm" },
+        { id: 1, title: "CTC 29/21mm - 15g", weight: "15", neck: "CTC 29/21mm", usage: "500ml", apps: "Water" },
+        { id: 2, title: "CTC 29/21mm - 23.5g", weight: "23.5", neck: "CTC 29/21mm", usage: "1L", apps: "Water" },
+        { id: 3, title: "CTC 29/21mm - 26g", weight: "26", neck: "CTC 29/21mm", usage: "1L", apps: "CSD / Juice" },
       ];
       const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
       const waKitLink = `https://wa.me/910000000000?text=${waKitText}`;
@@ -808,26 +809,26 @@
 
             <div className="block md:hidden mb-16 rounded-3xl border border-slate-200 shadow-2xl overflow-hidden bg-white">
               <div className="bg-brand-navy p-5 text-center border-b border-brand-navy/80">
-                <span className="font-black text-white text-sm uppercase tracking-widest">Technical Specifications</span>
+                <span className="font-black text-white text-sm uppercase tracking-widest">CTC 29/21mm</span>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
                       <th className="px-5 py-3 whitespace-nowrap">Weight</th>
-                      <th className="px-5 py-3 whitespace-nowrap">Neck</th>
-                      <th className="px-5 py-3 text-right whitespace-nowrap">Action</th>
+                      <th className="px-5 py-3 whitespace-nowrap">Bottle Usage</th>
+                      <th className="px-5 py-3 text-right whitespace-nowrap">Applications</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white">
                     ${allProducts.map(p => html`
                       <tr className="hover:bg-slate-50 transition-colors">
                         <td className="px-5 py-4 font-black text-brand-navy text-lg">${p.weight}g</td>
-                        <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.neck}</td>
+                        <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.usage}</td>
                         <td className="px-5 py-4 text-right">
-                          <button onClick=${() => window.open(`https://wa.me/910000000000?text=${encodeURIComponent(`Hello Rainbow Polypack Team, I would like to request a sample of the ${p.title} (${p.weight}g) PET Preform.`)}`, '_blank')} className="bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-2 rounded-xl text-xs font-extrabold hover:bg-brand-green hover:text-white transition-colors whitespace-nowrap">
-                            Sample
-                          </button>
+                          <span className="bg-brand-green/10 text-brand-green border border-brand-green/20 px-3 py-1.5 rounded-lg text-[10px] font-extrabold uppercase whitespace-nowrap inline-block mt-1">
+                            ${p.apps}
+                          </span>
                         </td>
                       </tr>
                     `)}
