@@ -782,13 +782,14 @@
       `;
     }
     function Products({ isIntegrated = false }) {
+      const [expandedId, setExpandedId] = useState(null);
       useEffect(() => {
         if(!isIntegrated) window.scrollTo(0, 0);
       }, [isIntegrated]);
       const allProducts = [
-        { id: 1, title: "CTC 29/21mm - 15g", weight: "15", neck: "CTC 29/21mm", usage: "250ml - 500ml", apps: "Edible Oil, Syrups" },
-        { id: 2, title: "CTC 29/21mm - 23.5g", weight: "23.5", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Edible Oil, Ghee" },
-        { id: 3, title: "CTC 29/21mm - 26g", weight: "26", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Agro Chemicals" },
+        { id: 1, title: "CTC 29/21mm - 15g", weight: "15", neck: "CTC 29/21mm", usage: "250ml - 500ml", apps: "Edible Oils, Syrups, Pharmaceuticals, Liquid Condiments" },
+        { id: 2, title: "CTC 29/21mm - 23.5g", weight: "23.5", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Edible Oils, Ghee, Household Cleaners, Personal Care" },
+        { id: 3, title: "CTC 29/21mm - 26g", weight: "26", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Edible Oils, Agro Chemicals, Industrial Liquids, Lubricants" },
       ];
       const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
       const waKitLink = `https://wa.me/910000000000?text=${waKitText}`;
@@ -824,7 +825,14 @@
                         <td className="px-5 py-4 font-black text-brand-navy text-lg">${p.weight}g</td>
                         <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.usage}</td>
                         <td className="px-5 py-4 text-right text-xs font-semibold text-slate-700 max-w-[140px] leading-relaxed">
-                          ${p.apps}
+                          ${expandedId === p.id ? p.apps : (p.apps.split(',').slice(0, 2).join(',') + '...')}
+                          <br/>
+                          <button 
+                            onClick=${() => setExpandedId(expandedId === p.id ? null : p.id)} 
+                            className="text-brand-green text-[10px] font-extrabold uppercase tracking-widest mt-1.5 hover:underline cursor-pointer"
+                          >
+                            ${expandedId === p.id ? "Show Less" : "View All"}
+                          </button>
                         </td>
                       </tr>
                     `)}
