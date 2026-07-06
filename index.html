@@ -53,6 +53,8 @@
     video::-webkit-media-controls { display: none !important; }
     video::-webkit-media-controls-start-playback-button { display: none !important; opacity: 0; }
     video { pointer-events: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
   <script type="importmap">
     {
@@ -798,9 +800,11 @@
               <h2 className="text-4xl font-black text-brand-navy tracking-tight mb-2">B2B Product Catalog</h2>
               <p className="text-slate-600 font-medium">Full Range: CTC 29/21mm Neck Finishes</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 mb-16 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
               ${allProducts.map((p) => html`
-                <${ProductCard} key=${p.id} p=${p} />
+                <div className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 snap-center shrink-0">
+                  <${ProductCard} key=${p.id} p=${p} />
+                </div>
               `)}
             </div>
             <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
