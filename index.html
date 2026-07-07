@@ -290,9 +290,9 @@
                   High-precision PET packaging solutions engineered for automated blowing lines. Delivering excellence in optical clarity, dimensional stability, and zero-defect manufacturing.
                 </p>
                 <div className="flex space-x-4">
-                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
+                  <a href="https://www.linkedin.com/company/rainbow-polypack" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                  </div>
+                  </a>
                 </div>
               </div>
               <div>
@@ -325,8 +325,8 @@
             <div className="border-t border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-500">
               <p>© ${new Date().getFullYear()} Rainbow Polypack. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                <${Link} to="/privacy" className="hover:text-white transition-colors cursor-pointer">Privacy Policy<//>
+                <${Link} to="/terms" className="hover:text-white transition-colors cursor-pointer">Terms of Service<//>
               </div>
             </div>
           </div>
@@ -1044,6 +1044,55 @@
         </div>
       `;
     }
+
+    function PrivacyPolicy() {
+      React.useEffect(() => { window.scrollTo(0, 0); }, []);
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-[#F3F4F6] text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
+            <h1 className="text-4xl font-black text-brand-navy mb-4 tracking-tight">Privacy Policy</h1>
+            <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Effective Date: July 7, 2026</p>
+            <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
+              <p>At Rainbow Polypack, we prioritize the confidentiality of our B2B procurement partners and technical inquiries. This Privacy Policy outlines how we collect, store, and safeguard your corporate data and structural requirements.</p>
+              
+              <h2 className="text-xl font-black text-brand-navy pt-4">1. Information Collection</h2>
+              <p>We collect operational data provided explicitly through our Smart RFQ system and direct communications, including your full name, corporate email address, company registration indicators, logistical dispatch addresses, and custom structural or resin specifications.</p>
+              
+              <h2 className="text-xl font-black text-brand-navy pt-4">2. Technical Data Utilization</h2>
+              <p>Collected corporate metrics are utilized strictly to formulate prioritized manufacturing quotations, evaluate processing compatibility with our hot runner moulds, arrange fast-track dispatch of sample trial kits, and coordinate production scheduling.</p>
+              
+              <h2 className="text-xl font-black text-brand-navy pt-4">3. Data Integrity & Confidentiality</h2>
+              <p>All custom blueprints, technical parameters, and proprietary structural requests are treated as strictly confidential under industry-standard industrial data guidelines. Your specifications are never sold, leased, or distributed to adjacent trade firms, unverified logistics vendors, or third parties.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function TermsOfService() {
+      React.useEffect(() => { window.scrollTo(0, 0); }, []);
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-[#F3F4F6] text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
+            <h1 className="text-4xl font-black text-brand-navy mb-4 tracking-tight">Terms of Service</h1>
+            <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Last Updated: July 7, 2026</p>
+            <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
+              <p>Welcome to the official business-to-business digital portal of Rainbow Polypack. By interacting with our technical interfaces, transmitting manufacturing blueprints, or requesting batch sample testing kits, you agree to comply with the industrial terms outlined below.</p>
+              
+              <h2 className="text-xl font-black text-brand-navy pt-4">1. Industrial Quotations & Orders</h2>
+              <p>All manufacturing price estimates provided via our technical team or automated tools remain valid for exactly 30 calendar days due to raw PET resin price volatility. Formal purchase orders (PO) are subject to material availability and final production queue approval at our Chhatral, Gujarat facility.</p>
+              
+              <h2 className="text-xl font-black text-brand-navy pt-4">2. Quality Standards & Tolerances</h2>
+              <p>Our high-performance preforms are produced under strict zero-defect parameters. Final batches are subject to standard structural weight variances of ±0.15g and total gate vestige thresholds of ≤0.1mm as per standard hot runner engineering benchmarks.</p>
+              
+              <h2 className="text-xl font-black text-brand-navy pt-4">3. Tooling & Proprietary Design</h2>
+              <p>Any proprietary custom moulds or tooling modifications financed or supplied by a procurement partner remain the strict intellectual property of that partner. Rainbow Polypack guarantees separate facility custody and zero third-party cross-utilization of custom molds.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function App() {
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
       const waLink = `https://wa.me/910000000000?text=${waText}`;
@@ -1058,6 +1107,8 @@
                   <${Route} path="/" element=${html`<${Home} />`} />
                   <${Route} path="/about" element=${html`<${AboutUs} />`} />
                   <${Route} path="/brochure" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/privacy" element=${html`<${PrivacyPolicy} />`} />
+                  <${Route} path="/terms" element=${html`<${TermsOfService} />`} />
                 <//>
               <//>
             </main>
