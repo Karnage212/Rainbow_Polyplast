@@ -446,7 +446,10 @@
           if (progress < duration) {
             window.requestAnimationFrame(step);
           } else {
-            window.dispatchEvent(new Event('cinematicScrollEnd'));
+            // Delay the end event to let the Framer Motion spring physically settle
+            setTimeout(() => {
+              window.dispatchEvent(new Event('cinematicScrollEnd'));
+            }, 800);
           }
         };
         window.requestAnimationFrame(step);
@@ -624,7 +627,10 @@
           if (progress < duration) {
             window.requestAnimationFrame(step);
           } else {
-            setIsAutoScrolling(false);
+            // Delay turning off the overlay to let the Framer Motion spring settle
+            setTimeout(() => {
+              setIsAutoScrolling(false);
+            }, 800);
           }
         };
         window.requestAnimationFrame(step);
