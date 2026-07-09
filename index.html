@@ -449,7 +449,7 @@
             // Delay the end event to let the Framer Motion spring physically settle
             setTimeout(() => {
               window.dispatchEvent(new Event('cinematicScrollEnd'));
-            }, 800);
+            }, 2000);
           }
         };
         window.requestAnimationFrame(step);
@@ -630,7 +630,7 @@
             // Delay turning off the overlay to let the Framer Motion spring settle
             setTimeout(() => {
               setIsAutoScrolling(false);
-            }, 800);
+            }, 2000);
           }
         };
         window.requestAnimationFrame(step);
