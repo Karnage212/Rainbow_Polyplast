@@ -141,7 +141,7 @@
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
             style=${{
               opacity,
-              background: 'radial-gradient(800px circle at ' + position.x + 'px ' + position.y + 'px, rgba(112,164,67,0.08), rgba(11,37,69,0.04) 40%, transparent 80%)'
+              background: 'radial-gradient(800px circle at ' + position.x + 'px ' + position.y + 'px, rgba(255,105,180,0.12), rgba(0,255,255,0.12) 30%, rgba(255,255,0,0.12) 60%, transparent 80%)'
             }}
           ></div>
           <div className="relative z-10 w-full h-full flex flex-col">
@@ -730,8 +730,15 @@
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-navy/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
                     <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-96 h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo" />
                   </div>
-                  <h2 className="text-5xl md:text-8xl font-black text-white tracking-[0.2em] mb-12 drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">
-                    RAINBOW POLYPACK
+                  <h2 className="text-5xl md:text-8xl font-black text-white tracking-[0.2em] mb-12 drop-shadow-[0_5px_5px_rgba(0,0,0,1)] flex justify-center pointer-events-auto cursor-default">
+                    ${"RAINBOW POLYPACK".split("").map((char, index) => html`
+                      <span 
+                        key=${index} 
+                        className="transition-all duration-200 hover:text-brand-green hover:drop-shadow-[0_0_20px_rgba(112,164,67,0.8)] hover:-translate-y-2 inline-block"
+                      >
+                        ${char === " " ? "\u00A0" : char}
+                      </span>
+                    `)}
                   </h2>
                   <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center">
                     Submit an Enquiry
