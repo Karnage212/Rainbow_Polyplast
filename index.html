@@ -110,8 +110,6 @@
       const y = useMotionValue(0);
       const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
       const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
-      const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-      const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
       const [position, setPosition] = useState({ x: 0, y: 0 });
       const [opacity, setOpacity] = useState(0);
       const handleMouseMove = (e) => {
@@ -136,9 +134,9 @@
           onMouseMove=${handleMouseMove}
           onMouseEnter=${() => setOpacity(1)}
           onMouseLeave=${handleMouseLeave}
-          style=${{ rotateX, rotateY, transformStyle: "preserve-3d", ...style }}
+          style=${style}
           whileHover=${{ scale: 1.02, zIndex: 10 }}
-          className=${"relative group perspective-1000 bg-white shadow-[0_8px_32px_rgba(11,37,69,0.08)] overflow-hidden " + className}
+          className=${"relative group bg-white shadow-[0_8px_32px_rgba(11,37,69,0.08)] overflow-hidden transform-gpu " + className}
         >
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
