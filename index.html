@@ -505,6 +505,7 @@
       const imagesRef = useRef([]);
       const [scrollPercent, setScrollPercent] = useState(0);
       const [isMobile, setIsMobile] = useState(false);
+      const [isAutoScrolling, setIsAutoScrolling] = useState(false);
       const mobileVideoRef = useRef(null);
       const frameCount = 108;
 
@@ -559,6 +560,34 @@
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
       }, [isMobile]);
+
+      const handleCinematicScroll = () => {
+        if (!containerRef.current) return;
+        setIsAutoScrolling(true);
+        const startY = window.scrollY;
+        const targetY = containerRef.current.offsetTop + (containerRef.current.offsetHeight * 0.82);
+        const distance = targetY - startY;
+        const duration = 2000;
+        let start = null;
+
+        const step = (timestamp) => {
+          if (!start) start = timestamp;
+          const progress = Math.min(timestamp - start, duration);
+          const ease = progress < duration / 2 
+            ? 4 * Math.pow(progress / duration, 3) 
+            : 1 - Math.pow(-2 * (progress / duration) + 2, 3) / 2;
+          
+          window.scrollTo(0, startY + distance * ease);
+          
+          if (progress < duration) {
+            window.requestAnimationFrame(step);
+          } else {
+            setIsAutoScrolling(false);
+          }
+        };
+        window.requestAnimationFrame(step);
+      };
+
       const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
@@ -698,7 +727,7 @@
                   <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-[500px] xl:w-[600px] object-contain drop-shadow-[0_0_50px_rgba(255,255,255,0.4)] relative z-10" alt="Rainbow Polypack Huge Logo" />
                 </div>
                 <button
-                  onClick=${() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick=${handleCinematicScroll}
                   className="absolute bottom-8 left-8 pointer-events-auto bg-brand-navy/80 hover:bg-brand-navy backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer"
                 >
                   View Catalog
@@ -709,11 +738,12 @@
                 </div>
               <//>
               <div className="fixed top-0 left-0 h-screen w-full pointer-events-none z-20">
-                <${motion.div}
-                  style=${{ opacity: phase1Opacity, y: p1y }}
-                  className="absolute inset-0 flex items-center justify-between px-6 sm:px-12 md:px-16 lg:px-24 pointer-events-none z-30"
-                >
-                  <div className="w-full max-w-sm md:max-w-md lg:max-w-lg pointer-events-auto text-left flex flex-col justify-center">
+                <div style=${{ opacity: isAutoScrolling ? 0 : 1, transition: "opacity 0.5s ease" }} className="w-full h-full pointer-events-none">
+                  <${motion.div}
+                    style=${{ opacity: phase1Opacity, y: p1y }}
+                    className="absolute inset-0 flex items-center justify-between px-6 sm:px-12 md:px-16 lg:px-24 pointer-events-none z-30"
+                  >
+                    <div className="w-full max-w-sm md:max-w-md lg:max-w-lg pointer-events-auto text-left flex flex-col justify-center">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_8px_24px_rgba(0,0,0,0.9)]">
                       <span className="text-white">Rainbow</span> <span className="text-[#1E3A8A] drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">Polypack</span>
                     </h1>
@@ -776,6 +806,7 @@
                     </p>
                   </div>
                 <//>
+                </div>
               </div>
               <${motion.div} style=${{ opacity: phase5Opacity, y: p5y }} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pt-20">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,37,69,0.8)_0%,_transparent_60%)] pointer-events-none -z-10"></div>
