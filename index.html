@@ -517,17 +517,17 @@
       });
       const introOpacity = useTransform(smoothProgress, [0, 0.035], [1, 0]);
       const introScale = useTransform(smoothProgress, [0, 0.035], [1, 1.15]);
-      const phase1Opacity = useTransform(smoothProgress, [0.04, 0.07, 0.16, 0.19], [0, 1, 1, 0]);
-      const phase2Opacity = useTransform(smoothProgress, [0.20, 0.24, 0.38, 0.42], [0, 1, 1, 0]);
-      const phase3Opacity = useTransform(smoothProgress, [0.43, 0.47, 0.63, 0.67], [0, 1, 1, 0]);
-      const phase4Opacity = useTransform(smoothProgress, [0.68, 0.72, 0.88, 0.92], [0, 1, 1, 0]);
-      const phase5Opacity = useTransform(smoothProgress, [0.93, 0.96, 1, 1], [0, 1, 1, 1]);
-      const p1y = useTransform(smoothProgress, [0.04, 0.07, 0.16, 0.19], [40, 0, 0, -40]);
-      const p2y = useTransform(smoothProgress, [0.20, 0.24, 0.38, 0.42], [40, 0, 0, -40]);
-      const p3y = useTransform(smoothProgress, [0.43, 0.47, 0.63, 0.67], [40, 0, 0, -40]);
-      const p4y = useTransform(smoothProgress, [0.68, 0.72, 0.88, 0.92], [40, 0, 0, -40]);
-      const p5y = useTransform(smoothProgress, [0.93, 0.96, 1, 1], [40, 0, 0, 0]);
-      const videoOpacity = useTransform(smoothProgress, [0.88, 0.98], [1, 0]);
+      const phase1Opacity = useTransform(smoothProgress, [0.03, 0.06, 0.12, 0.15], [0, 1, 1, 0]);
+      const phase2Opacity = useTransform(smoothProgress, [0.17, 0.20, 0.32, 0.35], [0, 1, 1, 0]);
+      const phase3Opacity = useTransform(smoothProgress, [0.37, 0.40, 0.52, 0.55], [0, 1, 1, 0]);
+      const phase4Opacity = useTransform(smoothProgress, [0.57, 0.60, 0.72, 0.75], [0, 1, 1, 0]);
+      const phase5Opacity = useTransform(smoothProgress, [0.78, 0.83, 1, 1], [0, 1, 1, 1]);
+      const p1y = useTransform(smoothProgress, [0.03, 0.06, 0.12, 0.15], [40, 0, 0, -40]);
+      const p2y = useTransform(smoothProgress, [0.17, 0.20, 0.32, 0.35], [40, 0, 0, -40]);
+      const p3y = useTransform(smoothProgress, [0.37, 0.40, 0.52, 0.55], [40, 0, 0, -40]);
+      const p4y = useTransform(smoothProgress, [0.57, 0.60, 0.72, 0.75], [40, 0, 0, -40]);
+      const p5y = useTransform(smoothProgress, [0.78, 0.83, 1, 1], [40, 0, 0, 0]);
+      const videoOpacity = useTransform(smoothProgress, [0.85, 0.98], [1, 0]);
       const bgBridge = useTransform(smoothProgress, [0.85, 1], ["rgba(11, 37, 69, 1)", "rgba(243, 244, 246, 1)"]);
       if (isMobile) {
         return html`
@@ -627,7 +627,7 @@
       }
       return html`
         <div>
-          <${motion.div} ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[500vh] md:h-[800vh]">
+          <${motion.div} ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[600vh] md:h-[1200vh]">
             <div className="sticky top-0 h-screen w-screen overflow-hidden">
               <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-10 mix-blend-overlay scale-150 blur-xs brightness-0 invert">
                 <img src="./assets/rainbow-polypack-logo.svg" className="w-full h-auto max-w-none" alt="Watermark" />
@@ -725,6 +725,7 @@
               </div>
               <${motion.div} style=${{ opacity: phase5Opacity, y: p5y }} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pt-20">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,37,69,0.8)_0%,_transparent_60%)] pointer-events-none -z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,105,180,0.06)] via-[rgba(0,255,255,0.06)] to-[rgba(255,255,0,0.06)] pointer-events-none -z-10 mix-blend-screen"></div>
                 <div className="text-center px-4 w-full flex flex-col items-center">
                   <div className="relative mb-8">
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-navy/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
