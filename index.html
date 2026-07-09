@@ -436,34 +436,6 @@
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in your PET preforms.");
       const waLink = `https://wa.me/910000000000?text=${waText}`;
       
-      const handleCinematicScrollUp = () => {
-        window.dispatchEvent(new Event('cinematicScrollStart'));
-        const startY = window.scrollY;
-        const distance = -startY;
-        const duration = 3500;
-        let start = null;
-
-        const step = (timestamp) => {
-          if (!start) start = timestamp;
-          const progress = Math.min(timestamp - start, duration);
-          const ease = progress < duration / 2 
-            ? 4 * Math.pow(progress / duration, 3) 
-            : 1 - Math.pow(-2 * (progress / duration) + 2, 3) / 2;
-          
-          window.scrollTo(0, startY + distance * ease);
-          
-          if (progress < duration) {
-            window.requestAnimationFrame(step);
-          } else {
-            // Delay the end event to let the Framer Motion spring physically settle
-            setTimeout(() => {
-              window.dispatchEvent(new Event('cinematicScrollEnd'));
-            }, 2000);
-          }
-        };
-        window.requestAnimationFrame(step);
-      };
-
       return html`
         <div className="fixed top-6 left-6 md:top-8 md:left-8 z-[60] hidden md:flex items-center">
           <${AnimatePresence}>
@@ -476,9 +448,9 @@
                 onClick=${() => {
                   if (location.pathname !== '/') {
                     navigate('/');
-                    setTimeout(() => window.scrollTo(0, 0), 100);
+                    setTimeout(() => window.dispatchEvent(new Event('cinematicScrollUp')), 100);
                   } else {
-                    handleCinematicScrollUp();
+                    window.dispatchEvent(new Event('cinematicScrollUp'));
                   }
                 }}
                 className="cursor-pointer transition-transform active:scale-95 group flex items-center justify-center p-2"
@@ -545,6 +517,7 @@
       const [scrollPercent, setScrollPercent] = useState(0);
       const [isMobile, setIsMobile] = useState(false);
       const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+      const activeScrollRef = useRef({ frameId: null, timeoutId: null });
       const mobileVideoRef = useRef(null);
       const frameCount = 108;
 
@@ -601,14 +574,16 @@
         return () => window.removeEventListener('resize', handleResize);
       }, [isMobile]);
 
-      const handleCinematicScroll = () => {
-        const productsEl = document.getElementById('products');
-        if (!productsEl) return;
+      const runCinematicScroll = (targetY, duration = 3500) => {
+        // 1. Immediately cancel any conflicting background timers or animations
+        if (activeScrollRef.current.frameId) cancelAnimationFrame(activeScrollRef.current.frameId);
+        if (activeScrollRef.current.timeoutId) clearTimeout(activeScrollRef.current.timeoutId);
+
+        // 2. Hide all text overlays instantly
         setIsAutoScrolling(true);
+
         const startY = window.scrollY;
-        const targetY = productsEl.getBoundingClientRect().top + window.scrollY;
         const distance = targetY - startY;
-        const duration = 3500; // 3.5 seconds
         let start = null;
 
         const step = (timestamp) => {
@@ -621,30 +596,36 @@
           window.scrollTo(0, startY + distance * ease);
           
           if (progress < duration) {
-            window.requestAnimationFrame(step);
+            activeScrollRef.current.frameId = window.requestAnimationFrame(step);
           } else {
-            // Delay turning off the overlay to let the Framer Motion spring settle
-            setTimeout(() => {
+            activeScrollRef.current.frameId = null;
+            // 3. Keep text hidden until the Framer Motion spring completely settles
+            activeScrollRef.current.timeoutId = setTimeout(() => {
               setIsAutoScrolling(false);
-            }, 2000);
+              activeScrollRef.current.timeoutId = null;
+            }, 1500);
           }
         };
-        window.requestAnimationFrame(step);
+        activeScrollRef.current.frameId = window.requestAnimationFrame(step);
       };
 
       useEffect(() => {
-        const handleStart = () => setIsAutoScrolling(true);
-        const handleEnd = () => setIsAutoScrolling(false);
-        const handleDown = () => handleCinematicScroll();
+        const handleDown = () => {
+          const productsEl = document.getElementById('products');
+          if (productsEl) runCinematicScroll(productsEl.getBoundingClientRect().top + window.scrollY, 3500);
+        };
+        const handleUp = () => {
+          runCinematicScroll(0, 3500);
+        };
         
-        window.addEventListener('cinematicScrollStart', handleStart);
-        window.addEventListener('cinematicScrollEnd', handleEnd);
         window.addEventListener('cinematicScrollDown', handleDown);
+        window.addEventListener('cinematicScrollUp', handleUp);
         
         return () => {
-          window.removeEventListener('cinematicScrollStart', handleStart);
-          window.removeEventListener('cinematicScrollEnd', handleEnd);
           window.removeEventListener('cinematicScrollDown', handleDown);
+          window.removeEventListener('cinematicScrollUp', handleUp);
+          if (activeScrollRef.current.frameId) cancelAnimationFrame(activeScrollRef.current.frameId);
+          if (activeScrollRef.current.timeoutId) clearTimeout(activeScrollRef.current.timeoutId);
         };
       }, []);
 
@@ -787,7 +768,10 @@
                   <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-[500px] xl:w-[600px] object-contain drop-shadow-[0_0_50px_rgba(255,255,255,0.4)] relative z-10" alt="Rainbow Polypack Huge Logo" />
                 </div>
                 <button
-                  onClick=${handleCinematicScroll}
+                  onClick=${() => {
+                    const productsEl = document.getElementById('products');
+                    if (productsEl) runCinematicScroll(productsEl.getBoundingClientRect().top + window.scrollY, 3500);
+                  }}
                   className="absolute bottom-8 left-8 pointer-events-auto bg-brand-navy/80 hover:bg-brand-navy backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer"
                 >
                   View Catalog
