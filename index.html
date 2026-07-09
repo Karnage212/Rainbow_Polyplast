@@ -134,8 +134,7 @@
           onMouseMove=${handleMouseMove}
           onMouseEnter=${() => setOpacity(1)}
           onMouseLeave=${handleMouseLeave}
-          style=${{ willChange: "transform", WebkitFontSmoothing: "antialiased", ...style }}
-          whileHover=${{ scale: 1.02, zIndex: 10 }}
+          style=${style}
           className=${"relative group bg-white shadow-[0_8px_32px_rgba(11,37,69,0.08)] overflow-hidden " + className}
         >
           <div
@@ -754,7 +753,7 @@
       const waTDSText = encodeURIComponent(`Hello Rainbow Polypack Team, please share the official Technical Data Sheet (TDS) for the ${p.title} (${p.weight}g) PET Preform.`);
       const waTDSLink = `https://wa.me/910000000000?text=${waTDSText}`;
       return html`
-        <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white border border-slate-200">
+        <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 bg-white border border-slate-200">
           <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200 border border-slate-100 text-brand-navy">
             <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
           </div>
@@ -839,7 +838,7 @@
                 <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">IV (Intrinsic Viscosity)</span><span className="font-extrabold text-brand-navy font-mono">0.80 - 0.84 dl/g</span></div>
                 <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">AA Level</span><span className="font-extrabold text-brand-navy font-mono">${"<"} 1.0 ppm</span></div>
                 <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">Weight Tolerance</span><span className="font-extrabold text-brand-navy font-mono">± 0.15g</span></div>
-                <div className="flex justify-between pt-1"><span className="text-slate-500">Resin Base</span><span className="font-extrabold text-brand-navy font-mono">100% Virgin PET</span></div>
+                <div className="flex justify-between pt-1"><span className="text-slate-500">Resin Base</span><span className="font-extrabold text-brand-navy font-mono">Virgin / rPET</span></div>
               </div>
             </div>
             <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
