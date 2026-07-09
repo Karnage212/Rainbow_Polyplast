@@ -184,8 +184,9 @@
       return html`
         <div className="w-full max-w-3xl mx-auto space-y-4">
           ${items.map((item, index) => html`
-            <div key=${index} className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <button
+            <div key=${index} className=${"rounded-2xl border overflow-hidden transition-all duration-300 " + (activeIndex === index ? "bg-slate-50 border-brand-navy/30 shadow-md" : "bg-white border-slate-200 shadow-sm hover:shadow-md")}>
+              <${motion.button}
+                whileTap=${{ scale: 0.98 }}
                 onClick=${() => setActiveIndex(activeIndex === index ? -1 : index)}
                 className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
               >
@@ -193,7 +194,7 @@
                 <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-navy border-brand-navy text-white" : "border-slate-300 text-slate-500 group-hover:border-brand-navy")}>
                   <svg className=${"w-5 h-5 transition-transform duration-300 " + (activeIndex === index ? "rotate-180" : "rotate-0")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-              </button>
+              <//>
               <${AnimatePresence}>
                 ${activeIndex === index && html`
                   <${motion.div}
@@ -550,6 +551,11 @@
               <div className="absolute inset-0 z-0">
                 <video ref=${mobileVideoRef} src="./assets/mobile_bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
+                <${motion.div} 
+                  animate=${{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.15, 1] }} 
+                  transition=${{ duration: 6, repeat: Infinity, ease: "easeInOut" }} 
+                  className="absolute inset-0 bg-gradient-to-tr from-brand-navy/80 via-brand-green/10 to-transparent blur-[60px] pointer-events-none" 
+                />
               </div>
               <${motion.div}
                 initial=${{opacity: 0, scale: 0.9}}
@@ -583,52 +589,43 @@
                 transition=${{duration: 0.8, delay: 0.6}}
                 className="relative z-10 w-full px-2 mb-12"
               >
-                 <${MagneticLink} to="/brochure" className="block w-full px-8 py-4 bg-brand-green text-white rounded-full font-extrabold text-lg shadow-[0_10px_30px_rgba(112,164,67,0.3)] border border-brand-green/50">
-                  Ask for Quotation
+                 <${MagneticLink} to="/brochure" className="block w-full">
+                  <${motion.div}
+                    whileTap=${{ scale: 0.96 }}
+                    animate=${{ boxShadow: ["0px 10px 30px rgba(112,164,67,0.3)", "0px 15px 40px rgba(112,164,67,0.6)", "0px 10px 30px rgba(112,164,67,0.3)"] }}
+                    transition=${{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-full px-8 py-4 bg-brand-green text-white rounded-full font-extrabold text-lg border border-brand-green/50 text-center flex items-center justify-center gap-2"
+                  >
+                    <span>Ask for Quotation</span>
+                    <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  <//>
                 <//>
               <//>
             </div>
             <div className="py-20 px-8 bg-slate-900 border-t border-white/5 relative z-10">
-              <div className="space-y-24">
-                <${motion.div}
-                  initial=${{opacity: 0, y: 40}}
-                  whileInView=${{opacity: 1, y: 0}}
-                  viewport=${{once: true, margin: "-50px"}}
-                  transition=${{duration: 0.8}}
-                  className="text-center"
-                >
-                  <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest shadow-sm">
-                    Neck Finish
-                  </div>
-                  <h3 className="text-3xl font-black text-white mb-4">CTC 29/21mm</h3>
-                  <p className="text-slate-400 text-lg leading-relaxed">Precision-molded threads designed for absolute sealing integrity. Flawless gate quality and strict dimensional tolerances ensure zero leakage.</p>
-                <//>
-                <${motion.div}
-                  initial=${{opacity: 0, y: 40}}
-                  whileInView=${{opacity: 1, y: 0}}
-                  viewport=${{once: true, margin: "-50px"}}
-                  transition=${{duration: 0.8}}
-                  className="text-center"
-                >
-                  <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest shadow-sm">
-                    Mold Systems
-                  </div>
-                  <h3 className="text-3xl font-black text-white mb-4">100% Hot Runner Systems</h3>
-                  <p className="text-slate-400 text-lg leading-relaxed">Zero cold runner scrap. Maximum consistency. By utilizing advanced hot runner technology, we eliminate material degradation.</p>
-                <//>
-                <${motion.div}
-                  initial=${{opacity: 0, y: 40}}
-                  whileInView=${{opacity: 1, y: 0}}
-                  viewport=${{once: true, margin: "-50px"}}
-                  transition=${{duration: 0.8}}
-                  className="text-center"
-                >
-                  <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest shadow-sm">
-                    Material Distribution
-                  </div>
-                  <h3 className="text-3xl font-black text-white mb-4">Blow-Up Ratio Perfection</h3>
-                  <p className="text-slate-400 text-lg leading-relaxed">Optimal material distribution ensures your final stretch-blown containers possess superior top-load strength and brilliant transparency.</p>
-                <//>
+              <div className="space-y-6">
+                ${[
+                  { badge: "Neck Finish", title: "CTC 29/21mm", desc: "Precision-molded threads designed for absolute sealing integrity. Flawless gate quality and strict dimensional tolerances ensure zero leakage." },
+                  { badge: "Mold Systems", title: "100% Hot Runner Systems", desc: "Zero cold runner scrap. Maximum consistency. By utilizing advanced hot runner technology, we eliminate material degradation." },
+                  { badge: "Material Distribution", title: "Blow-Up Ratio Perfection", desc: "Optimal material distribution ensures your final stretch-blown containers possess superior top-load strength and brilliant transparency." }
+                ].map((item, idx) => html`
+                  <${motion.div}
+                    key=${idx}
+                    initial=${{ opacity: 0, y: 30 }}
+                    whileInView=${{ opacity: 1, y: 0 }}
+                    viewport=${{ once: true, margin: "-20px" }}
+                    transition=${{ duration: 0.5, delay: idx * 0.1 }}
+                    whileTap=${{ scale: 0.98 }}
+                    className="p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md text-left relative overflow-hidden group"
+                  >
+                    <div className="absolute top-0 left-0 w-1 h-full bg-brand-green"></div>
+                    <div className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-3 py-1 rounded-full text-[10px] font-extrabold mb-3 uppercase tracking-widest">
+                      ${item.badge}
+                    </div>
+                    <h3 className="text-2xl font-black text-white mb-2">${item.title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">${item.desc}</p>
+                  <//>
+                `)}
               </div>
             </div>
             <div className="bg-[#F3F4F6] pt-12 pb-0 relative z-20">
