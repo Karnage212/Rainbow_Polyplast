@@ -519,6 +519,7 @@
       const [isAutoScrolling, setIsAutoScrolling] = useState(false);
       const activeScrollRef = useRef({ frameId: null, timeoutId: null });
       const mobileVideoRef = useRef(null);
+      const lastFrameRef = useRef(0);
       const frameCount = 108;
 
       useEffect(() => {
@@ -553,6 +554,7 @@
         const loadImages = () => {
           for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
+            img.decoding = 'async';
             const paddedIndex = i.toString().padStart(5, '0');
             img.src = `./assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
             imagesRef.current[i] = img;
@@ -640,7 +642,10 @@
           let p = latest; // Ensure the animation reaches 100% completion before the outro fade out begins
           if (p > 1) p = 1;
           const frameIndex = Math.min(frameCount, Math.max(1, Math.round(p * frameCount)));
-          requestAnimationFrame(() => drawImage(frameIndex));
+          if (frameIndex !== lastFrameRef.current) {
+            lastFrameRef.current = frameIndex;
+            requestAnimationFrame(() => drawImage(frameIndex));
+          }
         }
       });
       const introOpacity = useTransform(smoothProgress, [0, 0.035], [1, 0]);
@@ -915,7 +920,7 @@
       }, [isIntegrated]);
       const allProducts = [
         { id: 1, title: "CTC 29/21mm - 15g", weight: "15", neck: "CTC 29/21mm", usage: "250ml - 500ml", apps: "Edible Oils, Syrups, Pharmaceuticals, Liquid Condiments" },
-        { id: 2, title: "CTC 29/21mm - 23.5g", weight: "23.5", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Edible Oils, Ghee, Household Cleaners, Personal Care" },
+        { id: 2, title: "CTC 29/21mm - 23.5g", weight: "23.5", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Edible Oils" },
         { id: 3, title: "CTC 29/21mm - 26g", weight: "26", neck: "CTC 29/21mm", usage: "1000ml (1L)", apps: "Edible Oils, Agro Chemicals, Industrial Liquids, Lubricants" },
       ];
       const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
