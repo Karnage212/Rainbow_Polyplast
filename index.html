@@ -753,7 +753,7 @@
         <div>
           <${motion.div} ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[600vh] md:h-[1200vh]">
             <div className="sticky top-0 h-screen w-screen overflow-hidden">
-              <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-10 mix-blend-overlay scale-150 blur-xs brightness-0 invert">
+              <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-10 mix-blend-overlay scale-150 blur-[2px] brightness-0 invert transform-gpu will-change-transform">
                 <img src="./assets/rainbow-polypack-logo.svg" className="w-full h-auto max-w-none" alt="Watermark" />
               </div>
               <${motion.canvas}
@@ -761,11 +761,11 @@
                 style=${{ opacity: videoOpacity }}
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none"
               />
-              <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-slate-900/20 backdrop-blur-sm">
-                <div className="relative mb-12">
-                  <div className="absolute -inset-20 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.5)_0%,_transparent_70%)] pointer-events-none -z-10 blur-2xl"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-navy/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
-                  <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-[500px] xl:w-[600px] object-contain drop-shadow-[0_0_50px_rgba(255,255,255,0.4)] relative z-10" alt="Rainbow Polypack Huge Logo" />
+              <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-slate-900/20 backdrop-blur-sm transform-gpu will-change-transform">
+                <div className="relative mb-12 transform-gpu">
+                  <div className="absolute -inset-20 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.5)_0%,_transparent_70%)] pointer-events-none -z-10 blur-2xl transform-gpu"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-navy/10 blur-[60px] rounded-full scale-150 pointer-events-none transform-gpu"></div>
+                  <img src="./assets/rainbow-polypack-logo.svg" className="w-64 md:w-[500px] xl:w-[600px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo" />
                 </div>
                 <button
                   onClick=${() => {
