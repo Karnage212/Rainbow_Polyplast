@@ -713,11 +713,7 @@
               <span>${t("nav_enquiry")}</span>
             <//>
             
-            <div className="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md border border-white/20 rounded-full px-3 min-h-[44px] shadow-2xl shrink-0">
-              <button onClick=${() => setLang('en')} aria-label="Switch to English" className=${"text-xs font-bold uppercase min-w-[32px] min-h-[32px] " + (lang === 'en' ? "text-brand-green" : "text-white/50 hover:text-white transition-colors")}>EN</button>
-              <span className="text-white/20 text-xs">|</span>
-              <button onClick=${() => setLang('fr')} aria-label="Switch to French" className=${"text-xs font-bold uppercase min-w-[32px] min-h-[32px] " + (lang === 'fr' ? "text-brand-green" : "text-white/50 hover:text-white transition-colors")}>FR</button>
-            </div>
+
           </div>
 
           <button
