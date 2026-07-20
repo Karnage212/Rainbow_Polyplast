@@ -58,11 +58,19 @@
     .hover-rainbow-text:hover {
       background: linear-gradient(90deg, #ffffff, #A3E635, #38BDF8, #ffffff, #A3E635);
       background-size: 300% 100%;
-      animation: rainbow-sweep 3s ease infinite;
       -webkit-background-clip: text;
       background-clip: text;
-      color: transparent;
-      text-shadow: none;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-sweep 3s linear infinite;
+    }
+    .hover-rainbow-row {
+      transition: all 0.3s ease;
+    }
+    .hover-rainbow-row:hover {
+      background: linear-gradient(90deg, rgba(236,72,153,0.05), rgba(59,130,246,0.05), rgba(34,197,94,0.05));
+      background-size: 200% 100%;
+      animation: rainbow-sweep 3s linear infinite;
+      box-shadow: inset 0 0 20px rgba(59,130,246,0.1), inset 0 0 10px rgba(34,197,94,0.1);
     }
     ::-webkit-scrollbar-thumb:hover { background: #70A443; }
     video::-webkit-media-controls { display: none !important; }
@@ -150,13 +158,13 @@
         submit_enquiry: "Submit an Enquiry",
         qc_commitment: "Zero-Defect Commitment",
         qc_protocol_title: "Zero-Defect Quality Protocol",
-        qc_protocol_desc: "Speed means nothing without structural perfection. Every batch undergoes rigorous mechanical and optical testing before it leaves our facility.",
+        qc_protocol_desc: "Speed is irrelevant without structural and dimensional perfection. Every production cycle is governed by strict Quality Assurance (QA) protocols, utilizing advanced metrology and polymer testing to ensure flawless performance on high-speed blow molding lines.",
         qc_structural_title: "Structural Integrity Checks",
-        qc_structural_desc: "Every batch is tested for drop impact resistance, top-load limits, and stress crack resistance.",
+        qc_structural_desc: "Each batch undergoes rigorous Intrinsic Viscosity (IV) drop tests, top-load crush resistance profiling, and Environmental Stress Cracking Resistance (ESCR) evaluations to eliminate gate vestige vulnerabilities and ensure structural integrity.",
         qc_optical_title: "Optical Clarity Standards",
-        qc_optical_desc: "We ensure maximum transparency and minimize haze so your final beverage shines on the shelf.",
+        qc_optical_desc: "Advanced polariscopic analysis is conducted to detect internal stress, birefringence, and crystallinity. We continuously monitor Acetaldehyde (AA) levels (< 1.0 ppm) and ensure maximum transparency with minimal haze.",
         qc_dim_title: "Dimensional Tolerances",
-        qc_dim_desc: "Rigorous caliper and CMM measurements to guarantee flawless neck finishes and thread engagement.",
+        qc_dim_desc: "Rigorous caliper and Coordinate Measuring Machine (CMM) inspections are performed to guarantee precise neck finish parameters (T-dimension, E-dimension) and flawless thread concentricity, ensuring zero leakage and absolute sealing integrity.",
         why_partner: "Why Partner With Us",
         startup_agility_title: "The Startup Agility Advantage",
         startup_agility_desc: "We are a modern, agile manufacturing firm unburdened by legacy bureaucracy. Experience rapid turnarounds, flexible MOQs, and direct access to technical founders.",
@@ -240,13 +248,13 @@
         submit_enquiry: "Soumettre une Demande",
         qc_commitment: "Engagement Zéro Défaut",
         qc_protocol_title: "Protocole de Qualité Zéro Défaut",
-        qc_protocol_desc: "La vitesse ne signifie rien sans perfection structurelle. Chaque lot subit des tests mécaniques et optiques rigoureux avant de quitter notre usine.",
+        qc_protocol_desc: "La vitesse n'a pas d'importance sans une perfection structurelle et dimensionnelle. Chaque cycle de production est régi par des protocoles stricts d'Assurance Qualité (AQ), utilisant une métrologie avancée et des tests sur les polymères pour garantir des performances impeccables sur les lignes de moulage par soufflage à grande vitesse.",
         qc_structural_title: "Contrôles d'Intégrité Structurelle",
-        qc_structural_desc: "Chaque lot est testé pour la résistance à l'impact de chute, les limites de charge par le haut et la résistance aux fissures sous contrainte.",
+        qc_structural_desc: "Chaque lot est soumis à des tests rigoureux de chute de Viscosité Intrinsèque (IV), à un profilage de la résistance à l'écrasement sous charge supérieure et à des évaluations de la Résistance à la Fissuration sous Contrainte Environnementale (ESCR) pour éliminer les vulnérabilités des vestiges de seuil et garantir l'intégrité structurelle.",
         qc_optical_title: "Normes de Clarté Optique",
-        qc_optical_desc: "Nous garantissons une transparence maximale et minimisons le voile afin que votre boisson finale brille en rayon.",
+        qc_optical_desc: "Une analyse polariscopique avancée est effectuée pour détecter les contraintes internes, la biréfringence et la cristallinité. Nous surveillons en permanence les niveaux d'Acétaldéhyde (AA) (< 1.0 ppm) et garantissons une transparence maximale avec un trouble minimal.",
         qc_dim_title: "Tolérances Dimensionnelles",
-        qc_dim_desc: "Mesures rigoureuses au pied à coulisse et MMT pour garantir des finitions de col et un engagement de filetage sans faille.",
+        qc_dim_desc: "Des inspections rigoureuses au pied à coulisse et à la Machine à Mesurer Tridimensionnelle (MMT) sont effectuées pour garantir des paramètres de finition de col précis (dimension T, dimension E) et une concentricité de filetage impeccable, garantissant aucune fuite et une intégrité d'étanchéité absolue.",
         why_partner: "Pourquoi Nous Choisir",
         startup_agility_title: "L'Avantage de l'Agilité Startup",
         startup_agility_desc: "Nous sommes une entreprise de fabrication moderne et agile, libérée de la bureaucratie traditionnelle. Profitez de délais de traitement rapides, de MOQ flexibles et d'un accès direct aux fondateurs techniques.",
@@ -685,7 +693,7 @@
                 window.dispatchEvent(new Event('cinematicScrollUp'));
               }
             }}
-            className=${"cursor-pointer transition-all duration-500 group flex items-center justify-center " + (isScrolledLogo ? "p-2 bg-slate-900/10 backdrop-blur-sm rounded-full border border-white/5 opacity-50 hover:opacity-100" : "p-3 bg-transparent backdrop-blur-none")}
+            className=${"cursor-pointer transition-all duration-500 group flex items-center justify-center " + (isScrolledLogo ? "p-2 bg-slate-900/10 backdrop-blur-sm rounded-full border border-white/10 opacity-60 hover:opacity-100 shadow-md" : "p-0 bg-transparent border-transparent")}
           >
             <img 
               src="/assets/rainbow-polypack-logo.svg" 
@@ -1057,7 +1065,6 @@
                       </div>
                       <div className="text-left">
                         <div className="text-white font-black text-xl tracking-tight leading-snug">Chhatral, Gujarat</div>
-                        <div className="text-brand-green font-bold text-xs uppercase tracking-widest mt-1">Global Manufacturing</div>
                       </div>
                     </div>
                   <//>
@@ -1278,12 +1285,11 @@
                         <th className="px-6 py-4 whitespace-normal break-words">${t("optimal_usage")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("applications")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("iv_aa")}</th>
-                        <th className="px-6 py-4 text-right min-w-[180px] whitespace-normal break-words">${t("action")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 bg-white text-sm">
                       ${allProducts.map(p => html`
-                        <tr className="hover:bg-slate-50 transition-colors group">
+                        <tr className="hover-rainbow-row">
                           <td className="px-6 py-5 font-black text-brand-navy whitespace-normal break-words group-hover:hover-rainbow-text transition-all duration-300">
                             ${p.title.split(' - ')[0]}<br/>
                             <span className="text-lg text-brand-green">${p.weight}g</span>
@@ -1294,24 +1300,6 @@
                           <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">
                             IV: 0.80-0.84 dl/g<br/>
                             <span className="text-slate-500 text-xs">AA: ${"<"} 1.0 ppm</span>
-                          </td>
-                          <td className="px-6 py-5 text-right min-w-[140px] whitespace-normal break-words">
-                            <div className="flex flex-row gap-2 items-center justify-end">
-                              <button 
-                                onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a sample of the ' + p.title + ' (' + p.weight + 'g) PET Preform.')}`, '_blank')}
-                                className="inline-flex items-center justify-center min-w-[120px] h-[40px] px-4 bg-brand-navy text-white rounded-lg font-bold text-xs hover:bg-slate-800 transition-colors cursor-pointer"
-                              >
-                                ${t("req_sample")}
-                              </button>
-                              <button 
-                                onClick=${() => setModalTDS(p.title)}
-                                aria-label=${t("download_tds")}
-                                title=${t("download_tds")}
-                                className="inline-flex items-center justify-center w-[40px] h-[40px] bg-slate-100 text-slate-500 rounded-lg hover:bg-brand-green hover:text-white transition-colors cursor-pointer"
-                              >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                              </button>
-                            </div>
                           </td>
                         </tr>
                       `)}
@@ -1333,10 +1321,15 @@
                         <span className="block text-xs font-black text-brand-navy">± 0.15g</span>
                       </div>
                     </div>
-                    <button onClick=${() => setModalTDS(t("profile_title"))} className="w-full min-h-[44px] bg-brand-navy hover:bg-slate-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                      ${t("download_tds")}
-                    </button>
+                    <div className="w-full flex flex-col gap-3">
+                      <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-navy hover:bg-slate-800 text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-navy/30">
+                        Request Bulk Sample
+                      </button>
+                      <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download Full Technical Catalog (TDS)
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1360,7 +1353,7 @@
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white">
                     ${allProducts.map(p => html`
-                      <tr className="hover:bg-slate-50 transition-colors group">
+                      <tr className="hover-rainbow-row group">
                         <td className="px-5 py-4 font-black text-brand-navy text-lg group-hover:hover-rainbow-text transition-all duration-300">${p.weight}g</td>
                         <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.usage}</td>
                         <td className="px-5 py-4 text-right font-mono text-xs font-bold text-brand-navy whitespace-normal break-words leading-relaxed min-w-[140px]">
@@ -1378,11 +1371,12 @@
                 <div className="flex justify-between pt-1"><span className="text-slate-500">Resin Base</span><span className="font-extrabold text-brand-navy font-mono">Virgin / rPET</span></div>
                 
                 <div className="pt-4 flex flex-col gap-3">
-                  <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request samples of the CTC 29/21mm PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-navy text-white rounded-xl font-bold text-xs flex items-center justify-center hover:bg-slate-800 transition-colors">
-                    ${t("req_sample")}
+                  <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-navy hover:bg-slate-800 text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-navy/30">
+                    Request Bulk Sample
                   </button>
-                  <button onClick=${() => setModalTDS(t("profile_title"))} className="w-full min-h-[44px] bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center hover:bg-slate-300 transition-colors">
-                    ${t("download_tds")}
+                  <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-green hover:text-white transition-colors">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download Full Technical Catalog (TDS)
                   </button>
                 </div>
               </div>
