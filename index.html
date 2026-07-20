@@ -835,7 +835,7 @@
             }
             observer.disconnect();
           }
-        }, { threshold: 0.1 });
+        }, { threshold: 0 });
         if (containerRef.current) observer.observe(containerRef.current);
         
         const handleResize = () => {
