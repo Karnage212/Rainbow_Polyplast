@@ -905,11 +905,11 @@
           </div>
           <h3 className="text-2xl font-black text-brand-navy mb-5">${p.title}</h3>
           <div className="space-y-4 text-sm mt-auto font-medium mb-8">
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Bottle Usage</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${p.usage}</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Applications</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${p.apps}</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">IV (Intrinsic Viscosity)</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">0.80 - 0.84 dl/g</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">AA Level</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">${"<"} 1.0 ppm</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">Resin</span><span className="bg-slate-100 text-brand-navy px-2 py-1 rounded-md font-mono text-xs font-bold border border-slate-200">Virgin / Food-Grade rPET</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Bottle Usage</span><span className="font-semibold text-slate-800 text-sm">${p.usage}</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">Applications</span><span className="font-semibold text-slate-800 text-sm">${p.apps}</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">IV (Intrinsic Viscosity)</span><span className="font-semibold text-slate-800 text-sm">0.80 - 0.84 dl/g</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">AA Level</span><span className="font-semibold text-slate-800 text-sm">${"<"} 1.0 ppm</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">Resin</span><span className="font-semibold text-slate-800 text-sm">Virgin / Food-Grade rPET</span></div>
           </div>
           <div className="mt-auto pt-4 flex flex-col gap-3">
             <button onClick=${() => window.open(waSampleLink, '_blank')} className="w-full text-center py-3 rounded-xl border-2 border-brand-green text-brand-green font-extrabold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer block">
@@ -962,10 +962,65 @@
             <div className="mb-12 border-b border-slate-200 pb-6">
               <h2 className="text-4xl font-black text-brand-navy tracking-tight mb-2">B2B Product Catalog</h2>
             </div>
-            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 mb-16">
-              ${allProducts.map((p) => html`
-                <${ProductCard} key=${p.id} p=${p} />
-              `)}
+            <div className="hidden md:block mb-16">
+              <div className="flex flex-col xl:flex-row gap-12 items-start">
+                <div className="flex-1 w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        <th className="px-6 py-4 whitespace-nowrap">SKU / Weight</th>
+                        <th className="px-6 py-4 whitespace-nowrap">Neck Finish</th>
+                        <th className="px-6 py-4 whitespace-nowrap">Optimal Bottle Usage</th>
+                        <th className="px-6 py-4">Applications</th>
+                        <th className="px-6 py-4 whitespace-nowrap">IV & AA Levels</th>
+                        <th className="px-6 py-4 text-right whitespace-nowrap">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 bg-white text-sm">
+                      ${allProducts.map(p => html`
+                        <tr className="hover:bg-slate-50 transition-colors group">
+                          <td className="px-6 py-5 font-black text-brand-navy whitespace-nowrap">
+                            ${p.title.split(' - ')[0]}<br/>
+                            <span className="text-lg text-brand-green">${p.weight}g</span>
+                          </td>
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-nowrap">${p.neck}</td>
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-nowrap">${p.usage}</td>
+                          <td className="px-6 py-5 font-medium text-slate-600 max-w-xs leading-relaxed">${p.apps}</td>
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-nowrap">
+                            IV: 0.80-0.84 dl/g<br/>
+                            <span className="text-slate-500 text-xs">AA: ${"<"} 1.0 ppm</span>
+                          </td>
+                          <td className="px-6 py-5 text-right whitespace-nowrap">
+                            <button 
+                              onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a sample of the ' + p.title + ' (' + p.weight + 'g) PET Preform.')}`, '_blank')}
+                              className="inline-flex items-center justify-center px-4 py-2 bg-brand-navy text-white rounded-lg font-bold text-xs hover:bg-slate-800 transition-colors cursor-pointer"
+                            >
+                              Request Sample
+                            </button>
+                          </td>
+                        </tr>
+                      `)}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="w-full xl:w-[350px] shrink-0 sticky top-32">
+                  <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center text-center">
+                    <img src="./assets/CTC Neck Image.jpeg" alt="CTC Neck Preform" className="w-full h-auto object-cover rounded-xl mb-6 shadow-sm border border-slate-100" />
+                    <h4 className="text-lg font-black text-brand-navy mb-2">CTC 29/21mm Profile</h4>
+                    <p className="text-xs font-medium text-slate-600 leading-relaxed mb-6">Precision engineered press-on neck finish ideal for viscous liquids, condiments, and high-performance sealing.</p>
+                    <div className="w-full grid grid-cols-2 gap-3 text-left">
+                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Resin Base</span>
+                        <span className="block text-xs font-black text-brand-navy">Virgin / rPET</span>
+                      </div>
+                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Weight Tolerance</span>
+                        <span className="block text-xs font-black text-brand-navy">± 0.15g</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="block md:hidden mb-16 rounded-3xl border border-slate-200 shadow-2xl overflow-hidden bg-white">
@@ -1014,7 +1069,7 @@
             <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
               <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
               <div className="relative z-10 text-left">
-                <span className="inline-block px-4 py-1.5 rounded-md bg-brand-green/20 border border-brand-green/40 text-brand-green font-mono text-xs font-extrabold uppercase tracking-widest mb-4">Fast-Track Verification</span>
+                <span className="inline-block text-brand-green font-bold text-sm uppercase tracking-widest mb-4">Fast-Track Verification</span>
                 <h3 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">Rainbow Polypack Trial Sample Box</h3>
                 <p className="text-slate-300 font-medium text-lg max-w-xl">
                   A pre-packed, premium box containing 5 pieces of every CTC SKU (15g, 23.5g, 26g). Dispatched within 48 hours for your internal quality and blowing tests.
@@ -1032,7 +1087,7 @@
 
             <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-slate-200 gap-8 mt-12">
               <div className="relative z-10 text-left">
-                <span className="inline-block px-4 py-1.5 rounded-md bg-brand-navy/10 border border-brand-navy/20 text-brand-navy font-mono text-xs font-extrabold uppercase tracking-widest mb-4">Need a Custom Solution?</span>
+                <span className="inline-block text-brand-navy font-bold text-sm uppercase tracking-widest mb-4">Need a Custom Solution?</span>
                 <h3 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tight">Tailored Preform Engineering</h3>
                 <p className="text-slate-600 font-medium text-lg max-w-xl">
                   Don't see the exact specifications you need? We provide end-to-end custom preform engineering. From unique neck finishes and specific weights to custom color matching and specialized rPET blending, our technical team can develop a solution tailored to your exact manufacturing requirements.
@@ -1129,13 +1184,71 @@
         </div>
       `;
     }
+    const stateCityMap = {
+      "Andaman and Nicobar Islands": ["Port Blair", "Other"],
+      "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Tirupati", "Other"],
+      "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Other"],
+      "Assam": ["Guwahati", "Silchar", "Dibrugarh", "Jorhat", "Other"],
+      "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Other"],
+      "Chandigarh": ["Chandigarh", "Other"],
+      "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur", "Korba", "Other"],
+      "Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Silvassa", "Other"],
+      "Delhi": ["New Delhi", "Other"],
+      "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa", "Other"],
+      "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar", "Jamnagar", "Vapi", "Ankleshwar", "Other"],
+      "Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Rohtak", "Karnal", "Other"],
+      "Himachal Pradesh": ["Shimla", "Dharamshala", "Baddi", "Mandi", "Solan", "Other"],
+      "Jammu and Kashmir": ["Srinagar", "Jammu", "Anantnag", "Other"],
+      "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Other"],
+      "Karnataka": ["Bengaluru", "Mysuru", "Hubballi-Dharwad", "Mangaluru", "Belagavi", "Other"],
+      "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Palakkad", "Other"],
+      "Ladakh": ["Leh", "Kargil", "Other"],
+      "Lakshadweep": ["Kavaratti", "Other"],
+      "Madhya Pradesh": ["Indore", "Bhopal", "Jabalpur", "Gwalior", "Ujjain", "Other"],
+      "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad", "Thane", "Navi Mumbai", "Kolhapur", "Other"],
+      "Manipur": ["Imphal", "Other"],
+      "Meghalaya": ["Shillong", "Other"],
+      "Mizoram": ["Aizawl", "Other"],
+      "Nagaland": ["Dimapur", "Kohima", "Other"],
+      "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Berhampur", "Sambalpur", "Other"],
+      "Puducherry": ["Puducherry", "Auroville", "Other"],
+      "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Mohali", "Bathinda", "Other"],
+      "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bhiwadi", "Alwar", "Other"],
+      "Sikkim": ["Gangtok", "Other"],
+      "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Tiruppur", "Salem", "Hosur", "Other"],
+      "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Other"],
+      "Tripura": ["Agartala", "Other"],
+      "Uttar Pradesh": ["Noida", "Kanpur", "Lucknow", "Agra", "Meerut", "Varanasi", "Ghaziabad", "Aligarh", "Other"],
+      "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Rudrapur", "Haldwani", "Other"],
+      "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol", "Siliguri", "Kharagpur", "Other"],
+      "Other": ["Other"]
+    };
+
     function EBrochure() {
       useEffect(() => { window.scrollTo(0, 0); }, []);
       const [submitted, setSubmitted] = useState(false);
+      const [selectedState, setSelectedState] = useState("");
+      const [selectedCity, setSelectedCity] = useState("");
+      const [customCity, setCustomCity] = useState("");
+
       const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true);
       };
+
+      const handleStateChange = (e) => {
+        setSelectedState(e.target.value);
+        setSelectedCity("");
+        setCustomCity("");
+      };
+
+      const handleCityChange = (e) => {
+        setSelectedCity(e.target.value);
+        if(e.target.value !== "Other") {
+          setCustomCity("");
+        }
+      };
+
       const containerVariants = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.1 } }
@@ -1178,20 +1291,30 @@
                         <input type="text" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" />
                       </div>
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">Location / Region <span className="text-brand-green">*</span></label>
-                        <select required defaultValue="" className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
-                          <option value="" disabled>Select State/Region</option>
-                          <option value="Gujarat">Gujarat</option>
-                          <option value="Maharashtra">Maharashtra</option>
-                          <option value="Delhi NCR">Delhi NCR</option>
-                          <option value="Karnataka">Karnataka</option>
-                          <option value="Tamil Nadu">Tamil Nadu</option>
-                          <option value="Telangana">Telangana</option>
-                          <option value="West Bengal">West Bengal</option>
-                          <option value="Other">Other</option>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">State / Region <span className="text-brand-green">*</span></label>
+                        <select required value=${selectedState} onChange=${handleStateChange} className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
+                          <option value="" disabled>Select State</option>
+                          ${Object.keys(stateCityMap).map(state => html`<option key=${state} value=${state}>${state}</option>`)}
                         </select>
                       </div>
                     </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-navy mb-3">City / Hub <span className="text-brand-green">*</span></label>
+                        <select required disabled=${!selectedState} value=${selectedCity} onChange=${handleCityChange} className=${"w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm " + (!selectedState ? "opacity-50 cursor-not-allowed" : "")}>
+                          <option value="" disabled>Select City</option>
+                          ${selectedState && stateCityMap[selectedState].map(city => html`<option key=${city} value=${city}>${city}</option>`)}
+                        </select>
+                      </div>
+                      ${(selectedCity === "Other" || selectedState === "Other") ? html`
+                        <div>
+                          <label className="block text-sm font-extrabold text-brand-navy mb-3">Specify City <span className="text-brand-green">*</span></label>
+                          <input type="text" required value=${customCity} onChange=${(e) => setCustomCity(e.target.value)} className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" placeholder="Please specify your city..." />
+                        </div>
+                      ` : html`<div className="hidden md:block"></div>`}
+                    </div>
+
                     <div className="border-t border-slate-200 my-10"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
