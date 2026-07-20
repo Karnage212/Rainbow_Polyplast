@@ -900,8 +900,9 @@
       const waTDSLink = `https://wa.me/918735817667?text=${waTDSText}`;
       return html`
         <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 bg-white border border-slate-200">
-          <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200 border border-slate-100 text-brand-navy">
-            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-brand-navy border border-brand-navy shadow-inner p-8 overflow-hidden relative">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,164,67,0.15)_0%,_transparent_70%)] pointer-events-none"></div>
+            <img src="./assets/rainbow-polypack-logo.svg" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500" />
           </div>
           <h3 className="text-2xl font-black text-brand-navy mb-5">${p.title}</h3>
           <div className="space-y-4 text-sm mt-auto font-medium mb-8">
