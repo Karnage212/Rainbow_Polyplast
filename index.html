@@ -785,8 +785,19 @@
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        const img = imagesRef.current[index];
+        let img = imagesRef.current[index];
+        
+        if (!img || !img.complete) {
+          for (let f = index - 1; f >= 1; f--) {
+            if (imagesRef.current[f]?.complete) {
+              img = imagesRef.current[f];
+              break;
+            }
+          }
+        }
+        
         if (!img || !img.complete) return;
+        
         const hRatio = canvas.width / img.width;
         const vRatio = canvas.height / img.height;
         const ratio  = Math.max(hRatio, vRatio);
@@ -816,9 +827,7 @@
                 img.src = `/assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
                 img.onload = () => {
                   requestAnimationFrame(() => {
-                    if (imagesRef.current[lastFrameRef.current]?.complete) {
-                      drawImage(lastFrameRef.current);
-                    }
+                    drawImage(lastFrameRef.current || 1);
                   });
                 };
                 imagesRef.current[i] = img;
@@ -895,18 +904,7 @@
           const frameIndex = Math.min(frameCount, Math.max(1, Math.round(latest * frameCount)));
           if (frameIndex !== lastFrameRef.current) {
             lastFrameRef.current = frameIndex;
-            requestAnimationFrame(() => {
-              if (imagesRef.current[frameIndex]?.complete) {
-                drawImage(frameIndex);
-              } else {
-                for (let f = frameIndex - 1; f >= 1; f--) {
-                  if (imagesRef.current[f]?.complete) {
-                    drawImage(f);
-                    break;
-                  }
-                }
-              }
-            });
+            requestAnimationFrame(() => drawImage(frameIndex));
           }
         }
       });
@@ -1289,25 +1287,25 @@
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                        <th className="px-6 py-4 min-w-[140px] whitespace-normal break-words">${t("sku_weight")}</th>
-                        <th className="px-6 py-4 min-w-[140px] whitespace-normal break-words">${t("neck_finish")}</th>
-                        <th className="px-6 py-4 min-w-[140px] whitespace-normal break-words">${t("optimal_usage")}</th>
-                        <th className="px-6 py-4 min-w-[140px] whitespace-normal break-words">${t("applications")}</th>
-                        <th className="px-6 py-4 min-w-[140px] whitespace-normal break-words">${t("iv_aa")}</th>
+                        <th className="px-6 py-4 whitespace-normal break-words">${t("sku_weight")}</th>
+                        <th className="px-6 py-4 whitespace-normal break-words">${t("neck_finish")}</th>
+                        <th className="px-6 py-4 whitespace-normal break-words">${t("optimal_usage")}</th>
+                        <th className="px-6 py-4 whitespace-normal break-words">${t("applications")}</th>
+                        <th className="px-6 py-4 whitespace-normal break-words">${t("iv_aa")}</th>
                         <th className="px-6 py-4 text-right min-w-[180px] whitespace-normal break-words">${t("action")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 bg-white text-sm">
                       ${allProducts.map(p => html`
                         <tr className="hover:bg-slate-50 transition-colors group">
-                          <td className="px-6 py-5 font-black text-brand-navy min-w-[140px] whitespace-normal break-words">
+                          <td className="px-6 py-5 font-black text-brand-navy whitespace-normal break-words">
                             ${p.title.split(' - ')[0]}<br/>
                             <span className="text-lg text-brand-green">${p.weight}g</span>
                           </td>
-                          <td className="px-6 py-5 font-semibold text-slate-800 min-w-[140px] whitespace-normal break-words">${p.neck}</td>
-                          <td className="px-6 py-5 font-semibold text-slate-800 min-w-[140px] whitespace-normal break-words">${p.usage}</td>
-                          <td className="px-6 py-5 font-medium text-slate-600 min-w-[200px] whitespace-normal break-words leading-relaxed">${p.apps}</td>
-                          <td className="px-6 py-5 font-semibold text-slate-800 min-w-[140px] whitespace-normal break-words">
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">${p.neck}</td>
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">${p.usage}</td>
+                          <td className="px-6 py-5 font-medium text-slate-600 whitespace-normal break-words leading-relaxed">${p.apps}</td>
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">
                             IV: 0.80-0.84 dl/g<br/>
                             <span className="text-slate-500 text-xs">AA: ${"<"} 1.0 ppm</span>
                           </td>
