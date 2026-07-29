@@ -4,8 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rainbow Polypack | Premium PET Preform Manufacturers</title>
-  <meta name="description" content="Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance 15g, 24g, 26g CTC 29/21mm preforms utilizing advanced Hot Runner Moulds.">
+  <meta name="description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
   <meta name="keywords" content="PET preform manufacturer Gujarat, CTC 29/21 preform, Chhatral GIDC plastics, Rainbow Polypack">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.rainbowpolypack.com/">
+  <meta property="og:title" content="Rainbow Polypack | Premium PET Preform Manufacturers">
+  <meta property="og:description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
+  <meta property="og:image" content="https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.rainbowpolypack.com/">
+  <meta property="twitter:title" content="Rainbow Polypack | Premium PET Preform Manufacturers">
+  <meta property="twitter:description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
+  <meta property="twitter:image" content="https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Rainbow Polypack",
+    "url": "https://www.rainbowpolypack.com/",
+    "logo": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
+    "description": "Premium PET Preform manufacturers based in Chhatral, Gujarat.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chhatral",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/rainbow-polypack/",
+      "https://www.instagram.com/rainbowpolypack/",
+      "https://x.com/Rainbowpolypack"
+    ]
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="./assets/logo_assets/svg/logo-icon-transparent-bg.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -147,7 +184,7 @@
     import React, { useEffect, useState, useRef, useMemo, createContext, useContext } from 'react';
     import { createRoot } from 'react-dom/client';
     import { useScroll, useTransform, motion, useMotionValueEvent, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
-    import { HashRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+    import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
     import htm from 'htm';
     const html = htm.bind(React.createElement);
 
@@ -825,7 +862,7 @@
           }
           lastScrollY.current = currentScrollY;
           
-          const isHome = window.location.hash === '#/' || window.location.hash === '';
+          const isHome = window.location.pathname === '/';
           if (!isHome) {
              setIsScrolledLogo(true);
              setIsPastHeroLogo(true);
@@ -2020,7 +2057,7 @@ ${message}`);
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       return html`
-        <${HashRouter}>
+        <${BrowserRouter}>
           <${GlobalScrollObserver} />
           <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-black">
             <${CustomCursor} />
