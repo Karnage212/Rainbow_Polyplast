@@ -6,7 +6,7 @@
   <title>Rainbow Polypack | Premium PET Preform Manufacturers</title>
   <meta name="description" content="Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance 15g, 23.5g, 26g CTC 29/21mm preforms utilizing advanced Hot Runner Moulds.">
   <meta name="keywords" content="PET preform manufacturer Gujarat, CTC 29/21 preform, Chhatral GIDC plastics, Rainbow Polypack">
-  <link rel="icon" type="image/svg+xml" href="/assets/rainbow-polypack-logo.svg">
+  <link rel="icon" type="image/svg+xml" href="./assets/logo_assets/svg/logo-icon-transparent-bg.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -14,12 +14,16 @@
         extend: {
           colors: {
             brand: {
-              navy: '#0B2545',
-              green: '#70A443'
+              purple: '#49326B',
+              green: '#039544',
+              yellow: '#FEF111',
+              red: '#E5332E',
+              black: '#0B0B0C',
+              white: '#FFFFFF'
             }
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['DM Sans', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           blur: {
@@ -29,7 +33,7 @@
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
     @media (pointer: fine) {
       body, a, button, input, select, textarea {
@@ -37,18 +41,18 @@
       }
     }
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #F3F4F6;
+      font-family: 'DM Sans', sans-serif;
+      background-color: #FFFFFF;
       margin: 0;
       padding: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
-      color: #0B2545;
+      color: #0B0B0C;
     }
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0B2545; }
-    ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: #0B0B0C; }
+    ::-webkit-scrollbar-thumb { background: #039544; border-radius: 4px; }
 
     @keyframes rainbow-sweep {
       0% { background-position: 0% 50%; }
@@ -56,7 +60,7 @@
       100% { background-position: 0% 50%; }
     }
     .hover-rainbow-text:hover {
-      background: linear-gradient(90deg, #ffffff, #A3E635, #38BDF8, #ffffff, #A3E635);
+      background: linear-gradient(90deg, #49326B, #039544, #FEF111, #E5332E, #49326B);
       background-size: 300% 100%;
       -webkit-background-clip: text;
       background-clip: text;
@@ -67,18 +71,52 @@
       transition: all 0.3s ease;
     }
     .hover-rainbow-row:hover {
-      background: linear-gradient(90deg, rgba(236,72,153,0.05), rgba(59,130,246,0.05), rgba(34,197,94,0.05));
-      background-size: 200% 100%;
-      animation: rainbow-sweep 3s linear infinite;
-      box-shadow: inset 0 0 20px rgba(59,130,246,0.1), inset 0 0 10px rgba(34,197,94,0.1);
+      background-color: rgba(3, 149, 68, 0.03); /* extremely subtle green brand tint */
     }
-    ::-webkit-scrollbar-thumb:hover { background: #70A443; }
+    ::-webkit-scrollbar-thumb:hover { background: #E5332E; }
     video::-webkit-media-controls { display: none !important; }
     video::-webkit-media-controls-start-playback-button { display: none !important; opacity: 0; }
     video { pointer-events: none; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .overflow-x-auto { -webkit-overflow-scrolling: touch; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .focus-gradient-ring:focus:not(:invalid) {
+        border-color: transparent !important;
+        background-image: linear-gradient(white, white), linear-gradient(90deg, #49326B, #039544, #FEF111, #E5332E, #49326B);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        background-size: 100% 100%, 200% 100%;
+        animation: rainbow-sweep 3s linear infinite;
+        outline: none;
+      }
+      
+      .btn-gradient-sweep {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn-gradient-sweep::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #49326B, #039544, #FEF111, #E5332E, #49326B);
+        background-size: 200% 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+      }
+      .btn-gradient-sweep:hover::before {
+        opacity: 1;
+        animation: rainbow-sweep 3s linear infinite;
+      }
+      .btn-gradient-sweep:hover {
+        border-color: transparent !important;
+      }
+    }
   </style>
+
   <script type="importmap">
     {
       "imports": {
@@ -324,7 +362,74 @@
         <//>
       `;
     }
+
+    function SectionHeaderReveal({ children }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReduced) return html`<div className="mb-6 relative w-full flex justify-center">${children}</div>`;
+
+      const container = {
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.05, delayChildren: 0.1 }
+        }
+      };
+      
+      const tile = {
+        hidden: { opacity: 0, scale: 0.5 },
+        visible: { opacity: [0, 1, 0], scale: [0.5, 1, 0.5], transition: { duration: 0.5 } }
+      };
+
+      return html`
+        <div className="relative mb-6 flex flex-col items-center justify-center overflow-visible">
+          <${motion.div} variants=${container} initial="hidden" whileInView="visible" viewport=${{ once: true, margin: "-100px" }} className="absolute inset-0 flex items-center justify-center gap-2 pointer-events-none z-0 mt-6">
+            ${[1,2,3,4,5].map(i => html`
+              <${motion.div} key=${i} variants=${tile} className="w-6 h-6 opacity-20" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} />
+            `)}
+          <//>
+          <div className="relative z-10 w-full text-center flex justify-center">
+            ${children}
+          </div>
+        </div>
+      `;
+    }
+
+    function TiltRow({ children, className }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const x = useMotionValue(0);
+      const y = useMotionValue(0);
+      const rotateX = useTransform(y, [-50, 50], [2, -2]);
+      const rotateY = useTransform(x, [-200, 200], [-2, 2]);
+
+      const handleMouseMove = (e) => {
+        if (isReduced || window.matchMedia('(hover: none)').matches) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        x.set(e.clientX - centerX);
+        y.set(e.clientY - centerY);
+      };
+
+      const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+      };
+
+      return html`
+        <${motion.tr}
+          className=${className}
+          style=${isReduced ? {} : { rotateX, rotateY, transformPerspective: 1000 }}
+          onMouseMove=${handleMouseMove}
+          onMouseLeave=${handleMouseLeave}
+          transition=${{ type: "spring", stiffness: 400, damping: 30 }}
+        >
+          ${children}
+        <//>
+      `;
+    }
+
     function TiltCard({ children, className, style = {} }) {
+
       const ref = useRef(null);
       const x = useMotionValue(0);
       const y = useMotionValue(0);
@@ -355,7 +460,7 @@
           onMouseEnter=${() => setOpacity(1)}
           onMouseLeave=${handleMouseLeave}
           style=${style}
-          className=${"relative group bg-white shadow-[0_8px_32px_rgba(11,37,69,0.08)] overflow-hidden " + className}
+          className=${"relative group bg-white shadow-[0_8px_32px_rgba(11,11,12,0.08)] overflow-hidden " + className}
         >
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
@@ -390,14 +495,14 @@
       return html`
         <div className="w-full max-w-3xl mx-auto space-y-4">
           ${items.map((item, index) => html`
-            <div key=${index} className=${"rounded-2xl border overflow-hidden transition-all duration-300 " + (activeIndex === index ? "bg-slate-50 border-brand-navy/30 shadow-md" : "bg-white border-slate-200 shadow-sm hover:shadow-md")}>
+            <div key=${index} className=${"rounded-2xl border overflow-hidden transition-all duration-300 " + (activeIndex === index ? "bg-brand-white border-brand-black/30 shadow-md" : "bg-white border-slate-200 shadow-sm hover:shadow-md")}>
               <${motion.button}
                 whileTap=${{ scale: 0.98 }}
                 onClick=${() => setActiveIndex(activeIndex === index ? -1 : index)}
                 className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
               >
-                <span className="text-lg font-black text-brand-navy">${item.title}</span>
-                <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-navy border-brand-navy text-white" : "border-slate-300 text-slate-500 group-hover:border-brand-navy")}>
+                <span className="text-lg font-black text-brand-black">${item.title}</span>
+                <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-black border-brand-black text-white" : "border-slate-300 text-slate-500 group-hover:border-brand-black")}>
                   <svg className=${"w-5 h-5 transition-transform duration-300 " + (activeIndex === index ? "rotate-180" : "rotate-0")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
               <//>
@@ -431,12 +536,12 @@
         visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
       };
       return html`
-        <div className="bg-[#F3F4F6] py-32 border-y border-slate-200 relative overflow-hidden">
+        <div className="bg-brand-white py-32 border-y border-slate-200 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_rgba(112,164,67,0.05),_transparent_50%)] pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("why_partner")}</span>
-              <h2 className="text-4xl md:text-5xl font-black text-brand-navy tracking-tight mb-6">${t("startup_agility_title")}</h2>
+              <span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("why_partner")}</span>
+              <${SectionHeaderReveal}><h2 className="text-4xl md:text-5xl font-black text-brand-black tracking-tight">${t("startup_agility_title")}</h2><//>
               <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
                 ${t("startup_agility_desc")}
               </p>
@@ -453,7 +558,7 @@
                   <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-6 border border-brand-green/20">
                     <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </div>
-                  <h3 className="text-xl font-black text-brand-navy mb-3">${t("dispatch_title")}</h3>
+                  <h3 className="text-xl font-black text-brand-black mb-3">${t("dispatch_title")}</h3>
                   <p className="text-slate-600 font-medium text-sm leading-relaxed">
                     ${t("dispatch_desc")}
                   </p>
@@ -464,7 +569,7 @@
                   <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-6 border border-brand-green/20">
                     <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                   </div>
-                  <h3 className="text-xl font-black text-brand-navy mb-3">${t("moq_title")}</h3>
+                  <h3 className="text-xl font-black text-brand-black mb-3">${t("moq_title")}</h3>
                   <p className="text-slate-600 font-medium text-sm leading-relaxed">
                     ${t("moq_desc")}
                   </p>
@@ -475,7 +580,7 @@
                   <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-6 border border-brand-green/20">
                     <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
                   </div>
-                  <h3 className="text-xl font-black text-brand-navy mb-3">${t("consultation_title")}</h3>
+                  <h3 className="text-xl font-black text-brand-black mb-3">${t("consultation_title")}</h3>
                   <p className="text-slate-600 font-medium text-sm leading-relaxed">
                     ${t("consultation_desc")}
                   </p>
@@ -483,8 +588,8 @@
               <//>
             <//>
             <div className="text-center mb-16">
-              <span className="inline-block bg-brand-navy text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("qc_commitment")}</span>
-              <h2 className="text-4xl md:text-5xl font-black text-brand-navy tracking-tight mb-6">${t("qc_protocol_title")}</h2>
+              <span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("qc_commitment")}</span>
+              <${SectionHeaderReveal}><h2 className="text-4xl md:text-5xl font-black text-brand-black tracking-tight">${t("qc_protocol_title")}</h2><//>
               <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
                 ${t("qc_protocol_desc")}
               </p>
@@ -499,15 +604,15 @@
       const location = useLocation();
       const navigate = useNavigate();
       return html`
-        <footer style=${{ userSelect: 'none' }} onCopy=${(e) => e.preventDefault()} className="select-none bg-[#0B2545] text-slate-300 py-24 relative overflow-hidden">
+        <footer style=${{ userSelect: 'none' }} onCopy=${(e) => e.preventDefault()} className="select-none bg-brand-black text-slate-300 py-24 relative overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] mix-blend-overlay" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: '150px 150px', backgroundRepeat: 'repeat' }}></div>
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
               <div className="md:col-span-2">
                 <div className="flex items-center mb-8 relative">
                   <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 pointer-events-none"></div>
-                  <img src="/assets/rainbow-polypack-logo.svg" className="h-16 md:h-20 w-auto mr-6 object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo" />
-                  <span className="text-xl md:text-2xl font-black text-white tracking-widest relative z-10">${t("brand_name")}</span>
+                  <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" loading="lazy" className="w-16 md:w-20 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <p className="text-slate-400 mb-8 max-w-md leading-relaxed text-sm font-medium">
                   ${t("footer_desc")}
@@ -562,7 +667,7 @@
                 </ul>
               </div>
             </div>
-            <div className="border-t border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-500">
+            <div className="border-t border-brand-black mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-500">
               <p>© ${new Date().getFullYear()} Rainbow Polypack. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <${Link} to="/privacy" className="hover:text-white transition-colors cursor-pointer">${t("privacy_policy")}<//>
@@ -693,13 +798,9 @@
                 window.dispatchEvent(new Event('cinematicScrollUp'));
               }
             }}
-            className=${"cursor-pointer transition-all duration-500 group flex items-center justify-center " + (isScrolledLogo ? "p-2 bg-slate-900/10 backdrop-blur-sm rounded-full border border-white/10 opacity-60 hover:opacity-100 shadow-md" : "p-0 bg-transparent border-transparent")}
+            className="cursor-pointer transition-all duration-500 group flex items-center justify-center opacity-100"
           >
-            <img 
-              src="/assets/rainbow-polypack-logo.svg" 
-              className=${"h-auto object-contain transition-all duration-500 " + (isScrolledLogo ? "w-16 md:w-20 drop-shadow-sm group-hover:scale-105" : "w-32 md:w-40 drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)] group-hover:scale-105")} 
-              alt="Rainbow Polypack Logo" 
-            />
+            <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" className="h-12 md:h-16 w-auto object-contain" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
           <//>
         </div>
 
@@ -719,7 +820,7 @@
           <button
             onClick=${() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
-            className="bg-slate-900/80 backdrop-blur-md border border-white/20 text-white rounded-full min-h-[44px] px-5 md:px-6 cursor-pointer hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 md:gap-3 shadow-2xl active:scale-95 shrink-0"
+            className="bg-brand-black/80 backdrop-blur-md border border-white/20 text-white rounded-full min-h-[44px] px-5 md:px-6 cursor-pointer hover:bg-brand-black transition-colors flex items-center justify-center gap-2 md:gap-3 shadow-2xl active:scale-95 shrink-0"
           >
             <svg className="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d=${isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path></svg>
             <span className="font-extrabold uppercase tracking-widest text-sm hidden md:inline-block">Menu</span>
@@ -731,7 +832,7 @@
                 animate=${{ opacity: 1, y: 0, scale: 1 }}
                 exit=${{ opacity: 0, y: -20, scale: 0.95 }}
                 transition=${{ type: "spring", stiffness: 400, damping: 30 }}
-                className="absolute top-16 right-0 w-64 bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+                className="absolute top-16 right-0 w-64 bg-brand-black/90 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
               >
                 <div className="p-4 space-y-2">
                   ${links.map(link => html`
@@ -761,6 +862,7 @@
       const canvasRef = useRef(null);
       const imagesRef = useRef({});
       const [isMobile, setIsMobile] = useState(false);
+      const [isCanvasFailed, setIsCanvasFailed] = useState(false);
       const [isAutoScrolling, setIsAutoScrolling] = useState(false);
       const activeScrollRef = useRef({ frameId: null, timeoutId: null });
       const mobileVideoRef = useRef(null);
@@ -808,29 +910,46 @@
 
       useEffect(() => {
         if (isMobile) return;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
         const img1 = new Image();
         img1.decoding = 'async';
-        img1.src = `/assets/frames/preform_mould_frames_1080p_webp/fram00001.webp`;
+        img1.src = `./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp`;
+        
+        img1.onerror = () => {
+          setIsCanvasFailed(true);
+        };
+
         imagesRef.current[1] = img1;
         img1.onload = () => requestAnimationFrame(() => drawImage(1));
 
+        if (prefersReducedMotion) return;
+
         const observer = new IntersectionObserver((entries) => {
           if (entries[0].isIntersecting) {
-            for (let i = 1; i <= frameCount; i++) {
-              if (!imagesRef.current[i]) {
-                const img = new Image();
-                img.decoding = 'async';
-                const paddedIndex = i.toString().padStart(5, '0');
-                img.src = `/assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
-                img.onload = () => {
-                  requestAnimationFrame(() => {
-                    drawImage(lastFrameRef.current || 1);
-                  });
-                };
-                imagesRef.current[i] = img;
+            let currentIndex = 1;
+            const loadChunk = () => {
+              const chunkEnd = Math.min(currentIndex + 9, frameCount);
+              for (let i = currentIndex; i <= chunkEnd; i++) {
+                if (!imagesRef.current[i]) {
+                  const img = new Image();
+                  img.decoding = 'async';
+                  const paddedIndex = i.toString().padStart(5, '0');
+                  img.src = `./assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
+                  img.onload = () => {
+                    requestAnimationFrame(() => {
+                      drawImage(lastFrameRef.current || 1);
+                    });
+                  };
+                  imagesRef.current[i] = img;
+                }
               }
-            }
+              currentIndex = chunkEnd + 1;
+              if (currentIndex <= frameCount) {
+                setTimeout(loadChunk, 50);
+              }
+            };
+            loadChunk();
             observer.disconnect();
           }
         }, { threshold: 0 });
@@ -898,6 +1017,7 @@
       const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
       const smoothProgress = useSpring(scrollYProgress, { stiffness: 45, damping: 35, restDelta: 0.0001 });
       useMotionValueEvent(smoothProgress, "change", (latest) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (!isMobile && canvasRef.current) {
           const frameIndex = Math.min(frameCount, Math.max(1, Math.round(latest * frameCount)));
           if (frameIndex !== lastFrameRef.current) {
@@ -919,22 +1039,23 @@
       const p4y = useTransform(smoothProgress, [0.57, 0.60, 0.72, 0.75], [40, 0, 0, -40]);
       const p5y = useTransform(smoothProgress, [0.78, 0.83, 1, 1], [40, 0, 0, 0]);
       const videoOpacity = useTransform(smoothProgress, [0.85, 0.98], [1, 0]);
-      const bgBridge = useTransform(smoothProgress, [0.85, 1], ["rgba(11, 37, 69, 1)", "rgba(243, 244, 246, 1)"]);
+      const bgBridge = useTransform(smoothProgress, [0.85, 1], ["rgba(11, 11, 12, 1)", "rgba(243, 244, 246, 1)"]);
       if (isMobile) {
         return html`
-          <div className="bg-slate-900 min-h-screen font-sans">
+          <div className="bg-brand-black min-h-screen font-sans">
+            <${motion.div} style=${{ scaleX: smoothProgress, transformOrigin: 'left' }} className="fixed top-0 left-0 right-0 h-[3px] z-[100] pointer-events-none" style=${{ scaleX: smoothProgress, transformOrigin: 'left', backgroundImage: 'linear-gradient(to right, #49326B, #039544, #FEF111, #E5332E)' }} />
             <div className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-24 text-center overflow-hidden">
               <div className="absolute inset-0 z-0">
-                <video ref=${mobileVideoRef} src="/assets/mobile_bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="/assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
+                <video ref=${mobileVideoRef} src="./assets/mobile-bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" onError=${(e) => { e.target.style.display = 'none'; }} className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-black/50 to-brand-black"></div>
               </div>
               <${motion.div}
                 initial=${{opacity: 0, scale: 0.9}}
                 animate=${{opacity: 1, scale: 1}}
                 transition=${{duration: 1}}
-                className="relative z-10 w-full max-w-xs mx-auto mb-10 mt-12"
+                className="relative z-10 w-full max-w-sm sm:max-w-md mx-auto mb-10 mt-12"
               >
-                <img src="/assets/rainbow-polypack-logo.svg" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo" />
+                <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <//>
               <${motion.h1}
                 initial=${{opacity: 0, y: 20}}
@@ -971,7 +1092,7 @@
                 <//>
               <//>
             </div>
-            <div className="py-20 px-8 bg-slate-900 border-t border-white/5 relative z-10">
+            <div className="py-20 px-8 bg-brand-black border-t border-white/5 relative z-10">
               <div className="space-y-6">
                 ${[
                   { badge: "Neck Finish", title: "CTC 29/21mm", desc: "Precision-molded threads designed for absolute sealing integrity. Flawless gate quality and strict dimensional tolerances ensure zero leakage." },
@@ -997,8 +1118,8 @@
                 `)}
               </div>
             </div>
-            <div className="bg-[#F3F4F6] pt-12 pb-0 relative z-20">
-              <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-slate-900 to-transparent -translate-y-full"></div>
+            <div className="bg-brand-white pt-12 pb-0 relative z-20">
+              <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-brand-black to-transparent -translate-y-full"></div>
               <${Products} isIntegrated=${true} />
               <${StartupAgility} />
             </div>
@@ -1009,26 +1130,26 @@
         <div>
           <${motion.div} ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[600vh] md:h-[1200vh]">
             <div className="sticky top-0 h-screen w-screen overflow-hidden">
-              <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-10 mix-blend-overlay scale-150 blur-[2px] brightness-0 invert transform-gpu will-change-transform">
-                <img src="/assets/rainbow-polypack-logo.svg" className="w-full h-auto max-w-none" alt="Watermark" />
-              </div>
-              <${motion.canvas}
-                ref=${canvasRef}
-                style=${{ opacity: videoOpacity }}
-                className="absolute inset-0 w-full h-full z-10 pointer-events-none"
-              />
-              <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-slate-900/20 backdrop-blur-sm transform-gpu will-change-transform">
+              <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] mix-blend-overlay transform-gpu will-change-transform" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: '150px 150px', backgroundRepeat: 'repeat' }}></div>
+              ${!isCanvasFailed ? html`
+                <${motion.canvas}
+                  ref=${canvasRef}
+                  style=${{ opacity: videoOpacity }}
+                  className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+                />
+              ` : null}
+              <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-brand-black/20 backdrop-blur-sm transform-gpu will-change-transform">
                 <div className="relative mb-12 transform-gpu">
                   <div className="absolute -inset-20 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.5)_0%,_transparent_70%)] pointer-events-none -z-10 blur-2xl transform-gpu"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-navy/10 blur-[60px] rounded-full scale-150 pointer-events-none transform-gpu"></div>
-                  <img src="/assets/rainbow-polypack-logo.svg" className="w-64 md:w-[500px] xl:w-[600px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-black/10 blur-[60px] rounded-full scale-150 pointer-events-none transform-gpu"></div>
+                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-80 sm:w-[420px] md:w-[600px] lg:w-[680px] xl:w-[760px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <button
                   onClick=${() => {
                     const productsEl = document.getElementById('products');
                     if (productsEl) runCinematicScroll(productsEl.getBoundingClientRect().top + window.scrollY, 3500);
                   }}
-                  className="absolute bottom-8 left-8 pointer-events-auto bg-brand-navy/80 hover:bg-brand-navy backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer min-h-[44px]"
+                  className="absolute bottom-8 left-8 pointer-events-auto bg-brand-black/80 hover:bg-brand-black backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer min-h-[44px]"
                 >
                   ${t("home_scroll_catalog")}
                 </button>
@@ -1043,7 +1164,7 @@
                     style=${{ opacity: phase1Opacity, y: p1y }}
                     className="absolute inset-0 flex items-center justify-between px-6 sm:px-12 md:px-16 lg:px-24 pointer-events-none z-30"
                   >
-                    <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-left max-w-lg pointer-events-auto">
+                    <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-left max-w-lg pointer-events-auto">
                       <div className="absolute top-0 left-0 w-1 h-full bg-brand-green"></div>
                       <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight mb-4 text-white">
                         Rainbow <span className="text-brand-green">Polypack</span>
@@ -1052,7 +1173,7 @@
                         ${t("home_scroll_desc")}
                       </p>
                     </div>
-                    <div className="hidden lg:flex items-center gap-4 pointer-events-auto bg-slate-900/40 backdrop-blur-lg border border-white/20 rounded-2xl px-5 py-3 shadow-2xl hover:bg-slate-900/60 transition-colors cursor-default">
+                    <div className="hidden lg:flex items-center gap-4 pointer-events-auto bg-brand-black/40 backdrop-blur-lg border border-white/20 rounded-2xl px-5 py-3 shadow-2xl hover:bg-brand-black/60 transition-colors cursor-default">
                       <div className="w-12 h-12 rounded-xl bg-brand-green/20 flex items-center justify-center text-brand-green shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 drop-shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -1065,7 +1186,7 @@
                     </div>
                   <//>
                   <${motion.div} style=${{ opacity: phase2Opacity, y: p2y }} className="absolute inset-0 flex items-end justify-end px-8 md:px-16 lg:px-24 pb-32 pointer-events-none">
-                    <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-right max-w-lg pointer-events-auto flex flex-col items-end">
+                    <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-right max-w-lg pointer-events-auto flex flex-col items-end">
                       <div className="absolute top-0 right-0 w-1 h-full bg-brand-green"></div>
                       <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                         ${t("home_scroll_neck")}
@@ -1076,7 +1197,7 @@
                     </div>
                   <//>
                   <${motion.div} style=${{ opacity: phase3Opacity, y: p3y }} className="absolute inset-0 flex items-end justify-start px-8 md:px-16 lg:px-24 pb-32 pointer-events-none">
-                    <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-left max-w-lg pointer-events-auto">
+                    <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-left max-w-lg pointer-events-auto">
                       <div className="absolute top-0 left-0 w-1 h-full bg-brand-green"></div>
                       <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                         ${t("home_scroll_hot_runner")}
@@ -1087,7 +1208,7 @@
                     </div>
                   <//>
                   <${motion.div} style=${{ opacity: phase4Opacity, y: p4y }} className="absolute inset-0 flex items-end justify-end px-8 md:px-16 lg:px-24 pb-32 pointer-events-none">
-                    <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-right max-w-lg pointer-events-auto flex flex-col items-end">
+                    <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-right max-w-lg pointer-events-auto flex flex-col items-end">
                       <div className="absolute top-0 right-0 w-1 h-full bg-brand-green"></div>
                       <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                         ${t("home_scroll_blow_up")}
@@ -1101,16 +1222,14 @@
               </div>
               <${motion.div} style=${{ opacity: phase5Opacity, y: p5y }} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pt-20">
                 <div style=${{ opacity: isAutoScrolling ? 0 : 1, transition: isAutoScrolling ? "opacity 0s" : "opacity 0.8s ease" }} className="w-full h-full relative flex items-center justify-center pointer-events-none">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,37,69,0.8)_0%,_transparent_60%)] pointer-events-none -z-10"></div>
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,11,12,0.8)_0%,_transparent_60%)] pointer-events-none -z-10"></div>
                   <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,105,180,0.06)] via-[rgba(0,255,255,0.06)] to-[rgba(255,255,0,0.06)] pointer-events-none -z-10 mix-blend-screen"></div>
                   <div className="text-center px-4 w-full flex flex-col items-center">
                     <div className="relative mb-8">
-                      <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-navy/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
-                      <img src="/assets/rainbow-polypack-logo.svg" className="w-64 md:w-96 h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-black/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
+                      <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-80 md:w-[480px] lg:w-[560px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     </div>
-                    <h2 className="text-5xl md:text-8xl font-black text-white tracking-[0.2em] mb-12 drop-shadow-[0_5px_5px_rgba(0,0,0,1)] flex justify-center pointer-events-auto cursor-default transition-all duration-500">
-                      ${t("brand_name")}
-                    </h2>
+                    
                     <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center">
                       ${t("submit_enquiry")}
                     <//>
@@ -1134,11 +1253,11 @@
       const waTDSLink = `https://wa.me/918735817667?text=${waTDSText}`;
       return html`
         <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 bg-white border border-slate-200">
-          <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-brand-navy border border-brand-navy shadow-inner p-8 overflow-hidden relative">
+          <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-brand-black border border-brand-black shadow-inner p-8 overflow-hidden relative">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,164,67,0.15)_0%,_transparent_70%)] pointer-events-none"></div>
-            <img src="/assets/CTC%20Neck%20Image.jpeg" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500" />
+            <img src="./assets/ctc-neck-image.jpeg" loading="lazy" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
           </div>
-          <h3 className="text-2xl font-black text-brand-navy mb-5">${p.title}</h3>
+          <h3 className="text-2xl font-black text-brand-black mb-5">${p.title}</h3>
           <div className="space-y-4 text-sm mt-auto font-medium mb-8">
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("bottle_usage")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${p.usage}</span></div>
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("applications")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${p.apps}</span></div>
@@ -1150,7 +1269,7 @@
             <button onClick=${() => window.open(waSampleLink, '_blank')} className="w-full text-center py-3 rounded-xl border-2 border-brand-green text-brand-green font-extrabold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer block">
               Request Sample
             </button>
-            <button onClick=${() => window.open(waTDSLink, '_blank')} className="w-full text-center py-3 rounded-xl bg-slate-100 text-slate-600 font-extrabold text-sm hover:bg-slate-200 transition-colors cursor-pointer block">
+            <button onClick=${() => window.open(waTDSLink, '_blank')} className="w-full text-center py-3 rounded-xl bg-brand-white text-slate-600 font-extrabold text-sm hover:bg-slate-200 transition-colors cursor-pointer block">
               Download TDS
             </button>
           </div>
@@ -1176,7 +1295,7 @@
 
       return html`
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick=${onClose}></div>
+          <div className="absolute inset-0 bg-brand-black/60 backdrop-blur-sm" onClick=${onClose}></div>
           <${motion.div} 
             initial=${{ opacity: 0, scale: 0.95, y: 20 }}
             animate=${{ opacity: 1, scale: 1, y: 0 }}
@@ -1186,7 +1305,7 @@
             <button onClick=${onClose} aria-label="Close Modal" className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-800 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
               <svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <h3 className="text-2xl font-black text-brand-navy mb-2">${t("tds_modal_title")}</h3>
+            <h3 className="text-2xl font-black text-brand-black mb-2">${t("tds_modal_title")}</h3>
             <p className="text-sm text-slate-500 mb-6 font-medium">${t("tds_modal_desc")}</p>
             
             ${error && html`<div className="mb-4 p-3 bg-red-50 text-red-600 text-xs font-bold rounded-lg border border-red-100">${error}</div>`}
@@ -1194,17 +1313,17 @@
             <form onSubmit=${handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_name")}</label>
-                <input type="text" value=${formData.name} onChange=${e => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="John Doe" />
+                <input type="text" value=${formData.name} onChange=${e => setFormData({...formData, name: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="John Doe" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_company")}</label>
-                <input type="text" value=${formData.company} onChange=${e => setFormData({...formData, company: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="Acme Corp" />
+                <input type="text" value=${formData.company} onChange=${e => setFormData({...formData, company: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="Acme Corp" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_email")}</label>
-                <input type="email" value=${formData.email} onChange=${e => setFormData({...formData, email: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="john@acme.com" />
+                <input type="email" value=${formData.email} onChange=${e => setFormData({...formData, email: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="john@acme.com" />
               </div>
-              <button type="submit" className="w-full bg-brand-navy text-white font-extrabold text-sm min-h-[44px] py-4 rounded-xl hover:bg-slate-800 transition-colors shadow-lg mt-6 flex justify-center items-center">
+              <button type="submit" className="w-full bg-brand-black text-white font-extrabold text-sm min-h-[44px] py-4 rounded-xl hover:bg-brand-black transition-colors shadow-lg mt-6 flex justify-center items-center btn-gradient-sweep">
                 ${t("tds_unlock")}
               </button>
             </form>
@@ -1255,7 +1374,7 @@
       const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
       const waKitLink = `https://wa.me/918735817667?text=${waKitText}`;
       return html`
-        <div id="products" className=${"pb-24 bg-[#F3F4F6] relative overflow-hidden " + (isIntegrated ? "pt-12" : "pt-36 min-h-screen")}>
+        <div id="products" className=${"pb-24 bg-brand-white relative overflow-hidden " + (isIntegrated ? "pt-12" : "pt-36 min-h-screen")}>
           <${AnimatePresence}>
             ${modalTDS && html`
               <${LeadCaptureModal} 
@@ -1268,14 +1387,14 @@
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="mb-12 border-b border-slate-200 pb-6">
-              <h2 className="text-4xl font-black text-brand-navy tracking-tight mb-2">${t("b2b_catalog")}</h2>
+              <${SectionHeaderReveal}><h2 className="text-4xl font-black text-brand-black tracking-tight">${t("b2b_catalog")}</h2><//>
             </div>
             <div className="hidden md:block mb-16">
               <div className="flex flex-col xl:flex-row gap-12 items-start">
-                <div className="flex-1 w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto overflow-y-hidden shadow-inner">
+                <div className="flex-1 w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto overflow-y-hidden shadow-inner no-scrollbar">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      <tr className="bg-brand-white border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
                         <th className="px-6 py-4 whitespace-normal break-words">${t("sku_weight")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("neck_finish")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("optimal_usage")}</th>
@@ -1285,8 +1404,8 @@
                     </thead>
                     <tbody className="divide-y divide-slate-100 bg-white text-sm">
                       ${allProducts.map(p => html`
-                        <tr className="hover-rainbow-row">
-                          <td className="px-6 py-5 font-black text-brand-navy whitespace-normal break-words group-hover:hover-rainbow-text transition-all duration-300">
+                        <${TiltRow} className="hover-rainbow-row">
+                          <td className="px-6 py-5 font-black text-brand-black whitespace-normal break-words group-hover:hover-rainbow-text transition-all duration-300">
                             ${p.title.split(' - ')[0]}<br/>
                             <span className="text-lg text-brand-green">${p.weight}g</span>
                           </td>
@@ -1297,31 +1416,31 @@
                             IV: 0.80-0.84 dl/g<br/>
                             <span className="text-slate-500 text-xs">AA: ${"<"} 1.0 ppm</span>
                           </td>
-                        </tr>
+                        <//>
                       `)}
                     </tbody>
                   </table>
                 </div>
                 <div className="w-full xl:w-[350px] shrink-0 sticky top-32">
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center text-center">
-                    <img src="/assets/CTC%20Neck%20Image.jpeg" alt="CTC Neck Preform" className="w-full h-auto object-cover rounded-xl mb-6 shadow-sm border border-slate-100" />
-                    <h4 className="text-lg font-black text-brand-navy mb-2">${t("profile_title")}</h4>
+                    <img src="./assets/ctc-neck-image.jpeg" loading="lazy" alt="CTC Neck Preform" className="w-full h-auto object-cover rounded-xl mb-6 shadow-sm border border-slate-100"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                    <h4 className="text-lg font-black text-brand-black mb-2">${t("profile_title")}</h4>
                     <p className="text-xs font-medium text-slate-600 leading-relaxed mb-6">Precision engineered press-on neck finish ideal for viscous liquids, condiments, and high-performance sealing.</p>
                     <div className="w-full grid grid-cols-2 gap-3 text-left mb-6">
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                      <div className="bg-brand-white p-3 rounded-lg border border-slate-100">
                         <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Resin Base</span>
-                        <span className="block text-xs font-black text-brand-navy">Virgin / rPET</span>
+                        <span className="block text-xs font-black text-brand-black">Virgin / rPET</span>
                       </div>
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                      <div className="bg-brand-white p-3 rounded-lg border border-slate-100">
                         <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Weight Tolerance</span>
-                        <span className="block text-xs font-black text-brand-navy">± 0.15g</span>
+                        <span className="block text-xs font-black text-brand-black">± 0.15g</span>
                       </div>
                     </div>
                     <div className="w-full flex flex-col gap-3">
-                      <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-navy hover:bg-slate-800 text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-navy/30">
+                      <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30 btn-gradient-sweep border border-transparent">
                         Request Bulk Sample
                       </button>
-                      <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors">
+                      <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-brand-white hover:bg-brand-green hover:text-white text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors btn-gradient-sweep border border-transparent">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Download Full Technical Catalog (TDS)
                       </button>
@@ -1332,16 +1451,16 @@
             </div>
 
             <div className="block md:hidden mb-16 rounded-3xl border border-slate-200 shadow-2xl overflow-hidden bg-white">
-              <div className="bg-slate-900 p-5 text-center border-b border-brand-navy/80 flex items-center justify-between px-6">
+              <div className="bg-brand-black p-5 text-center border-b border-brand-black/80 flex items-center justify-between px-6">
                 <span className="font-black text-white text-sm uppercase tracking-widest">CTC 29/21mm SKUs</span>
                 <span className="text-[10px] font-mono text-brand-green bg-brand-green/10 px-2.5 py-1 rounded-full border border-brand-green/30 flex items-center gap-1 animate-pulse">
                   <span>← Swipe Table →</span>
                 </span>
               </div>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto no-scrollbar">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
+                    <tr className="bg-brand-white border-b border-slate-200 text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
                       <th className="px-5 py-3 whitespace-nowrap">Weight</th>
                       <th className="px-5 py-3 whitespace-nowrap">Bottle Usage</th>
                       <th className="px-5 py-3 text-right whitespace-nowrap">Applications</th>
@@ -1349,25 +1468,25 @@
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white">
                     ${allProducts.map(p => html`
-                      <tr className="hover-rainbow-row group">
-                        <td className="px-5 py-4 font-black text-brand-navy text-lg group-hover:hover-rainbow-text transition-all duration-300">${p.weight}g</td>
+                      <${TiltRow} className="hover-rainbow-row group">
+                        <td className="px-5 py-4 font-black text-brand-black text-lg group-hover:hover-rainbow-text transition-all duration-300">${p.weight}g</td>
                         <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.usage}</td>
-                        <td className="px-5 py-4 text-right font-mono text-xs font-bold text-brand-navy whitespace-normal break-words leading-relaxed min-w-[140px]">
+                        <td className="px-5 py-4 text-right font-mono text-xs font-bold text-brand-black whitespace-normal break-words leading-relaxed min-w-[140px]">
                           ${p.apps}
                         </td>
-                      </tr>
+                      <//>
                     `)}
                   </tbody>
                 </table>
               </div>
-              <div className="bg-slate-50 p-6 border-t border-slate-200 text-xs font-semibold text-slate-600 space-y-3">
-                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">IV (Intrinsic Viscosity)</span><span className="font-extrabold text-brand-navy font-mono">0.80 - 0.84 dl/g</span></div>
-                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">AA Level</span><span className="font-extrabold text-brand-navy font-mono">${"<"} 1.0 ppm</span></div>
-                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">Weight Tolerance</span><span className="font-extrabold text-brand-navy font-mono">± 0.15g</span></div>
-                <div className="flex justify-between pt-1"><span className="text-slate-500">Resin Base</span><span className="font-extrabold text-brand-navy font-mono">Virgin / rPET</span></div>
+              <div className="bg-brand-white p-6 border-t border-slate-200 text-xs font-semibold text-slate-600 space-y-3">
+                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">IV (Intrinsic Viscosity)</span><span className="font-extrabold text-brand-black font-mono">0.80 - 0.84 dl/g</span></div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">AA Level</span><span className="font-extrabold text-brand-black font-mono">${"<"} 1.0 ppm</span></div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">Weight Tolerance</span><span className="font-extrabold text-brand-black font-mono">± 0.15g</span></div>
+                <div className="flex justify-between pt-1"><span className="text-slate-500">Resin Base</span><span className="font-extrabold text-brand-black font-mono">Virgin / rPET</span></div>
                 
                 <div className="pt-4 flex flex-col gap-3">
-                  <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-navy hover:bg-slate-800 text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-navy/30">
+                  <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30">
                     Request Bulk Sample
                   </button>
                   <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-green hover:text-white transition-colors">
@@ -1377,7 +1496,7 @@
                 </div>
               </div>
             </div>
-            <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
+            <div className="bg-brand-black rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
               <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
               <div className="relative z-10 text-left">
                 <span className="inline-block text-brand-green font-bold text-sm uppercase tracking-widest mb-4">${t("fast_track")}</span>
@@ -1398,8 +1517,8 @@
 
             <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-slate-200 gap-8 mt-12">
               <div className="relative z-10 text-left">
-                <span className="inline-block text-brand-navy font-bold text-sm uppercase tracking-widest mb-4">${t("custom_sol")}</span>
-                <h3 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tight">${t("tailored_engineering")}</h3>
+                <span className="inline-block text-brand-black font-bold text-sm uppercase tracking-widest mb-4">${t("custom_sol")}</span>
+                <h3 className="text-3xl md:text-5xl font-black text-brand-black mb-4 tracking-tight">${t("tailored_engineering")}</h3>
                 <p className="text-slate-600 font-medium text-lg max-w-xl">
                   ${t("tailored_desc")}
                 </p>
@@ -1407,7 +1526,7 @@
               <div className="relative z-10 w-full md:w-auto">
                 <button
                   onClick=${() => window.open(waKitLink, '_blank')}
-                  className="w-full md:w-auto px-10 py-5 bg-brand-navy text-white rounded-2xl font-extrabold text-lg shadow-[0_15px_30px_rgba(11,37,69,0.4)] hover:bg-slate-800 transition-all cursor-pointer whitespace-normal break-words text-center h-auto min-h-[60px]"
+                  className="w-full md:w-auto px-10 py-5 bg-brand-black text-white rounded-2xl font-extrabold text-lg shadow-[0_15px_30px_rgba(11,11,12,0.4)] hover:bg-brand-black transition-all cursor-pointer whitespace-normal break-words text-center h-auto min-h-[60px] btn-gradient-sweep border border-transparent"
                 >
                   ${t("discuss_custom")}
                 </button>
@@ -1430,7 +1549,7 @@
         visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
       };
       return html`
-        <div className="pt-32 pb-24 bg-[#F3F4F6] relative overflow-hidden">
+        <div className="pt-24 pb-16 md:pt-28 md:pb-24 bg-brand-white relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <${motion.div}
               variants=${containerVariants}
@@ -1441,23 +1560,23 @@
             >
               <${motion.div}
                 variants=${itemVariants}
-                className="mb-12 relative w-full flex justify-center"
+                className="mb-8 relative w-full flex justify-center"
                 animate=${{ y: [0, -10, 0] }}
                 transition=${{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,164,67,0.15)_0%,_transparent_70%)] blur-xl pointer-events-none md:hidden"></div>
                 <${Link} to="/" className="relative z-10 block">
                   <img 
-                    src="/assets/rainbow-polypack-logo.svg" 
+                    src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" 
                     className="w-64 sm:w-80 md:w-[500px] lg:w-[600px] h-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.8)] md:drop-shadow-2xl opacity-100 hover:scale-105 transition-transform cursor-pointer" 
                     alt="Rainbow Polypack Logo" 
-                  />
+                   onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 <//>
               </${motion.div}>
               <${motion.div} variants=${itemVariants} className="inline-block bg-brand-green/10 text-brand-green border border-brand-green/20 px-4 py-1.5 rounded-full text-xs font-extrabold mb-8 tracking-widest uppercase font-mono">
                 ${t("company_profile")}
               </${motion.div}>
-              <${motion.h1} variants=${itemVariants} className="text-5xl md:text-6xl font-black text-brand-navy mb-8 leading-[1.1] tracking-tight">
+              <${motion.h1} variants=${itemVariants} className="text-5xl md:text-6xl font-black text-brand-black mb-8 leading-[1.1] tracking-tight">
                 ${t("about_title")}
               </${motion.h1}>
               <${motion.p} variants=${itemVariants} className="text-xl text-slate-800 mb-6 leading-relaxed font-medium max-w-3xl">
@@ -1467,19 +1586,19 @@
               </${motion.p}>
               <${motion.div} variants=${itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-8 rounded-3xl shadow-xl border border-slate-200 w-full max-w-4xl text-left relative overflow-hidden mb-8">
                 <div className="border-l-4 border-brand-green pl-5 relative z-10">
-                  <div className="text-4xl font-black text-brand-navy mb-2">100%</div>
+                  <div className="text-4xl font-black text-brand-black mb-2">100%</div>
                   <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Virgin PET</div>
                 </div>
-                <div className="border-l-4 border-brand-navy pl-5 relative z-10">
-                  <div className="text-4xl font-black text-brand-navy mb-2">rPET</div>
+                <div className="border-l-4 border-brand-black pl-5 relative z-10">
+                  <div className="text-4xl font-black text-brand-black mb-2">rPET</div>
                   <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Food-Approved</div>
                 </div>
                 <div className="border-l-4 border-slate-300 pl-5 relative z-10">
-                  <div className="text-4xl font-black text-brand-navy mb-2">0%</div>
+                  <div className="text-4xl font-black text-brand-black mb-2">0%</div>
                   <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Runner Waste</div>
                 </div>
               </${motion.div}>
-              <${motion.div} variants=${itemVariants} className="bg-brand-navy text-white p-12 rounded-3xl shadow-xl border border-white/10 flex flex-col md:flex-row items-center justify-center text-center md:text-left w-full max-w-3xl gap-8 relative overflow-hidden">
+              <${motion.div} variants=${itemVariants} className="bg-brand-black text-white p-12 rounded-3xl shadow-xl border border-white/10 flex flex-col md:flex-row items-center justify-center text-center md:text-left w-full max-w-3xl gap-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
                 <div className="w-24 h-24 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center shrink-0 border border-brand-green/40 shadow-[0_0_20px_rgba(112,164,67,0.3)] relative z-10">
                   <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -1574,7 +1693,7 @@
         visible: { opacity: 1, y: 0 }
       };
       return html`
-        <div className="pt-40 pb-24 min-h-screen bg-[#F3F4F6] flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white flex flex-col items-center justify-center relative overflow-hidden">
           <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl -translate-x-1/2 pointer-events-none"></div>
           <${motion.div}
             variants=${containerVariants}
@@ -1583,32 +1702,32 @@
             className="w-full max-w-3xl mx-auto px-4 relative z-10"
           >
             <${motion.div} variants=${childVariants} className="text-center mb-16">
-              <h1 className="text-5xl font-black text-brand-navy mb-6 tracking-tight">${t("enquiry_title")}</h1>
+              <${SectionHeaderReveal}><h1 className="text-5xl font-black text-brand-black tracking-tight">${t("enquiry_title")}</h1><//>
               <p className="text-xl text-slate-700 max-w-2xl mx-auto font-medium">${t("enquiry_desc")}</p>
             <//>
             <${motion.div} variants=${childVariants} className="bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden relative">
-              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-navy to-brand-green"></div>
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-black to-brand-green"></div>
               <div className="p-10 md:p-14">
                 ${!submitted ? html`
                   <form onSubmit=${handleSubmit} className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("form_name")} <span className="text-brand-green">*</span></label>
-                        <input type="text" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" />
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_name")} <span className="text-brand-green">*</span></label>
+                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("form_email")} <span className="text-brand-green">*</span></label>
-                        <input type="email" inputMode="email" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" />
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_email")} <span className="text-brand-green">*</span></label>
+                        <input type="email" inputMode="email" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("form_company")} <span className="text-brand-green">*</span></label>
-                        <input type="text" required className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" />
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_company")} <span className="text-brand-green">*</span></label>
+                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("form_state")} <span className="text-brand-green">*</span></label>
-                        <select required value=${selectedState} onChange=${handleStateChange} className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_state")} <span className="text-brand-green">*</span></label>
+                        <select required value=${selectedState} onChange=${handleStateChange} className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option value="" disabled>${t("select_state")}</option>
                           ${Object.keys(stateCityMap).map(state => html`<option key=${state} value=${state}>${state}</option>`)}
                         </select>
@@ -1617,16 +1736,16 @@
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("form_city")} <span className="text-brand-green">*</span></label>
-                        <select required disabled=${!selectedState} value=${selectedCity} onChange=${handleCityChange} className=${"w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm " + (!selectedState ? "opacity-50 cursor-not-allowed" : "")}>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_city")} <span className="text-brand-green">*</span></label>
+                        <select required disabled=${!selectedState} value=${selectedCity} onChange=${handleCityChange} className=${"w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm " + (!selectedState ? "opacity-50 cursor-not-allowed" : "")}>
                           <option value="" disabled>${t("select_city")}</option>
                           ${selectedState && stateCityMap[selectedState].map(city => html`<option key=${city} value=${city}>${city}</option>`)}
                         </select>
                       </div>
                       ${(selectedCity === "Other" || selectedState === "Other") ? html`
                         <div>
-                          <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("specify_city")} <span className="text-brand-green">*</span></label>
-                          <input type="text" required value=${customCity} onChange=${(e) => setCustomCity(e.target.value)} className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm" placeholder="Please specify your city..." />
+                          <label className="block text-sm font-extrabold text-brand-black mb-3">${t("specify_city")} <span className="text-brand-green">*</span></label>
+                          <input type="text" required value=${customCity} onChange=${(e) => setCustomCity(e.target.value)} className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm" placeholder="Please specify your city..." />
                         </div>
                       ` : html`<div className="hidden md:block"></div>`}
                     </div>
@@ -1634,8 +1753,8 @@
                     <div className="border-t border-slate-200 my-10"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("product_interest")}</label>
-                        <select className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("product_interest")}</label>
+                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option>CTC 29/21mm - 15g</option>
                           <option>CTC 29/21mm - 23.5g</option>
                           <option>CTC 29/21mm - 26g</option>
@@ -1644,8 +1763,8 @@
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-extrabold text-brand-navy mb-3">${t("monthly_volume")}</label>
-                        <select className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-navy shadow-sm">
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("monthly_volume")}</label>
+                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option>${"<"} 50,000 units</option>
                           <option>50,000 - 200,000 units</option>
                           <option>200,000 - 500,000 units</option>
@@ -1655,10 +1774,10 @@
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-extrabold text-brand-navy mb-3">Custom Technical Requirements</label>
-                      <textarea rows="4" className="w-full px-5 py-4 bg-slate-50 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-navy shadow-sm resize-none" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
+                      <label className="block text-sm font-extrabold text-brand-black mb-3">Custom Technical Requirements</label>
+                      <textarea rows="4" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
                     </div>
-                    <${MagneticButton} type="submit" className="w-full py-5 bg-brand-navy text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-navy/20 mt-4 border border-brand-navy/50 hover:bg-brand-green transition-colors">
+                    <${MagneticButton} type="submit" className="w-full py-5 bg-brand-black text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-black/20 mt-4 border border-brand-black/50 hover:bg-brand-green transition-colors">
                       Submit Enquiry
                     <//>
                     <p className="text-center text-xs font-extrabold text-slate-500 mt-6 uppercase tracking-wider font-mono">Confidential Technical Inquiry</p>
@@ -1672,9 +1791,9 @@
                     <div className="w-28 h-28 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner border border-brand-green/20">
                       <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    <h3 className="text-4xl font-black text-brand-navy mb-4 tracking-tight">Request Received</h3>
+                    <h3 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Request Received</h3>
                     <p className="text-xl text-slate-700 mb-10 max-w-md mx-auto font-medium">Thank you for your interest. Our technical sales team will review your requirements and respond within 24 hours.</p>
-                    <${MagneticLink} to="#" className="inline-flex items-center px-10 py-5 bg-brand-green text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-green/20 hover:bg-brand-navy transition-colors">
+                    <${MagneticLink} to="#" className="inline-flex items-center px-10 py-5 bg-brand-green text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-green/20 hover:bg-brand-black transition-colors">
                       <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       Download PDF Brochure
                     <//>
@@ -1690,20 +1809,20 @@
     function PrivacyPolicy() {
       React.useEffect(() => { window.scrollTo(0, 0); }, []);
       return html`
-        <div className="pt-40 pb-24 min-h-screen bg-[#F3F4F6] text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
-            <h1 className="text-4xl font-black text-brand-navy mb-4 tracking-tight">Privacy Policy</h1>
+            <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Privacy Policy</h1>
             <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Effective Date: July 7, 2026</p>
             <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
               <p>At Rainbow Polypack, we prioritize the confidentiality of our B2B procurement partners and technical inquiries. This Privacy Policy outlines how we collect, store, and safeguard your corporate data and structural requirements.</p>
               
-              <h2 className="text-xl font-black text-brand-navy pt-4">1. Information Collection</h2>
+              <h2 className="text-xl font-black text-brand-black pt-4">1. Information Collection</h2>
               <p>We collect operational data provided explicitly through our Smart RFQ system and direct communications, including your full name, corporate email address, company registration indicators, logistical dispatch addresses, and custom structural or resin specifications.</p>
               
-              <h2 className="text-xl font-black text-brand-navy pt-4">2. Technical Data Utilization</h2>
+              <h2 className="text-xl font-black text-brand-black pt-4">2. Technical Data Utilization</h2>
               <p>Collected corporate metrics are utilized strictly to formulate prioritized manufacturing quotations, evaluate processing compatibility with our hot runner moulds, arrange fast-track dispatch of sample trial kits, and coordinate production scheduling.</p>
               
-              <h2 className="text-xl font-black text-brand-navy pt-4">3. Data Integrity & Confidentiality</h2>
+              <h2 className="text-xl font-black text-brand-black pt-4">3. Data Integrity & Confidentiality</h2>
               <p>All custom blueprints, technical parameters, and proprietary structural requests are treated as strictly confidential under industry-standard industrial data guidelines. Your specifications are never sold, leased, or distributed to adjacent trade firms, unverified logistics vendors, or third parties.</p>
             </div>
           </div>
@@ -1714,20 +1833,20 @@
     function TermsOfService() {
       React.useEffect(() => { window.scrollTo(0, 0); }, []);
       return html`
-        <div className="pt-40 pb-24 min-h-screen bg-[#F3F4F6] text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
-            <h1 className="text-4xl font-black text-brand-navy mb-4 tracking-tight">Terms of Service</h1>
+            <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Terms of Service</h1>
             <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Last Updated: July 7, 2026</p>
             <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
               <p>Welcome to the official business-to-business digital portal of Rainbow Polypack. By interacting with our technical interfaces, transmitting manufacturing blueprints, or requesting batch sample testing kits, you agree to comply with the industrial terms outlined below.</p>
               
-              <h2 className="text-xl font-black text-brand-navy pt-4">1. Industrial Quotations & Orders</h2>
+              <h2 className="text-xl font-black text-brand-black pt-4">1. Industrial Quotations & Orders</h2>
               <p>All manufacturing price estimates provided via our technical team or automated tools remain valid for exactly 30 calendar days due to raw PET resin price volatility. Formal purchase orders (PO) are subject to material availability and final production queue approval at our Chhatral, Gujarat facility.</p>
               
-              <h2 className="text-xl font-black text-brand-navy pt-4">2. Quality Standards & Tolerances</h2>
+              <h2 className="text-xl font-black text-brand-black pt-4">2. Quality Standards & Tolerances</h2>
               <p>Our high-performance preforms are produced under strict zero-defect parameters. Final batches are subject to standard structural weight variances of ±0.15g and total gate vestige thresholds of ≤0.1mm as per standard hot runner engineering benchmarks.</p>
               
-              <h2 className="text-xl font-black text-brand-navy pt-4">3. Tooling & Proprietary Design</h2>
+              <h2 className="text-xl font-black text-brand-black pt-4">3. Tooling & Proprietary Design</h2>
               <p>Any proprietary custom moulds or tooling modifications financed or supplied by a procurement partner remain the strict intellectual property of that partner. Rainbow Polypack guarantees separate facility custody and zero third-party cross-utilization of custom molds.</p>
             </div>
           </div>
@@ -1740,7 +1859,7 @@
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       return html`
         <${HashRouter}>
-          <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-navy">
+          <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-black">
             <${CustomCursor} />
             <${Navbar} />
             <main className="flex-grow">
