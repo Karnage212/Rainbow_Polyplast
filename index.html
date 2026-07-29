@@ -639,9 +639,9 @@
               <div className="md:col-span-2">
                 <div className="flex items-center mb-8 relative">
                   <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 pointer-events-none"></div>
-                  <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" loading="lazy" className="w-16 md:w-20 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                  <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" loading="lazy" className="w-24 md:w-32 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
-                <p className="text-slate-400 mb-8 max-w-md leading-relaxed text-sm font-medium">
+                <p className="text-slate-400 mb-8 max-w-md leading-relaxed text-base md:text-lg font-medium">
                   ${t("footer_desc")}
                 </p>
                 <div className="flex space-x-4">
@@ -654,9 +654,17 @@
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-extrabold text-white uppercase tracking-wider mb-6">${t("quick_links")}</h3>
-                <ul className="space-y-4 text-sm font-medium text-slate-400">
-                  <li><${Link} to="/" className="hover:text-brand-green transition-colors">${t("nav_home")}<//></li>
+                <h3 className="text-base md:text-lg font-extrabold text-white uppercase tracking-wider mb-6">${t("quick_links")}</h3>
+                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-400">
+                  <li><a href="/" onClick=${(e) => {
+                    e.preventDefault();
+                    if (location.pathname !== '/') {
+                      navigate('/');
+                      setTimeout(() => window.dispatchEvent(new Event('cinematicScrollUp')), 100);
+                    } else {
+                      window.dispatchEvent(new Event('cinematicScrollUp'));
+                    }
+                  }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_home")}</a></li>
                   <li><a href="/#products" onClick=${(e) => {
                     e.preventDefault();
                     if (location.pathname !== '/') {
@@ -671,8 +679,8 @@
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-extrabold text-white uppercase tracking-wider mb-6">${t("headquarters")}</h3>
-                <ul className="space-y-4 text-sm font-medium text-slate-400">
+                <h3 className="text-base md:text-lg font-extrabold text-white uppercase tracking-wider mb-6">${t("headquarters")}</h3>
+                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-400">
                   <li className="flex items-start group">
                     <a href="https://www.google.com/maps/search/?api=1&query=GIDC+Industrial+Estate,+Chhatral,+Gandhinagar+Highway,+Gujarat,+India" target="_blank" rel="noopener noreferrer" className="flex items-start group">
                       <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -777,6 +785,15 @@
            } else {
               window.dispatchEvent(new Event('cinematicScrollDown'));
            }
+        } else if(path === '/') {
+           if (location.pathname !== '/') {
+              navigate('/');
+              setTimeout(() => {
+                 window.dispatchEvent(new Event('cinematicScrollUp'));
+              }, 100);
+           } else {
+              window.dispatchEvent(new Event('cinematicScrollUp'));
+           }
         } else if(path.startsWith('/#')) {
            if (location.pathname !== '/') {
               navigate('/');
@@ -790,7 +807,8 @@
            window.scrollTo(0,0);
         }
       };
-      const [isScrolledLogo, setIsScrolledLogo] = useState(false);
+      const [isScrolledLogo, setIsScrolledLogo] = useState(location.pathname !== '/');
+      const [isPastHeroLogo, setIsPastHeroLogo] = useState(location.pathname !== '/');
       const [showMobileNavItems, setShowMobileNavItems] = useState(true);
       const lastScrollY = useRef(0);
 
@@ -803,84 +821,119 @@
             setShowMobileNavItems(true);
           }
           lastScrollY.current = currentScrollY;
-          setIsScrolledLogo(currentScrollY > 50);
+          
+          const isHome = window.location.hash === '#/' || window.location.hash === '';
+          if (!isHome) {
+             setIsScrolledLogo(true);
+             setIsPastHeroLogo(true);
+             return;
+          }
+          
+          let isPast = false;
+          const cinematicEl = document.getElementById('home-cinematic-scroll');
+          if (cinematicEl) {
+             isPast = currentScrollY > cinematicEl.offsetHeight - (window.innerHeight * 0.8);
+          } else {
+             isPast = currentScrollY > 100;
+          }
+          setIsScrolledLogo(isPast);
+          setIsPastHeroLogo(currentScrollY > window.innerHeight * 0.6);
         };
+        
         window.addEventListener('scroll', handleScroll, { passive: true });
+        // Run immediately to set initial state correctly on route change
+        handleScroll();
+        
         return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
+      }, [location.pathname]);
 
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in your PET preforms.");
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       
       return html`
-        <div className="fixed top-6 left-6 md:top-8 md:left-8 z-[60] hidden md:flex items-center">
-          <${motion.div}
-            initial=${{ opacity: 0, y: -20 }}
-            animate=${{ opacity: 1, y: 0 }}
-            onClick=${() => {
-              if (location.pathname !== '/') {
-                navigate('/');
-                setTimeout(() => window.dispatchEvent(new Event('cinematicScrollUp')), 100);
-              } else {
-                window.dispatchEvent(new Event('cinematicScrollUp'));
-              }
-            }}
-            className="cursor-pointer transition-all duration-500 group flex items-center justify-center opacity-100"
-          >
-            <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" className="h-12 md:h-16 w-auto object-contain hover:scale-[1.03] transition-transform duration-300 origin-left ease-out" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
-          <//>
-        </div>
-
-        <div className="fixed top-6 right-6 md:top-8 md:right-8 z-[60] flex items-center gap-2">
-          <div className=${`flex items-center transition-all duration-300 ease-in-out ${showMobileNavItems ? 'gap-2 opacity-100 scale-100 w-auto origin-right' : 'gap-0 opacity-0 scale-50 w-0 overflow-hidden md:overflow-visible md:w-auto md:scale-100 md:gap-2 md:opacity-100 origin-right'}`}>
-            <${Link} 
-              to="/brochure" 
-              aria-label=${t("nav_enquiry")}
-              className="md:hidden min-w-[44px] min-h-[44px] bg-brand-green/90 backdrop-blur-md text-white border border-white/20 rounded-full px-5 font-extrabold text-xs tracking-wider uppercase shadow-[0_0_15px_rgba(112,164,67,0.5)] active:scale-95 transition-all flex items-center justify-center shrink-0 whitespace-nowrap"
-            >
-              <span>${t("nav_enquiry")}</span>
-            <//>
+        <div className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ease-out pointer-events-none ${isScrolledLogo ? 'pt-4 md:pt-6' : 'pt-6 md:pt-8'} ${isPastHeroLogo ? 'opacity-100' : 'opacity-0'}`}>
+          <div className=${`mx-auto px-6 md:px-8 flex items-center justify-between w-full transition-all duration-700 pointer-events-auto ${isScrolledLogo ? 'max-w-5xl bg-brand-black/70 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-full py-3 border border-white/10' : 'max-w-[1400px] bg-transparent py-0'}`}>
             
+            <${motion.div}
+              onClick=${() => {
+                if (location.pathname !== '/') {
+                  navigate('/');
+                  setTimeout(() => window.dispatchEvent(new Event('cinematicScrollUp')), 100);
+                } else {
+                  window.dispatchEvent(new Event('cinematicScrollUp'));
+                }
+              }}
+              className="cursor-pointer transition-transform duration-300 origin-left ease-out hover:scale-[1.03]"
+            >
+              <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" className=${`w-auto object-contain transition-all duration-700 ${isScrolledLogo ? 'h-10 md:h-12' : 'h-12 md:h-[60px] lg:h-[68px]'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+            <//>
+
+            <!-- Desktop Inline Links -->
+            <div className="hidden md:flex items-center gap-8">
+              ${links.map(link => html`
+                <div
+                  key=${link.path}
+                  onClick=${() => handleNav(link.path)}
+                  className=${`cursor-pointer text-base md:text-lg font-black transition-colors uppercase tracking-widest ${isScrolledLogo ? 'text-white hover:text-brand-green' : 'text-brand-black/80 hover:text-brand-black'}`}
+                >
+                  ${link.label}
+                </div>
+              `)}
+            </div>
+
+            <!-- Mobile Burger Menu & Contact -->
+            <div className="flex md:hidden items-center gap-2">
+              <div className=${`flex items-center transition-all duration-300 ease-in-out ${showMobileNavItems ? 'gap-2 opacity-100 scale-100 w-auto origin-right' : 'gap-0 opacity-0 scale-50 w-0 overflow-hidden origin-right'}`}>
+                <${Link} 
+                  to="/brochure" 
+                  aria-label=${t("nav_enquiry")}
+                  className="min-w-[44px] min-h-[44px] bg-brand-green/90 backdrop-blur-md text-white border border-white/20 rounded-full px-5 font-extrabold text-xs tracking-wider uppercase shadow-[0_0_15px_rgba(112,164,67,0.5)] active:scale-95 transition-all flex items-center justify-center shrink-0 whitespace-nowrap"
+                >
+                  <span>${t("nav_enquiry")}</span>
+                <//>
+              </div>
+
+              <button
+                onClick=${() => setIsOpen(!isOpen)}
+                aria-label="Toggle Menu"
+                className="bg-brand-black/80 backdrop-blur-md border border-white/20 text-white rounded-full min-h-[44px] px-5 cursor-pointer hover:bg-brand-black transition-colors flex items-center justify-center shadow-2xl active:scale-95 shrink-0"
+              >
+                <svg className="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d=${isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path></svg>
+              </button>
+            </div>
 
           </div>
-
-          <button
-            onClick=${() => setIsOpen(!isOpen)}
-            aria-label="Toggle Menu"
-            className="bg-brand-black/80 backdrop-blur-md border border-white/20 text-white rounded-full min-h-[44px] px-5 md:px-6 cursor-pointer hover:bg-brand-black transition-colors flex items-center justify-center gap-2 md:gap-3 shadow-2xl active:scale-95 shrink-0"
-          >
-            <svg className="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d=${isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path></svg>
-            <span className="font-extrabold uppercase tracking-widest text-sm hidden md:inline-block">Menu</span>
-          </button>
-          <${AnimatePresence}>
-            ${isOpen && html`
-              <${motion.div}
-                initial=${{ opacity: 0, y: -20, scale: 0.95 }}
-                animate=${{ opacity: 1, y: 0, scale: 1 }}
-                exit=${{ opacity: 0, y: -20, scale: 0.95 }}
-                transition=${{ type: "spring", stiffness: 400, damping: 30 }}
-                className="absolute top-16 right-0 w-64 bg-brand-black/90 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
-              >
-                <div className="p-4 space-y-2">
-                  ${links.map(link => html`
-                    <div
-                      key=${link.path}
-                      onClick=${() => handleNav(link.path)}
-                      className="cursor-pointer block px-5 py-4 my-1 rounded-2xl text-base font-extrabold transition-all text-white hover:bg-white/10 hover:text-brand-green active:bg-brand-green/20 active:scale-98"
-                    >
-                      ${link.label}
-                    </div>
-                  `)}
-                  <div className="pt-4 mt-2 border-t border-white/10">
-                    <button onClick=${() => window.open(waLink, '_blank')} className="w-full bg-brand-green text-white px-5 py-3 rounded-2xl text-sm font-extrabold hover:bg-white hover:text-brand-green transition-colors">
-                      WhatsApp Us
-                    </button>
-                  </div>
-                </div>
-              <//>
-            `}
-          <//>
         </div>
+
+        <!-- Mobile Open Menu Dropdown -->
+        <${AnimatePresence}>
+          ${isOpen && html`
+            <${motion.div}
+              initial=${{ opacity: 0, y: -20, scale: 0.95 }}
+              animate=${{ opacity: 1, y: 0, scale: 1 }}
+              exit=${{ opacity: 0, y: -20, scale: 0.95 }}
+              transition=${{ type: "spring", stiffness: 400, damping: 30 }}
+              className="fixed top-20 right-6 z-[60] md:hidden w-64 bg-brand-black/90 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+            >
+              <div className="p-4 space-y-2">
+                ${links.map(link => html`
+                  <div
+                    key=${link.path}
+                    onClick=${() => handleNav(link.path)}
+                    className="cursor-pointer block px-5 py-4 my-1 rounded-2xl text-base font-extrabold transition-all text-white hover:bg-white/10 hover:text-brand-green active:bg-brand-green/20 active:scale-98"
+                  >
+                    ${link.label}
+                  </div>
+                `)}
+                <div className="pt-4 mt-2 border-t border-white/10">
+                  <button onClick=${() => window.open(waLink, '_blank')} className="w-full bg-brand-green text-white px-5 py-3 rounded-2xl text-sm font-extrabold hover:bg-white hover:text-brand-green transition-colors">
+                    WhatsApp Us
+                  </button>
+                </div>
+              </div>
+            <//>
+          `}
+        <//>
       `;
     }
     function Home() {
@@ -891,6 +944,7 @@
       const [isMobile, setIsMobile] = useState(false);
       const [isCanvasFailed, setIsCanvasFailed] = useState(false);
       const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+      const [isImmersiveScrolling, setIsImmersiveScrolling] = useState(false);
       const activeScrollRef = useRef({ frameId: null, timeoutId: null });
       const mobileVideoRef = useRef(null);
       const lastFrameRef = useRef(0);
@@ -998,10 +1052,11 @@
         };
       }, [isMobile]);
 
-      const runCinematicScroll = (targetY, duration = 3500) => {
+      const runCinematicScroll = (targetY, duration = 3500, immersive = false) => {
         if (activeScrollRef.current.frameId) cancelAnimationFrame(activeScrollRef.current.frameId);
         if (activeScrollRef.current.timeoutId) clearTimeout(activeScrollRef.current.timeoutId);
         setIsAutoScrolling(true);
+        setIsImmersiveScrolling(immersive);
         const startY = window.scrollY;
         const distance = targetY - startY;
         let start = null;
@@ -1016,10 +1071,11 @@
             activeScrollRef.current.frameId = window.requestAnimationFrame(step);
           } else {
             activeScrollRef.current.frameId = null;
+            setIsImmersiveScrolling(false);
             activeScrollRef.current.timeoutId = setTimeout(() => {
               setIsAutoScrolling(false);
               activeScrollRef.current.timeoutId = null;
-            }, 1500);
+            }, 50);
           }
         };
         activeScrollRef.current.frameId = window.requestAnimationFrame(step);
@@ -1028,14 +1084,31 @@
       useEffect(() => {
         const handleDown = () => {
           const productsEl = document.getElementById('products');
-          if (productsEl) runCinematicScroll(productsEl.getBoundingClientRect().top + window.scrollY, 3500);
+          if (productsEl) runCinematicScroll(productsEl.getBoundingClientRect().top + window.scrollY, 3500, true);
         };
-        const handleUp = () => runCinematicScroll(0, 3500);
+        const handleUp = () => runCinematicScroll(0, 3500, true);
+        
+        const handleInterrupt = () => {
+          if (activeScrollRef.current.frameId || activeScrollRef.current.timeoutId) {
+            if (activeScrollRef.current.frameId) cancelAnimationFrame(activeScrollRef.current.frameId);
+            if (activeScrollRef.current.timeoutId) clearTimeout(activeScrollRef.current.timeoutId);
+            activeScrollRef.current.frameId = null;
+            activeScrollRef.current.timeoutId = null;
+            setIsAutoScrolling(false);
+            setIsImmersiveScrolling(false);
+          }
+        };
+        
         window.addEventListener('cinematicScrollDown', handleDown);
         window.addEventListener('cinematicScrollUp', handleUp);
+        window.addEventListener('wheel', handleInterrupt, { passive: true });
+        window.addEventListener('touchstart', handleInterrupt, { passive: true });
+        
         return () => {
           window.removeEventListener('cinematicScrollDown', handleDown);
           window.removeEventListener('cinematicScrollUp', handleUp);
+          window.removeEventListener('wheel', handleInterrupt);
+          window.removeEventListener('touchstart', handleInterrupt);
           if (activeScrollRef.current.frameId) cancelAnimationFrame(activeScrollRef.current.frameId);
           if (activeScrollRef.current.timeoutId) clearTimeout(activeScrollRef.current.timeoutId);
         };
@@ -1053,6 +1126,34 @@
           }
         }
       });
+      
+      // Gentle Magnetic Snapping
+      useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if (isMobile) return;
+        if (activeScrollRef.current.timeoutId) clearTimeout(activeScrollRef.current.timeoutId);
+        
+        activeScrollRef.current.timeoutId = setTimeout(() => {
+          if (isAutoScrolling) return;
+          const peaks = [0.0, 0.09, 0.26, 0.46, 0.66, 0.91, 1.0];
+          
+          let nearest = peaks[0];
+          let minDiff = 1;
+          for (let p of peaks) {
+            if (Math.abs(latest - p) < minDiff) {
+              minDiff = Math.abs(latest - p);
+              nearest = p;
+            }
+          }
+          
+          // Forcefully snap to eliminate dead zones
+          if (containerRef.current) {
+            const maxScroll = containerRef.current.scrollHeight - window.innerHeight;
+            const targetY = containerRef.current.offsetTop + nearest * maxScroll;
+            runCinematicScroll(targetY, 400, false); 
+          }
+        }, 50); 
+      });
+
       const introOpacity = useTransform(smoothProgress, [0, 0.035], [1, 0]);
       const introScale = useTransform(smoothProgress, [0, 0.035], [1, 1.15]);
       const phase1Opacity = useTransform(smoothProgress, [0.03, 0.06, 0.12, 0.15], [0, 1, 1, 0]);
@@ -1060,6 +1161,7 @@
       const phase3Opacity = useTransform(smoothProgress, [0.37, 0.40, 0.52, 0.55], [0, 1, 1, 0]);
       const phase4Opacity = useTransform(smoothProgress, [0.57, 0.60, 0.72, 0.75], [0, 1, 1, 0]);
       const phase5Opacity = useTransform(smoothProgress, [0.78, 0.83, 1, 1], [0, 1, 1, 1]);
+      const phase5LogoOpacity = useTransform(smoothProgress, [0.85, 0.9, 1, 1], [0, 1, 1, 1]);
       const p1y = useTransform(smoothProgress, [0.03, 0.06, 0.12, 0.15], [40, 0, 0, -40]);
       const p2y = useTransform(smoothProgress, [0.17, 0.20, 0.32, 0.35], [40, 0, 0, -40]);
       const p3y = useTransform(smoothProgress, [0.37, 0.40, 0.52, 0.55], [40, 0, 0, -40]);
@@ -1155,7 +1257,7 @@
       }
       return html`
         <div>
-          <${motion.div} ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[600vh] md:h-[1200vh]">
+          <${motion.div} id="home-cinematic-scroll" ref=${containerRef} style=${{ backgroundColor: bgBridge }} className="relative h-[600vh] md:h-[1200vh]">
             <div className="sticky top-0 h-screen w-screen overflow-hidden">
               <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] mix-blend-overlay transform-gpu will-change-transform" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: '150px 150px', backgroundRepeat: 'repeat' }}></div>
               ${!isCanvasFailed ? html`
@@ -1167,26 +1269,13 @@
               ` : null}
               <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-brand-black/20 backdrop-blur-sm transform-gpu will-change-transform">
                 <div className="relative mb-12 transform-gpu">
-                  <div className="absolute -inset-20 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.5)_0%,_transparent_70%)] pointer-events-none -z-10 blur-2xl transform-gpu"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-black/10 blur-[60px] rounded-full scale-150 pointer-events-none transform-gpu"></div>
-                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-80 sm:w-[420px] md:w-[600px] lg:w-[680px] xl:w-[760px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                  
+                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-80 sm:w-[500px] md:w-[700px] lg:w-[800px] xl:w-[900px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
-                <button
-                  onClick=${() => {
-                    const productsEl = document.getElementById('products');
-                    if (productsEl) runCinematicScroll(productsEl.getBoundingClientRect().top + window.scrollY, 3500);
-                  }}
-                  className="absolute bottom-8 left-8 pointer-events-auto bg-brand-black/80 hover:bg-brand-black backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-mono text-xs font-extrabold tracking-widest uppercase transition-colors shadow-xl z-50 cursor-pointer min-h-[44px]"
-                >
-                  ${t("home_scroll_catalog")}
-                </button>
-                <div className="absolute bottom-12 left-0 w-full flex flex-col items-center justify-center animate-bounce z-50">
-                  <span className="text-white text-xs font-extrabold uppercase tracking-widest font-mono mb-3">${t("home_scroll_explore")}</span>
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                </div>
+                
               <//>
               <div className="fixed top-0 left-0 h-screen w-full pointer-events-none z-20">
-                <div style=${{ opacity: isAutoScrolling ? 0 : 1, transition: isAutoScrolling ? "opacity 0s" : "opacity 0.8s ease" }} className="w-full h-full pointer-events-none">
+                <div style=${{ opacity: isImmersiveScrolling ? 0 : 1, transition: isImmersiveScrolling ? "opacity 0.2s" : "opacity 0.8s ease" }} className="w-full h-full pointer-events-none">
                   <${motion.div}
                     style=${{ opacity: phase1Opacity, y: p1y }}
                     className="absolute inset-0 flex items-center justify-between px-6 sm:px-12 md:px-16 lg:px-24 pointer-events-none z-30"
@@ -1248,19 +1337,17 @@
                 </div>
               </div>
               <${motion.div} style=${{ opacity: phase5Opacity, y: p5y }} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pt-20">
-                <div style=${{ opacity: isAutoScrolling ? 0 : 1, transition: isAutoScrolling ? "opacity 0s" : "opacity 0.8s ease" }} className="w-full h-full relative flex items-center justify-center pointer-events-none">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,11,12,0.8)_0%,_transparent_60%)] pointer-events-none -z-10"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,105,180,0.06)] via-[rgba(0,255,255,0.06)] to-[rgba(255,255,0,0.06)] pointer-events-none -z-10 mix-blend-screen"></div>
-                  <div className="text-center px-4 w-full flex flex-col items-center">
+                <div style=${{ opacity: isImmersiveScrolling ? 0 : 1, transition: isImmersiveScrolling ? "opacity 0.2s" : "opacity 0.8s ease" }} className="w-full h-full relative flex items-center justify-center pointer-events-none">
+                  
+                  <${motion.div} style=${{ opacity: phase5LogoOpacity }} className="text-center px-4 w-full flex flex-col items-center">
                     <div className="relative mb-8">
-                      <div className="absolute inset-0 bg-gradient-to-r from-brand-green/10 via-slate-500/10 to-brand-black/10 blur-[80px] rounded-full scale-150 pointer-events-none"></div>
-                      <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-80 md:w-[480px] lg:w-[560px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                      <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-[400px] md:w-[580px] lg:w-[700px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     </div>
                     
-                    <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center">
+                    <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
                       ${t("submit_enquiry")}
                     <//>
-                  </div>
+                  </${motion.div}>
                 </div>
               <//>
             </div>
@@ -1281,7 +1368,6 @@
       return html`
         <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 bg-white border border-slate-200">
           <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-brand-black border border-brand-black shadow-inner p-8 overflow-hidden relative">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,164,67,0.15)_0%,_transparent_70%)] pointer-events-none"></div>
             <img src="./assets/ctc-neck-image.jpeg" loading="lazy" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
           </div>
           <h3 className="text-2xl font-black text-brand-black mb-5">${p.title}</h3>
@@ -1422,8 +1508,8 @@
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-brand-white border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                        <th className="px-6 py-4 whitespace-normal break-words">${t("sku_weight")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("neck_finish")}</th>
+                        <th className="px-6 py-4 whitespace-normal break-words">${t("sku_weight")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("optimal_usage")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("applications")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("iv_aa")}</th>
@@ -1432,11 +1518,10 @@
                     <tbody className="divide-y divide-slate-100 bg-white text-sm">
                       ${allProducts.map(p => html`
                         <${TiltRow} className="hover-rainbow-row">
-                          <td className="px-6 py-5 font-black text-brand-black whitespace-normal break-words group-hover:hover-rainbow-text transition-all duration-300">
-                            ${p.title.split(' - ')[0]}<br/>
-                            <span className="text-lg text-brand-green">${p.weight}g</span>
+                          <td className="px-6 py-5 font-black text-brand-black whitespace-normal break-words group-hover:hover-rainbow-text transition-all duration-300">${p.neck}</td>
+                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">
+                            <span className="text-xl font-black text-brand-green">${p.weight}g</span>
                           </td>
-                          <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">${p.neck}</td>
                           <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">${p.usage}</td>
                           <td className="px-6 py-5 font-medium text-slate-600 whitespace-normal break-words leading-relaxed">${p.apps}</td>
                           <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">
@@ -1488,7 +1573,8 @@
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-brand-white border-b border-slate-200 text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
-                      <th className="px-5 py-3 whitespace-nowrap sticky left-0 bg-brand-white z-10 border-r border-slate-200">Weight</th>
+                      <th className="px-5 py-3 whitespace-nowrap sticky left-0 bg-brand-white z-10 border-r border-slate-200">Neck</th>
+                      <th className="px-5 py-3 whitespace-nowrap">Weight</th>
                       <th className="px-5 py-3 whitespace-nowrap">Bottle Usage</th>
                       <th className="px-5 py-3 text-right whitespace-nowrap">Applications</th>
                     </tr>
@@ -1496,7 +1582,8 @@
                   <tbody className="divide-y divide-slate-100 bg-white">
                     ${allProducts.map(p => html`
                       <${TiltRow} className="hover-rainbow-row group">
-                        <td className="px-5 py-4 font-black text-brand-black text-lg group-hover:hover-rainbow-text transition-all duration-300 sticky left-0 bg-white z-10 border-r border-slate-100 shadow-[2px_0_5px_rgba(0,0,0,0.02)]">${p.weight}g</td>
+                        <td className="px-5 py-4 font-black text-brand-black text-xs group-hover:hover-rainbow-text transition-all duration-300 sticky left-0 bg-white z-10 border-r border-slate-100 shadow-[2px_0_5px_rgba(0,0,0,0.02)]">${p.neck}</td>
+                        <td className="px-5 py-4 font-black text-brand-green text-lg">${p.weight}g</td>
                         <td className="px-5 py-3 text-[11px] font-extrabold text-slate-500">${p.usage}</td>
                         <td className="px-5 py-3 text-right font-mono text-[11px] font-bold text-brand-black whitespace-normal break-words leading-relaxed min-w-[140px]">
                           ${p.apps}
@@ -1591,7 +1678,6 @@
                 animate=${{ y: [0, -10, 0] }}
                 transition=${{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,164,67,0.15)_0%,_transparent_70%)] blur-xl pointer-events-none md:hidden"></div>
                 <${Link} to="/" className="relative z-10 block">
                   <img 
                     src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" 
@@ -1695,6 +1781,27 @@
           alert(t('city_error'));
           return;
         }
+        
+        const name = document.getElementById('enq_name')?.value || '';
+        const email = document.getElementById('enq_email')?.value || '';
+        const company = document.getElementById('enq_company')?.value || '';
+        const product = document.getElementById('enq_product')?.value || '';
+        const volume = document.getElementById('enq_volume')?.value || '';
+        const message = document.getElementById('enq_message')?.value || '';
+        const finalCity = (selectedCity === 'Other' || selectedState === 'Other') ? customCity : selectedCity;
+        
+        const text = encodeURIComponent(`Hello Rainbow Polypack Team, I have a new enquiry:
+Name: ${name}
+Company: ${company}
+Email: ${email}
+Location: ${finalCity}, ${selectedState}
+Product Interest: ${product}
+Monthly Volume: ${volume}
+
+Requirements:
+${message}`);
+        
+        window.open(`https://wa.me/918735817667?text=${text}`, '_blank');
         setSubmitted(true);
       };
 
@@ -1740,17 +1847,17 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_name")} <span className="text-brand-green">*</span></label>
-                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                        <input id="enq_name" type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_email")} <span className="text-brand-green">*</span></label>
-                        <input type="email" inputMode="email" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                        <input id="enq_email" type="email" inputMode="email" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_company")} <span className="text-brand-green">*</span></label>
-                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                        <input id="enq_company" type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_state")} <span className="text-brand-green">*</span></label>
@@ -1781,7 +1888,7 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("product_interest")}</label>
-                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                        <select id="enq_product" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option>CTC 29/21mm - 15g</option>
                           <option>CTC 29/21mm - 24g</option>
                           <option>CTC 29/21mm - 26g</option>
@@ -1791,7 +1898,7 @@
                       </div>
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("monthly_volume")}</label>
-                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                        <select id="enq_volume" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option>${"<"} 50,000 units</option>
                           <option>50,000 - 200,000 units</option>
                           <option>200,000 - 500,000 units</option>
@@ -1802,7 +1909,7 @@
                     </div>
                     <div>
                       <label className="block text-sm font-extrabold text-brand-black mb-3">Custom Technical Requirements</label>
-                      <textarea rows="4" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
+                      <textarea id="enq_message" rows="4" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
                     </div>
                     <${MagneticButton} type="submit" className="w-full py-5 bg-brand-black text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-black/20 mt-4 border border-brand-black/50 hover:bg-brand-green transition-colors">
                       Submit Enquiry
@@ -1898,7 +2005,7 @@
         
         setTimeout(() => {
           document.querySelectorAll('h1:not(.no-reveal), h2:not(.no-reveal), h3:not(.no-reveal), h4:not(.no-reveal), p:not(.no-reveal)').forEach((el) => {
-            if (!el.classList.contains('scroll-reveal')) {
+            if (!el.closest('#home-cinematic-scroll') && !el.classList.contains('scroll-reveal')) {
               el.classList.add('scroll-reveal');
               observer.observe(el);
             }
