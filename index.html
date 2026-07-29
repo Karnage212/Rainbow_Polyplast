@@ -1203,6 +1203,7 @@
       const phase5Opacity = useTransform(smoothProgress, [0.78, 0.83, 1, 1], [0, 1, 1, 1]);
       const phase5LogoOpacity = useTransform(smoothProgress, [0.85, 0.9, 1, 1], [0, 1, 1, 1]);
       const p5Pointer = useTransform(smoothProgress, [0.85, 0.86], ["none", "auto"]);
+      const p5Display = useTransform(smoothProgress, [0.85, 0.86], ["none", "block"]);
       const p1y = useTransform(smoothProgress, [0.03, 0.06, 0.12, 0.15], [40, 0, 0, -40]);
       const p2y = useTransform(smoothProgress, [0.17, 0.20, 0.32, 0.35], [40, 0, 0, -40]);
       const p3y = useTransform(smoothProgress, [0.37, 0.40, 0.52, 0.55], [40, 0, 0, -40]);
@@ -1363,8 +1364,8 @@
                       <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-[400px] md:w-[580px] lg:w-[700px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     </div>
                     
-                    <${motion.div} style=${{ pointerEvents: p5Pointer }}>
-                      <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
+                    <${motion.div} style=${{ pointerEvents: p5Pointer, display: p5Display }}>
+                      <${MagneticLink} to="/brochure" className="z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
                         ${t("submit_enquiry")}
                       <//>
                     </${motion.div}>
