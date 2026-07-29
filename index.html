@@ -985,6 +985,7 @@
       const [isCanvasFailed, setIsCanvasFailed] = useState(false);
       const [isAutoScrolling, setIsAutoScrolling] = useState(false);
       const [isImmersiveScrolling, setIsImmersiveScrolling] = useState(false);
+      const [isPhase5Clickable, setIsPhase5Clickable] = useState(false);
       const activeScrollRef = useRef({ frameId: null, timeoutId: null });
       const mobileVideoRef = useRef(null);
       const lastFrameRef = useRef(0);
@@ -1157,6 +1158,8 @@
       const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
       const smoothProgress = useSpring(scrollYProgress, { stiffness: 45, damping: 35, restDelta: 0.0001 });
       useMotionValueEvent(smoothProgress, "change", (latest) => {
+        if (latest > 0.85 && !isPhase5Clickable) setIsPhase5Clickable(true);
+        else if (latest <= 0.85 && isPhase5Clickable) setIsPhase5Clickable(false);
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (!isMobile && canvasRef.current) {
           const frameIndex = Math.min(frameCount, Math.max(1, Math.round(latest * frameCount)));
@@ -1364,11 +1367,13 @@
                       <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-[400px] md:w-[580px] lg:w-[700px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     </div>
                     
-                    <${motion.div} style=${{ pointerEvents: p5Pointer, display: p5Display }}>
-                      <${MagneticLink} to="/brochure" className="z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
-                        ${t("submit_enquiry")}
-                      <//>
-                    </${motion.div}>
+                    ${isPhase5Clickable ? html`
+                      <${motion.div} initial=${{ opacity: 0, scale: 0.9 }} animate=${{ opacity: 1, scale: 1 }} transition=${{ duration: 0.3 }}>
+                        <${MagneticLink} to="/brochure" className="z-[100] pointer-events-auto flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
+                          ${t("submit_enquiry")}
+                        <//>
+                      </${motion.div}>
+                    ` : null}
                   </${motion.div}>
                 </div>
               <//>
