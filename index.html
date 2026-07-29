@@ -50,7 +50,7 @@
       overflow-x: hidden;
       color: #0B0B0C;
     }
-    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0B0B0C; }
     ::-webkit-scrollbar-thumb { background: #039544; border-radius: 4px; }
 
@@ -108,7 +108,7 @@
         z-index: -1;
       }
       .btn-gradient-sweep:hover::before {
-        opacity: 1;
+        opacity: 0.15;
         animation: rainbow-sweep 3s linear infinite;
       }
       .btn-gradient-sweep:hover {
@@ -363,6 +363,21 @@
       `;
     }
 
+    
+    function RevealText({ children, className = "", delay = 0 }) {
+      return html`
+        <${motion.div}
+          initial=${{ opacity: 0, y: 15 }}
+          whileInView=${{ opacity: 1, y: 0 }}
+          viewport=${{ once: false, amount: 0.2 }}
+          transition=${{ duration: 0.6, delay: delay, ease: "easeOut" }}
+          className=${className}
+        >
+          ${children}
+        </${motion.div}>
+      `;
+    }
+
     function SectionHeaderReveal({ children }) {
       const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (isReduced) return html`<div className="mb-6 relative w-full flex justify-center">${children}</div>`;
@@ -382,7 +397,7 @@
 
       return html`
         <div className="relative mb-6 flex flex-col items-center justify-center overflow-visible">
-          <${motion.div} variants=${container} initial="hidden" whileInView="visible" viewport=${{ once: true, margin: "-100px" }} className="absolute inset-0 flex items-center justify-center gap-2 pointer-events-none z-0 mt-6">
+          <${motion.div} variants=${container} initial="hidden" whileInView="visible" viewport=${{ once: false, amount: 0.2 }} className="absolute inset-0 flex items-center justify-center gap-2 pointer-events-none z-0 mt-6">
             ${[1,2,3,4,5].map(i => html`
               <${motion.div} key=${i} variants=${tile} className="w-6 h-6 opacity-20" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} />
             `)}
@@ -466,7 +481,7 @@
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
             style=${{
               opacity,
-              background: 'radial-gradient(800px circle at ' + position.x + 'px ' + position.y + 'px, rgba(255,105,180,0.12), rgba(0,255,255,0.12) 30%, rgba(255,255,0,0.12) 60%, transparent 80%)'
+              background: 'radial-gradient(400px circle at ' + position.x + 'px ' + position.y + 'px, rgba(112,164,67,0.06), transparent 80%)'
             }}
           ></div>
           <div className="relative z-10 w-full h-full flex flex-col">
@@ -550,7 +565,7 @@
               variants=${containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport=${{ once: true, margin: "-50px" }}
+              viewport=${{ once: false, amount: 0.2 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32"
             >
               <${motion.div} variants=${itemVariants} className="h-full">
@@ -800,7 +815,7 @@
             }}
             className="cursor-pointer transition-all duration-500 group flex items-center justify-center opacity-100"
           >
-            <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" className="h-12 md:h-16 w-auto object-contain" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+            <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" className="h-12 md:h-16 w-auto object-contain hover:scale-[1.03] transition-transform duration-300 origin-left ease-out" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
           <//>
         </div>
 
@@ -1313,15 +1328,15 @@
             <form onSubmit=${handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_name")}</label>
-                <input type="text" value=${formData.name} onChange=${e => setFormData({...formData, name: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="John Doe" />
+                <input type="text" value=${formData.name} onChange=${e => setFormData({...formData, name: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50/50 focus:border-brand-green transition-all" placeholder="John Doe" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_company")}</label>
-                <input type="text" value=${formData.company} onChange=${e => setFormData({...formData, company: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="Acme Corp" />
+                <input type="text" value=${formData.company} onChange=${e => setFormData({...formData, company: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50/50 focus:border-brand-green transition-all" placeholder="Acme Corp" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_email")}</label>
-                <input type="email" value=${formData.email} onChange=${e => setFormData({...formData, email: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green transition-all" placeholder="john@acme.com" />
+                <input type="email" value=${formData.email} onChange=${e => setFormData({...formData, email: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50/50 focus:border-brand-green transition-all" placeholder="john@acme.com" />
               </div>
               <button type="submit" className="w-full bg-brand-black text-white font-extrabold text-sm min-h-[44px] py-4 rounded-xl hover:bg-brand-black transition-colors shadow-lg mt-6 flex justify-center items-center btn-gradient-sweep">
                 ${t("tds_unlock")}
@@ -1461,7 +1476,7 @@
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-brand-white border-b border-slate-200 text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
-                      <th className="px-5 py-3 whitespace-nowrap">Weight</th>
+                      <th className="px-5 py-3 whitespace-nowrap sticky left-0 bg-brand-white z-10 border-r border-slate-200">Weight</th>
                       <th className="px-5 py-3 whitespace-nowrap">Bottle Usage</th>
                       <th className="px-5 py-3 text-right whitespace-nowrap">Applications</th>
                     </tr>
@@ -1469,9 +1484,9 @@
                   <tbody className="divide-y divide-slate-100 bg-white">
                     ${allProducts.map(p => html`
                       <${TiltRow} className="hover-rainbow-row group">
-                        <td className="px-5 py-4 font-black text-brand-black text-lg group-hover:hover-rainbow-text transition-all duration-300">${p.weight}g</td>
-                        <td className="px-5 py-4 text-xs font-extrabold text-slate-500">${p.usage}</td>
-                        <td className="px-5 py-4 text-right font-mono text-xs font-bold text-brand-black whitespace-normal break-words leading-relaxed min-w-[140px]">
+                        <td className="px-5 py-4 font-black text-brand-black text-lg group-hover:hover-rainbow-text transition-all duration-300 sticky left-0 bg-white z-10 border-r border-slate-100 shadow-[2px_0_5px_rgba(0,0,0,0.02)]">${p.weight}g</td>
+                        <td className="px-5 py-3 text-[11px] font-extrabold text-slate-500">${p.usage}</td>
+                        <td className="px-5 py-3 text-right font-mono text-[11px] font-bold text-brand-black whitespace-normal break-words leading-relaxed min-w-[140px]">
                           ${p.apps}
                         </td>
                       <//>
@@ -1555,7 +1570,7 @@
               variants=${containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport=${{ once: true }}
+              viewport=${{ once: false, amount: 0.1 }}
               className="flex flex-col items-center text-center"
             >
               <${motion.div}
@@ -1713,21 +1728,21 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_name")} <span className="text-brand-green">*</span></label>
-                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_email")} <span className="text-brand-green">*</span></label>
-                        <input type="email" inputMode="email" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                        <input type="email" inputMode="email" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_company")} <span className="text-brand-green">*</span></label>
-                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                        <input type="text" required className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
                       </div>
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_state")} <span className="text-brand-green">*</span></label>
-                        <select required value=${selectedState} onChange=${handleStateChange} className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                        <select required value=${selectedState} onChange=${handleStateChange} className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option value="" disabled>${t("select_state")}</option>
                           ${Object.keys(stateCityMap).map(state => html`<option key=${state} value=${state}>${state}</option>`)}
                         </select>
@@ -1737,7 +1752,7 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_city")} <span className="text-brand-green">*</span></label>
-                        <select required disabled=${!selectedState} value=${selectedCity} onChange=${handleCityChange} className=${"w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm " + (!selectedState ? "opacity-50 cursor-not-allowed" : "")}>
+                        <select required disabled=${!selectedState} value=${selectedCity} onChange=${handleCityChange} className=${"w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm " + (!selectedState ? "opacity-50 cursor-not-allowed" : "")}>
                           <option value="" disabled>${t("select_city")}</option>
                           ${selectedState && stateCityMap[selectedState].map(city => html`<option key=${city} value=${city}>${city}</option>`)}
                         </select>
@@ -1745,7 +1760,7 @@
                       ${(selectedCity === "Other" || selectedState === "Other") ? html`
                         <div>
                           <label className="block text-sm font-extrabold text-brand-black mb-3">${t("specify_city")} <span className="text-brand-green">*</span></label>
-                          <input type="text" required value=${customCity} onChange=${(e) => setCustomCity(e.target.value)} className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm" placeholder="Please specify your city..." />
+                          <input type="text" required value=${customCity} onChange=${(e) => setCustomCity(e.target.value)} className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm" placeholder="Please specify your city..." />
                         </div>
                       ` : html`<div className="hidden md:block"></div>`}
                     </div>
@@ -1754,7 +1769,7 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("product_interest")}</label>
-                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option>CTC 29/21mm - 15g</option>
                           <option>CTC 29/21mm - 23.5g</option>
                           <option>CTC 29/21mm - 26g</option>
@@ -1764,7 +1779,7 @@
                       </div>
                       <div>
                         <label className="block text-sm font-extrabold text-brand-black mb-3">${t("monthly_volume")}</label>
-                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                        <select className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
                           <option>${"<"} 50,000 units</option>
                           <option>50,000 - 200,000 units</option>
                           <option>200,000 - 500,000 units</option>
@@ -1775,7 +1790,7 @@
                     </div>
                     <div>
                       <label className="block text-sm font-extrabold text-brand-black mb-3">Custom Technical Requirements</label>
-                      <textarea rows="4" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
+                      <textarea rows="4" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
                     </div>
                     <${MagneticButton} type="submit" className="w-full py-5 bg-brand-black text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-black/20 mt-4 border border-brand-black/50 hover:bg-brand-green transition-colors">
                       Submit Enquiry
