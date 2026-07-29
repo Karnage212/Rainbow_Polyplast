@@ -1202,6 +1202,7 @@
       const phase4Opacity = useTransform(smoothProgress, [0.57, 0.60, 0.72, 0.75], [0, 1, 1, 0]);
       const phase5Opacity = useTransform(smoothProgress, [0.78, 0.83, 1, 1], [0, 1, 1, 1]);
       const phase5LogoOpacity = useTransform(smoothProgress, [0.85, 0.9, 1, 1], [0, 1, 1, 1]);
+      const p5Pointer = useTransform(smoothProgress, [0.85, 0.86], ["none", "auto"]);
       const p1y = useTransform(smoothProgress, [0.03, 0.06, 0.12, 0.15], [40, 0, 0, -40]);
       const p2y = useTransform(smoothProgress, [0.17, 0.20, 0.32, 0.35], [40, 0, 0, -40]);
       const p3y = useTransform(smoothProgress, [0.37, 0.40, 0.52, 0.55], [40, 0, 0, -40]);
@@ -1287,7 +1288,7 @@
                   
                   <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-80 sm:w-[500px] md:w-[700px] lg:w-[800px] xl:w-[900px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center justify-center opacity-80 animate-bounce text-white drop-shadow-md">
+                <div className="absolute bottom-12 w-full left-0 hidden md:flex flex-col items-center justify-center opacity-80 animate-bounce text-white drop-shadow-md pointer-events-none">
                   <span className="text-xs font-bold uppercase tracking-widest mb-2">${t("home_scroll_explore") || "Scroll to Explore"}</span>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                 </div>
@@ -1362,9 +1363,11 @@
                       <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-[400px] md:w-[580px] lg:w-[700px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     </div>
                     
-                    <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
-                      ${t("submit_enquiry")}
-                    <//>
+                    <${motion.div} style=${{ pointerEvents: p5Pointer }}>
+                      <${MagneticLink} to="/brochure" className="pointer-events-auto z-[100] flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
+                        ${t("submit_enquiry")}
+                      <//>
+                    </${motion.div}>
                   </${motion.div}>
                 </div>
               <//>
