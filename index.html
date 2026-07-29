@@ -185,7 +185,7 @@
     import React, { useEffect, useState, useRef, useMemo, createContext, useContext } from 'react';
     import { createRoot } from 'react-dom/client';
     import { useScroll, useTransform, motion, useMotionValueEvent, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
-    import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+    import { BrowserRouter, HashRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
     import htm from 'htm';
     const html = htm.bind(React.createElement);
 
@@ -199,10 +199,10 @@
         hero_tagline: "High-Performance PET Preforms",
         hero_title_1: "Precision Engineering.",
         hero_title_2: "Flawless Consistency.",
-        hero_desc: "Supplying the food, beverage, and chemical industries with premium CTC 29/21mm PET preforms manufactured on advanced Hot Runner Moulds.",
+        hero_desc: "Empowering the food, beverage, and chemical industries with premium CTC 29/21mm PET preforms. Engineered on advanced Hot Runner Moulds to maximize your high-speed blowing line efficiency and minimize downtime.",
         company_profile: "Company Profile",
         about_title: "Precision Packaging from Gujarat to the World",
-        about_desc_1: "Located in the industrial hub of Chhatral, Gujarat, Rainbow Polypack has established itself as a premier agile manufacturer of high-quality PET preforms for the food, beverage, and chemical industries.",
+        about_desc_1: "Located in Chhatral, within the greater Ahmedabad industrial corridor, Rainbow Polypack has established itself as a premier agile manufacturer of high-quality PET preforms for the food, beverage, and chemical industries.",
         about_desc_2: "We are driven by a commitment to zero-defect manufacturing, startup agility, and highly competitive pricing. By exclusively utilizing state-of-the-art Hot Runner Moulds, we offer high-performance preforms in both premium 100% Virgin PET and sustainable, food-approved rPET (Recycled PET) blends. We ensure that every batch meets the rigorous dimensional tolerances required by high-speed blowing lines, without bureaucratic legacy delays.",
         b2b_catalog: "B2B Product Catalog",
         sku_weight: "SKU / Weight",
@@ -219,7 +219,7 @@
         custom_sol: "Need a Custom Solution?",
         tailored_engineering: "Tailored Preform Engineering",
         tailored_desc: "Don't see the exact specifications you need? We provide end-to-end custom preform engineering. From unique neck finishes and specific weights to custom color matching and specialized rPET blending, our technical team can develop a solution tailored to your exact manufacturing requirements.",
-        discuss_custom: "Discuss Custom Requirements",
+        discuss_custom: "Consult Our Engineering Team",
         enquiry_title: "Submit an Enquiry",
         enquiry_desc: "Enter your procurement requirements to access our full technical catalog and receive a prioritized quotation from our engineering team.",
         download_tds: "Download TDS",
@@ -243,7 +243,7 @@
         product_interest: "Product Interest",
         monthly_volume: "Estimated Monthly Volume",
         brand_name: "RAINBOW POLYPACK",
-        submit_enquiry: "Submit an Enquiry",
+        submit_enquiry: "Request a Technical Quote",
         qc_commitment: "Quality Assurance Commitment",
         qc_protocol_title: "Strict Quality Protocol",
         qc_protocol_desc: "Speed is irrelevant without structural and dimensional perfection. Every production cycle is governed by strict Quality Assurance (QA) protocols, utilizing advanced metrology and polymer testing to ensure flawless performance on high-speed blow molding lines.",
@@ -254,11 +254,11 @@
         qc_dim_title: "Dimensional Tolerances",
         qc_dim_desc: "Rigorous caliper and Coordinate Measuring Machine (CMM) inspections are performed to guarantee precise neck finish parameters (T-dimension, E-dimension) and flawless thread concentricity, ensuring zero leakage and absolute sealing integrity.",
         why_partner: "Why Partner With Us",
-        startup_agility_title: "The Startup Agility Advantage",
-        startup_agility_desc: "We are a modern, agile manufacturing firm unburdened by legacy bureaucracy. Experience rapid turnarounds, flexible MOQs, and direct access to technical founders.",
+        startup_agility_title: "The Agile Manufacturing Advantage",
+        startup_agility_desc: "We are a modern, dynamic manufacturing firm unburdened by legacy bureaucracy. Experience rapid turnarounds, flexible MOQs, and direct access to our technical engineering team.",
         dispatch_title: "48-Hour Sample Dispatch",
         dispatch_desc: "Test our preforms on your lines immediately. We guarantee lightning-fast sample dispatch without multi-week legacy sales cycles.",
-        moq_title: "Flexible Startup MOQs",
+        moq_title: "Dynamic & Pilot-Friendly MOQs",
         moq_desc: "Whether you are a growing craft beverage brand or launching a pilot product line, our agile production runs are tailored to your scaling needs.",
         consultation_title: "Direct Technical Consultation",
         consultation_desc: "Bypass bureaucratic sales reps. Speak directly with our founding engineering team to solve your specific blowing and packaging challenges.",
@@ -289,10 +289,10 @@
         hero_tagline: "Préformes PET Haute Performance",
         hero_title_1: "Ingénierie de Précision.",
         hero_title_2: "Cohérence Parfaite.",
-        hero_desc: "Fournissant les industries alimentaire, des boissons et chimique avec des préformes PET CTC 29/21mm de première qualité, fabriquées sur des moules à canaux chauds avancés.",
+        hero_desc: "Donnant aux industries alimentaire, des boissons et chimique les moyens d'agir avec des préformes PET CTC 29/21mm de qualité supérieure. Conçues sur des moules à canaux chauds avancés pour maximiser l'efficacité de votre ligne de soufflage à grande vitesse et minimiser les temps d'arrêt.",
         company_profile: "Profil de l'Entreprise",
         about_title: "Emballage de Précision, du Gujarat au Monde",
-        about_desc_1: "Situé dans le centre industriel de Chhatral, Gujarat, Rainbow Polypack s'est imposé comme un fabricant agile de premier plan de préformes PET de haute qualité pour les industries alimentaire, des boissons et chimique.",
+        about_desc_1: "Situé à Chhatral, dans le grand corridor industriel d'Ahmedabad, Rainbow Polypack s'est imposé comme un fabricant agile de premier plan de préformes PET de haute qualité pour les industries alimentaire, des boissons et chimique.",
         about_desc_2: "Nous sommes animés par un engagement envers la fabrication zéro défaut, l'agilité des startups et des prix hautement compétitifs. En utilisant exclusivement des moules à canaux chauds de pointe, nous proposons des préformes haute performance en PET 100% vierge premium et en mélanges rPET (PET recyclé) durables et approuvés pour le contact alimentaire. Nous garantissons que chaque lot respecte les tolérances dimensionnelles rigoureuses requises par les lignes de soufflage à grande vitesse, sans délais bureaucratiques hérités.",
         b2b_catalog: "Catalogue de Produits B2B",
         sku_weight: "SKU / Poids",
@@ -309,7 +309,7 @@
         custom_sol: "Besoin d'une Solution Personnalisée?",
         tailored_engineering: "Ingénierie de Préformes sur Mesure",
         tailored_desc: "Vous ne trouvez pas les spécifications exactes dont vous avez besoin? Nous fournissons une ingénierie de préformes personnalisée de bout en bout. Des finitions de col uniques et des poids spécifiques à la correspondance de couleurs personnalisée et au mélange rPET spécialisé, notre équipe technique peut développer une solution adaptée à vos exigences de fabrication exactes.",
-        discuss_custom: "Discuter des Besoins Personnalisés",
+        discuss_custom: "Consultez Notre Équipe d'Ingénierie",
         enquiry_title: "Soumettre une Demande",
         enquiry_desc: "Entrez vos besoins d'approvisionnement pour accéder à notre catalogue technique complet et recevoir un devis prioritaire de notre équipe d'ingénierie.",
         download_tds: "Télécharger TDS",
@@ -333,7 +333,7 @@
         product_interest: "Intérêt pour le Produit",
         monthly_volume: "Volume Mensuel Estimé",
         brand_name: "RAINBOW POLYPACK",
-        submit_enquiry: "Soumettre une Demande",
+        submit_enquiry: "Demander un Devis Technique",
         qc_commitment: "Engagement d'Assurance Qualité",
         qc_protocol_title: "Protocole de Qualité Strict",
         qc_protocol_desc: "La vitesse n'a pas d'importance sans une perfection structurelle et dimensionnelle. Chaque cycle de production est régi par des protocoles stricts d'Assurance Qualité (AQ), utilisant une métrologie avancée et des tests sur les polymères pour garantir des performances impeccables sur les lignes de moulage par soufflage à grande vitesse.",
@@ -344,11 +344,11 @@
         qc_dim_title: "Tolérances Dimensionnelles",
         qc_dim_desc: "Des inspections rigoureuses au pied à coulisse et à la Machine à Mesurer Tridimensionnelle (MMT) sont effectuées pour garantir des paramètres de finition de col précis (dimension T, dimension E) et une concentricité de filetage impeccable, garantissant aucune fuite et une intégrité d'étanchéité absolue.",
         why_partner: "Pourquoi Nous Choisir",
-        startup_agility_title: "L'Avantage de l'Agilité Startup",
-        startup_agility_desc: "Nous sommes une entreprise de fabrication moderne et agile, libérée de la bureaucratie traditionnelle. Profitez de délais de traitement rapides, de MOQ flexibles et d'un accès direct aux fondateurs techniques.",
+        startup_agility_title: "L'Avantage de la Fabrication Agile",
+        startup_agility_desc: "Nous sommes une entreprise de fabrication moderne et dynamique, libérée de la bureaucratie traditionnelle. Profitez de délais rapides, de MOQ flexibles et d'un accès direct à notre équipe technique d'ingénierie.",
         dispatch_title: "Expédition d'Échantillons en 48 Heures",
         dispatch_desc: "Testez nos préformes sur vos lignes immédiatement. Nous garantissons une expédition ultra-rapide des échantillons, sans les cycles de vente traditionnels de plusieurs semaines.",
-        moq_title: "MOQ de Démarrage Flexibles",
+        moq_title: "MOQ Dynamiques et Adaptés aux Projets Pilotes",
         moq_desc: "Que vous soyez une marque de boissons artisanales en pleine croissance ou que vous lanciez une ligne de produits pilote, nos cycles de production agiles sont adaptés à vos besoins de croissance.",
         consultation_title: "Consultation Technique Directe",
         consultation_desc: "Contournez les représentants commerciaux bureaucratiques. Discutez directement avec notre équipe d'ingénieurs fondateurs pour résoudre vos défis spécifiques de soufflage et d'emballage.",
@@ -864,7 +864,7 @@
           }
           lastScrollY.current = currentScrollY;
           
-          const isHome = window.location.pathname === '/';
+          const isHome = location.pathname === '/';
           if (!isHome) {
              setIsScrolledLogo(true);
              setIsPastHeroLogo(true);
@@ -2043,10 +2043,11 @@ ${message}`);
     }
 
     function App() {
+      const RouterComponent = window.location.protocol === 'file:' ? HashRouter : BrowserRouter;
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       return html`
-        <${BrowserRouter}>
+              <${RouterComponent}>
           <${GlobalScrollObserver} />
           <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-black">
             <${CustomCursor} />
