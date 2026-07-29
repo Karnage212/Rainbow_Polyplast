@@ -108,13 +108,25 @@
         z-index: -1;
       }
       .btn-gradient-sweep:hover::before {
-        opacity: 0.15;
+        opacity: 0.45;
         animation: rainbow-sweep 3s linear infinite;
       }
       .btn-gradient-sweep:hover {
         border-color: transparent !important;
       }
     }
+  
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      will-change: opacity, transform;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
   </style>
 
   <script type="importmap">
@@ -481,7 +493,7 @@
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
             style=${{
               opacity,
-              background: 'radial-gradient(400px circle at ' + position.x + 'px ' + position.y + 'px, rgba(112,164,67,0.06), transparent 80%)'
+              background: 'radial-gradient(600px circle at ' + position.x + 'px ' + position.y + 'px, rgba(73,50,107,0.06), rgba(3,149,68,0.05) 30%, rgba(254,241,17,0.04) 60%, rgba(229,51,46,0.03) 90%, transparent 100%)'
             }}
           ></div>
           <div className="relative z-10 w-full h-full flex flex-col">
@@ -1869,11 +1881,43 @@
       `;
     }
 
+    
+    
+    function GlobalScrollObserver() {
+      const location = useLocation();
+      useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            } else {
+              entry.target.classList.remove('revealed');
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        setTimeout(() => {
+          document.querySelectorAll('h1:not(.no-reveal), h2:not(.no-reveal), h3:not(.no-reveal), h4:not(.no-reveal), p:not(.no-reveal)').forEach((el) => {
+            if (!el.classList.contains('scroll-reveal')) {
+              el.classList.add('scroll-reveal');
+              observer.observe(el);
+            }
+          });
+        }, 500);
+
+        return () => observer.disconnect();
+      }, [location.pathname]);
+
+      return null;
+    }
+
     function App() {
+      const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       return html`
         <${HashRouter}>
+          <${GlobalScrollObserver} />
           <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-black">
             <${CustomCursor} />
             <${Navbar} />
