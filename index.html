@@ -1394,9 +1394,11 @@
               <//>
             </div>
           <//>
-          <div className="relative z-30 -mt-24 bg-gradient-to-b from-transparent via-[#F3F4F6]/90 to-[#F3F4F6] pt-24 pb-0">
-             <${Products} isIntegrated=${true} />
-             <${StartupAgility} />
+          <div className="relative z-30 -mt-24 bg-gradient-to-b from-transparent via-[#F3F4F6]/90 to-[#F3F4F6] pt-24 pb-0 pointer-events-none">
+             <div className="pointer-events-auto">
+               <${Products} isIntegrated=${true} />
+               <${StartupAgility} />
+             </div>
           </div>
         </div>
       `;
