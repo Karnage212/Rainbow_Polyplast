@@ -7,6 +7,7 @@
   <meta name="description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
   <meta name="keywords" content="PET preform manufacturer Gujarat, CTC 29/21 preform, Chhatral GIDC plastics, Rainbow Polypack">
   
+  <link rel="canonical" href="https://www.rainbowpolypack.com/">
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.rainbowpolypack.com/">
@@ -804,6 +805,7 @@
       `;
     }
     function Navbar() {
+      const SemanticWrapper = "header";
       const location = useLocation();
       const navigate = useNavigate();
       const [isOpen, setIsOpen] = useState(false);
@@ -891,8 +893,8 @@
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       
       return html`
-        <div className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ease-out pointer-events-none ${isScrolledLogo ? 'pt-4 md:pt-6' : 'pt-6 md:pt-8'} ${isPastHeroLogo ? 'opacity-100' : 'opacity-100 md:opacity-0'}`}>
-          <div className=${`mx-auto px-6 md:px-8 flex items-center justify-between w-full transition-all duration-700 pointer-events-auto ${isScrolledLogo ? 'max-w-5xl bg-transparent md:bg-brand-black/70 backdrop-blur-none md:backdrop-blur-md md:shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-full py-3 md:border border-transparent md:border-white/10' : 'max-w-[1400px] bg-transparent py-0'}`}>
+        <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ease-out pointer-events-none ${isScrolledLogo ? 'pt-4 md:pt-6' : 'pt-6 md:pt-8'} ${isPastHeroLogo ? 'opacity-100' : 'opacity-100 md:opacity-0'}`}>
+          <div className=${`mx-auto px-6 md:px-8 flex items-center justify-between w-full transition-all duration-700 pointer-events-auto ${isScrolledLogo ? 'max-w-5xl bg-transparent md:bg-brand-black/70 backdrop-blur-none md:backdrop-blur-md md:shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-full py-2 md:border border-transparent md:border-white/10' : 'max-w-[1400px] bg-transparent py-0'}`}>
             
             <${motion.div}
               onClick=${() => {
@@ -914,7 +916,7 @@
                 <div
                   key=${link.path}
                   onClick=${() => handleNav(link.path)}
-                  className=${`cursor-pointer text-base md:text-lg font-black transition-colors uppercase tracking-widest ${isScrolledLogo ? 'text-white hover:text-brand-green' : 'text-brand-black/80 hover:text-brand-black'}`}
+                  className=${`cursor-pointer text-sm md:text-base font-black transition-colors uppercase tracking-widest ${isScrolledLogo ? 'text-white hover:text-brand-green' : 'text-brand-black/80 hover:text-brand-black'}`}
                 >
                   ${link.label}
                 </div>
