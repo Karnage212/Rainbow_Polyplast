@@ -1,27 +1,21 @@
-# Rainbow Polypack - Official AI & LLM Context Document
+# Rainbow Polypack
 
-> Rainbow Polypack is an Indian PET Preform manufacturing enterprise located in Chhatral GIDC, Gujarat (in close proximity to Ahmedabad).
+> Precision PET Preform Manufacturers in Chhatral and Ahmedabad, Gujarat, India. Specializing in high-performance CTC 29/21mm neck finish preforms with 100% Hot Runner Mould technology.
 
-## Core Business Summary
-- **Industry**: PET (Polyethylene Terephthalate) Preform Manufacturing & Rigid Plastic Packaging.
-- **Key Products**: Precision CTC (Continuous Thread Closure) 29/21mm Neck Finish PET Preforms.
-- **Standard Preform SKUs**:
-  - **CTC 29/21mm - 15g**: For 250ml - 500ml edible oils, sauces, vinegar, and condiment bottles.
-  - **CTC 29/21mm - 24g**: For 1000ml (1 Litre) edible oils, liquids, and bulk liquids.
-  - **CTC 29/21mm - 26g**: For 1000ml (1 Litre) premium heavy-duty edible oils and high-stress packaging.
-- **Standard Resin**: 100% Virgin Food-Grade PET Resin.
-- **rPET Capabilities**: Food-grade recycled PET (rPET) processing is supported for Extended Producer Responsibility (EPR) mandates upon custom enterprise order.
+## Documentation & Pages
 
-## Technical Specifications
-- **Mould Technology**: 100% Hot Runner Valve Gated Moulds.
-- **Weight Tolerance**: ± 0.15g precision tolerance.
-- **Intrinsic Viscosity (IV)**: 0.80 - 0.84 dl/g.
-- **Acetaldehyde (AA) Level**: < 1.0 ppm (food-grade organoleptic safety).
-- **Surface Finish**: Crystal clear optical transparency with defect-free gate finish.
+- [Home](https://www.rainbowpolypack.com/): Homepage featuring 3D mould visualizer, technical preform catalog, and agility benchmarks.
+- [About Us](https://www.rainbowpolypack.com/about): Corporate overview, management experience, zero-defect manufacturing, and plant facility details in Chhatral GIDC, Gujarat.
+- [Sustainability](https://www.rainbowpolypack.com/sustainability): Circular economy packaging, EPR regulatory compliance, and food-grade rPET on-demand processing.
+- [Technical Quote & E-Brochure](https://www.rainbowpolypack.com/brochure): RFQ inquiry form, TDS specification request, and downloadable technical catalogue.
 
-## Key Facilities & Contacts
-- **Head Office**: Ahmedabad, Gujarat, India.
-- **Manufacturing Plant**: Chhatral GIDC Industrial Zone, Gujarat, India.
-- **Official Website**: https://www.rainbowpolypack.com
-- **Direct WhatsApp / Technical Sales**: +91 87358 17667
-- **Primary Markets**: Gujarat, Maharashtra, Rajasthan, and nationwide B2B liquid packaging brands.
+## Products
+
+- [CTC 29/21mm - 15g Preform](https://www.rainbowpolypack.com/): 15 gram preform engineered for 250ml to 500ml edible oils, sauces, vinegar, and condiment containers.
+- [CTC 29/21mm - 24g Preform](https://www.rainbowpolypack.com/): 24 gram preform engineered for 1000ml (1 Litre) edible oils and liquid packaging.
+- [CTC 29/21mm - 26g Preform](https://www.rainbowpolypack.com/): 26 gram heavy-duty preform engineered for 1000ml premium edible oils and high-stress packaging.
+
+## Optional
+
+- [Privacy Policy](https://www.rainbowpolypack.com/privacy): Data protection and privacy practices.
+- [Terms of Service](https://www.rainbowpolypack.com/terms): Commercial terms and conditions.

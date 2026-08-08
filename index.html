@@ -23,14 +23,14 @@
   <link rel="alternate" type="text/markdown" title="LLM Context" href="/llms.txt">
 
   <!-- Preconnect & DNS-Prefetch Resource Hints -->
+  <link rel="preconnect" href="https://esm.sh" crossorigin>
+  <link rel="dns-prefetch" href="https://esm.sh">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="dns-prefetch" href="https://unpkg.com">
 
   <!-- LCP Asset Preloads -->
   <link rel="preload" as="image" href="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" type="image/svg+xml">
@@ -200,7 +200,9 @@
     {
       "imports": {
         "react": "https://esm.sh/react@18.2.0",
+        "react/": "https://esm.sh/react@18.2.0/",
         "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "react-dom/": "https://esm.sh/react-dom@18.2.0/",
         "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
         "framer-motion": "https://esm.sh/framer-motion@10.16.4?deps=react@18.2.0,react-dom@18.2.0",
         "react-router-dom": "https://esm.sh/react-router-dom@6.22.1?deps=react@18.2.0,react-dom@18.2.0",
@@ -600,7 +602,7 @@
                 className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
               >
                 <span className="text-lg font-black text-brand-black">${item.title}</span>
-                <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-black border-brand-black text-white" : "border-slate-300 text-slate-500 group-hover:border-brand-black")}>
+                <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-black border-brand-black text-white" : "border-slate-300 text-slate-700 group-hover:border-brand-black")}>
                   <svg className=${"w-5 h-5 transition-transform duration-300 " + (activeIndex === index ? "rotate-180" : "rotate-0")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
               <//>
@@ -789,7 +791,7 @@
                 </ul>
               </div>
             </div>
-            <div className="border-t border-brand-black mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-400">
+            <div className="border-t border-brand-black mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-300">
               <p>© ${new Date().getFullYear()} Rainbow Polypack. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <${Link} to="/privacy" className="hover:text-white transition-colors cursor-pointer">${t("privacy_policy")}<//>
@@ -1310,7 +1312,7 @@
             <${motion.div} className="fixed top-0 left-0 right-0 h-[3px] z-[100] pointer-events-none" style=${{ scaleX: smoothProgress, transformOrigin: 'left', backgroundImage: 'linear-gradient(to right, #49326B, #039544, #FEF111, #E5332E)' }} />
             <div className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-24 text-center overflow-hidden">
               <div className="absolute inset-0 z-0">
-                <video ref=${mobileVideoRef} aria-hidden="true" tabIndex="-1" src="./assets/mobile-bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" onError=${(e) => { e.target.style.display = 'none'; }} className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
+                <video ref=${mobileVideoRef} aria-hidden="true" tabIndex="-1" src="./assets/mobile-bg.mp4" fetchpriority="low" autoPlay loop muted playsInline preload="metadata" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" onError=${(e) => { e.target.style.display = 'none'; }} className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-black/50 to-brand-black"></div>
               </div>
               <${motion.div}
@@ -1533,7 +1535,7 @@
             exit=${{ opacity: 0, scale: 0.95, y: 20 }}
             className="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl border border-slate-100"
           >
-            <button onClick=${onClose} aria-label="Close Modal" className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-800 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <button onClick=${onClose} aria-label="Close Modal" className="absolute top-4 right-4 p-2 text-slate-600 hover:text-slate-900 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
               <svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h3 className="text-2xl font-black text-brand-black mb-2">${t("tds_modal_title")}</h3>
@@ -2078,7 +2080,7 @@ ${message}`);
         <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
             <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Privacy Policy</h1>
-            <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Effective Date: July 7, 2026</p>
+            <p className="text-xs text-slate-700 font-bold tracking-wider uppercase mb-8">Effective Date: July 7, 2026</p>
             <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
               <p>At Rainbow Polypack, we prioritize the confidentiality of our B2B procurement partners and technical inquiries. This Privacy Policy outlines how we collect, store, and safeguard your corporate data and structural requirements.</p>
               
@@ -2102,7 +2104,7 @@ ${message}`);
         <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
             <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Terms of Service</h1>
-            <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Last Updated: July 7, 2026</p>
+            <p className="text-xs text-slate-700 font-bold tracking-wider uppercase mb-8">Last Updated: July 7, 2026</p>
             <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
               <p>Welcome to the official business-to-business digital portal of Rainbow Polypack. By interacting with our technical interfaces, transmitting manufacturing blueprints, or requesting batch sample testing kits, you agree to comply with the industrial terms outlined below.</p>
               
