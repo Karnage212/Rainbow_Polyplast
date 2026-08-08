@@ -20,7 +20,6 @@
   
   <link rel="canonical" href="https://www.rainbowpolypack.com/">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="alternate" type="text/markdown" title="LLM Context" href="/llms.txt">
 
   <!-- Preconnect & DNS-Prefetch Resource Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,7 +116,7 @@
     }
     body {
       font-family: 'DM Sans', sans-serif;
-      background-color: #0B0B0C;
+      background-color: #FFFFFF;
       margin: 0;
       padding: 0;
       -webkit-font-smoothing: antialiased;
@@ -125,7 +124,6 @@
       overflow-x: hidden;
       color: #0B0B0C;
     }
-    #root { overflow-x: hidden; width: 100%; position: relative; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0B0B0C; }
     ::-webkit-scrollbar-thumb { background: #039544; border-radius: 4px; }
@@ -422,7 +420,7 @@
         <//>
       `;
     };
-    function MagneticButton({ children, className, onClick, type = "button", ...props }) {
+    function MagneticButton({ children, className, onClick, type = "button" }) {
       return html`
         <${motion.button}
           type=${type}
@@ -431,7 +429,6 @@
           whileTap=${{ scale: 0.97 }}
           transition=${{ type: "spring", stiffness: 400, damping: 17 }}
           className=${className}
-          aria-label=${props['aria-label'] || props.ariaLabel || undefined}
         >
           ${children}
         <//>
@@ -1043,7 +1040,7 @@
       const containerRef = useRef(null);
       const canvasRef = useRef(null);
       const imagesRef = useRef({});
-      const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+      const [isMobile, setIsMobile] = useState(false);
       const [isCanvasFailed, setIsCanvasFailed] = useState(false);
       const [isAutoScrolling, setIsAutoScrolling] = useState(false);
       const [isImmersiveScrolling, setIsImmersiveScrolling] = useState(false);
@@ -1316,7 +1313,7 @@
             <${motion.div} style=${{ scaleX: smoothProgress, transformOrigin: 'left' }} className="fixed top-0 left-0 right-0 h-[3px] z-[100] pointer-events-none" style=${{ scaleX: smoothProgress, transformOrigin: 'left', backgroundImage: 'linear-gradient(to right, #49326B, #039544, #FEF111, #E5332E)' }} />
             <div className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-24 text-center overflow-hidden">
               <div className="absolute inset-0 z-0">
-                <video ref=${mobileVideoRef} aria-hidden="true" tabIndex="-1" src="./assets/mobile-bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" onError=${(e) => { e.target.style.display = 'none'; }} className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
+                <video ref=${mobileVideoRef} src="./assets/mobile-bg.mp4" fetchPriority="high" autoPlay loop muted playsInline preload="auto" poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" webkit-playsinline="true" onError=${(e) => { e.target.style.display = 'none'; }} className="w-full h-full object-cover opacity-70 mix-blend-screen pointer-events-none"></video>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-black/50 to-brand-black"></div>
               </div>
               <${motion.div}
@@ -1543,7 +1540,7 @@
               <svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h3 className="text-2xl font-black text-brand-black mb-2">${t("tds_modal_title")}</h3>
-            <p className="text-sm text-slate-600 mb-6 font-medium">${t("tds_modal_desc")}</p>
+            <p className="text-sm text-slate-500 mb-6 font-medium">${t("tds_modal_desc")}</p>
             
             ${error && html`<div className="mb-4 p-3 bg-red-50 text-red-600 text-xs font-bold rounded-lg border border-red-100">${error}</div>`}
             
@@ -2044,13 +2041,15 @@ ${message}`);
                           <option>Other</option>
                         </select>
                       </div>
+                    </div>
+                    <div>
                       <label className="block text-sm font-extrabold text-brand-black mb-3">Custom Technical Requirements</label>
                       <textarea id="enq_message" rows="4" className="w-full px-5 py-4 bg-brand-white rounded-2xl border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
                     </div>
                     <${MagneticButton} type="submit" className="w-full py-5 bg-brand-black text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-black/20 mt-4 border border-brand-black/50 hover:bg-brand-green transition-colors">
                       Submit Enquiry
                     <//>
-                    <p className="text-center text-xs font-extrabold text-slate-600 mt-6 uppercase tracking-wider font-mono">Confidential Technical Inquiry</p>
+                    <p className="text-center text-xs font-extrabold text-slate-500 mt-6 uppercase tracking-wider font-mono">Confidential Technical Inquiry</p>
                   </form>
                 ` : html`
                   <${motion.div}
@@ -2058,38 +2057,42 @@ ${message}`);
                     animate=${{ opacity: 1, scale: 1 }}
                     className="text-center py-16"
                   >
-                    <div className="w-24 h-24 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-brand-green/20">
-                      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                    <div className="w-28 h-28 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner border border-brand-green/20">
+                      <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    <h3 className="text-3xl font-black text-brand-black mb-4">Inquiry Received</h3>
-                    <p className="text-slate-600 font-bold max-w-md mx-auto mb-8 text-lg">Thank you. Our engineering team has received your technical specifications and will generate a priority quote.</p>
-                    <button onClick=${() => setSubmitted(false)} className="px-8 py-3 bg-brand-black text-white font-extrabold text-sm rounded-xl hover:bg-brand-green transition-colors">Submit Another Inquiry</button>
+                    <h3 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Request Received</h3>
+                    <p className="text-xl text-slate-700 mb-10 max-w-md mx-auto font-medium">Thank you for your interest. Our technical sales team will review your requirements and respond within 24 hours.</p>
+                    <${MagneticLink} to="#" className="inline-flex items-center px-10 py-5 bg-brand-green text-white rounded-2xl font-black text-xl shadow-xl shadow-brand-green/20 hover:bg-brand-black transition-colors">
+                      <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download PDF Brochure
+                    <//>
                   <//>
                 `}
               </div>
             <//>
-          </div>
+          <//>
         </div>
       `;
     }
 
     function PrivacyPolicy() {
-      const { t } = useLanguage();
-      useEffect(() => { window.scrollTo(0, 0); }, []);
+      React.useEffect(() => { window.scrollTo(0, 0); }, []);
       return html`
-        <div className="pt-40 pb-24 min-h-screen bg-brand-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl md:text-5xl font-black text-brand-black mb-8">${t("privacy_policy")}</h1>
-            <div className="bg-white p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl space-y-6 text-slate-700 font-medium leading-relaxed">
-              <p>Rainbow Polypack is committed to protecting the privacy and security of our clients, partners, and website visitors. This Privacy Policy outlines our practices regarding the collection, use, and disclosure of information when you access our digital portal.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">1. Information Collection</h2>
-              <p>We collect information provided directly by procurement officers and technical leads when requesting Technical Data Sheets (TDS), customized samples, or engineering consultations. This may include your full name, work email address, corporate entity, contact phone number, and preform specifications.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">2. Utilization of Information</h2>
-              <p>The technical and contact information provided is strictly utilized to facilitate direct B2B engineering consultation, dispatch sample kits, issue formal commercial quotations, and ensure precise dimensional alignment with your high-speed blow moulding lines.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">3. Data Security & Non-Disclosure</h2>
-              <p>Rainbow Polypack enforces strict security controls to prevent unauthorized access, alteration, or disclosure of proprietary container specifications and procurement inquiries. We do not sell or lease technical inquiry data to third parties.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">4. Direct Contact</h2>
-              <p>For inquiries regarding data integrity or to update your commercial specifications, please reach our administrative team at <a href="mailto:info@rainbowpolypack.com" className="text-brand-green font-bold underline">info@rainbowpolypack.com</a>.</p>
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
+            <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Privacy Policy</h1>
+            <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Effective Date: July 7, 2026</p>
+            <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
+              <p>At Rainbow Polypack, we prioritize the confidentiality of our B2B procurement partners and technical inquiries. This Privacy Policy outlines how we collect, store, and safeguard your corporate data and structural requirements.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">1. Information Collection</h2>
+              <p>We collect operational data provided explicitly through our Smart RFQ system and direct communications, including your full name, corporate email address, company registration indicators, logistical dispatch addresses, and custom structural or resin specifications.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">2. Technical Data Utilization</h2>
+              <p>Collected corporate metrics are utilized strictly to formulate prioritized manufacturing quotations, evaluate processing compatibility with our hot runner moulds, arrange fast-track dispatch of sample trial kits, and coordinate production scheduling.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">3. Data Integrity & Confidentiality</h2>
+              <p>All custom blueprints, technical parameters, and proprietary structural requests are treated as strictly confidential under industry-standard industrial data guidelines. Your specifications are never sold, leased, or distributed to adjacent trade firms, unverified logistics vendors, or third parties.</p>
             </div>
           </div>
         </div>
@@ -2097,40 +2100,43 @@ ${message}`);
     }
 
     function TermsOfService() {
-      const { t } = useLanguage();
-      useEffect(() => { window.scrollTo(0, 0); }, []);
+      React.useEffect(() => { window.scrollTo(0, 0); }, []);
       return html`
-        <div className="pt-40 pb-24 min-h-screen bg-brand-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl md:text-5xl font-black text-brand-black mb-8">${t("terms_service")}</h1>
-            <div className="bg-white p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl space-y-6 text-slate-700 font-medium leading-relaxed">
-              <p>Welcome to the official digital portal of Rainbow Polypack. By browsing or utilizing this website to request samples or download Technical Data Sheets, you agree to comply with the following operational terms and conditions.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">1. Technical Data & Tolerances</h2>
-              <p>All preform specifications, Intrinsic Viscosity (IV) metrics, Acetaldehyde (AA) ppm levels, and neck finish diagrams published on this site are indicative of our baseline manufacturing tolerances under Hot Runner injection moulding environments. Final production parameters are governed by formal mutually agreed Technical Data Sheets (TDS) and production purchase orders.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">2. Sample Kit Dispatch</h2>
-              <p>Sample preform kits and trial boxes dispatched for line testing remain subject to factory inventory availability and regional logistics parameters. Dispatch timeframes (including 48-hour expedited batches) apply to standard CTC configurations.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">3. Intellectual Property</h2>
-              <p>All brand marks, 3D mould visual models, custom interactive simulation assets, and technical literature displayed are the exclusive intellectual property of Rainbow Polypack.</p>
-              <h2 className="text-xl font-bold text-brand-black pt-4">4. Governing Law</h2>
-              <p>These terms and all commercial transactions initiated through technical inquiries shall be governed and interpreted in accordance with the laws of the State of Gujarat, India.</p>
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
+            <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Terms of Service</h1>
+            <p className="text-xs text-slate-500 font-bold tracking-wider uppercase mb-8">Last Updated: July 7, 2026</p>
+            <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
+              <p>Welcome to the official business-to-business digital portal of Rainbow Polypack. By interacting with our technical interfaces, transmitting manufacturing blueprints, or requesting batch sample testing kits, you agree to comply with the industrial terms outlined below.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">1. Industrial Quotations & Orders</h2>
+              <p>All manufacturing price estimates provided via our technical team or automated tools remain valid for exactly 30 calendar days due to raw PET resin price volatility. Formal purchase orders (PO) are subject to material availability and final production queue approval at our Chhatral, Gujarat facility.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">2. Quality Standards & Tolerances</h2>
+              <p>Our high-performance preforms are produced under strict zero-defect parameters. Final batches are subject to standard structural weight variances of ±0.15g and total gate vestige thresholds of ≤0.1mm as per standard hot runner engineering benchmarks.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">3. Tooling & Proprietary Design</h2>
+              <p>Any proprietary custom moulds or tooling modifications financed or supplied by a procurement partner remain the strict intellectual property of that partner. Rainbow Polypack guarantees separate facility custody and zero third-party cross-utilization of custom molds.</p>
             </div>
           </div>
         </div>
       `;
     }
 
+    
+    
     function GlobalScrollObserver() {
       const location = useLocation();
-
       useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
+              entry.target.classList.add('revealed');
+            } else {
+              entry.target.classList.remove('revealed');
             }
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         
         setTimeout(() => {
           document.querySelectorAll('h1:not(.no-reveal), h2:not(.no-reveal), h3:not(.no-reveal), h4:not(.no-reveal), p:not(.no-reveal)').forEach((el) => {
@@ -2222,7 +2228,7 @@ ${message}`);
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       return html`
-        <${RouterComponent}>
+              <${RouterComponent}>
           <${GlobalScrollObserver} />
           <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-black">
             <${CustomCursor} />
@@ -2240,7 +2246,7 @@ ${message}`);
               <//>
             </main>
             <${Footer} />
-            <${MagneticButton} aria-label="Contact us on WhatsApp" onClick=${() => window.open(waLink, '_blank')} className="fixed bottom-6 md:bottom-8 right-6 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] group border border-[#25D366]/20 cursor-pointer">
+            <${MagneticButton} onClick=${() => window.open(waLink, '_blank')} className="fixed bottom-6 md:bottom-8 right-6 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] group border border-[#25D366]/20 cursor-pointer">
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
               </svg>
