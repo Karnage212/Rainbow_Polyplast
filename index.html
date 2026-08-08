@@ -50,38 +50,136 @@
   <meta property="twitter:description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
   <meta property="twitter:image" content="https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg">
 
-  <!-- Schema.org Multi-location LocalBusiness & Manufacturer Structured Data -->
+  <!-- Schema.org WebSite, Sitelinks & Organization Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "Manufacturer"],
-    "name": "Rainbow Polypack",
-    "alternateName": ["Rainbow Poly Pack", "RainbowPolypack"],
-    "url": "https://www.rainbowpolypack.com/",
-    "logo": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
-    "image": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
-    "description": "Premium PET Preform manufacturers based in Chhatral and Ahmedabad, Gujarat.",
-    "address": [
+    "@graph": [
       {
-        "@type": "PostalAddress",
-        "addressLocality": "Ahmedabad",
-        "addressRegion": "Gujarat",
-        "postalCode": "380054",
-        "addressCountry": "IN",
-        "streetAddress": "A/602, Salister, Bh. Rajpath Club, Rajpath-Rangoli Road, Bodakdev"
+        "@type": "WebSite",
+        "@id": "https://www.rainbowpolypack.com/#website",
+        "url": "https://www.rainbowpolypack.com/",
+        "name": "Rainbow Polypack",
+        "alternateName": [
+          "Rainbow Poly Pack",
+          "Rainbow Polypack Gujarat",
+          "Rainbow Polyplast",
+          "Rainbow Polypack Ahmedabad"
+        ],
+        "description": "Leading PET Preform manufacturers in Chhatral and Ahmedabad, Gujarat. High-performance CTC 29/21mm preforms with 100% Hot Runner Moulds.",
+        "publisher": {
+          "@id": "https://www.rainbowpolypack.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "hasPart": [
+          {
+            "@type": "WebPage",
+            "@id": "https://www.rainbowpolypack.com/#about",
+            "url": "https://www.rainbowpolypack.com/about",
+            "name": "About Us",
+            "description": "Learn about Rainbow Polypack's manufacturing plant in Chhatral GIDC, Gujarat, 35+ years leadership heritage, and zero-defect engineering."
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.rainbowpolypack.com/#enquiry",
+            "url": "https://www.rainbowpolypack.com/brochure",
+            "name": "Enquiry & Technical Quote",
+            "description": "Submit an RFQ, request physical trial sample kits, and download official PET preform Technical Data Sheets (TDS)."
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.rainbowpolypack.com/#products",
+            "url": "https://www.rainbowpolypack.com/#products",
+            "name": "Products & Specifications",
+            "description": "Browse 15g, 24g, and 26g CTC 29/21mm neck finish PET preforms engineered for edible oils, sauces, vinegar, and liquids."
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.rainbowpolypack.com/#sustainability",
+            "url": "https://www.rainbowpolypack.com/sustainability",
+            "name": "Sustainability",
+            "description": "Discover our circular packaging commitments, EPR regulatory compliance, and on-demand food-grade rPET processing."
+          }
+        ]
       },
       {
-        "@type": "PostalAddress",
-        "addressLocality": "Chhatral",
-        "addressRegion": "Gujarat",
-        "addressCountry": "IN",
-        "streetAddress": "GIDC Industrial Estate, Gandhinagar Highway"
+        "@type": "ItemList",
+        "@id": "https://www.rainbowpolypack.com/#sitenavigation",
+        "name": "Rainbow Polypack Navigation",
+        "itemListElement": [
+          {
+            "@type": "SiteNavigationElement",
+            "position": 1,
+            "name": "About Us",
+            "description": "Corporate overview, management experience, zero-defect manufacturing, and plant facility in Chhatral GIDC.",
+            "url": "https://www.rainbowpolypack.com/about"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 2,
+            "name": "Enquiry",
+            "description": "Submit technical RFQ, request physical trial sample kits, and download PET preform technical brochures.",
+            "url": "https://www.rainbowpolypack.com/brochure"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 3,
+            "name": "Products",
+            "description": "High-performance CTC 29/21mm preform catalogue (15g, 24g, 26g) for edible oil and FMCG packaging.",
+            "url": "https://www.rainbowpolypack.com/#products"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 4,
+            "name": "Sustainability",
+            "description": "Circular economy packaging, Extended Producer Responsibility (EPR) mandates, and food-grade rPET capabilities.",
+            "url": "https://www.rainbowpolypack.com/sustainability"
+          }
+        ]
+      },
+      {
+        "@type": ["Organization", "LocalBusiness", "Manufacturer"],
+        "@id": "https://www.rainbowpolypack.com/#organization",
+        "name": "Rainbow Polypack",
+        "alternateName": [
+          "Rainbow Poly Pack",
+          "Rainbow Polypack Gujarat",
+          "Rainbow Polyplast"
+        ],
+        "url": "https://www.rainbowpolypack.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
+          "width": "900",
+          "height": "300"
+        },
+        "image": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
+        "description": "Premium PET Preform manufacturers based in Chhatral and Ahmedabad, Gujarat.",
+        "telephone": "+91 87358 17667",
+        "email": "contact@rainbowpolypack.com",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380054",
+            "addressCountry": "IN",
+            "streetAddress": "A/602, Salister, Bh. Rajpath Club, Rajpath-Rangoli Road, Bodakdev"
+          },
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Chhatral",
+            "addressRegion": "Gujarat",
+            "addressCountry": "IN",
+            "streetAddress": "GIDC Industrial Estate, Gandhinagar Highway"
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/rainbow-polypack/",
+          "https://www.instagram.com/rainbowpolypack/",
+          "https://x.com/Rainbowpolypack"
+        ]
       }
-    ],
-    "sameAs": [
-      "https://www.linkedin.com/company/rainbow-polypack/",
-      "https://www.instagram.com/rainbowpolypack/",
-      "https://x.com/Rainbowpolypack"
     ]
   }
   </script>
@@ -1769,7 +1867,10 @@
     }
     function AboutUs() {
       const { t } = useLanguage();
-      useEffect(() => { window.scrollTo(0, 0); }, []);
+      useEffect(() => { 
+        window.scrollTo(0, 0); 
+        document.title = "About Us | Rainbow Polypack - 35+ Years PET Preform Engineering Heritage";
+      }, []);
       const containerVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
@@ -1903,7 +2004,10 @@
 
     function EBrochure() {
       const { t } = useLanguage();
-      useEffect(() => { window.scrollTo(0, 0); }, []);
+      useEffect(() => { 
+        window.scrollTo(0, 0); 
+        document.title = "Enquiry & Technical Quote | Rainbow Polypack PET Preforms";
+      }, []);
       const [submitted, setSubmitted] = useState(false);
       const [selectedState, setSelectedState] = useState("");
       const [selectedCity, setSelectedCity] = useState("");
@@ -2154,7 +2258,10 @@ ${message}`);
 
     function Sustainability() {
       const { t } = useLanguage();
-      useEffect(() => { window.scrollTo(0, 0); }, []);
+      useEffect(() => { 
+        window.scrollTo(0, 0); 
+        document.title = "Sustainability & Green Packaging | Rainbow Polypack";
+      }, []);
       
       const containerVariants = {
         hidden: { opacity: 0 },
@@ -2238,6 +2345,8 @@ ${message}`);
                   <${Route} path="/about" element=${html`<${AboutUs} />`} />
                   <${Route} path="/sustainability" element=${html`<${Sustainability} />`} />
                   <${Route} path="/brochure" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/enquiry" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/quote" element=${html`<${EBrochure} />`} />
                   <${Route} path="/privacy" element=${html`<${PrivacyPolicy} />`} />
                   <${Route} path="/terms" element=${html`<${TermsOfService} />`} />
                 <//>
