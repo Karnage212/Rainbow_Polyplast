@@ -1,3 +1,14 @@
+<!-- 
+  ========================================================================
+  Rainbow Polypack - Production Web Application
+  Technical SEO & Performance Optimized
+  
+  IMPORTANT NOTE FOR DEPLOYMENT / INDEXING:
+  Ensure that `sitemap.xml` and `robots.txt` files are located in the root 
+  directory (e.g. /sitemap.xml and /robots.txt) for Google Search Console
+  and search engine crawlers.
+  ========================================================================
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +16,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rainbow Polypack | Premium PET Preform Manufacturers</title>
   <meta name="description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
-  <meta name="keywords" content="PET preform manufacturer Gujarat, CTC 29/21 preform, Chhatral GIDC plastics, Rainbow Polypack">
+  <meta name="keywords" content="Rainbow Polypack, Rainbow Poly Pack, poly pack, PET preform manufacturer Gujarat, PET preforms Ahmedabad, Chhatral GIDC plastics">
   
   <link rel="canonical" href="https://www.rainbowpolypack.com/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+  <!-- Preconnect & DNS-Prefetch Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.rainbowpolypack.com/">
@@ -22,21 +45,34 @@
   <meta property="twitter:description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
   <meta property="twitter:image" content="https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg">
 
-  <!-- Schema.org -->
+  <!-- Schema.org Multi-location LocalBusiness & Manufacturer Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "LocalBusiness", "Manufacturer"],
     "name": "Rainbow Polypack",
+    "alternateName": ["Rainbow Poly Pack", "RainbowPolypack"],
     "url": "https://www.rainbowpolypack.com/",
     "logo": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
-    "description": "Premium PET Preform manufacturers based in Chhatral, Gujarat.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Chhatral",
-      "addressRegion": "Gujarat",
-      "addressCountry": "IN"
-    },
+    "image": "https://www.rainbowpolypack.com/assets/logo_assets/svg/polypack-logo-transparent-bg.svg",
+    "description": "Premium PET Preform manufacturers based in Chhatral and Ahmedabad, Gujarat.",
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "addressLocality": "Ahmedabad",
+        "addressRegion": "Gujarat",
+        "postalCode": "380054",
+        "addressCountry": "IN",
+        "streetAddress": "A/602, Salister, Bh. Rajpath Club, Rajpath-Rangoli Road, Bodakdev"
+      },
+      {
+        "@type": "PostalAddress",
+        "addressLocality": "Chhatral",
+        "addressRegion": "Gujarat",
+        "addressCountry": "IN",
+        "streetAddress": "GIDC Industrial Estate, Gandhinagar Highway"
+      }
+    ],
     "sameAs": [
       "https://www.linkedin.com/company/rainbow-polypack/",
       "https://www.instagram.com/rainbowpolypack/",
@@ -192,6 +228,7 @@
         nav_home: "Home",
         nav_about: "About Us",
         nav_products: "Products",
+        nav_sustainability: "Sustainability",
         nav_enquiry: "Enquiry",
         nav_view_catalog: "View Catalog",
         hero_tagline: "High-Performance PET Preforms",
@@ -201,7 +238,7 @@
         company_profile: "Company Profile",
         about_title: "Precision Packaging from Gujarat to the World",
         about_desc_1: "Strategically headquartered in Chhatral, within Gujarat's premier Ahmedabad industrial corridor, Rainbow Polypack leverages the region's robust polymer supply chain and advanced logistics network. This geographic advantage allows us to deliver highly competitive pricing and rapid dispatch for the food, beverage, and chemical industries.",
-        about_desc_2: "Driven by a commitment to zero-defect manufacturing, we utilize state-of-the-art Hot Runner Moulds to offer preforms in premium 100% Virgin PET. Furthermore, we champion packaging sustainability through our advanced, food-approved rPET (Recycled PET) blends—empowering brands to meet their EPR (Extended Producer Responsibility) targets without sacrificing structural integrity.",
+        about_desc_2: "Driven by a commitment to zero-defect manufacturing, we utilize state-of-the-art Hot Runner Moulds to offer preforms in premium 100% Virgin PET. We guarantee that every batch meets the rigorous dimensional tolerances required by high-speed blowing lines, without bureaucratic legacy delays.",
         b2b_catalog: "B2B Product Catalog",
         sku_weight: "SKU / Weight",
         neck_finish: "Neck Finish",
@@ -216,7 +253,7 @@
         claim_kit: "📦 Claim Trial Sample Kit",
         custom_sol: "Need a Custom Solution?",
         tailored_engineering: "Tailored Preform Engineering",
-        tailored_desc: "Don't see the exact specifications you need? We provide end-to-end custom preform engineering. From unique neck finishes and specific weights to custom color matching and specialized rPET blending, our technical team can develop a solution tailored to your exact manufacturing requirements.",
+        tailored_desc: "Don't see the exact specifications you need? We provide end-to-end custom preform engineering. From unique neck finishes and specific weights to custom color matching, our technical team can develop a solution tailored to your exact manufacturing requirements.",
         discuss_custom: "Consult Our Engineering Team",
         enquiry_title: "Submit an Enquiry",
         enquiry_desc: "Enter your procurement requirements to access our full technical catalog and receive a prioritized quotation from our engineering team.",
@@ -282,6 +319,7 @@
         nav_home: "Accueil",
         nav_about: "À Propos",
         nav_products: "Produits",
+        nav_sustainability: "Durabilité",
         nav_enquiry: "Demande",
         nav_view_catalog: "Voir le Catalogue",
         hero_tagline: "Préformes PET Haute Performance",
@@ -291,7 +329,7 @@
         company_profile: "Profil de l'Entreprise",
         about_title: "Emballage de Précision, du Gujarat au Monde",
         about_desc_1: "Situé à Chhatral, dans le grand corridor industriel d'Ahmedabad, Rainbow Polypack s'est imposé comme un fabricant agile de premier plan de préformes PET de haute qualité pour les industries alimentaire, des boissons et chimique.",
-        about_desc_2: "Nous sommes animés par un engagement envers la fabrication zéro défaut, l'agilité des startups et des prix hautement compétitifs. En utilisant exclusivement des moules à canaux chauds de pointe, nous proposons des préformes haute performance en PET 100% vierge premium et en mélanges rPET (PET recyclé) durables et approuvés pour le contact alimentaire. Nous garantissons que chaque lot respecte les tolérances dimensionnelles rigoureuses requises par les lignes de soufflage à grande vitesse, sans délais bureaucratiques hérités.",
+        about_desc_2: "Nous sommes animés par un engagement envers la fabrication zéro défaut et des prix hautement compétitifs. En utilisant exclusivement des moules à canaux chauds de pointe, nous proposons des préformes haute performance en PET 100% vierge premium. Nous garantissons que chaque lot respecte les tolérances dimensionnelles rigoureuses requises par les lignes de soufflage à grande vitesse, sans délais bureaucratiques hérités.",
         b2b_catalog: "Catalogue de Produits B2B",
         sku_weight: "SKU / Poids",
         neck_finish: "Finition du Col",
@@ -306,7 +344,7 @@
         claim_kit: "📦 Réclamer le Kit d'Échantillons",
         custom_sol: "Besoin d'une Solution Personnalisée?",
         tailored_engineering: "Ingénierie de Préformes sur Mesure",
-        tailored_desc: "Vous ne trouvez pas les spécifications exactes dont vous avez besoin? Nous fournissons une ingénierie de préformes personnalisée de bout en bout. Des finitions de col uniques et des poids spécifiques à la correspondance de couleurs personnalisée et au mélange rPET spécialisé, notre équipe technique peut développer une solution adaptée à vos exigences de fabrication exactes.",
+        tailored_desc: "Vous ne trouvez pas les spécifications exactes dont vous avez besoin? Nous fournissons une ingénierie de préformes personnalisée de bout en bout. Des finitions de col uniques et des poids spécifiques à la correspondance de couleurs personnalisée, notre équipe technique peut développer une solution adaptée à vos exigences de fabrication exactes.",
         discuss_custom: "Consultez Notre Équipe d'Ingénierie",
         enquiry_title: "Soumettre une Demande",
         enquiry_desc: "Entrez vos besoins d'approvisionnement pour accéder à notre catalogue technique complet et recevoir un devis prioritaire de notre équipe d'ingénierie.",
@@ -675,26 +713,26 @@
               <div className="md:col-span-2">
                 <div className="flex items-center mb-8 relative">
                   <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 pointer-events-none"></div>
-                  <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" loading="lazy" className="w-24 md:w-32 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                  <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" width="128" height="128" loading="lazy" className="w-24 md:w-32 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
-                <p className="text-slate-400 mb-8 max-w-md leading-relaxed text-base md:text-lg font-medium">
+                <p className="text-slate-300 mb-8 max-w-md leading-relaxed text-base md:text-lg font-medium">
                   ${t("footer_desc")}
                 </p>
                 <div className="flex space-x-4">
-                  <a aria-label="LinkedIn" href="https://www.linkedin.com/company/rainbow-polypack/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
+                  <a aria-label="LinkedIn Profile" href="https://www.linkedin.com/company/rainbow-polypack/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-300">
                     <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                   </a>
-                  <a aria-label="Instagram" href="https://www.instagram.com/rainbowpolypack/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
+                  <a aria-label="Instagram Profile" href="https://www.instagram.com/rainbowpolypack/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-300">
                     <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                   </a>
-                  <a aria-label="X (Twitter)" href="https://x.com/Rainbowpolypack" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-400">
+                  <a aria-label="X Twitter Profile" href="https://x.com/Rainbowpolypack" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-300">
                     <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                   </a>
                 </div>
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-extrabold text-white uppercase tracking-wider mb-6">${t("quick_links")}</h3>
-                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-400">
+                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-300">
                   <li><a href="/" onClick=${(e) => {
                     e.preventDefault();
                     if (location.pathname !== '/') {
@@ -714,46 +752,47 @@
                     }
                   }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_products")}</a></li>
                   <li><${Link} to="/about" className="hover:text-brand-green transition-colors">${t("nav_about")}<//></li>
+                  <li><${Link} to="/sustainability" className="hover:text-brand-green transition-colors cursor-pointer">Sustainability<//></li>
                   <li><${Link} to="/brochure" className="hover:text-brand-green transition-colors">${t("nav_enquiry")}<//></li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-extrabold text-white uppercase tracking-wider mb-6">${t("headquarters")}</h3>
-                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-400">
+                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-300">
                   <li className="flex items-start group">
-                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-1" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                     <div className="flex flex-col">
                       <span className="text-white font-bold text-sm mb-1 tracking-wide">Head Office</span>
-                      <a href="https://maps.google.com/?q=Salister+Bodakdev+Ahmedabad" target="_blank" rel="noopener noreferrer" className="text-sm group-hover:text-white transition-colors leading-relaxed text-slate-400">
+                      <a href="https://maps.google.com/?q=Salister+Bodakdev+Ahmedabad" target="_blank" rel="noopener noreferrer" className="text-sm group-hover:text-white transition-colors leading-relaxed text-slate-300">
                         A/602, Salister, Bh. Rajpath Club,<br/>Rajpath-Rangoli Road, Bodakdev,<br/>Ahmedabad-380054, Gujarat
                       </a>
                     </div>
                   </li>
                   <li className="flex items-start group mt-5">
-                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-1" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <div className="flex flex-col">
                       <span className="text-white font-bold text-sm mb-1 tracking-wide">Manufacturing Unit</span>
-                      <a href="https://www.google.com/maps/search/?api=1&query=GIDC+Industrial+Estate,+Chhatral" target="_blank" rel="noopener noreferrer" className="text-sm group-hover:text-white transition-colors leading-relaxed text-slate-400">
+                      <a href="https://www.google.com/maps/search/?api=1&query=GIDC+Industrial+Estate,+Chhatral" target="_blank" rel="noopener noreferrer" className="text-sm group-hover:text-white transition-colors leading-relaxed text-slate-300">
                         GIDC Industrial Estate, Chhatral,<br/>Gandhinagar Highway,<br/>Gujarat, India
                       </a>
                     </div>
                   </li>
                   <li className="flex items-center group cursor-pointer">
-                    <a href="mailto:info@rainbowpolypack.com" target="_blank" rel="noopener noreferrer" className="flex items-center group cursor-pointer">
-                      <svg className="w-5 h-5 mr-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <a href="mailto:info@rainbowpolypack.com" target="_blank" rel="noopener noreferrer" className="flex items-center group cursor-pointer text-slate-300" aria-label="Email info@rainbowpolypack.com">
+                      <svg className="w-5 h-5 mr-3 text-brand-green" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                       <span className="group-hover:text-white transition-colors">info@rainbowpolypack.com</span>
                     </a>
                   </li>
                   <li className="flex items-center group cursor-pointer">
-                    <a href="https://wa.me/918735817667" target="_blank" rel="noopener noreferrer" className="flex items-center group cursor-pointer">
-                      <svg className="w-5 h-5 mr-3 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <a href="https://wa.me/918735817667" target="_blank" rel="noopener noreferrer" className="flex items-center group cursor-pointer text-slate-300" aria-label="Contact Phone and WhatsApp">
+                      <svg className="w-5 h-5 mr-3 text-brand-green" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                       <span className="group-hover:text-white transition-colors">+91 87358 17667</span>
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-            <div className="border-t border-brand-black mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-500">
+            <div className="border-t border-brand-black mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-400">
               <p>© ${new Date().getFullYear()} Rainbow Polypack. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <${Link} to="/privacy" className="hover:text-white transition-colors cursor-pointer">${t("privacy_policy")}<//>
@@ -824,6 +863,7 @@
         { path: "/", label: t("nav_home") },
         { path: "/about", label: t("nav_about") },
         { path: "/#products", label: t("nav_products") },
+        { path: "/sustainability", label: t("nav_sustainability") || "Sustainability" },
         { path: "/brochure", label: t("nav_enquiry") }
       ];
       const handleNav = (path) => {
@@ -917,7 +957,7 @@
               }}
               className="cursor-pointer transition-transform duration-300 origin-left ease-out hover:scale-[1.03]"
             >
-              <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" className=${`w-auto object-contain transition-all duration-700 ${isScrolledLogo ? 'h-10 md:h-12' : 'h-12 md:h-[60px] lg:h-[68px]'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/svg/logo-icon-transparent-bg.svg" width="48" height="48" className=${`w-auto object-contain transition-all duration-700 ${isScrolledLogo ? 'h-10 md:h-12' : 'h-12 md:h-[60px] lg:h-[68px]'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             <//>
 
             <!-- Desktop Inline Links -->
@@ -1052,8 +1092,12 @@
       useEffect(() => {
         if (isMobile) return;
         
+        // Load Frame 1 immediately with high priority for instant LCP paint
         const img1 = new Image();
         img1.decoding = 'async';
+        if ('fetchPriority' in img1) {
+          img1.fetchPriority = 'high';
+        }
         img1.src = `./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp`;
         
         img1.onerror = () => {
@@ -1063,35 +1107,67 @@
         imagesRef.current[1] = img1;
         img1.onload = () => requestAnimationFrame(() => drawImage(1));
 
-        const observer = new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) {
-            let currentIndex = 1;
-            const loadChunk = () => {
-              const chunkEnd = Math.min(currentIndex + 9, frameCount);
-              for (let i = currentIndex; i <= chunkEnd; i++) {
-                if (!imagesRef.current[i]) {
-                  const img = new Image();
-                  img.decoding = 'async';
-                  const paddedIndex = i.toString().padStart(5, '0');
-                  img.src = `./assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
-                  img.onload = () => {
-                    requestAnimationFrame(() => {
-                      drawImage(lastFrameRef.current || 1);
-                    });
-                  };
-                  imagesRef.current[i] = img;
-                }
+        let preloadStarted = false;
+        let preloadTimeout = null;
+
+        const startPreloadingFrames = () => {
+          if (preloadStarted) return;
+          preloadStarted = true;
+
+          let currentIndex = 2;
+          const loadChunk = () => {
+            const chunkEnd = Math.min(currentIndex + 9, frameCount);
+            for (let i = currentIndex; i <= chunkEnd; i++) {
+              if (!imagesRef.current[i]) {
+                const img = new Image();
+                img.decoding = 'async';
+                const paddedIndex = i.toString().padStart(5, '0');
+                img.src = `./assets/frames/preform_mould_frames_1080p_webp/fram${paddedIndex}.webp`;
+                img.onload = () => {
+                  requestAnimationFrame(() => {
+                    drawImage(lastFrameRef.current || 1);
+                  });
+                };
+                imagesRef.current[i] = img;
               }
-              currentIndex = chunkEnd + 1;
-              if (currentIndex <= frameCount) {
+            }
+            currentIndex = chunkEnd + 1;
+            if (currentIndex <= frameCount) {
+              if (window.requestIdleCallback) {
+                window.requestIdleCallback(() => setTimeout(loadChunk, 30));
+              } else {
                 setTimeout(loadChunk, 50);
               }
-            };
-            loadChunk();
+            }
+          };
+          loadChunk();
+        };
+
+        // Defer preloading frames 2-108 until after initial paint & when user interacts/scrolls
+        const schedulePreload = () => {
+          if (preloadTimeout) return;
+          preloadTimeout = setTimeout(() => {
+            if (window.requestIdleCallback) {
+              window.requestIdleCallback(startPreloadingFrames, { timeout: 2000 });
+            } else {
+              startPreloadingFrames();
+            }
+          }, 300);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            schedulePreload();
             observer.disconnect();
           }
         }, { threshold: 0 });
         if (containerRef.current) observer.observe(containerRef.current);
+
+        const onFirstScroll = () => {
+          schedulePreload();
+          window.removeEventListener('scroll', onFirstScroll);
+        };
+        window.addEventListener('scroll', onFirstScroll, { passive: true, once: true });
         
         const handleResize = () => {
           if (canvasRef.current) {
@@ -1104,7 +1180,9 @@
         window.addEventListener('resize', handleResize);
         
         return () => {
+          if (preloadTimeout) clearTimeout(preloadTimeout);
           observer.disconnect();
+          window.removeEventListener('scroll', onFirstScroll);
           window.removeEventListener('resize', handleResize);
         };
       }, [isMobile]);
@@ -1244,7 +1322,7 @@
                 transition=${{duration: 1}}
                 className="relative z-10 w-full max-w-md sm:max-w-lg mx-auto mb-8 mt-16 scale-[1.15] md:scale-100"
               >
-                <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <//>
               <${motion.h1}
                 initial=${{opacity: 0, y: 20}}
@@ -1268,7 +1346,7 @@
                 transition=${{duration: 0.8, delay: 0.6}}
                 className="relative z-10 w-full px-2 mb-12"
               >
-                 <${MagneticLink} to="/brochure" className="block w-full">
+                 <${MagneticLink} to="/brochure" className="block w-full" aria-label=${t("nav_enquiry")}>
                   <${motion.div}
                     whileTap=${{ scale: 0.96 }}
                     animate=${{ boxShadow: ["0px 10px 30px rgba(112,164,67,0.3)", "0px 15px 40px rgba(112,164,67,0.6)", "0px 10px 30px rgba(112,164,67,0.3)"] }}
@@ -1304,12 +1382,11 @@
               ` : null}
               <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-brand-black/20 backdrop-blur-sm transform-gpu will-change-transform">
                 <div className="relative mb-12 transform-gpu">
-                  
-                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-80 sm:w-[500px] md:w-[700px] lg:w-[800px] xl:w-[900px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" className="w-80 sm:w-[500px] md:w-[700px] lg:w-[800px] xl:w-[900px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <div className="absolute bottom-12 w-full left-0 hidden md:flex flex-col items-center justify-center opacity-80 animate-bounce text-white drop-shadow-md pointer-events-none">
                   <span className="text-xs font-bold uppercase tracking-widest mb-2">${t("home_scroll_explore") || "Scroll to Explore"}</span>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                  <svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                 </div>
               <//>
               <div className="fixed top-0 left-0 h-screen w-full pointer-events-none z-20">
@@ -1320,9 +1397,9 @@
                   >
                     <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-left max-w-lg pointer-events-auto">
                       <div className="absolute top-0 left-0 w-1 h-full bg-brand-green"></div>
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight mb-4 text-white">
+                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight mb-4 text-white">
                         Rainbow <span className="text-brand-green">Polypack</span>
-                      </h1>
+                      </h2>
                       <p className="text-slate-200 font-medium text-base sm:text-lg leading-relaxed">
                         ${t("home_scroll_desc")}
                       </p>
@@ -1342,9 +1419,9 @@
                   <${motion.div} style=${{ opacity: phase2Opacity, y: p2y }} className="absolute inset-0 flex items-end justify-end px-8 md:px-16 lg:px-24 pb-32 pointer-events-none">
                     <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-right max-w-lg pointer-events-auto flex flex-col items-end">
                       <div className="absolute top-0 right-0 w-1 h-full bg-brand-green"></div>
-                      <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                      <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                         ${t("home_scroll_neck")}
-                      </h1>
+                      </h2>
                       <p className="text-slate-200 font-medium text-lg leading-relaxed text-right">
                         ${t("qc_dim_desc")}
                       </p>
@@ -1353,9 +1430,9 @@
                   <${motion.div} style=${{ opacity: phase3Opacity, y: p3y }} className="absolute inset-0 flex items-end justify-start px-8 md:px-16 lg:px-24 pb-32 pointer-events-none">
                     <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-left max-w-lg pointer-events-auto">
                       <div className="absolute top-0 left-0 w-1 h-full bg-brand-green"></div>
-                      <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                      <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                         ${t("home_scroll_hot_runner")}
-                      </h1>
+                      </h2>
                       <p className="text-slate-200 font-medium text-lg leading-relaxed">
                         ${t("hero_desc")}
                       </p>
@@ -1364,9 +1441,9 @@
                   <${motion.div} style=${{ opacity: phase4Opacity, y: p4y }} className="absolute inset-0 flex items-end justify-end px-8 md:px-16 lg:px-24 pb-32 pointer-events-none">
                     <div className="bg-brand-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-right max-w-lg pointer-events-auto flex flex-col items-end">
                       <div className="absolute top-0 right-0 w-1 h-full bg-brand-green"></div>
-                      <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                      <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                         ${t("home_scroll_blow_up")}
-                      </h1>
+                      </h2>
                       <p className="text-slate-200 font-medium text-lg leading-relaxed text-right">
                         ${t("home_scroll_blow_up_desc")}
                       </p>
@@ -1379,12 +1456,12 @@
                   
                   <${motion.div} style=${{ opacity: phase5LogoOpacity }} className="text-center px-4 w-full flex flex-col items-center">
                     <div className="relative mb-8">
-                      <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" className="w-72 sm:w-[400px] md:w-[580px] lg:w-[700px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                      <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" className="w-72 sm:w-[400px] md:w-[580px] lg:w-[700px] h-auto relative z-10 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Huge Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     </div>
                     
                     ${isPhase5Clickable ? html`
                       <${motion.div} initial=${{ opacity: 0, scale: 0.9 }} animate=${{ opacity: 1, scale: 1 }} transition=${{ duration: 0.3 }}>
-                        <${MagneticLink} to="/brochure" className="z-[100] pointer-events-auto flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
+                        <${MagneticLink} to="/brochure" aria-label=${t("submit_enquiry")} className="z-[100] pointer-events-auto flex items-center justify-center px-12 py-6 bg-brand-green text-white rounded-full font-extrabold text-2xl shadow-[0_20px_50px_rgba(112,164,67,0.5)] border border-white/20 hover:bg-white hover:text-brand-green transition-colors cursor-pointer w-fit mx-auto text-center btn-gradient-sweep">
                           ${t("submit_enquiry")}
                         <//>
                       </${motion.div}>
@@ -1412,7 +1489,7 @@
       return html`
         <${TiltCard} className="rounded-3xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 bg-white border border-slate-200">
           <div className="h-48 rounded-2xl mb-8 flex items-center justify-center bg-brand-black border border-brand-black shadow-inner p-8 overflow-hidden relative">
-            <img src="./assets/ctc-neck-image.jpeg" loading="lazy" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+            <img src="./assets/ctc-neck-image.jpeg" width="350" height="200" loading="lazy" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
           </div>
           <h3 className="text-2xl font-black text-brand-black mb-5">${p.title}</h3>
           <div className="space-y-4 text-sm mt-auto font-medium mb-8">
@@ -1420,13 +1497,13 @@
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("applications")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${p.apps}</span></div>
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("iv_level")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">0.80 - 0.84 dl/g</span></div>
             <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("aa_level")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${"<"} 1.0 ppm</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">${t("resin_type")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">Virgin / Food-Grade rPET</span></div>
+            <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">${t("resin_type")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">100% Virgin PET</span></div>
           </div>
           <div className="mt-auto pt-4 flex flex-col gap-3">
-            <button onClick=${() => window.open(waSampleLink, '_blank')} className="w-full text-center py-3 rounded-xl border-2 border-brand-green text-brand-green font-extrabold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer block">
+            <button aria-label="Request Sample" onClick=${() => window.open(waSampleLink, '_blank')} className="w-full text-center py-3 rounded-xl border-2 border-brand-green text-brand-green font-extrabold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer block">
               Request Sample
             </button>
-            <button onClick=${() => window.open(waTDSLink, '_blank')} className="w-full text-center py-3 rounded-xl bg-brand-white text-slate-600 font-extrabold text-sm hover:bg-slate-200 transition-colors cursor-pointer block">
+            <button aria-label="Download TDS" onClick=${() => window.open(waTDSLink, '_blank')} className="w-full text-center py-3 rounded-xl bg-brand-white text-slate-600 font-extrabold text-sm hover:bg-slate-200 transition-colors cursor-pointer block">
               Download TDS
             </button>
           </div>
@@ -1551,7 +1628,7 @@
                 <div className="flex-1 w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto overflow-y-hidden shadow-inner no-scrollbar">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="bg-brand-white border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      <tr className="bg-brand-white border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
                         <th className="px-6 py-4 whitespace-normal break-words">${t("neck_finish")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("sku_weight")}</th>
                         <th className="px-6 py-4 whitespace-normal break-words">${t("optimal_usage")}</th>
@@ -1570,7 +1647,7 @@
                           <td className="px-6 py-5 font-medium text-slate-600 whitespace-normal break-words leading-relaxed">${p.apps}</td>
                           <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">
                             IV: 0.80-0.84 dl/g<br/>
-                            <span className="text-slate-500 text-xs">AA: ${"<"} 1.0 ppm</span>
+                            <span className="text-slate-600 text-xs">AA: ${"<"} 1.0 ppm</span>
                           </td>
                         <//>
                       `)}
@@ -1579,25 +1656,25 @@
                 </div>
                 <div className="w-full xl:w-[350px] shrink-0 sticky top-32">
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center text-center">
-                    <img src="./assets/ctc-neck-image.jpeg" loading="lazy" alt="CTC Neck Preform" className="w-full h-auto object-cover rounded-xl mb-6 shadow-sm border border-slate-100"  onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                    <img src="./assets/ctc-neck-image.jpeg" width="350" height="200" loading="lazy" alt="CTC Neck Preform" className="w-full h-auto object-cover rounded-xl mb-6 shadow-sm border border-slate-100" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     <h4 className="text-lg font-black text-brand-black mb-2">${t("profile_title")}</h4>
                     <p className="text-xs font-medium text-slate-600 leading-relaxed mb-6">Precision engineered press-on neck finish ideal for viscous liquids, condiments, and high-performance sealing.</p>
                     <div className="w-full grid grid-cols-2 gap-3 text-left mb-6">
                       <div className="bg-brand-white p-3 rounded-lg border border-slate-100">
-                        <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Resin Base</span>
-                        <span className="block text-xs font-black text-brand-black">Virgin / rPET</span>
+                        <span className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1">Resin Base</span>
+                        <span className="block text-xs font-black text-brand-black">100% Virgin PET</span>
                       </div>
                       <div className="bg-brand-white p-3 rounded-lg border border-slate-100">
-                        <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Weight Tolerance</span>
+                        <span className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1">Weight Tolerance</span>
                         <span className="block text-xs font-black text-brand-black">± 0.15g</span>
                       </div>
                     </div>
                     <div className="w-full flex flex-col gap-3">
-                      <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30 btn-gradient-sweep border border-transparent">
+                      <button aria-label="Request Bulk Sample" onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30 btn-gradient-sweep border border-transparent">
                         Request Bulk Sample
                       </button>
-                      <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-brand-white hover:bg-brand-green hover:text-white text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors btn-gradient-sweep border border-transparent">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      <button aria-label="Download Full Technical Catalog (TDS)" onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-brand-white hover:bg-brand-green hover:text-white text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors btn-gradient-sweep border border-transparent">
+                        <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Download Full Technical Catalog (TDS)
                       </button>
                     </div>
@@ -1613,7 +1690,7 @@
               <div className="w-full">
                 <table className="w-full text-left border-collapse table-fixed">
                   <thead>
-                    <tr className="bg-brand-white border-b border-slate-200 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">
+                    <tr className="bg-brand-white border-b border-slate-200 text-[10px] sm:text-xs font-bold text-slate-600 uppercase tracking-wider">
                       <th className="px-2 py-3 w-3/12 border-r border-slate-200">Weight</th>
                       <th className="px-2 py-3 w-4/12 border-r border-slate-200">Usage</th>
                       <th className="px-2 py-3 w-5/12 text-right">Applications</th>
@@ -1633,17 +1710,17 @@
                 </table>
               </div>
               <div className="bg-brand-white p-6 border-t border-slate-200 text-xs font-semibold text-slate-600 space-y-3">
-                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">IV (Intrinsic Viscosity)</span><span className="font-extrabold text-brand-black font-mono">0.80 - 0.84 dl/g</span></div>
-                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">AA Level</span><span className="font-extrabold text-brand-black font-mono">${"<"} 1.0 ppm</span></div>
-                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-500">Weight Tolerance</span><span className="font-extrabold text-brand-black font-mono">± 0.15g</span></div>
-                <div className="flex justify-between pt-1"><span className="text-slate-500">Resin Base</span><span className="font-extrabold text-brand-black font-mono">Virgin / rPET</span></div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-600">IV (Intrinsic Viscosity)</span><span className="font-extrabold text-brand-black font-mono">0.80 - 0.84 dl/g</span></div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-600">AA Level</span><span className="font-extrabold text-brand-black font-mono">${"<"} 1.0 ppm</span></div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2"><span className="text-slate-600">Weight Tolerance</span><span className="font-extrabold text-brand-black font-mono">± 0.15g</span></div>
+                <div className="flex justify-between pt-1"><span className="text-slate-600">Resin Base</span><span className="font-extrabold text-brand-black font-mono">100% Virgin PET</span></div>
                 
                 <div className="pt-4 flex flex-col gap-3">
-                  <button onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30">
+                  <button aria-label="Request Bulk Sample" onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full min-h-[44px] bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30">
                     Request Bulk Sample
                   </button>
-                  <button onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-green hover:text-white transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  <button aria-label="Download Full Technical Catalog (TDS)" onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full min-h-[44px] bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-green hover:text-white transition-colors">
+                    <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     Download Full Technical Catalog (TDS)
                   </button>
                 </div>
@@ -1678,6 +1755,7 @@
               </div>
               <div className="relative z-10 w-full md:w-auto">
                 <button
+                  aria-label=${t("discuss_custom")}
                   onClick=${() => window.open(waKitLink, '_blank')}
                   className="w-full md:w-auto px-10 py-5 bg-brand-black text-white rounded-2xl font-extrabold text-lg shadow-[0_15px_30px_rgba(11,11,12,0.4)] hover:bg-brand-black transition-all cursor-pointer whitespace-normal break-words text-center h-auto min-h-[60px] btn-gradient-sweep border border-transparent"
                 >
@@ -1717,12 +1795,14 @@
                 animate=${{ y: [0, -10, 0] }}
                 transition=${{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <${Link} to="/" className="relative z-10 block">
+                <${Link} to="/" aria-label="Rainbow Polypack Home" className="relative z-10 block">
                   <img 
                     src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" 
+                    width="900" 
+                    height="300"
                     className="w-80 sm:w-96 md:w-[600px] lg:w-[700px] h-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.8)] md:drop-shadow-2xl opacity-100 hover:scale-105 transition-transform cursor-pointer" 
                     alt="Rainbow Polypack Logo" 
-                   onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                    onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 <//>
               </${motion.div}>
               <${motion.div} variants=${itemVariants} className="inline-block text-brand-green font-extrabold mb-4 uppercase tracking-widest text-sm">
@@ -1742,8 +1822,8 @@
                   <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Virgin PET</div>
                 </div>
                 <div className="border-l-4 border-brand-black pl-5 relative z-10">
-                  <div className="text-4xl font-black text-brand-black mb-2">rPET</div>
-                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Food-Approved</div>
+                  <div className="text-4xl font-black text-brand-black mb-2">100%</div>
+                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Hot Runner</div>
                 </div>
                 <div className="border-l-4 border-slate-300 pl-5 relative z-10">
                   <div className="text-4xl font-black text-brand-black mb-2">0%</div>
@@ -2073,6 +2153,76 @@ ${message}`);
       return null;
     }
 
+    function Sustainability() {
+      const { t } = useLanguage();
+      useEffect(() => { window.scrollTo(0, 0); }, []);
+      
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      };
+      const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+      };
+
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-green/10 rounded-full blur-[120px] pointer-events-none"></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-20">
+              <span className="inline-block text-brand-green font-extrabold mb-4 uppercase tracking-widest text-sm">Our Environmental Commitment</span>
+              <h1 className="text-5xl md:text-6xl font-black text-brand-black mb-6 tracking-tight">Engineered for a Circular Economy.</h1>
+              <p className="text-xl text-slate-700 max-w-3xl mx-auto font-medium leading-relaxed">
+                As government mandates for sustainable packaging evolve, Rainbow Polypack is positioned to help your brand seamlessly transition. We provide factual, scalable solutions to meet Extended Producer Responsibility (EPR) targets.
+              </p>
+            </div>
+
+            <${motion.div} variants=${containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-10 rounded-3xl border border-slate-200 shadow-xl h-full bg-white">
+                  <div className="w-16 h-16 bg-brand-black text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                  </div>
+                  <h3 className="text-2xl font-black text-brand-black mb-4">Navigating EPR Mandates</h3>
+                  <p className="text-slate-600 font-medium text-base leading-relaxed">
+                    With the Indian government's increasing push toward sustainable waste management, brands are facing strict EPR compliance guidelines. We offer technical consulting to help you align your packaging procurement with upcoming regulatory shifts without disrupting your supply chain.
+                  </p>
+                <//>
+              <//>
+
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-10 rounded-3xl border border-brand-green/30 shadow-xl h-full bg-brand-green/5">
+                  <div className="w-16 h-16 bg-brand-green text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-brand-green/30">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                  </div>
+                  <h3 className="text-2xl font-black text-brand-black mb-4">Food-Grade rPET On-Demand</h3>
+                  <p className="text-slate-600 font-medium text-base leading-relaxed">
+                    While our standard, high-performance catalog utilizes 100% Virgin PET, we possess the processing capabilities to run sustainable, food-approved rPET (Recycled PET) blends. <strong className="text-brand-black">rPET manufacturing is available exclusively upon customer request</strong> for brands requiring strict sustainability compliance.
+                  </p>
+                <//>
+              <//>
+            <//>
+
+            <${motion.div} variants=${itemVariants} initial="hidden" animate="visible" className="bg-brand-black text-white rounded-3xl p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+              <div className="relative z-10 max-w-2xl">
+                <h3 className="text-3xl font-black mb-4">Ready to discuss your rPET requirements?</h3>
+                <p className="text-slate-300 font-medium text-lg">Contact our engineering team to evaluate processing compatibility, MOQs, and lead times for custom rPET preform batches.</p>
+              </div>
+              <div className="relative z-10 mt-8 md:mt-0 w-full md:w-auto shrink-0">
+                <${MagneticLink} to="/brochure" className="block w-full">
+                  <div className="w-full md:w-auto px-8 py-4 bg-brand-green text-white rounded-xl font-extrabold text-lg shadow-[0_10px_20px_rgba(112,164,67,0.3)] hover:bg-white hover:text-brand-green transition-all cursor-pointer text-center">
+                    Consult Our Engineers
+                  </div>
+                <//>
+              </div>
+            <//>
+          </div>
+        </div>
+      `;
+    }
+
     function App() {
       const RouterComponent = window.location.protocol === 'file:' ? HashRouter : BrowserRouter;
       const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
@@ -2088,6 +2238,7 @@ ${message}`);
                 <${Routes}>
                   <${Route} path="/" element=${html`<${Home} />`} />
                   <${Route} path="/about" element=${html`<${AboutUs} />`} />
+                  <${Route} path="/sustainability" element=${html`<${Sustainability} />`} />
                   <${Route} path="/brochure" element=${html`<${EBrochure} />`} />
                   <${Route} path="/privacy" element=${html`<${PrivacyPolicy} />`} />
                   <${Route} path="/terms" element=${html`<${TermsOfService} />`} />
