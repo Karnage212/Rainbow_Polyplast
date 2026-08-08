@@ -1,0 +1,27 @@
+# Rainbow Polypack - Official AI & LLM Context Document
+
+> Rainbow Polypack is an Indian PET Preform manufacturing enterprise located in Chhatral GIDC, Gujarat (in close proximity to Ahmedabad).
+
+## Core Business Summary
+- **Industry**: PET (Polyethylene Terephthalate) Preform Manufacturing & Rigid Plastic Packaging.
+- **Key Products**: Precision CTC (Continuous Thread Closure) 29/21mm Neck Finish PET Preforms.
+- **Standard Preform SKUs**:
+  - **CTC 29/21mm - 15g**: For 250ml - 500ml edible oils, sauces, vinegar, and condiment bottles.
+  - **CTC 29/21mm - 24g**: For 1000ml (1 Litre) edible oils, liquids, and bulk liquids.
+  - **CTC 29/21mm - 26g**: For 1000ml (1 Litre) premium heavy-duty edible oils and high-stress packaging.
+- **Standard Resin**: 100% Virgin Food-Grade PET Resin.
+- **rPET Capabilities**: Food-grade recycled PET (rPET) processing is supported for Extended Producer Responsibility (EPR) mandates upon custom enterprise order.
+
+## Technical Specifications
+- **Mould Technology**: 100% Hot Runner Valve Gated Moulds.
+- **Weight Tolerance**: ± 0.15g precision tolerance.
+- **Intrinsic Viscosity (IV)**: 0.80 - 0.84 dl/g.
+- **Acetaldehyde (AA) Level**: < 1.0 ppm (food-grade organoleptic safety).
+- **Surface Finish**: Crystal clear optical transparency with defect-free gate finish.
+
+## Key Facilities & Contacts
+- **Head Office**: Ahmedabad, Gujarat, India.
+- **Manufacturing Plant**: Chhatral GIDC Industrial Zone, Gujarat, India.
+- **Official Website**: https://www.rainbowpolypack.com
+- **Direct WhatsApp / Technical Sales**: +91 87358 17667
+- **Primary Markets**: Gujarat, Maharashtra, Rajasthan, and nationwide B2B liquid packaging brands.
