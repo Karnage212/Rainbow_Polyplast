@@ -32,6 +32,10 @@
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="dns-prefetch" href="https://unpkg.com">
 
+  <!-- LCP Asset Preloads -->
+  <link rel="preload" as="image" href="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp" media="(max-width: 767px)">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.rainbowpolypack.com/">
@@ -108,7 +112,9 @@
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap"></noscript>
   <style>
     @media (pointer: fine) {
       body, a, button, input, select, textarea {
@@ -194,6 +200,7 @@
     {
       "imports": {
         "react": "https://esm.sh/react@18.2.0",
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
         "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
         "framer-motion": "https://esm.sh/framer-motion@10.16.4?deps=react@18.2.0,react-dom@18.2.0",
         "react-router-dom": "https://esm.sh/react-router-dom@6.22.1?deps=react@18.2.0,react-dom@18.2.0",
@@ -1312,7 +1319,7 @@
                 transition=${{duration: 1}}
                 className="relative z-10 w-full max-w-md sm:max-w-lg mx-auto mb-8 mt-16 scale-[1.15] md:scale-100"
               >
-                <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" fetchpriority="high" loading="eager" className="w-full h-auto relative drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <//>
               <${motion.h1}
                 initial=${{opacity: 0, y: 20}}
@@ -1372,7 +1379,7 @@
               ` : null}
               <${motion.div} style=${{ opacity: introOpacity, scale: introScale }} className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none bg-brand-black/20 backdrop-blur-sm transform-gpu will-change-transform">
                 <div className="relative mb-12 transform-gpu">
-                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" className="w-80 sm:w-[500px] md:w-[700px] lg:w-[800px] xl:w-[900px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                  <img src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" width="900" height="300" fetchpriority="high" loading="eager" className="w-80 sm:w-[500px] md:w-[700px] lg:w-[800px] xl:w-[900px] object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] relative z-10 transform-gpu" alt="Rainbow Polypack Huge Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <div className="absolute bottom-12 w-full left-0 hidden md:flex flex-col items-center justify-center opacity-80 animate-bounce text-white drop-shadow-md pointer-events-none">
                   <span className="text-xs font-bold uppercase tracking-widest mb-2">${t("home_scroll_explore") || "Scroll to Explore"}</span>
