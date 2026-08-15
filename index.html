@@ -41,14 +41,14 @@
   <meta property="og:url" content="https://www.rainbowpolypack.com/">
   <meta property="og:title" content="Rainbow Polypack | Premium PET Preform Manufacturers">
   <meta property="og:description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
-  <meta property="og:image" content="https://www.rainbowpolypack.com/assets/FINAL LOGO.PNG">
+  <meta property="og:image" content="https://www.rainbowpolypack.com/assets/FINAL LOGO.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://www.rainbowpolypack.com/">
   <meta property="twitter:title" content="Rainbow Polypack | Premium PET Preform Manufacturers">
   <meta property="twitter:description" content="Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.">
-  <meta property="twitter:image" content="https://www.rainbowpolypack.com/assets/FINAL LOGO.PNG">
+  <meta property="twitter:image" content="https://www.rainbowpolypack.com/assets/FINAL LOGO.jpg">
 
   <!-- Schema.org WebSite, Sitelinks & Organization Structured Data -->
   <script type="application/ld+json">
@@ -994,13 +994,13 @@
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       
       return html`
-        <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-3' : 'bg-transparent py-6'}`}>
+        <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-xl shadow-md border-b border-slate-200 py-3' : 'bg-brand-black/40 backdrop-blur-xl border-b border-white/10 py-6'}`}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
             <div
               onClick=${() => navigate('/')}
               className="cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
             >
-              <img src="./assets/FINAL LOGO.PNG" width="200" height="60" className=${`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-14'}`} style=${{ mixBlendMode: 'multiply' }} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/FINAL LOGO.jpg" width="200" height="60" className=${`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-14'}`} style=${{ mixBlendMode: 'multiply' }} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
 
             <!-- Desktop Inline Links -->
@@ -1012,7 +1012,7 @@
                 <div
                   key=${link.path}
                   onClick=${() => handleNav(link.path)}
-                  className=${`relative cursor-pointer text-sm font-bold uppercase tracking-wider transition-colors ${isActive ? 'text-brand-green' : 'text-slate-600 hover:text-brand-black'}`}
+                  className=${`relative cursor-pointer text-sm font-bold uppercase tracking-wider transition-colors ${isActive ? 'text-brand-green' : (scrolled ? 'text-slate-800 hover:text-brand-green' : 'text-white hover:text-brand-green')}`}
                 >
                   ${link.label}
                   ${isActive ? html`<div className="absolute -bottom-1 left-0 w-full h-0.5 bg-brand-green rounded-full"></div>` : ''}
@@ -1020,7 +1020,7 @@
               `})}
               <${Link} 
                 to="/brochure" 
-                className="bg-brand-green text-white rounded-lg px-6 py-2.5 font-bold text-sm tracking-wider uppercase hover:bg-brand-black transition-colors shadow-sm"
+                className="bg-brand-green text-white rounded-lg px-6 py-2.5 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green"
               >
                 ${t("nav_enquiry")}
               <//>
@@ -1119,7 +1119,7 @@
       ];
 
       return html`
-        <div className="bg-brand-white w-full font-sans text-slate-800">
+        <div className="bg-brand-black w-full font-sans text-white">
           
           <!-- Corporate Split-Hero Section -->
           <div className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 max-w-7xl mx-auto">
@@ -1127,26 +1127,29 @@
               
               <!-- Left Column: Copy & CTA -->
               <div className="flex flex-col text-left order-2 lg:order-1">
-                <div className="inline-block px-4 py-1.5 rounded-md bg-slate-100 text-slate-700 font-bold text-xs uppercase tracking-widest mb-6 w-fit border border-slate-200">ISO 9001:2015 Certified</div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-brand-black tracking-tight mb-6 leading-[1.1]">
+                <div className="inline-block px-4 py-1.5 rounded-md bg-white/10 text-brand-green border-white/10 font-bold text-xs uppercase tracking-widest mb-6 w-fit border border-slate-200">ISO 9001:2015 Certified</div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 leading-[1.1]">
                   Premium PET Preform <br className="hidden md:block" /> Manufacturing
                 </h1>
-                <p className="text-lg text-slate-600 max-w-xl mb-10 font-medium leading-relaxed">
+                <p className="text-lg text-slate-300 max-w-xl mb-10 font-medium leading-relaxed">
                   High-performance CTC 29/21mm preforms engineered with 100% Hot Runner Moulds for FMCG, edible oil, and liquid packaging brands across India.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <${Link} to="/brochure" className="px-8 py-4 bg-brand-green text-white rounded-lg font-bold text-base hover:bg-brand-black transition-colors shadow-sm flex items-center justify-center">
+                  <${Link} to="/brochure" className="px-8 py-4 bg-brand-green text-white rounded-lg font-bold text-base hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green flex items-center justify-center">
                     Request a Technical Quote
                   <//>
-                  <a href="#products" className="px-8 py-4 bg-white text-brand-black border border-slate-200 rounded-lg font-bold text-base hover:bg-slate-50 transition-colors shadow-sm flex items-center justify-center">
+                  <div onClick=${() => {
+                    const el = document.getElementById('products');
+                    if(el) el.scrollIntoView({ behavior: 'smooth' });
+                  }} className="px-8 py-4 bg-transparent text-white border border-white/20 rounded-lg font-bold text-base hover:bg-white/10 transition-all shadow-sm flex items-center justify-center cursor-pointer">
                     View Catalog
-                  </a>
+                  </div>
                 </div>
               </div>
               
               <!-- Right Column: Inline Video -->
               <div className="relative w-full order-1 lg:order-2 flex justify-center">
-                <div className="relative w-full max-w-lg lg:max-w-full rounded-xl overflow-hidden shadow-md bg-brand-black aspect-video border border-slate-200">
+                <div className="relative w-full max-w-lg lg:max-w-full rounded-xl overflow-hidden shadow-[0_0_40px_rgba(3,149,68,0.15)] bg-brand-black aspect-video border border-brand-green/20">
                   <video 
                     ref=${mobileVideoRef}
                     src="./assets/mobile-bg.mp4" 
@@ -1176,7 +1179,7 @@
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 ${features.map(feature => html`
                   <div key=${feature.id} className="p-8 rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div className="text-brand-green mb-6 bg-slate-50 w-14 h-14 rounded-lg flex items-center justify-center border border-slate-100">
+                    <div className="text-brand-green mb-6 bg-brand-green/10 w-14 h-14 rounded-lg flex items-center justify-center border border-brand-green/20">
                       ${feature.icon}
                     </div>
                     <h3 className="text-lg font-bold text-brand-black mb-3">${feature.title}</h3>
@@ -1321,7 +1324,7 @@
       const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
       const waKitLink = `https://wa.me/918735817667?text=${waKitText}`;
       return html`
-        <div id="products" className=${"pb-24 bg-brand-white relative overflow-hidden " + (isIntegrated ? "pt-12" : "pt-36 min-h-screen")}>
+        <div id="products" className=${"scroll-mt-32 pb-24 bg-brand-white relative overflow-hidden " + (isIntegrated ? "pt-12" : "pt-36 min-h-screen")}>
           <${AnimatePresence}>
             ${modalTDS && html`
               <${LeadCaptureModal} 
@@ -1359,8 +1362,8 @@
                           <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">${p.usage}</td>
                           <td className="px-6 py-5 font-medium text-slate-600 whitespace-normal break-words leading-relaxed">${p.apps}</td>
                           <td className="px-6 py-5 font-semibold text-slate-800 whitespace-normal break-words">
-                            IV: 0.80-0.84 dl/g<br/>
-                            <span className="text-slate-600 text-xs">AA: ${"<"} 1.0 ppm</span>
+                            <span className="font-mono">IV: 0.80-0.84 dl/g</span><br/>
+                            <span className="text-slate-600 text-xs font-mono tabular-nums">AA: ${"<"} 1.0 ppm</span>
                           </td>
                         <//>
                       `)}
