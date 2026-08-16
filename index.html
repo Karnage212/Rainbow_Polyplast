@@ -458,6 +458,8 @@
 
     
     function RevealText({ children, className = "", delay = 0 }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReduced) return html`<div className=${className}>${children}</div>`;
       return html`
         <${motion.div}
           initial=${{ opacity: 0, y: 15 }}
@@ -564,7 +566,7 @@
       return html`
         <div className="relative group w-full h-full" onMouseEnter=${() => setOpacity(1)} onMouseLeave=${handleMouseLeave} onMouseMove=${handleMouseMove}>
           <div
-            className="absolute inset-0 rounded-[inherit] z-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none"
+            className="absolute inset-0 rounded-[inherit] z-0 blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
             style=${{
               background: 'linear-gradient(90deg, #49326B, #039544, #FEF111, #E5332E, #49326B)',
               backgroundSize: '200% 100%',
@@ -608,7 +610,7 @@
         }
       ];
       return html`
-        <div className="w-full max-w-3xl mx-auto space-y-4">
+        <${RevealText} className="w-full max-w-3xl mx-auto space-y-4">
           ${items.map((item, index) => html`
             <div key=${index} className=${"rounded-lg border overflow-hidden transition-all duration-300 " + (activeIndex === index ? "bg-brand-white border-brand-black/30 shadow-md" : "bg-white border-slate-200 shadow-sm hover:shadow-md")}>
               <${motion.button}
@@ -637,7 +639,7 @@
               <//>
             </div>
           `)}
-        </div>
+        <//>
       `;
     }
     function StartupAgility() {
@@ -655,11 +657,11 @@
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_rgba(112,164,67,0.05),_transparent_50%)] pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("why_partner")}</span>
+              <${RevealText}><span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("why_partner")}</span><//>
               <${SectionHeaderReveal}><h2 className="text-4xl md:text-5xl font-black text-brand-black tracking-tight">${t("startup_agility_title")}</h2><//>
-              <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
+              <${RevealText} delay=${0.1}><p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
                 ${t("startup_agility_desc")}
-              </p>
+              </p><//>
             </div>
             <${motion.div}
               variants=${containerVariants}
@@ -703,11 +705,11 @@
               <//>
             <//>
             <div className="text-center mb-16">
-              <span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("qc_commitment")}</span>
+              <${RevealText}><span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("qc_commitment")}</span><//>
               <${SectionHeaderReveal}><h2 className="text-4xl md:text-5xl font-black text-brand-black tracking-tight">${t("qc_protocol_title")}</h2><//>
-              <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+              <${RevealText} delay=${0.1}><p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
                 ${t("qc_protocol_desc")}
-              </p>
+              </p><//>
             </div>
             <${QCAccordion} />
           </div>
@@ -893,6 +895,7 @@
         { path: '/', label: t("nav_home") },
         { path: '/products', label: "Products" },
         { path: '/manufacturing', label: "Manufacturing" },
+        { path: '/sustainability', label: "Sustainability" },
         { path: '/about', label: t("nav_about") }
       ];
 
@@ -1117,8 +1120,8 @@
             <!-- KPI Enterprise Ribbon -->
             <div className="absolute bottom-0 left-0 right-0 z-20 w-full">
               <div className="max-w-7xl mx-auto px-6 pb-8 md:pb-12">
-                <div className="bg-black/45 backdrop-blur-xl border border-white/15 rounded-2xl p-6 flex flex-wrap justify-between items-center shadow-2xl gap-4">
-                  <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 pr-4 transition-all duration-300 hover:scale-105 cursor-default group">
+                <div className="bg-black/45 backdrop-blur-xl border border-white/15 rounded-2xl p-6 flex flex-wrap justify-center md:justify-between items-center shadow-2xl gap-4">
+                  <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 px-4 md:pl-0 md:pr-4 transition-all duration-300 hover:scale-105 cursor-default group">
                     <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">100%</p>
                     <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Virgin PET</p>
                   </div>
@@ -1161,7 +1164,7 @@
                     decoding="async"
                     src="./assets/PET_PREFORM_HERO.png" 
                     alt="PET Preform" 
-                    className="h-full w-auto object-contain scale-[2.2] md:scale-100" 
+                    className="h-full w-auto object-contain scale-[2.97] md:scale-100" 
                   />
                 <//>
                 
@@ -1174,7 +1177,7 @@
                     transition=${{ duration: 0.6, ease: "easeOut" }}
                     className="relative md:absolute md:top-[10%] md:left-[15%] z-20 w-full md:w-72 md:pointer-events-auto"
                   >
-                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-green">
+                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-green transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] cursor-default">
                       <p className="font-bold text-lg md:text-xl mb-1 text-slate-900">Precision Threading</p>
                       <p className="text-sm text-slate-700">Flawless sealing and capping consistency.</p>
                     </div>
@@ -1188,7 +1191,7 @@
                     transition=${{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                     className="relative md:absolute md:top-[45%] md:right-[15%] z-20 w-full md:w-72 md:pointer-events-auto"
                   >
-                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-yellow">
+                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-yellow transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] cursor-default">
                       <p className="font-bold text-lg md:text-xl mb-1 text-slate-900">100% Virgin PET</p>
                       <p className="text-sm text-slate-700">AA levels ${"<"} 1.0 ppm for optimal safety.</p>
                     </div>
@@ -1202,7 +1205,7 @@
                     transition=${{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
                     className="relative md:absolute md:bottom-[10%] md:left-[15%] z-20 w-full md:w-72 md:pointer-events-auto"
                   >
-                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-red">
+                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-red transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] cursor-default">
                       <p className="font-bold text-lg md:text-xl mb-1 text-slate-900">Zero Gate Vestige</p>
                       <p className="text-sm text-slate-700">Hot Runner Injection for superior clarity.</p>
                     </div>
@@ -1941,7 +1944,7 @@ ${message}`);
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        document.title = "Sustainability & Green Packaging | Rainbow Polypack";
+        document.title = "Sustainability & rPET in Indian PET Packaging | Rainbow Polypack";
       }, []);
       
       const containerVariants = {
@@ -1955,46 +1958,78 @@ ${message}`);
 
       return html`
         <div className="pt-40 pb-24 min-h-screen bg-brand-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-green/10 rounded-full blur-[120px] pointer-events-none"></div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-20">
-              <span className="inline-block text-brand-green font-extrabold mb-4 uppercase tracking-widest text-sm">Our Environmental Commitment</span>
-              <h1 className="text-5xl md:text-6xl font-black text-brand-black mb-6 tracking-tight">Engineered for a Circular Economy.</h1>
-                As government mandates for sustainable packaging tighten, Rainbow Polypack gives your brand a clear, audit-ready path to compliance. We deliver scalable, fully traceable solutions engineered to meet Extended Producer Responsibility (EPR) targets without disrupting your supply chain.
+              <span className="inline-block text-brand-green font-extrabold mb-4 uppercase tracking-widest text-sm">Sustainability</span>
+              <h1 className="text-5xl md:text-6xl font-black text-brand-black mb-6 tracking-tight">Sustainability in Indian PET Packaging: Where Things Actually Stand</h1>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
+                A straightforward look at what's changing in Indian plastic packaging regulation, what recycled PET (rPET) actually is, and where Rainbow Polypack fits into it today.
               </p>
             </div>
 
-            <${motion.div} variants=${containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-              <${motion.div} variants=${itemVariants} className="h-full">
-                <${TiltCard} className="p-10 rounded-xl border border-slate-200 shadow-xl h-full bg-white">
-                  <div className="w-16 h-16 bg-brand-black text-white rounded-lg flex items-center justify-center mb-8 shadow-lg">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+            <${motion.div} variants=${containerVariants} initial="hidden" whileInView="visible" viewport=${{ once: false, amount: 0.1 }} className="space-y-12 md:space-y-16 mb-20">
+              
+              <${motion.div} variants=${itemVariants} className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-black text-brand-black mb-6">India's Recycled-Content Mandate Is Rolling Out in Phases</h2>
+                <div className="space-y-4 text-lg text-slate-700 font-medium leading-relaxed">
+                  <p>Under the Plastic Waste Management (Amendment) Rules, brand owners and packaging producers in India are now required to include a minimum share of recycled content in rigid plastic packaging — the category that covers PET bottles, jars, and containers. The requirement started at roughly 30% for the 2025–26 financial year and is scheduled to rise in stages toward 60% by 2028–29. Food-contact PET packaging follows a similar, separately timed path, with its own phased increase and additional food-safety requirements administered by the FSSAI.</p>
+                  <p>This isn't a single switch that flips — it's a multi-year transition. The rules themselves have already been revised and clarified more than once since they were first introduced, and the supporting infrastructure — collection networks, sorting capacity, and food-grade-certified recycling plants — is still being built out to keep pace with the targets.</p>
+                  <p>Exact thresholds and deadlines are set and updated by the Ministry of Environment, Forest and Climate Change (MoEFCC) and the Central Pollution Control Board (CPCB). We'd always recommend confirming the current figures with your own compliance team rather than relying on any single source, including this page.</p>
+                </div>
+              <//>
+
+              <${motion.div} variants=${itemVariants} className="max-w-5xl mx-auto">
+                <${TiltCard} className="p-8 md:p-12 rounded-xl border border-slate-200 shadow-lg bg-white">
+                  <h3 className="text-2xl font-black text-brand-black mb-4">What rPET Actually Is</h3>
+                  <div className="space-y-4 text-base text-slate-600 font-medium leading-relaxed">
+                    <p>rPET is recycled PET resin — plastic reclaimed from used PET packaging, most commonly post-consumer bottles, which is collected, sorted, cleaned, and reprocessed into flake or pellet form. That reprocessed resin is then blended with, or used in place of, virgin PET resin when manufacturing new preforms.</p>
+                    <p>Not all rPET is equal. The resin's quality depends heavily on how clean and consistent the input material was, and for food-contact packaging specifically, recycled resin has to meet dedicated food-grade safety standards before it can be used — it isn't simply a matter of substituting one resin for another on the production line.</p>
                   </div>
-                  <h3 className="text-2xl font-black text-brand-black mb-4">EPR Compliance & Traceability</h3>
-                  <p className="text-slate-600 font-medium text-base leading-relaxed">
-                    With the Indian government's increasing push toward sustainable waste management, brands are facing strict EPR compliance guidelines and rising audit scrutiny. Our technical consulting delivers fully traceable, audit-ready packaging documentation that protects your brand from regulatory bottlenecks — so your procurement stays ahead of every EPR compliance shift.
-                  </p>
                 <//>
               <//>
 
-              <${motion.div} variants=${itemVariants} className="h-full">
-                <${TiltCard} className="p-10 rounded-xl border border-brand-green/30 shadow-xl h-full bg-brand-green/5">
-                  <div className="w-16 h-16 bg-brand-green text-white rounded-lg flex items-center justify-center mb-8 shadow-lg shadow-brand-green/30">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              <${motion.div} variants=${itemVariants} className="max-w-5xl mx-auto">
+                <${TiltCard} className="p-8 md:p-12 rounded-xl border border-slate-200 shadow-lg bg-white">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <h3 className="text-2xl font-black text-brand-black mb-4">Our Position on rPET</h3>
+                      <div className="space-y-4 text-base text-slate-600 font-medium leading-relaxed">
+                        <p>Our standard catalog runs on 100% virgin PET. We've built our process around it because it gives us consistent optical clarity and dimensional precision, batch after batch, without depending on the variability of external recycled-resin supply.</p>
+                        <p>We also have the processing capability to run food-grade rPET blends for customers who need them — whether that's to meet an approaching EPR recycled-content requirement, or as part of your own brand's sustainability commitments. Because rPET output depends on the specific recycled resin available at the time, we run it as a <strong className="text-brand-black">made-to-order production batch rather than a standing catalog item</strong>. If you have an rPET requirement, we'll work with you upfront on resin sourcing, minimum order quantities, and lead times before committing to a production slot.</p>
+                      </div>
+                    </div>
+                    <div className="relative h-64 md:h-full min-h-[250px] w-full flex items-center justify-center mix-blend-multiply mt-6 md:mt-0">
+                      <img 
+                        src="./assets/rpet_recycling.jpeg" 
+                        alt="rPET Recycling Process" 
+                        className="w-full h-full object-contain rounded-xl contrast-[1.05] brightness-[1.02] [mask-image:radial-gradient(ellipse_at_center,_black_80%,_transparent_100%)] transition-transform duration-700 hover:scale-105"
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-black text-brand-black mb-4">Food-Grade rPET On-Demand</h3>
-                  <p className="text-slate-600 font-medium text-base leading-relaxed">
-                    While our standard, high-performance catalog utilizes 100% Virgin PET, we possess the processing capabilities to run sustainable, food-approved rPET (Recycled PET) blends. <strong className="text-brand-black">rPET manufacturing is available exclusively upon customer request</strong> for brands requiring strict sustainability compliance.
-                  </p>
                 <//>
               <//>
+
+              <${motion.div} variants=${itemVariants} className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                <div className="border-l-4 border-brand-green pl-6 py-2">
+                  <p className="text-3xl font-black text-brand-black mb-1">FY25–29</p>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Phased EPR Rollout</p>
+                </div>
+                <div className="border-l-4 border-brand-green pl-6 py-2">
+                  <p className="text-3xl font-black text-brand-black mb-1">Made-to-Order</p>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Food-grade rPET production</p>
+                </div>
+                <div className="border-l-4 border-brand-green pl-6 py-2">
+                  <p className="text-3xl font-black text-brand-black mb-1">100%</p>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Virgin PET — our standard catalog</p>
+                </div>
+              <//>
+
             <//>
 
-            <${motion.div} variants=${itemVariants} initial="hidden" animate="visible" className="bg-brand-black text-white rounded-xl p-10 md:p-14 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+            <${motion.div} variants=${itemVariants} initial="hidden" whileInView="visible" viewport=${{ once: false, amount: 0.2 }} className="bg-brand-black text-white rounded-xl p-10 md:p-14 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
               <div className="relative z-10 max-w-2xl">
-                <h3 className="text-3xl font-black mb-4">Ready to discuss your rPET requirements?</h3>
-                <p className="text-slate-300 font-medium text-lg">Contact our engineering team to evaluate processing compatibility, MOQs, and lead times for custom rPET preform batches.</p>
+                <h3 className="text-3xl font-black mb-4">Have an EPR deadline coming up, or need to discuss an rPET production run?</h3>
+                <p className="text-slate-300 font-medium text-lg">Talk to our engineering team about resin options, compliance timing, and lead times — before you commit to a batch.</p>
               </div>
               <div className="relative z-10 mt-8 md:mt-0 w-full md:w-auto shrink-0">
                 <${MagneticLink} to="/brochure" className="block w-full">
