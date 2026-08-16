@@ -335,6 +335,13 @@
     import htm from 'htm';
     const html = htm.bind(React.createElement);
 
+    function updateSEO(title, path) {
+      document.title = title;
+      const canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', 'https://www.rainbowpolypack.com' + path);
+      }
+    }
     const i18nData = {
       en: {
         nav_home: "Home",
@@ -1074,7 +1081,7 @@
 
       useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Rainbow Polypack | Premium PET Preform Manufacturers | Chhatral, Gujarat";
+        updateSEO("Rainbow Polypack | Premium PET Preform Manufacturers | Chhatral, Gujarat", "/");
       }, []);
 
       const features = [
@@ -1464,7 +1471,7 @@
       
       useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Technical Catalog | Rainbow Polypack";
+        updateSEO("Technical Catalog | Rainbow Polypack", "/products");
       }, []);
       
       const allProducts = [
@@ -1609,7 +1616,7 @@
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        document.title = "About Us | Rainbow Polypack - Backed by 35+ Years of Rainbow Group Heritage";
+        updateSEO("About Us | Rainbow Polypack - Backed by 35+ Years of Rainbow Group Heritage", "/about");
       }, []);
       const containerVariants = {
         hidden: { opacity: 0 },
@@ -1746,7 +1753,7 @@
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        document.title = "Enquiry & Technical Quote | Rainbow Polypack PET Preforms";
+        updateSEO("Enquiry & Technical Quote | Rainbow Polypack PET Preforms", "/brochure");
       }, []);
       const [submitted, setSubmitted] = useState(false);
       const [selectedState, setSelectedState] = useState("");
@@ -2000,7 +2007,7 @@ ${message}`);
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        document.title = "Sustainability & rPET in Indian PET Packaging | Rainbow Polypack";
+        updateSEO("Sustainability & rPET in Indian PET Packaging | Rainbow Polypack", "/sustainability");
       }, []);
       
       const containerVariants = {
@@ -2109,7 +2116,7 @@ ${message}`);
 
       useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = "Manufacturing | Rainbow Polypack";
+        updateSEO("Manufacturing | Rainbow Polypack", "/manufacturing");
       }, []);
 
       const sections = [
