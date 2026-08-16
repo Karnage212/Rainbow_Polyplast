@@ -543,14 +543,21 @@
           viewport=${{ once: false, amount: 0.5 }}
           className="inline-block"
         >
-          ${text.split("").map((char, index) => html`
-            <${motion.span}
-              key=${index}
-              variants=${charVariants}
-              className="inline-block whitespace-pre"
-            >
-              ${char === " " ? "\u00A0" : char}
-            </${motion.span}>
+          ${text.split(" ").map((word, wordIndex, arr) => html`
+            <span className="inline-block whitespace-nowrap" key=${wordIndex}>
+              ${word.split("").map((char, charIndex) => html`
+                <${motion.span}
+                  key=${charIndex}
+                  variants=${charVariants}
+                  className="inline-block"
+                >
+                  ${char}
+                </${motion.span}>
+              `)}
+              ${wordIndex < arr.length - 1 ? html`
+                <${motion.span} variants=${charVariants} className="inline-block whitespace-pre">\u00A0</${motion.span}>
+              ` : null}
+            </span>
           `)}
         </${motion.span}>
       `;
