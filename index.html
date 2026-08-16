@@ -918,13 +918,13 @@
       const waLink = `https://wa.me/918735817667?text=${waText}`;
       
       return html`
-        <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-lg shadow-md border-b border-slate-200 py-2' : 'bg-transparent py-4'}`}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between min-h-[4.5rem] md:min-h-[7.5rem]">
+        <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-lg shadow-md border-b border-slate-200 py-1.5' : 'bg-transparent py-2.5'}`}>
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between min-h-[3.5rem] md:min-h-[4.5rem]">
             <div
               onClick=${() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
             >
-              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-20' : 'h-28'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-24' : 'h-36'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <img src="./assets/logo_assets/PNG/icon-rp.png" className=${`block md:hidden w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
 
@@ -1117,22 +1117,22 @@
             <!-- KPI Enterprise Ribbon -->
             <div className="absolute bottom-0 left-0 right-0 z-20 w-full">
               <div className="max-w-7xl mx-auto px-6 pb-8 md:pb-12">
-                <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 flex flex-wrap justify-between items-center shadow-2xl gap-4">
+                <div className="bg-black/45 backdrop-blur-xl border border-white/15 rounded-2xl p-6 flex flex-wrap justify-between items-center shadow-2xl gap-4">
                   <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 pr-4 transition-all duration-300 hover:scale-105 cursor-default group">
                     <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">100%</p>
-                    <p className="text-slate-300 text-xs uppercase tracking-widest font-bold">Virgin PET</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Virgin PET</p>
                   </div>
                   <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 px-4 transition-all duration-300 hover:scale-105 cursor-default group">
                     <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">±0.15g</p>
-                    <p className="text-slate-300 text-xs uppercase tracking-widest font-bold">Tolerance</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Tolerance</p>
                   </div>
                   <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 px-4 transition-all duration-300 hover:scale-105 cursor-default group">
                     <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">48h</p>
-                    <p className="text-slate-300 text-xs uppercase tracking-widest font-bold">Dispatch</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Dispatch</p>
                   </div>
                   <div className="flex-1 min-w-[150px] text-center md:text-left px-4 transition-all duration-300 hover:scale-105 cursor-default group">
                     <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">100%</p>
-                    <p className="text-slate-300 text-xs uppercase tracking-widest font-bold">Hot Runner</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Hot Runner</p>
                   </div>
                 </div>
               </div>
@@ -1148,12 +1148,12 @@
                 <p className="text-slate-700 text-lg max-w-2xl mx-auto">Engineered for seamless integration into high-speed blowing lines. Watch our technical advantages unfold as you scroll.</p>
               </div>
               
-              <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row md:justify-center md:items-center mt-12 md:mt-24 mb-12 md:mb-24 min-h-[85vh] md:min-h-[85vh]">
+              <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row md:justify-center md:items-center mt-12 md:mt-24 mb-12 md:mb-24 min-h-[70vh] md:min-h-[85vh]">
                 <!-- Rainbow Haze Glow -->
                 <div className="absolute inset-0 bg-gradient-to-r from-[#49326B] via-[#039544] to-[#fef111] blur-3xl opacity-20 animate-pulse rounded-full w-3/4 h-3/4 m-auto pointer-events-none"></div>
                 
                 <${motion.div} 
-                  className="relative z-10 h-[75vh] md:h-[85vh] w-auto mb-12 md:mb-0 origin-center will-change-transform flex justify-center items-center pointer-events-none" 
+                  className="relative z-10 h-[75vh] md:h-[85vh] w-auto mb-4 md:mb-0 origin-center will-change-transform flex justify-center items-center pointer-events-none" 
                   animate=${{ y: [-8, 8, -8], z: 0 }}
                   transition=${{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
                 >
@@ -1161,7 +1161,7 @@
                     decoding="async"
                     src="./assets/PET_PREFORM_HERO.png" 
                     alt="PET Preform" 
-                    className="h-full w-auto object-contain scale-[1.8] md:scale-100" 
+                    className="h-full w-auto object-contain scale-[2.2] md:scale-100" 
                   />
                 <//>
                 
@@ -1336,36 +1336,6 @@
       `;
     }
 
-    function ProductCard({ p }) {
-      const { t } = useLanguage();
-      const waSampleText = encodeURIComponent(`Hello Rainbow Polypack Team, I would like to request a sample of the ${p.title} (${p.weight}g) PET Preform.`);
-      const waSampleLink = `https://wa.me/918735817667?text=${waSampleText}`;
-      const waTDSText = encodeURIComponent(`Hello Rainbow Polypack Team, please share the official Technical Data Sheet (TDS) for the ${p.title} (${p.weight}g) PET Preform.`);
-      const waTDSLink = `https://wa.me/918735817667?text=${waTDSText}`;
-      return html`
-        <${TiltCard} className="rounded-xl p-8 shadow-lg cursor-default h-full flex flex-col transition-all duration-500 hover:shadow-md hover:-translate-y-2 bg-white border border-slate-200">
-          <div className="h-48 rounded-lg mb-8 flex items-center justify-center bg-brand-black border border-brand-black shadow-inner p-8 overflow-hidden relative">
-            <img src="./assets/ctc-neck-image.jpeg" width="350" height="200" loading="lazy" alt="Rainbow Polypack Preform" className="w-full h-full object-contain relative z-10 drop-shadow-md hover:scale-105 transition-transform duration-500" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
-          </div>
-          <h3 className="text-2xl font-black text-brand-black mb-5">${p.title}</h3>
-          <div className="space-y-4 text-sm mt-auto font-medium mb-8">
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("bottle_usage")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${p.usage}</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("applications")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${p.apps}</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("iv_level")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">0.80 - 0.84 dl/g</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2"><span className="text-slate-600">${t("aa_level")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">${"<"} 1.0 ppm</span></div>
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2 pt-1"><span className="text-slate-600">${t("resin_type")}</span><span className="font-semibold text-slate-800 text-sm whitespace-normal break-words text-right ml-4">100% Virgin PET</span></div>
-          </div>
-          <div className="mt-auto pt-4 flex flex-col gap-3">
-            <button aria-label="Request Sample" onClick=${() => window.open(waSampleLink, '_blank')} className="w-full text-center py-3 rounded-xl border-2 border-brand-green text-brand-green font-extrabold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer block">
-              Request Sample
-            </button>
-            <button aria-label="Download TDS" onClick=${() => window.open(waTDSLink, '_blank')} className="w-full text-center py-3 rounded-xl bg-brand-white text-slate-600 font-extrabold text-sm hover:bg-slate-200 transition-colors cursor-pointer block">
-              Download TDS
-            </button>
-          </div>
-        <//>
-      `;
-    }
     function LeadCaptureModal({ isOpen, onClose, onSuccess }) {
       const { t } = useLanguage();
       const [formData, setFormData] = useState({ name: '', company: '', email: '' });
