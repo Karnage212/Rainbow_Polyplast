@@ -919,13 +919,13 @@
       
       return html`
         <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-lg shadow-md border-b border-slate-200 py-2' : 'bg-transparent py-4'}`}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between min-h-[4.5rem] md:min-h-[10rem]">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between min-h-[4.5rem] md:min-h-[7.5rem]">
             <div
               onClick=${() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
             >
-              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-32' : 'h-56'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
-              <img src="./assets/logo_assets/PNG/icon-rp.png" className=${`block md:hidden w-auto object-contain transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-20' : 'h-28'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/PNG/icon-rp.png" className=${`block md:hidden w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
 
             <!-- Desktop Inline Links -->
@@ -1152,15 +1152,18 @@
                 <!-- Rainbow Haze Glow -->
                 <div className="absolute inset-0 bg-gradient-to-r from-[#49326B] via-[#039544] to-[#fef111] blur-3xl opacity-20 animate-pulse rounded-full w-3/4 h-3/4 m-auto pointer-events-none"></div>
                 
-                <${motion.img} 
-                  decoding="async"
-                  src="./assets/PET_PREFORM_HERO.png" 
-                  alt="PET Preform" 
-                  className="relative z-10 h-[75vh] md:h-[85vh] scale-[1.8] md:scale-100 w-auto object-contain pointer-events-none mb-12 md:mb-0 origin-center will-change-transform" 
-                  style=${{ transform: 'translateZ(0)' }}
-                  animate=${{ y: [-8, 8, -8] }}
+                <${motion.div} 
+                  className="relative z-10 h-[75vh] md:h-[85vh] w-auto mb-12 md:mb-0 origin-center will-change-transform flex justify-center items-center pointer-events-none" 
+                  animate=${{ y: [-8, 8, -8], z: 0 }}
                   transition=${{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                />
+                >
+                  <img 
+                    decoding="async"
+                    src="./assets/PET_PREFORM_HERO.png" 
+                    alt="PET Preform" 
+                    className="h-full w-auto object-contain scale-[1.8] md:scale-100" 
+                  />
+                <//>
                 
                 <div className="flex flex-col gap-6 w-full px-4 md:absolute md:inset-0 md:w-full md:h-full md:px-0 md:pointer-events-none">
                   <!-- Card 1: Neck -->
@@ -2114,12 +2117,8 @@ ${message}`);
               <div className="w-full md:w-1/2 flex flex-col pt-12 md:pb-[50vh]">
                 ${sections.map((step, idx) => html`
                   <div key=${step.id} data-step-index=${idx} className="manufacturing-step min-h-[100vh] flex flex-col justify-center">
-                    <${motion.div}
-                      initial=${{ opacity: 0, x: -30 }}
-                      whileInView=${{ opacity: 1, x: 0 }}
-                      viewport=${{ once: false, amount: 0.5 }}
-                      transition=${{ duration: 0.6 }}
-                      className=${`transition-opacity duration-500 ${activeStep === idx ? 'opacity-100' : 'opacity-40'}`}
+                    <div
+                      className=${`transition-all duration-700 transform ${activeStep === idx ? 'opacity-100 translate-x-0' : 'opacity-30 -translate-x-8'}`}
                     >
                       <span className="text-brand-green font-black text-6xl opacity-20 mb-4 block">0${idx + 1}</span>
                       <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-2">${step.title}</h2>
@@ -2128,7 +2127,7 @@ ${message}`);
                         ${step.media}
                       </div>
                       <p className="text-slate-600 text-lg leading-relaxed">${step.desc}</p>
-                    <//>
+                    </div>
                   </div>
                 `)}
               </div>
