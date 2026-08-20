@@ -1,0 +1,1999 @@
+import './index.css';
+import React, { useEffect, useState, useRef, useMemo, createContext, useContext } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { useScroll, useTransform, motion, useMotionValueEvent, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
+    import { BrowserRouter, HashRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+    import htm from 'htm';
+    const html = htm.bind(React.createElement);
+
+    function updateSEO(title, path) {
+      document.title = title;
+      const canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', 'https://www.rainbowpolypack.com' + path);
+      }
+    }
+    const productGroups = [
+      {
+        id: "ctc-29-21",
+        name: "CTC 29/21mm Neck Finish Series",
+        shortName: "CTC 29/21mm",
+        image: "./assets/ctc-neck-image.jpeg",
+        imageAlt: "CTC 29/21mm PET Preform",
+        imgWidth: 2400,
+        imgHeight: 1792,
+        variants: [
+          { weight: "15", usage: "250ml - 500ml", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
+          { weight: "24", usage: "1000ml (1L)", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
+          { weight: "26", usage: "1000ml (1L) premium", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
+        ],
+      },
+      {
+        id: "alaska-28",
+        name: "Alaska Short Neck 28mm Series",
+        shortName: "Alaska Short Neck 28mm",
+        image: "./assets/Alaska_28mm_Professional.jpg",
+        imageAlt: "Alaska Short Neck 28mm PET Preform",
+        imgWidth: 1536,
+        imgHeight: 2048,
+        variants: [
+          { weight: "10.2", usage: "250-500ml", apps: "Water" },
+          { weight: "6.6", usage: "150-250ml", apps: "Water" },
+        ],
+      },
+      {
+        id: "82mm",
+        name: "82mm Wide-Mouth Series",
+        shortName: "82mm",
+        image: "./assets/preform-82mm.jpeg",
+        imageAlt: "82mm PET Preform",
+        imgWidth: 1792,
+        imgHeight: 2400,
+        variants: [
+          { weight: "60", usage: "—", apps: "—" },
+        ],
+      },
+      {
+        id: "73mm",
+        name: "73mm Wide-Mouth Series",
+        shortName: "73mm",
+        image: "./assets/preform-73mm.jpeg",
+        imageAlt: "73mm PET Preform",
+        imgWidth: 1792,
+        imgHeight: 2400,
+        variants: [
+          { weight: "26", usage: "—", apps: "—" },
+          { weight: "29", usage: "—", apps: "—" },
+          { weight: "34", usage: "—", apps: "—" },
+        ],
+      },
+      {
+        id: "ctc-29-21-cap",
+        name: "CTC 29/21mm HDPE Caps & Closures",
+        shortName: "CTC 29/21mm HDPE Cap",
+        image: "./assets/CTC_Double_Cap_Professionall.jpg",
+        imageAlt: "CTC 29/21mm HDPE Cap",
+        imgWidth: 1536,
+        imgHeight: 2048,
+        isCapGroup: true,
+        variants: [
+          { weight: "3.2", usage: "—", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
+        ],
+      },
+    ];
+
+    const i18nData = {
+      en: {
+        nav_home: "Home",
+        nav_about: "About Us",
+        nav_products: "Products",
+        nav_sustainability: "Sustainability",
+        nav_enquiry: "Enquiry",
+        nav_view_catalog: "View Catalog",
+        hero_tagline: "High-Performance PET Preforms",
+        hero_title_1: "Precision Engineering.",
+        hero_title_2: "Flawless Consistency.",
+        hero_desc: "Supplying the food, beverage, and chemical industries with zero-defect PET preforms. Engineered on advanced 100% Hot Runner Moulds and led by our high-performance CTC 29/21mm series, our range of neck finishes is continuously expanding. They are built to maximize your high-speed blowing line efficiency and eliminate gate-related downtime.",
+        company_profile: "Company Profile",
+        about_title: "Precision Packaging from Gujarat to the World",
+        about_desc_1: "Rainbow Polypack is backed by the Rainbow Group's 35+ year heritage across spice and commodity exports, confectionery manufacturing, and now polymer engineering. Strategically headquartered in Chhatral, within Gujarat's premier Ahmedabad industrial corridor, we leverage the region's robust polymer supply chain and advanced logistics network, delivering highly competitive pricing and rapid dispatch for the food, beverage, and chemical industries.",
+        about_desc_2: "Driven by a commitment to zero-defect manufacturing, we utilize state-of-the-art Hot Runner Moulds to offer preforms in premium 100% Virgin PET. We guarantee that every batch meets the rigorous dimensional tolerances required by high-speed blowing lines, without bureaucratic legacy delays.",
+        b2b_catalog: "B2B Product Catalog",
+        sku_weight: "SKU / Weight",
+        neck_finish: "Neck Finish",
+        optimal_usage: "Optimal Bottle Usage",
+        applications: "Applications",
+        iv_aa: "IV & AA Levels",
+        action: "Action",
+        req_sample: "Request Sample",
+        fast_track: "Fast-Track Verification",
+        trial_box: "Rainbow Polypack Trial Sample Box",
+        trial_desc: "A pre-packed, premium box containing 5 pieces of every CTC SKU (15g, 23.5g, 26g). Dispatched within 48 hours for your internal quality and blowing tests.",
+        claim_kit: "📦 Claim Trial Sample Kit",
+        custom_sol: "Need a Custom Solution?",
+        tailored_engineering: "Tailored Preform Engineering",
+        tailored_desc: "Don't see the exact specifications you need? We provide end-to-end custom preform engineering. From unique neck finishes and specific weights to custom color matching, our technical team can develop a solution tailored to your exact manufacturing requirements.",
+        discuss_custom: "Consult Our Engineering Team",
+        enquiry_title: "Submit an Enquiry",
+        enquiry_desc: "Enter your procurement requirements to access our full technical catalog and receive a prioritized quotation from our engineering team.",
+        download_tds: "Download TDS",
+        footer_desc: "High-precision PET packaging solutions engineered for automated blowing lines. Delivering excellence in optical clarity, dimensional stability, and zero-defect manufacturing.",
+        quick_links: "Quick Links",
+        headquarters: "Headquarters",
+        privacy_policy: "Privacy Policy",
+        terms_service: "Terms of Service",
+        tds_modal_title: "Access TDS",
+        tds_modal_desc: "Please provide your details to download the Technical Data Sheet.",
+        tds_error: "All fields are required to access the Technical Data Sheet.",
+        form_name: "Full Name",
+        form_company: "Company Name",
+        form_email: "Work Email",
+        form_state: "State / Region",
+        select_state: "Select State",
+        form_city: "City / Hub",
+        select_city: "Select City",
+        specify_city: "Specify City",
+        city_error: "Please specify your city.",
+        product_interest: "Product Interest",
+        monthly_volume: "Estimated Monthly Volume",
+        brand_name: "RAINBOW POLYPACK",
+        submit_enquiry: "Request a Technical Quote",
+        qc_commitment: "Quality Assurance Commitment",
+        qc_protocol_title: "Strict Quality Protocol",
+        qc_protocol_desc: "Speed is irrelevant without structural and dimensional perfection. Every production cycle is governed by strict Quality Assurance (QA) protocols, utilizing advanced metrology and polymer testing to ensure flawless performance on high-speed blow molding lines.",
+        qc_structural_title: "Structural Integrity Checks",
+        qc_structural_desc: "Each batch undergoes rigorous Intrinsic Viscosity (IV) drop tests, top-load crush resistance profiling, and Environmental Stress Cracking Resistance (ESCR) evaluations to eliminate gate vestige vulnerabilities and ensure structural integrity.",
+        qc_optical_title: "Optical Clarity Standards",
+        qc_optical_desc: "Advanced polariscope analysis and precision thickness gauges are utilized to detect internal stress, birefringence, and ensure absolute dimensional uniformity. We operate under rigorous industry compliance, continuously monitoring Acetaldehyde (AA) levels (< 1.0 ppm) to guarantee maximum transparency and food-grade safety.",
+        qc_dim_title: "Dimensional Tolerances",
+        qc_dim_desc: "Rigorous caliper and Coordinate Measuring Machine (CMM) inspections are performed to guarantee precise neck finish parameters (T-dimension, E-dimension) and flawless thread concentricity, ensuring zero leakage and absolute sealing integrity.",
+        why_partner: "Why Partner With Us",
+        startup_agility_title: "The Lean Manufacturing Advantage",
+        startup_agility_desc: "We operate on advanced lean manufacturing principles, eliminating legacy bureaucracy. Experience rapid turnarounds, dynamic MOQs, and direct access to our technical engineering team for optimized production scaling.",
+        dispatch_title: "48-Hour Sample Dispatch",
+        dispatch_desc: "Test our preforms on your lines immediately. We guarantee lightning-fast sample dispatch without multi-week legacy sales cycles.",
+        moq_title: "Dynamic & Pilot-Friendly MOQs",
+        moq_desc: "Whether you are a growing craft beverage brand or launching a pilot product line, our agile production runs are tailored to your scaling needs.",
+        consultation_title: "Direct Technical Consultation",
+        consultation_desc: "Bypass bureaucratic sales reps. Speak directly with our founding engineering team to solve your specific blowing and packaging challenges.",
+        apps_15g: "Edible Oils, Syrups, Honey, Soy Sauce",
+        apps_24g: "Edible Oils, Syrups, Honey, Soy Sauce",
+        apps_26g: "Edible Oils, Syrups, Honey, Soy Sauce",
+        show_less: "Show Less",
+        view_all: "View All",
+        profile_title: "CTC 29/21mm Profile",
+        bottle_usage: "Bottle Usage",
+        iv_level: "IV (Intrinsic Viscosity)",
+        aa_level: "AA Level",
+        resin_type: "Resin",
+        home_scroll_desc: "Engineered for high-speed automated blowing lines, ensuring flawless production.",
+        home_scroll_neck: "Precision Neck Finishes",
+        home_scroll_hot_runner: "100% Hot Runner Systems",
+        home_scroll_blow_up: "Blow-Up Ratio Perfection",
+        home_scroll_blow_up_desc: "Optimal material distribution ensures your final stretch-blown containers possess superior top-load strength and brilliant transparency.",
+        home_scroll_explore: "Scroll to Explore",
+        home_scroll_catalog: "View Catalog"
+      }
+    };
+
+    const LanguageContext = createContext();
+    const useLanguage = () => useContext(LanguageContext);
+
+    const LanguageProvider = ({ children }) => {
+      const t = (key) => i18nData.en[key] || key;
+      return html`
+        <${LanguageContext.Provider} value=${{ lang: 'en', t }}>
+          ${children}
+        <//>
+      `;
+    };
+    function MagneticButton({ children, className, onClick, type = "button", ...props }) {
+      return html`
+        <${motion.button}
+          type=${type}
+          onClick=${onClick}
+          whileHover=${{ scale: 1.03, y: -2 }}
+          whileTap=${{ scale: 0.97 }}
+          transition=${{ type: "spring", stiffness: 400, damping: 17 }}
+          className=${className}
+          aria-label=${props['aria-label'] || props.ariaLabel || undefined}
+        >
+          ${children}
+        <//>
+      `;
+    }
+    function MagneticLink({ children, className, to }) {
+      return html`
+        <${Link} to=${to} className="inline-block">
+          <${motion.div}
+            whileHover=${{ scale: 1.03, y: -2 }}
+            whileTap=${{ scale: 0.97 }}
+            transition=${{ type: "spring", stiffness: 400, damping: 17 }}
+            className=${className}
+          >
+            ${children}
+          <//>
+        <//>
+      `;
+    }
+
+    
+    function RevealText({ children, className = "", delay = 0 }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReduced) return html`<div className=${className}>${children}</div>`;
+      return html`
+        <${motion.div}
+          initial=${{ opacity: 0, y: 15 }}
+          whileInView=${{ opacity: 1, y: 0 }}
+          viewport=${{ once: false, amount: 0.2 }}
+          transition=${{ duration: 0.6, delay: delay, ease: "easeOut" }}
+          className=${className}
+        >
+          ${children}
+        </${motion.div}>
+      `;
+    }
+
+    function SectionHeaderReveal({ children }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReduced) return html`<div className="mb-6 relative w-full flex justify-center">${children}</div>`;
+
+      const container = {
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.05, delayChildren: 0.1 }
+        }
+      };
+      
+      const tile = {
+        hidden: { opacity: 0, scale: 0.5 },
+        visible: { opacity: [0, 1, 0], scale: [0.5, 1, 0.5], transition: { duration: 0.5 } }
+      };
+
+      return html`
+        <div className="relative mb-6 flex flex-col items-center justify-center overflow-visible">
+          <${motion.div} variants=${container} initial="hidden" whileInView="visible" viewport=${{ once: false, amount: 0.2 }} className="absolute inset-0 flex items-center justify-center gap-2 pointer-events-none z-0 mt-6">
+            ${[1,2,3,4,5].map(i => html`
+              <${motion.div} key=${i} variants=${tile} className="w-6 h-6 opacity-20" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} />
+            `)}
+          <//>
+          <div className="relative z-10 w-full text-center flex justify-center">
+            ${children}
+          </div>
+        </div>
+      `;
+    }
+
+    function TypewriterReveal({ text, delay = 0 }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReduced) return html`<span>${text}</span>`;
+
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.01, delayChildren: delay }
+        }
+      };
+
+      const charVariants = {
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 400, damping: 15 } }
+      };
+
+      return html`
+        <${motion.span}
+          variants=${containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport=${{ once: false, amount: 0.5 }}
+          className="inline-block"
+        >
+          ${text.split(" ").map((word, wordIndex, arr) => html`
+            <span className="inline-block whitespace-nowrap" key=${wordIndex}>
+              ${word.split("").map((char, charIndex) => html`
+                <${motion.span}
+                  key=${charIndex}
+                  variants=${charVariants}
+                  className="inline-block"
+                >
+                  ${char}
+                </${motion.span}>
+              `)}
+              ${wordIndex < arr.length - 1 ? html`
+                <${motion.span} variants=${charVariants} className="inline-block whitespace-pre">\u00A0</${motion.span}>
+              ` : null}
+            </span>
+          `)}
+        </${motion.span}>
+      `;
+    }
+
+    function TiltRow({ children, className }) {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const x = useMotionValue(0);
+      const y = useMotionValue(0);
+      const rotateX = useTransform(y, [-50, 50], [2, -2]);
+      const rotateY = useTransform(x, [-200, 200], [-2, 2]);
+      const rafRef = useRef(null);
+
+      const handleMouseMove = (e) => {
+        if (isReduced || window.matchMedia('(hover: none)').matches) return;
+        const target = e.currentTarget;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          const rect = target.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          x.set(clientX - centerX);
+          y.set(clientY - centerY);
+        });
+      };
+
+      const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+      };
+
+      return html`
+        <${motion.tr}
+          className=${className}
+          style=${isReduced ? {} : { rotateX, rotateY, transformPerspective: 1000 }}
+          onMouseMove=${handleMouseMove}
+          onMouseLeave=${handleMouseLeave}
+          transition=${{ type: "spring", stiffness: 400, damping: 30 }}
+        >
+          ${children}
+        <//>
+      `;
+    }
+
+    function TiltCard({ children, className, style = {} }) {
+
+      const ref = useRef(null);
+      const x = useMotionValue(0);
+      const y = useMotionValue(0);
+      const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
+      const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
+      const [position, setPosition] = useState({ x: 0, y: 0 });
+      const [opacity, setOpacity] = useState(0);
+      const rafRef = useRef(null);
+      const handleMouseMove = (e) => {
+        if (!ref.current) return;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          if (!ref.current) return;
+          const rect = ref.current.getBoundingClientRect();
+          const width = rect.width;
+          const height = rect.height;
+          const mouseX = clientX - rect.left;
+          const mouseY = clientY - rect.top;
+          x.set(mouseX / width - 0.5);
+          y.set(mouseY / height - 0.5);
+          setPosition({ x: mouseX, y: mouseY });
+        });
+      };
+      const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+        setOpacity(0);
+      };
+      return html`
+        <div className="relative group w-full h-full" onMouseEnter=${() => setOpacity(1)} onMouseLeave=${handleMouseLeave} onMouseMove=${handleMouseMove}>
+          <div
+            className="absolute inset-0 rounded-[inherit] z-0 blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
+            style=${{
+              background: 'linear-gradient(90deg, #49326B, #039544, #FEF111, #E5332E, #49326B)',
+              backgroundSize: '200% 100%',
+              animation: opacity > 0 ? 'rainbow-sweep 4s linear infinite' : 'none'
+            }}
+          ></div>
+          <${motion.div}
+            ref=${ref}
+            style=${style}
+            className=${"relative z-10 bg-white/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(11,11,12,0.08)] border border-white/40 overflow-hidden h-full " + className.replace('h-full', '')}
+          >
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0 rounded-[inherit]"
+              style=${{
+                opacity,
+                background: 'radial-gradient(600px circle at ' + position.x + 'px ' + position.y + 'px, rgba(255,255,255,0.7), transparent 50%)'
+              }}
+            ></div>
+            <div className="relative z-10 w-full h-full flex flex-col">
+              ${children}
+            </div>
+          <//>
+        </div>
+      `;
+    }
+    function QCAccordion() {
+      const { t } = useLanguage();
+      const [activeIndex, setActiveIndex] = useState(0);
+      const items = [
+        {
+          title: t("qc_optical_title"),
+          content: t("qc_optical_desc")
+        },
+        {
+          title: t("qc_dim_title"),
+          content: t("qc_dim_desc")
+        },
+        {
+          title: t("qc_structural_title"),
+          content: t("qc_structural_desc")
+        }
+      ];
+      return html`
+        <${RevealText} className="w-full max-w-3xl mx-auto space-y-4">
+          ${items.map((item, index) => html`
+            <div key=${index} className=${"rounded-lg border overflow-hidden transition-all duration-300 " + (activeIndex === index ? "bg-brand-white border-brand-black/30 shadow-md" : "bg-white border-slate-200 shadow-sm hover:shadow-md")}>
+              <${motion.button}
+                whileTap=${{ scale: 0.98 }}
+                onClick=${() => setActiveIndex(activeIndex === index ? -1 : index)}
+                className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
+              >
+                <span className="text-lg font-black text-brand-black">${item.title}</span>
+                <div className=${"w-8 h-8 rounded-full border flex items-center justify-center transition-colors " + (activeIndex === index ? "bg-brand-black border-brand-black text-white" : "border-slate-300 text-slate-700 group-hover:border-brand-black")}>
+                  <svg className=${"w-5 h-5 transition-transform duration-300 " + (activeIndex === index ? "rotate-180" : "rotate-0")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              <//>
+              <${AnimatePresence}>
+                ${activeIndex === index && html`
+                  <${motion.div}
+                    initial=${{ height: 0, opacity: 0 }}
+                    animate=${{ height: "auto", opacity: 1 }}
+                    exit=${{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-8 pb-6 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                      ${item.content}
+                    </div>
+                  <//>
+                `}
+              <//>
+            </div>
+          `)}
+        <//>
+      `;
+    }
+    function StartupAgility() {
+      const { t } = useLanguage();
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      };
+      const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+      };
+      return html`
+        <div className="bg-brand-white py-32 border-y border-slate-200 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_rgba(112,164,67,0.05),_transparent_50%)] pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
+              <${RevealText}><span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("why_partner")}</span><//>
+              <${SectionHeaderReveal}><h2 className="text-4xl md:text-5xl font-black text-brand-black tracking-tight">${t("startup_agility_title")}</h2><//>
+              <${RevealText} delay=${0.1}><p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
+                ${t("startup_agility_desc")}
+              </p><//>
+            </div>
+            <${motion.div}
+              variants=${containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport=${{ once: false, amount: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32"
+            >
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-8 rounded-xl border border-slate-200 shadow-md h-full hover:border-brand-green/30">
+                  <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center mb-6 border border-brand-green/20">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </div>
+                  <h3 className="text-xl font-black text-brand-black mb-3">${t("dispatch_title")}</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                    ${t("dispatch_desc")}
+                  </p>
+                <//>
+              <//>
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-8 rounded-xl border border-slate-200 shadow-md h-full hover:border-brand-green/30">
+                  <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center mb-6 border border-brand-green/20">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                  </div>
+                  <h3 className="text-xl font-black text-brand-black mb-3">${t("moq_title")}</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                    ${t("moq_desc")}
+                  </p>
+                <//>
+              <//>
+              <${motion.div} variants=${itemVariants} className="h-full">
+                <${TiltCard} className="p-8 rounded-xl border border-slate-200 shadow-md h-full hover:border-brand-green/30">
+                  <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center mb-6 border border-brand-green/20">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                  </div>
+                  <h3 className="text-xl font-black text-brand-black mb-3">${t("consultation_title")}</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">
+                    ${t("consultation_desc")}
+                  </p>
+                <//>
+              <//>
+            <//>
+            <div className="text-center mb-16">
+              <${RevealText}><span className="inline-block bg-brand-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold mb-4 uppercase tracking-widest font-mono shadow-lg">${t("qc_commitment")}</span><//>
+              <${SectionHeaderReveal}><h2 className="text-4xl md:text-5xl font-black text-brand-black tracking-tight">${t("qc_protocol_title")}</h2><//>
+              <${RevealText} delay=${0.1}><p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+                ${t("qc_protocol_desc")}
+              </p><//>
+            </div>
+            <${QCAccordion} />
+          </div>
+        </div>
+      `;
+    }
+    function Footer() {
+      const { t } = useLanguage();
+      const location = useLocation();
+      const navigate = useNavigate();
+      return html`
+        <footer style=${{ userSelect: 'none' }} onCopy=${(e) => e.preventDefault()} className="select-none bg-brand-black text-slate-300 py-24 relative overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] mix-blend-overlay" style=${{ backgroundImage: 'url("./assets/logo_assets/svg/square-tiles.svg")', backgroundSize: '150px 150px', backgroundRepeat: 'repeat' }}></div>
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+              <div className="md:col-span-2">
+                <div className="flex items-center mb-8 relative">
+                  <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 pointer-events-none"></div>
+                  <img src="./assets/logo_assets/PNG/FINAL LOGO.png" width="7016" height="4961" loading="lazy" className="w-40 md:w-48 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                </div>
+                <p className="text-slate-300 mb-8 max-w-md leading-relaxed text-base md:text-lg font-medium">
+                  ${t("footer_desc")}
+                </p>
+                <div className="flex space-x-4">
+                  <a aria-label="LinkedIn Profile" href="https://www.linkedin.com/company/rainbow-polypack/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-300">
+                    <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  </a>
+                  <a aria-label="Instagram Profile" href="https://www.instagram.com/rainbowpolypack/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-300">
+                    <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  </a>
+                  <a aria-label="X Twitter Profile" href="https://x.com/Rainbowpolypack" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-colors cursor-pointer text-slate-300">
+                    <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-base md:text-lg font-extrabold text-white uppercase tracking-wider mb-6">${t("quick_links")}</h3>
+                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-300">
+                  <li><a href="/" onClick=${(e) => {
+                    e.preventDefault();
+                    if (location.pathname !== '/') {
+                      navigate('/');
+                      setTimeout(() => window.dispatchEvent(new Event('cinematicScrollUp')), 100);
+                    } else {
+                      window.dispatchEvent(new Event('cinematicScrollUp'));
+                    }
+                  }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_home")}</a></li>
+                  <li><a href="/#products" onClick=${(e) => {
+                    e.preventDefault();
+                    if (location.pathname !== '/') {
+                      navigate('/');
+                      setTimeout(() => window.dispatchEvent(new Event('cinematicScrollDown')), 100);
+                    } else {
+                      window.dispatchEvent(new Event('cinematicScrollDown'));
+                    }
+                  }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_products")}</a></li>
+                  <li><${Link} to="/about" className="hover:text-brand-green transition-colors">${t("nav_about")}<//></li>
+                  <li><${Link} to="/manufacturing" className="hover:text-brand-green transition-colors cursor-pointer">Manufacturing<//></li>
+                  <li><${Link} to="/sustainability" className="hover:text-brand-green transition-colors cursor-pointer">Sustainability<//></li>
+                  <li><${Link} to="/brochure" className="hover:text-brand-green transition-colors">${t("nav_enquiry")}<//></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-base md:text-lg font-extrabold text-white uppercase tracking-wider mb-6">${t("headquarters")}</h3>
+                <ul className="space-y-4 text-base md:text-lg font-medium text-slate-300">
+                  <li className="flex items-start group">
+                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-1" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm mb-1 tracking-wide">Head Office</span>
+                      <a href="https://maps.google.com/?q=Salister+Bodakdev+Ahmedabad" target="_blank" rel="noopener noreferrer" className="text-sm group-hover:text-white transition-colors leading-relaxed text-slate-300">
+                        A/602, Salister, Bh. Rajpath Club,<br/>Rajpath-Rangoli Road, Bodakdev,<br/>Ahmedabad-380054, Gujarat
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-start group mt-5">
+                    <svg className="w-5 h-5 mr-3 text-brand-green shrink-0 mt-1" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm mb-1 tracking-wide">Manufacturing Unit</span>
+                      <a href="https://www.google.com/maps/search/?api=1&query=GIDC+Industrial+Estate,+Chhatral" target="_blank" rel="noopener noreferrer" className="text-sm group-hover:text-white transition-colors leading-relaxed text-slate-300">
+                        GIDC Industrial Estate, Chhatral,<br/>Gandhinagar Highway,<br/>Gujarat, India
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-center group cursor-pointer">
+                    <a href="mailto:info@rainbowpolypack.com" target="_blank" rel="noopener noreferrer" className="flex items-center group cursor-pointer text-slate-300" aria-label="Email info@rainbowpolypack.com">
+                      <svg className="w-5 h-5 mr-3 text-brand-green" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                      <span className="group-hover:text-white transition-colors">info@rainbowpolypack.com</span>
+                    </a>
+                  </li>
+                  <li className="flex items-center group cursor-pointer">
+                    <a href="https://wa.me/918735817667" target="_blank" rel="noopener noreferrer" className="flex items-center group cursor-pointer text-slate-300" aria-label="Contact Phone and WhatsApp">
+                      <svg className="w-5 h-5 mr-3 text-brand-green" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                      <span className="group-hover:text-white transition-colors">+91 87358 17667</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-brand-black mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-slate-300">
+              <p>© ${new Date().getFullYear()} Rainbow Polypack. All rights reserved.</p>
+              <div className="flex space-x-6 mt-4 md:mt-0">
+                <${Link} to="/privacy" className="hover:text-white transition-colors cursor-pointer">${t("privacy_policy")}<//>
+                <${Link} to="/terms" className="hover:text-white transition-colors cursor-pointer">${t("terms_service")}<//>
+              </div>
+            </div>
+          </div>
+        </footer>
+      `;
+    }
+    function CustomCursor() {
+      const [isVisible, setIsVisible] = useState(false);
+      const [isHovering, setIsHovering] = useState(false);
+      const cursorX = useMotionValue(-100);
+      const cursorY = useMotionValue(-100);
+      const rafRef = useRef(null);
+      
+      useEffect(() => {
+        const moveCursor = (e) => {
+          if (rafRef.current) cancelAnimationFrame(rafRef.current);
+          rafRef.current = requestAnimationFrame(() => {
+            cursorX.set(e.clientX);
+            cursorY.set(e.clientY);
+            if (!isVisible) setIsVisible(true);
+          });
+          setIsHovering(!!e.target.closest('a, button, select, input, .cursor-pointer'));
+        };
+        const handleMouseLeave = () => setIsVisible(false);
+        const handleMouseEnter = () => setIsVisible(true);
+        window.addEventListener('mousemove', moveCursor);
+        document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+        document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+        return () => {
+          window.removeEventListener('mousemove', moveCursor);
+          document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+          document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
+          if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+      }, [isVisible]);
+      
+      return html`
+        <div className="hidden lg:block pointer-events-none z-[100] fixed inset-0">
+          <${motion.div}
+            className="w-2 h-2 bg-white rounded-full fixed top-0 left-0 -ml-1 -mt-1 shadow-[0_0_10px_rgba(255,255,255,0.8)] will-change-transform"
+            style=${{
+              x: cursorX,
+              y: cursorY,
+              opacity: isVisible ? 1 : 0
+            }}
+          />
+          <${motion.div}
+            className="w-8 h-8 border rounded-full fixed top-0 left-0 -ml-4 -mt-4 will-change-transform"
+            style=${{
+              x: cursorX,
+              y: cursorY,
+              opacity: isVisible ? 1 : 0,
+              boxShadow: isVisible ? '2px 2px 10px rgba(255, 0, 128, 0.4), -2px -2px 10px rgba(0, 255, 255, 0.4), 2px -2px 10px rgba(255, 255, 0, 0.4), -2px 2px 10px rgba(0, 255, 0, 0.4)' : 'none'
+            }}
+            animate=${{
+              scale: isHovering ? 1.5 : 1,
+              borderColor: isHovering ? '#039544' : 'rgba(255, 255, 255, 0.4)'
+            }}
+            transition=${{ duration: 0.15, ease: "easeOut" }}
+          />
+        </div>
+      `;
+    }
+    function Navbar() {
+      const { t } = useLanguage();
+      const [isOpen, setIsOpen] = useState(false);
+      const [scrolled, setScrolled] = useState(false);
+      const location = useLocation();
+      const navigate = useNavigate();
+
+      useEffect(() => {
+        const handleScroll = () => {
+          setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      const links = [
+        { path: '/', label: t("nav_home") },
+        { path: '/products', label: "Products" },
+        { path: '/manufacturing', label: "Manufacturing" },
+        { path: '/sustainability', label: "Sustainability" },
+        { path: '/about', label: t("nav_about") }
+      ];
+
+      const handleNav = (path) => {
+        setIsOpen(false);
+        if (path.startsWith('/#')) {
+          const targetId = path.substring(2);
+          if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+              document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          } else {
+            document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+          }
+        } else {
+          navigate(path);
+          window.scrollTo(0, 0);
+        }
+      };
+
+      const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in your PET preforms.");
+      const waLink = `https://wa.me/918735817667?text=${waText}`;
+      
+      return html`
+        <header className=${`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-lg shadow-md border-b border-slate-200 py-1.5' : 'bg-transparent py-2.5'}`}>
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between min-h-[3.5rem] md:min-h-[4.5rem]">
+            <div
+              onClick=${() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+            >
+              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" width="7016" height="4961" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-24' : 'h-36'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/PNG/icon-rp.png" width="3552" height="2245" className=${`block md:hidden w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+            </div>
+
+            <!-- Desktop Inline Links -->
+            <div className="hidden md:flex items-center gap-8">
+              ${links.map(link => {
+                const isActive = (link.path === '/' && location.pathname === '/' && !location.hash) || 
+                                 (link.path !== '/' && (location.pathname + location.hash) === link.path);
+                return html`
+                <div
+                  key=${link.path}
+                  onClick=${() => handleNav(link.path)}
+                  className=${`group relative cursor-pointer text-sm font-bold uppercase tracking-wider transition-colors ${isActive ? 'text-brand-green' : 'text-slate-800 hover:text-slate-900'}`}
+                >
+                  ${link.label}
+                  <div className=${`absolute -bottom-1 left-0 h-0.5 rounded-full transition-all duration-300 ${isActive ? 'w-full bg-brand-green' : 'w-0 group-hover:w-full bg-gradient-to-r from-[#49326B] via-[#039544] to-[#fef111]'}`}></div>
+                </div>
+              `})}
+              <${Link} 
+                to="/brochure" 
+                className="bg-brand-green text-white rounded-lg px-6 py-2.5 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green"
+              >
+                ${t("nav_enquiry")}
+              <//>
+            </div>
+
+            <!-- Mobile Burger Menu -->
+            <div className="flex md:hidden items-center gap-4">
+              <${Link} 
+                to="/brochure" 
+                className="bg-brand-green text-white rounded-lg px-4 py-2 font-bold text-xs tracking-wider uppercase shadow-sm"
+              >
+                Enquire
+              <//>
+              <button
+                onClick=${() => setIsOpen(!isOpen)}
+                aria-label="Toggle Menu"
+                className="text-slate-800 p-2"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d=${isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Mobile Open Menu Dropdown -->
+        <${AnimatePresence}>
+          ${isOpen && html`
+            <${motion.div}
+              initial=${{ opacity: 0, y: -10 }}
+              animate=${{ opacity: 1, y: 0 }}
+              exit=${{ opacity: 0, y: -10 }}
+              className="fixed top-[70px] left-4 right-4 z-[50] md:hidden bg-white border border-slate-100 rounded-xl overflow-hidden shadow-md"
+            >
+              <div className="p-4 space-y-1">
+                ${links.map(link => {
+                  const isActive = (link.path === '/' && location.pathname === '/' && !location.hash) || 
+                                   (link.path !== '/' && (location.pathname + location.hash) === link.path);
+                  return html`
+                  <div
+                    key=${link.path}
+                    onClick=${() => handleNav(link.path)}
+                    className=${`cursor-pointer block px-4 py-3 rounded-lg text-sm font-bold transition-colors ${isActive ? 'bg-brand-green/10 text-brand-green' : 'text-slate-600 hover:bg-slate-50'}`}
+                  >
+                    ${link.label}
+                  </div>
+                `})}
+              </div>
+            <//>
+          `}
+        <//>
+      `;
+    }
+
+    function Home() {
+      const { t } = useLanguage();
+      const mobileVideoRef = useRef(null);
+      const { scrollY } = useScroll();
+      const videoParallax = useTransform(scrollY, [0, 1000], ['0%', '15%']);
+      const [openGroupId, setOpenGroupId] = useState(null);
+      const waKitText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in claiming the Rainbow Polypack Trial Sample Box (CTC 29/21mm set).");
+      const waKitLink = `https://wa.me/918735817667?text=${waKitText}`;
+
+      useEffect(() => {
+        window.scrollTo(0, 0);
+        updateSEO("Rainbow Polypack | Premium PET Preform Manufacturers | Chhatral, Gujarat", "/");
+      }, []);
+
+      const features = [
+        {
+          id: 1,
+          title: "Rigorous Quality Assurance",
+          desc: "Our preforms are manufactured under stringent quality control protocols, ensuring every batch meets the precise dimensional tolerances required for high-speed blowing lines.",
+          icon: html`<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+        },
+        {
+          id: 2,
+          title: "100% Hot Runner Tooling",
+          desc: "We utilize advanced hot runner moulds for gate-vestige elimination and optimal optical clarity, removing the risks associated with cold-runner recycled defects.",
+          icon: html`<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>`
+        },
+        {
+          id: 3,
+          title: "High-Precision Tolerances",
+          desc: "Guaranteed weight variances of ±0.15g per preform. Our injection molding infrastructure provides identical wall distribution for uniform stretching.",
+          icon: html`<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>`
+        },
+        {
+          id: 4,
+          title: "Streamlined Supply Chain",
+          desc: "Experience direct-to-manufacturer procurement. Our flat organizational structure means faster quotation turnarounds and priority production queueing.",
+          icon: html`<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`
+        },
+        {
+          id: 5,
+          title: "The B2B Standard",
+          desc: "Trusted by leading FMCG and edible oil brands across India. We deliver commercial-scale preform volumes without compromising on consistency.",
+          icon: html`<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
+        }
+      ];
+
+      return html`
+        <div className="bg-slate-50 w-full font-sans text-slate-900">
+          
+          <!-- Clean & Airy Hero Section -->
+          <div className="relative pt-32 pb-16 md:pt-40 md:pb-40 px-6 max-w-7xl mx-auto text-center flex flex-col items-center justify-center min-h-[50vh] z-10">
+            <!-- TODO: Re-add a "Certifications & Compliance" trust badge here once ISO 9001:2015 / FSSAI certificates are received -->
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-800 tracking-tight mb-8 leading-[1.1] drop-shadow-sm">
+              <${TypewriterReveal} text="Premium PET Preform " delay=${0.2} />
+              <br className="hidden md:block" />
+              <${TypewriterReveal} text="Manufacturing" delay=${0.4} />
+            </h1>
+            <${motion.p} 
+              initial=${{ opacity: 0 }}
+              animate=${{ opacity: 1 }}
+              transition=${{ duration: 0.8, delay: 0.4 }}
+              className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
+            >
+              High-performance CTC 29/21mm preforms engineered with 100% Hot Runner Moulds for FMCG, edible oil, and liquid packaging brands across India.
+            <//>
+            <${motion.div} 
+              initial=${{ opacity: 0, y: 20 }}
+              animate=${{ opacity: 1, y: 0 }}
+              transition=${{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
+            >
+              <${motion.div} whileHover=${{ scale: 1.05 }} whileTap=${{ scale: 0.95 }} className="w-full sm:w-auto">
+                <${Link} to="/brochure" className="px-8 py-4 bg-brand-green text-white rounded-lg font-bold text-base hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green flex items-center justify-center w-full h-full">
+                  Request a Technical Quote
+                <//>
+              <//>
+              <${motion.div} whileHover=${{ scale: 1.05 }} whileTap=${{ scale: 0.95 }} className="w-full sm:w-auto">
+                <${Link} to="/products" className="px-8 py-4 bg-white/70 backdrop-blur-sm text-slate-800 border border-slate-200 rounded-lg font-bold text-base hover:bg-white transition-all shadow-sm flex items-center justify-center cursor-pointer w-full h-full">
+                  View Catalog
+                <//>
+              <//>
+            <//>
+          </div>
+
+          <!-- Cinematic Immersive Parallax Video Transition -->
+          <div className="relative w-full min-h-screen overflow-hidden">
+            <${motion.div} 
+              style=${{ y: videoParallax, transform: 'translateZ(0)' }}
+              className="absolute inset-0 w-full h-full will-change-transform"
+            >
+              <video 
+                ref=${mobileVideoRef}
+                src="./assets/mobile-bg.mp4" 
+                muted 
+                autoPlay 
+                loop 
+                playsInline 
+                disablePictureInPicture
+                preload="none"
+                poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp"
+                fetchpriority="high"
+                className="w-full h-full object-cover"
+                style=${{ pointerEvents: 'none' }}
+              ></video>
+            <//>
+              
+            <!-- Clean Fade Overlays -->
+            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 to-transparent pointer-events-none z-10"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none z-10"></div>
+            
+            <!-- KPI Enterprise Ribbon -->
+            <div className="absolute bottom-0 left-0 right-0 z-20 w-full">
+              <div className="max-w-7xl mx-auto px-6 pb-8 md:pb-12">
+                <div className="bg-black/45 backdrop-blur-xl border border-white/15 rounded-2xl p-6 flex flex-wrap justify-center md:justify-between items-center shadow-2xl gap-4">
+                  <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 px-4 md:pl-0 md:pr-4 transition-all duration-300 hover:scale-105 cursor-default group">
+                    <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">100%</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Virgin PET</p>
+                  </div>
+                  <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 px-4 transition-all duration-300 hover:scale-105 cursor-default group">
+                    <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">±0.15g</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Tolerance</p>
+                  </div>
+                  <div className="flex-1 min-w-[150px] text-center md:text-left border-r border-white/10 last:border-0 px-4 transition-all duration-300 hover:scale-105 cursor-default group">
+                    <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">48h</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Dispatch</p>
+                  </div>
+                  <div className="flex-1 min-w-[150px] text-center md:text-left px-4 transition-all duration-300 hover:scale-105 cursor-default group">
+                    <p className="text-white font-black text-xl md:text-2xl drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">100%</p>
+                    <p className="text-slate-100 text-xs uppercase tracking-widest font-bold drop-shadow-sm">Hot Runner</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Showcase: Anatomy of Precision -->
+          <!-- Interactive Showcase: Anatomy of Precision -->
+          <div className="bg-slate-50 w-full py-24 md:py-32 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+              <div className="text-center mb-16 md:mb-24">
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight"><${TypewriterReveal} text="Anatomy of Precision" /></h2>
+                <p className="text-slate-700 text-lg max-w-2xl mx-auto">Engineered for seamless integration into high-speed blowing lines. Watch our technical advantages unfold as you scroll.</p>
+              </div>
+              
+              <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row md:justify-center md:items-center mt-12 md:mt-24 mb-12 md:mb-24 min-h-[70vh] md:min-h-[85vh]">
+                <!-- Rainbow Haze Glow -->
+                <div className="absolute inset-0 bg-gradient-to-r from-[#49326B] via-[#039544] to-[#fef111] blur-3xl opacity-20 animate-pulse rounded-full w-3/4 h-3/4 m-auto pointer-events-none"></div>
+                
+                <${motion.div} 
+                  className="relative z-10 h-[75vh] md:h-[85vh] w-auto mb-4 md:mb-0 origin-center will-change-transform flex justify-center items-center pointer-events-none" 
+                  animate=${{ y: [-8, 8, -8], z: 0 }}
+                  transition=${{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                >
+                  <img 
+                    decoding="async"
+                    src="./assets/PET_PREFORM_HERO.png" 
+                    alt="PET Preform" 
+                    width="2752"
+                    height="1536"
+                    className="h-full w-auto object-contain scale-[2.97] md:scale-100" 
+                  />
+                <//>
+                
+                <div className="flex flex-col gap-6 w-full px-4 md:absolute md:inset-0 md:w-full md:h-full md:px-0 md:pointer-events-none">
+                  <!-- Card 1: Neck -->
+                  <${motion.div} 
+                    initial=${{ opacity: 0, y: 30 }}
+                    whileInView=${{ opacity: 1, y: 0 }}
+                    viewport=${{ once: false, amount: 0.3 }}
+                    transition=${{ duration: 0.6, ease: "easeOut" }}
+                    className="relative md:absolute md:top-[10%] md:left-[15%] z-20 w-full md:w-72 md:pointer-events-auto"
+                  >
+                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-green transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] cursor-default">
+                      <p className="font-bold text-lg md:text-xl mb-1 text-slate-900">Precision Threading</p>
+                      <p className="text-sm text-slate-700">Flawless sealing and capping consistency.</p>
+                    </div>
+                  <//>
+
+                  <!-- Card 2: Body -->
+                  <${motion.div} 
+                    initial=${{ opacity: 0, y: 30 }}
+                    whileInView=${{ opacity: 1, y: 0 }}
+                    viewport=${{ once: false, amount: 0.3 }}
+                    transition=${{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                    className="relative md:absolute md:top-[45%] md:right-[15%] z-20 w-full md:w-72 md:pointer-events-auto"
+                  >
+                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-yellow transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] cursor-default">
+                      <p className="font-bold text-lg md:text-xl mb-1 text-slate-900">100% Virgin PET</p>
+                      <p className="text-sm text-slate-700">AA levels ${"<"} 1.0 ppm for optimal safety.</p>
+                    </div>
+                  <//>
+
+                  <!-- Card 3: Base -->
+                  <${motion.div} 
+                    initial=${{ opacity: 0, y: 30 }}
+                    whileInView=${{ opacity: 1, y: 0 }}
+                    viewport=${{ once: false, amount: 0.3 }}
+                    transition=${{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+                    className="relative md:absolute md:bottom-[10%] md:left-[15%] z-20 w-full md:w-72 md:pointer-events-auto"
+                  >
+                    <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-6 border-l-4 border-brand-red transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] cursor-default">
+                      <p className="font-bold text-lg md:text-xl mb-1 text-slate-900">Zero Gate Vestige</p>
+                      <p className="text-sm text-slate-700">Hot Runner Injection for superior clarity.</p>
+                    </div>
+                  <//>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Our Core Portfolio -->
+          <div className="bg-white w-full py-16 md:py-24 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight"><${TypewriterReveal} text="Our Core Portfolio" /></h2>
+                <p className="text-slate-700 text-lg max-w-2xl mx-auto">Engineered specifically for the food, beverage, and chemical industries.</p>
+              </div>
+              
+              <div className="max-w-4xl mx-auto mb-16 space-y-4">
+                ${productGroups.map(group => html`
+                  <div key=${group.id} className="bg-slate-50 border border-slate-200 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                    <button 
+                      onClick=${() => setOpenGroupId(openGroupId === group.id ? null : group.id)}
+                      className="w-full px-8 py-6 flex items-center justify-between text-left relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-brand-green/0 via-brand-green/5 to-brand-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <h3 className="text-2xl md:text-3xl font-black text-slate-900 relative z-10">${group.name}</h3>
+                      <div className="relative z-10 w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm text-slate-500 group-hover:text-brand-green group-hover:border-brand-green transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className=${`transition-transform duration-500 ${openGroupId === group.id ? 'rotate-180' : 'rotate-0'}`}>
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </div>
+                    </button>
+                    <${AnimatePresence}>
+                      ${openGroupId === group.id && html`
+                        <${motion.div}
+                          initial=${{ height: 0, opacity: 0 }}
+                          animate=${{ height: 'auto', opacity: 1 }}
+                          exit=${{ height: 0, opacity: 0 }}
+                          transition=${{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-8 pb-8 pt-4 border-t border-slate-200 flex flex-col md:flex-row gap-8">
+                            <div className="flex-1 overflow-x-auto">
+                              <table className="w-full text-left border-collapse">
+                                <thead>
+                                  <tr className="border-b border-slate-200">
+                                    <th className="py-4 px-2 font-bold text-slate-900 text-sm">Weight</th>
+                                    <th className="py-4 px-2 font-bold text-slate-900 text-sm">Optimal Bottle Usage</th>
+                                    <th className="py-4 px-2 font-bold text-slate-900 text-sm">Applications</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="text-sm">
+                                  ${group.variants.map((v, i) => html`
+                                    <${motion.tr} key=${i} initial=${{ opacity: 0, x: -10 }} animate=${{ opacity: 1, x: 0 }} transition=${{ delay: 0.1 * (i + 1) }} className="border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors">
+                                      <td className="py-4 px-3 text-slate-900 font-black text-lg">${v.weight}g</td>
+                                      <td className="py-4 px-3 text-slate-700">${v.usage}</td>
+                                      <td className="py-4 px-3 text-slate-700">${v.apps}</td>
+                                    <//>
+                                  `)}
+                                </tbody>
+                              </table>
+                            </div>
+                            <div className="w-full md:w-1/3 h-48 bg-slate-100 rounded-xl p-4 flex items-center justify-center border border-slate-200 shadow-inner">
+                              ${group.image
+                                ? html`<img src=${group.image} alt=${group.imageAlt} width=${group.imgWidth} height=${group.imgHeight} loading="lazy" className="w-full h-full object-contain rounded-lg drop-shadow-md" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
+                                : html`
+                                  <div className="w-full h-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-2 text-slate-500 p-4">
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span className="text-xs font-bold uppercase tracking-wider text-center">Image coming soon</span>
+                                  </div>
+                                `
+                              }
+                            </div>
+                          </div>
+                        <//>
+                      `}
+                    <//>
+                  </div>
+                `)}
+              </div>
+
+              <div className="text-center">
+                <${Link} to="/products" className="inline-block px-10 py-4 bg-brand-green text-white rounded-lg font-bold text-base hover:bg-white hover:text-brand-green transition-all shadow-[0_0_20px_rgba(3,149,68,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] border border-transparent hover:border-brand-green">
+                  View Full Specifications
+                <//>
+              </div>
+            </div>
+            <div className="bg-brand-black rounded-xl p-8 md:p-12 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-white/10 gap-8 mt-12">
+              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+              <div className="relative z-10 text-left">
+                <span className="inline-block text-brand-green font-bold text-sm uppercase tracking-widest mb-4">${t("fast_track")}</span>
+                <h3 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">${t("trial_box")}</h3>
+                <p className="text-slate-300 font-medium text-lg max-w-xl">
+                  ${t("trial_desc")}
+                </p>
+              </div>
+              <div className="relative z-10 w-full md:w-auto">
+                <button
+                  onClick=${() => window.open(waKitLink, '_blank')}
+                  className="w-full md:w-auto px-10 py-5 bg-brand-green text-white rounded-lg font-extrabold text-lg shadow-sm hover:bg-white hover:text-brand-green transition-all cursor-pointer whitespace-normal break-words text-center h-auto min-h-[60px]"
+                >
+                  ${t("claim_kit")}
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl p-8 md:p-12 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-slate-200 gap-8 mt-12">
+              <div className="relative z-10 text-left">
+                <span className="inline-block text-brand-black font-bold text-sm uppercase tracking-widest mb-4">${t("custom_sol")}</span>
+                <h3 className="text-3xl md:text-5xl font-black text-brand-black mb-4 tracking-tight">${t("tailored_engineering")}</h3>
+                <p className="text-slate-600 font-medium text-lg max-w-xl">
+                  ${t("tailored_desc")}
+                </p>
+              </div>
+              <div className="relative z-10 w-full md:w-auto">
+                <button
+                  aria-label=${t("discuss_custom")}
+                  onClick=${() => window.open(waKitLink, '_blank')}
+                  className="w-full md:w-auto px-10 py-5 bg-brand-black text-white rounded-lg font-extrabold text-lg shadow-sm hover:bg-brand-black transition-all cursor-pointer whitespace-normal break-words text-center h-auto min-h-[60px] btn-gradient-sweep border border-transparent"
+                >
+                  ${t("discuss_custom")}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function LeadCaptureModal({ isOpen, onClose, onSuccess }) {
+      const { t } = useLanguage();
+      const [formData, setFormData] = useState({ name: '', company: '', email: '' });
+      const [error, setError] = useState('');
+
+      if (!isOpen) return null;
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formData.name || !formData.company || !formData.email) {
+          setError(t('tds_error'));
+          return;
+        }
+        setError('');
+        onSuccess(formData);
+      };
+
+      return html`
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+          <div className="absolute inset-0 bg-brand-black/60 backdrop-blur-sm" onClick=${onClose}></div>
+          <${motion.div} 
+            initial=${{ opacity: 0, scale: 0.95, y: 20 }}
+            animate=${{ opacity: 1, scale: 1, y: 0 }}
+            exit=${{ opacity: 0, scale: 0.95, y: 20 }}
+            className="bg-white rounded-xl p-8 max-w-md w-full relative z-10 shadow-md border border-slate-100"
+          >
+            <button onClick=${onClose} aria-label="Close Modal" className="absolute top-4 right-4 p-2 text-slate-600 hover:text-slate-900 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+              <svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 className="text-2xl font-black text-brand-black mb-2">${t("tds_modal_title")}</h3>
+            <p className="text-sm text-slate-600 mb-6 font-medium">${t("tds_modal_desc")}</p>
+            
+            ${error && html`<div className="mb-4 p-3 bg-red-50 text-red-600 text-xs font-bold rounded-lg border border-red-100">${error}</div>`}
+            
+            <form onSubmit=${handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_name")}</label>
+                <input type="text" value=${formData.name} onChange=${e => setFormData({...formData, name: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50/50 focus:border-brand-green transition-all" placeholder="John Doe" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_company")}</label>
+                <input type="text" value=${formData.company} onChange=${e => setFormData({...formData, company: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50/50 focus:border-brand-green transition-all" placeholder="Acme Corp" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">${t("form_email")}</label>
+                <input type="email" value=${formData.email} onChange=${e => setFormData({...formData, email: e.target.value})} className="w-full bg-brand-white border border-slate-200 rounded-xl min-h-[44px] px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green/50/50 focus:border-brand-green transition-all" placeholder="john@acme.com" />
+              </div>
+              <button type="submit" className="w-full bg-brand-black text-white font-extrabold text-sm min-h-[44px] py-4 rounded-xl hover:bg-brand-black transition-colors shadow-lg mt-6 flex justify-center items-center btn-gradient-sweep">
+                ${t("tds_unlock")}
+              </button>
+            </form>
+          <//>
+        </div>
+      `;
+    }
+
+    function ProductsPage() {
+      const { t } = useLanguage();
+      const [expandedId, setExpandedId] = useState(null);
+      const [modalTDS, setModalTDS] = useState(null);
+
+      const handleTDSDownload = (formData, productInfo) => {
+        setModalTDS(null);
+        const waTDSText = encodeURIComponent(`Hello Rainbow Polypack Team. \nName: ${formData.name}\nCompany: ${formData.company}\nEmail: ${formData.email}\n\nPlease share the official Technical Data Sheet (TDS) for the ${productInfo}.`);
+        window.open(`https://wa.me/918735817667?text=${waTDSText}`, '_blank');
+      };
+      
+      useEffect(() => {
+        window.scrollTo(0, 0);
+        updateSEO("Technical Catalog | Rainbow Polypack", "/products");
+      }, []);
+      
+
+
+      return html`
+        <div id="products" className="scroll-mt-32 pb-24 bg-brand-white relative overflow-hidden pt-36 min-h-screen">
+          <${AnimatePresence}>
+            ${modalTDS && html`
+              <${LeadCaptureModal} 
+                isOpen=${true} 
+                onClose=${() => setModalTDS(null)} 
+                onSuccess=${(formData) => handleTDSDownload(formData, modalTDS)}
+              />
+            `}
+          <//>
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="mb-12 border-b border-slate-200 pb-6">
+              <${SectionHeaderReveal}><h2 className="text-4xl font-black text-brand-black tracking-tight">${t("b2b_catalog")}</h2><//>
+            </div>
+            ${productGroups.map(group => html`
+              <div key=${group.id} className="mb-12">
+                <!-- Desktop: table + aligned image box -->
+                <div className="hidden md:block">
+                  <div className="flex flex-col xl:flex-row gap-8 items-start bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                    <div className="flex-1 w-full overflow-x-auto overflow-y-hidden no-scrollbar">
+                      <h3 className="text-xl font-black text-brand-black mb-4">${group.name}</h3>
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-slate-200">
+                            <th className="py-3 px-3 font-bold text-slate-900 text-sm">${t("sku_weight")}</th>
+                            <th className="py-3 px-3 font-bold text-slate-900 text-sm">${t("optimal_usage")}</th>
+                            <th className="py-3 px-3 font-bold text-slate-900 text-sm">${t("applications")}</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-sm">
+                          ${group.variants.map((v, idx) => html`
+                            <${motion.tr} key=${idx} initial=${{ opacity: 0, x: -10 }} animate=${{ opacity: 1, x: 0 }} transition=${{ delay: 0.05 * (idx + 1) }} className="border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors">
+                              <td className="py-3 px-3"><span className="font-black text-lg text-slate-900">${v.weight}g</span></td>
+                              <td className="py-3 px-3 text-slate-700">${v.usage}</td>
+                              <td className="py-3 px-3 text-slate-700 leading-relaxed">${v.apps}</td>
+                            <//>
+                          `)}
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- Image box: identical footprint across every group -->
+                    <div className="w-full xl:w-[280px] shrink-0 bg-slate-100 rounded-xl border border-slate-200 shadow-inner p-4 flex items-center justify-center h-64">
+                      ${group.image
+                        ? html`<img src=${group.image} alt=${group.imageAlt} width="280" height="220" loading="lazy" className="w-full h-full object-contain rounded-lg" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
+                        : html`
+                          <div className="w-full h-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-2 text-slate-500 p-4">
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span className="text-xs font-bold uppercase tracking-wider text-center">Image coming soon</span>
+                          </div>
+                        `
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile: header bar + compact table + aligned image -->
+                <div className="block md:hidden rounded-xl border border-slate-200 shadow-md overflow-hidden bg-white">
+                  <div className="bg-brand-black p-5 text-center border-b border-brand-black/80 flex items-center justify-center px-6">
+                    <span className="font-black text-white text-sm uppercase tracking-widest">${group.shortName} SKUs</span>
+                  </div>
+                  <div className="w-full aspect-[4/3] bg-slate-100 flex items-center justify-center border-b border-slate-200">
+                    ${group.image
+                      ? html`<img src=${group.image} alt=${group.imageAlt} width=${group.imgWidth} height=${group.imgHeight} loading="lazy" className="w-full h-full object-contain p-4" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
+                      : html`
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-500 p-4">
+                          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                          <span className="text-xs font-bold uppercase tracking-wider text-center">Image coming soon</span>
+                        </div>
+                      `
+                    }
+                  </div>
+                  <table className="w-full text-left border-collapse table-fixed">
+                    <thead>
+                      <tr className="bg-brand-white border-b border-slate-200 text-[10px] sm:text-xs font-bold text-slate-600 uppercase tracking-wider">
+                        <th className="px-2 py-3 w-3/12 border-r border-slate-200">Weight</th>
+                        <th className="px-2 py-3 w-4/12 border-r border-slate-200">Usage</th>
+                        <th className="px-2 py-3 w-5/12 text-right">Applications</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 bg-white">
+                      ${group.variants.map((v, idx) => html`
+                        <tr key=${idx} className="hover-rainbow-row group">
+                          <td className="px-2 py-3 font-black text-brand-green text-sm sm:text-base border-r border-slate-100">${v.weight}g</td>
+                          <td className="px-2 py-3 text-[10px] sm:text-xs font-bold text-slate-600 border-r border-slate-100 leading-tight">${v.usage}</td>
+                          <td className="px-2 py-3 text-right text-[10px] sm:text-xs font-medium text-slate-700 whitespace-normal break-words leading-tight">${v.apps}</td>
+                        </tr>
+                      `)}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `)}
+
+            <!-- ONE shared CTA block for the whole catalog — not repeated per group -->
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-6 mt-4">
+              <div className="text-center sm:text-left">
+                <h4 className="text-lg font-black text-brand-black mb-1">Need a sample or the full spec sheet?</h4>
+                <p className="text-sm text-slate-600 font-medium">Resin Base across our standard catalog: <span className="font-black text-brand-black">100% Virgin PET</span></p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+                <button aria-label="Request Bulk Sample" onClick=${() => window.open(`https://wa.me/918735817667?text=${encodeURIComponent('Hello Rainbow Polypack Team, I would like to request a bulk sample of your PET Preforms.')}`, '_blank')} className="w-full sm:w-auto min-w-[200px] min-h-[44px] px-6 bg-brand-black hover:bg-brand-black text-white rounded-xl font-bold text-sm flex items-center justify-center transition-colors shadow-lg shadow-brand-black/30 btn-gradient-sweep border border-transparent">
+                  Request Bulk Sample
+                </button>
+                <button aria-label="Download Full Technical Catalog (TDS)" onClick=${() => setModalTDS("Full Technical Catalog")} className="w-full sm:w-auto min-w-[200px] min-h-[44px] px-6 bg-brand-white hover:bg-brand-green hover:text-white text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors btn-gradient-sweep border border-transparent">
+                  <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  Download Full Technical Catalog (TDS)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    function AboutUs() {
+      const { t } = useLanguage();
+      useEffect(() => { 
+        window.scrollTo(0, 0); 
+        updateSEO("About Us | Rainbow Polypack - Backed by 35+ Years of Rainbow Group Heritage", "/about");
+      }, []);
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      };
+      const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+      };
+      return html`
+        <div className="pt-24 pb-16 md:pt-28 md:pb-24 bg-brand-white relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <${motion.div}
+              variants=${containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport=${{ once: false, amount: 0.1 }}
+              className="flex flex-col items-center text-center"
+            >
+              <${motion.div}
+                variants=${itemVariants}
+                className="mb-8 relative w-full flex justify-center"
+                animate=${{ y: [0, -10, 0] }}
+                transition=${{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <${Link} to="/" aria-label="Rainbow Polypack Home" className="relative z-10 block">
+                  <img 
+                    src="./assets/logo_assets/svg/polypack-logo-transparent-bg.svg" 
+                    width="900" 
+                    height="300"
+                    className="w-80 sm:w-96 md:w-[600px] lg:w-[700px] h-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.8)] md:drop-shadow-md opacity-100 hover:scale-105 transition-transform cursor-pointer" 
+                    alt="Rainbow Polypack Logo" 
+                    onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                <//>
+              </${motion.div}>
+              <${motion.div} variants=${itemVariants} className="inline-block text-brand-green font-extrabold mb-4 uppercase tracking-widest text-sm">
+                ${t("company_profile")}
+              </${motion.div}>
+              <${motion.h1} variants=${itemVariants} className="text-5xl md:text-6xl font-black text-brand-black mb-8 leading-[1.1] tracking-tight">
+                ${t("about_title")}
+              </${motion.h1}>
+              <${motion.p} variants=${itemVariants} className="text-xl text-slate-800 mb-6 leading-relaxed font-medium max-w-3xl">
+                ${t("about_desc_1")}
+              </${motion.p}>
+              <${motion.p} variants=${itemVariants} className="text-lg text-slate-700 mb-12 leading-relaxed font-medium max-w-3xl" dangerouslySetInnerHTML=${{__html: t("about_desc_2")}}>
+              </${motion.p}>
+              <${motion.div} variants=${itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-8 rounded-xl shadow-xl border border-slate-200 w-full max-w-4xl text-left relative overflow-hidden mb-8">
+                <div className="border-l-4 border-brand-green pl-5 relative z-10">
+                  <div className="text-4xl font-black text-brand-black mb-2">100%</div>
+                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Virgin PET</div>
+                </div>
+                <div className="border-l-4 border-brand-black pl-5 relative z-10">
+                  <div className="text-4xl font-black text-brand-black mb-2">100%</div>
+                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Hot Runner</div>
+                </div>
+                <div className="border-l-4 border-slate-300 pl-5 relative z-10">
+                  <div className="text-4xl font-black text-brand-black mb-2">0%</div>
+                  <div className="text-sm font-extrabold text-slate-600 uppercase tracking-widest">Runner Waste</div>
+                </div>
+              </${motion.div}>
+              <${motion.div} variants=${itemVariants} className="bg-white text-brand-black p-12 rounded-xl shadow-xl border border-slate-200 flex flex-col md:flex-row items-center justify-center text-center md:text-left w-full max-w-3xl gap-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+                <div className="w-24 h-24 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center shrink-0 border border-brand-green/20 shadow-[0_0_20px_rgba(112,164,67,0.1)] relative z-10">
+                  <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <div className="relative z-10 w-full md:w-auto flex-1">
+                  <h3 className="text-sm font-extrabold text-brand-green tracking-widest uppercase mb-6 text-center md:text-left">Our Locations</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
+                    <div>
+                      <h4 className="text-xl font-black mb-2 text-brand-black">Head Office</h4>
+                      <p className="text-xs text-slate-600 font-bold tracking-wide uppercase leading-relaxed">
+                        A/602, Salister, Bh. Rajpath Club,<br/>
+                        Rajpath-Rangoli Road, Bodakdev,<br/>
+                        Ahmedabad-380054, Gujarat
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-black mb-2 text-brand-black">Manufacturing Unit</h4>
+                      <p className="text-xs text-slate-600 font-bold tracking-wide uppercase leading-relaxed">
+                        GIDC Industrial Estate,<br/>
+                        Chhatral, Gandhinagar Highway,<br/>
+                        Gujarat, India
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </${motion.div}>
+            </${motion.div}>
+          </div>
+        </div>
+      `;
+    }
+    const stateCityMap = {
+      "Andaman and Nicobar Islands": ["Port Blair", "Other"],
+      "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Tirupati", "Other"],
+      "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Other"],
+      "Assam": ["Guwahati", "Silchar", "Dibrugarh", "Jorhat", "Other"],
+      "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Other"],
+      "Chandigarh": ["Chandigarh", "Other"],
+      "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur", "Korba", "Other"],
+      "Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Silvassa", "Other"],
+      "Delhi": ["New Delhi", "Other"],
+      "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa", "Other"],
+      "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar", "Jamnagar", "Vapi", "Ankleshwar", "Other"],
+      "Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Rohtak", "Karnal", "Other"],
+      "Himachal Pradesh": ["Shimla", "Dharamshala", "Baddi", "Mandi", "Solan", "Other"],
+      "Jammu and Kashmir": ["Srinagar", "Jammu", "Anantnag", "Other"],
+      "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Other"],
+      "Karnataka": ["Bengaluru", "Mysuru", "Hubballi-Dharwad", "Mangaluru", "Belagavi", "Other"],
+      "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Palakkad", "Other"],
+      "Ladakh": ["Leh", "Kargil", "Other"],
+      "Lakshadweep": ["Kavaratti", "Other"],
+      "Madhya Pradesh": ["Indore", "Bhopal", "Jabalpur", "Gwalior", "Ujjain", "Other"],
+      "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad", "Thane", "Navi Mumbai", "Kolhapur", "Other"],
+      "Manipur": ["Imphal", "Other"],
+      "Meghalaya": ["Shillong", "Other"],
+      "Mizoram": ["Aizawl", "Other"],
+      "Nagaland": ["Dimapur", "Kohima", "Other"],
+      "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Berhampur", "Sambalpur", "Other"],
+      "Puducherry": ["Puducherry", "Auroville", "Other"],
+      "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Mohali", "Bathinda", "Other"],
+      "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bhiwadi", "Alwar", "Other"],
+      "Sikkim": ["Gangtok", "Other"],
+      "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Tiruppur", "Salem", "Hosur", "Other"],
+      "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Other"],
+      "Tripura": ["Agartala", "Other"],
+      "Uttar Pradesh": ["Noida", "Kanpur", "Lucknow", "Agra", "Meerut", "Varanasi", "Ghaziabad", "Aligarh", "Other"],
+      "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Rudrapur", "Haldwani", "Other"],
+      "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol", "Siliguri", "Kharagpur", "Other"],
+      "Other": ["Other"]
+    };
+
+    function EBrochure() {
+      const { t } = useLanguage();
+      useEffect(() => { 
+        window.scrollTo(0, 0); 
+        updateSEO("Enquiry & Technical Quote | Rainbow Polypack PET Preforms", "/brochure");
+      }, []);
+      const [submitted, setSubmitted] = useState(false);
+      const [selectedState, setSelectedState] = useState("");
+      const [selectedCity, setSelectedCity] = useState("");
+      const [customCity, setCustomCity] = useState("");
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if ((selectedState === 'Other' || selectedCity === 'Other') && !customCity.trim()) {
+          alert(t('city_error'));
+          return;
+        }
+        
+        const name = document.getElementById('enq_name')?.value || '';
+        const email = document.getElementById('enq_email')?.value || '';
+        const company = document.getElementById('enq_company')?.value || '';
+        const product = document.getElementById('enq_product')?.value || '';
+        const volume = document.getElementById('enq_volume')?.value || '';
+        const message = document.getElementById('enq_message')?.value || '';
+        const finalCity = (selectedCity === 'Other' || selectedState === 'Other') ? customCity : selectedCity;
+        
+        const text = encodeURIComponent(`Hello Rainbow Polypack Team, I have a new enquiry:
+Name: ${name}
+Company: ${company}
+Email: ${email}
+Location: ${finalCity}, ${selectedState}
+Product Interest: ${product}
+Monthly Volume: ${volume}
+
+Requirements:
+${message}`);
+        
+        window.open(`https://wa.me/918735817667?text=${text}`, '_blank');
+        setSubmitted(true);
+      };
+
+      const handleStateChange = (e) => {
+        setSelectedState(e.target.value);
+        setSelectedCity("");
+        setCustomCity("");
+      };
+
+      const handleCityChange = (e) => {
+        setSelectedCity(e.target.value);
+        if(e.target.value !== "Other") {
+          setCustomCity("");
+        }
+      };
+
+      const containerVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.1 } }
+      };
+      const childVariants = {
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0 }
+      };
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl -translate-x-1/2 pointer-events-none"></div>
+          <${motion.div}
+            variants=${containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full max-w-3xl mx-auto px-4 relative z-10"
+          >
+            <${motion.div} variants=${childVariants} className="text-center mb-16">
+              <${SectionHeaderReveal}><h1 className="text-5xl font-black text-brand-black tracking-tight">${t("enquiry_title")}</h1><//>
+              <p className="text-xl text-slate-700 max-w-2xl mx-auto font-medium">${t("enquiry_desc")}</p>
+            <//>
+            <${motion.div} variants=${childVariants} className="bg-white/90 backdrop-blur-xl rounded-xl shadow-md border border-slate-200 overflow-hidden relative">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-black to-brand-green"></div>
+              <div className="p-10 md:p-14">
+                ${!submitted ? html`
+                  <form onSubmit=${handleSubmit} className="space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_name")} <span className="text-brand-green">*</span></label>
+                        <input id="enq_name" type="text" required className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_email")} <span className="text-brand-green">*</span></label>
+                        <input id="enq_email" type="email" inputMode="email" required className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_company")} <span className="text-brand-green">*</span></label>
+                        <input id="enq_company" type="text" required className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm focus-gradient-ring" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_state")} <span className="text-brand-green">*</span></label>
+                        <select required value=${selectedState} onChange=${handleStateChange} className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                          <option value="" disabled>${t("select_state")}</option>
+                          ${Object.keys(stateCityMap).map(state => html`<option key=${state} value=${state}>${state}</option>`)}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("form_city")} <span className="text-brand-green">*</span></label>
+                        <select required disabled=${!selectedState} value=${selectedCity} onChange=${handleCityChange} className=${"w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm " + (!selectedState ? "opacity-50 cursor-not-allowed" : "")}>
+                          <option value="" disabled>${t("select_city")}</option>
+                          ${selectedState && stateCityMap[selectedState].map(city => html`<option key=${city} value=${city}>${city}</option>`)}
+                        </select>
+                      </div>
+                      ${(selectedCity === "Other" || selectedState === "Other") ? html`
+                        <div>
+                          <label className="block text-sm font-extrabold text-brand-black mb-3">${t("specify_city")} <span className="text-brand-green">*</span></label>
+                          <input type="text" required value=${customCity} onChange=${(e) => setCustomCity(e.target.value)} className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm" placeholder="Please specify your city..." />
+                        </div>
+                      ` : html`<div className="hidden md:block"></div>`}
+                    </div>
+
+                    <div className="border-t border-slate-200 my-10"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("product_interest")}</label>
+                        <select id="enq_product" className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                          ${productGroups.map(group => group.variants.map(v => html`
+                            <option key=${`${group.id}-${v.weight}`}>${group.shortName} - ${v.weight}g</option>
+                          `))}
+                          <option>Multiple / Undecided</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-extrabold text-brand-black mb-3">${t("monthly_volume")}</label>
+                        <select id="enq_volume" className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all appearance-none font-bold text-brand-black shadow-sm">
+                          <option>${"<"} 50,000 units</option>
+                          <option>50,000 - 200,000 units</option>
+                          <option>200,000 - 500,000 units</option>
+                          <option>500,000+ units</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-extrabold text-brand-black mb-3">Custom Technical Requirements</label>
+                      <textarea id="enq_message" rows="4" className="w-full px-5 py-4 bg-brand-white rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:bg-white outline-none transition-all font-bold text-brand-black shadow-sm resize-none focus-gradient-ring" placeholder="Any specific requirements regarding resin tint, packaging configurations, etc."></textarea>
+                    </div>
+                    <${MagneticButton} type="submit" className="w-full py-5 bg-brand-black text-white rounded-lg font-black text-xl shadow-xl shadow-brand-black/20 mt-4 border border-brand-black/50 hover:bg-brand-green transition-colors">
+                      Submit Enquiry
+                    <//>
+                    <p className="text-center text-xs font-extrabold text-slate-600 mt-6 uppercase tracking-wider font-mono">Confidential Technical Inquiry</p>
+                  </form>
+                ` : html`
+                  <${motion.div}
+                    initial=${{ opacity: 0, scale: 0.9 }}
+                    animate=${{ opacity: 1, scale: 1 }}
+                    className="text-center py-16"
+                  >
+                    <div className="w-28 h-28 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner border border-brand-green/20">
+                      <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h3 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Request Received</h3>
+                    <p className="text-xl text-slate-700 mb-10 max-w-md mx-auto font-medium">Thank you for your interest. Our technical sales team will review your requirements and respond within 24 hours.</p>
+                    <${MagneticLink} to="#" className="inline-flex items-center px-10 py-5 bg-brand-green text-white rounded-lg font-black text-xl shadow-xl shadow-brand-green/20 hover:bg-brand-black transition-colors">
+                      <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download PDF Brochure
+                    <//>
+                  <//>
+                `}
+              </div>
+            <//>
+          <//>
+        </div>
+      `;
+    }
+
+    function PrivacyPolicy() {
+      React.useEffect(() => { window.scrollTo(0, 0); }, []);
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
+            <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Privacy Policy</h1>
+            <p className="text-xs text-slate-700 font-bold tracking-wider uppercase mb-8">Effective Date: July 7, 2026</p>
+            <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
+              <p>At Rainbow Polypack, we prioritize the confidentiality of our B2B procurement partners and technical inquiries. This Privacy Policy outlines how we collect, store, and safeguard your corporate data and structural requirements.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">1. Information Collection</h2>
+              <p>We collect operational data provided explicitly through our Smart RFQ system and direct communications, including your full name, corporate email address, company registration indicators, logistical dispatch addresses, and custom structural or resin specifications.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">2. Technical Data Utilization</h2>
+              <p>Collected corporate metrics are utilized strictly to formulate prioritized manufacturing quotations, evaluate processing compatibility with our hot runner moulds, arrange fast-track dispatch of sample trial kits, and coordinate production scheduling.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">3. Data Integrity & Confidentiality</h2>
+              <p>All custom blueprints, technical parameters, and proprietary structural requests are treated as strictly confidential under industry-standard industrial data guidelines. Your specifications are never sold, leased, or distributed to adjacent trade firms, unverified logistics vendors, or third parties.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function TermsOfService() {
+      React.useEffect(() => { window.scrollTo(0, 0); }, []);
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white text-slate-800 font-sans px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-14">
+            <h1 className="text-4xl font-black text-brand-black mb-4 tracking-tight">Terms of Service</h1>
+            <p className="text-xs text-slate-700 font-bold tracking-wider uppercase mb-8">Last Updated: July 7, 2026</p>
+            <div className="space-y-6 text-sm font-medium leading-relaxed text-slate-600">
+              <p>Welcome to the official business-to-business digital portal of Rainbow Polypack. By interacting with our technical interfaces, transmitting manufacturing blueprints, or requesting batch sample testing kits, you agree to comply with the industrial terms outlined below.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">1. Industrial Quotations & Orders</h2>
+              <p>All manufacturing price estimates provided via our technical team or automated tools remain valid for exactly 30 calendar days due to raw PET resin price volatility. Formal purchase orders (PO) are subject to material availability and final production queue approval at our Chhatral, Gujarat facility.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">2. Quality Standards & Tolerances</h2>
+              <p>Our high-performance preforms are produced under strict zero-defect parameters. Final batches are subject to standard structural weight variances of ±0.15g and total gate vestige thresholds of ≤0.1mm as per standard hot runner engineering benchmarks.</p>
+              
+              <h2 className="text-xl font-black text-brand-black pt-4">3. Tooling & Proprietary Design</h2>
+              <p>Any proprietary custom moulds or tooling modifications financed or supplied by a procurement partner remain the strict intellectual property of that partner. Rainbow Polypack guarantees separate facility custody and zero third-party cross-utilization of custom molds.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    
+    
+    function GlobalScrollObserver() {
+      const location = useLocation();
+      useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            } else {
+              entry.target.classList.remove('revealed');
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        setTimeout(() => {
+          document.querySelectorAll('h1:not(.no-reveal), h2:not(.no-reveal), h3:not(.no-reveal), h4:not(.no-reveal), p:not(.no-reveal)').forEach((el) => {
+            if (!el.closest('#home-cinematic-scroll') && !el.classList.contains('scroll-reveal')) {
+              el.classList.add('scroll-reveal');
+              observer.observe(el);
+            }
+          });
+        }, 500);
+
+        return () => observer.disconnect();
+      }, [location.pathname]);
+
+      return null;
+    }
+
+    function Sustainability() {
+      const { t } = useLanguage();
+      useEffect(() => { 
+        window.scrollTo(0, 0); 
+        updateSEO("Sustainability & rPET in Indian PET Packaging | Rainbow Polypack", "/sustainability");
+      }, []);
+      
+      const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+      };
+      const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+      };
+
+      return html`
+        <div className="pt-40 pb-24 min-h-screen bg-brand-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-20">
+              <span className="inline-block text-brand-green font-extrabold mb-4 uppercase tracking-widest text-sm"><${TypewriterReveal} text="Sustainability" /></span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-brand-black mb-6 tracking-tight leading-[1.1]">
+                <${TypewriterReveal} text="Sustainability in Indian PET Packaging:" delay=${0.1} />
+                <br />
+                <${TypewriterReveal} text="Where Things Actually Stand" delay=${0.3} />
+              </h1>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed">
+                A straightforward look at what's changing in Indian plastic packaging regulation, what recycled PET (rPET) actually is, and where Rainbow Polypack fits into it today.
+              </p>
+            </div>
+
+            <${motion.div} variants=${containerVariants} initial="hidden" whileInView="visible" viewport=${{ once: false, amount: 0.1 }} className="space-y-12 md:space-y-16 mb-20">
+              
+              <${motion.div} variants=${itemVariants} className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-black text-brand-black mb-6">India's Recycled-Content Mandate Is Rolling Out in Phases</h2>
+                <div className="space-y-4 text-lg text-slate-700 font-medium leading-relaxed">
+                  <p>Under the Plastic Waste Management (Amendment) Rules, brand owners and packaging producers in India are now required to include a minimum share of recycled content in rigid plastic packaging, which is the category that covers PET bottles, jars, and containers. The requirement started at roughly 30% for the 2025–26 financial year and is scheduled to rise in stages toward 60% by 2028–29. Food-contact PET packaging follows a similar, separately timed path, with its own phased increase and additional food-safety requirements administered by the FSSAI.</p>
+                  <p>This isn't a single switch that flips; it's a multi-year transition. The rules themselves have already been revised and clarified more than once since they were first introduced. The supporting infrastructure, including collection networks, sorting capacity, and food-grade-certified recycling plants, is still being built out to keep pace with the targets.</p>
+                  <p>Exact thresholds and deadlines are set and updated by the Ministry of Environment, Forest and Climate Change (MoEFCC) and the Central Pollution Control Board (CPCB). We'd always recommend confirming the current figures with your own compliance team rather than relying on any single source, including this page.</p>
+                </div>
+              <//>
+
+              <${motion.div} variants=${itemVariants} className="max-w-5xl mx-auto">
+                <${TiltCard} className="p-8 md:p-12 rounded-xl border border-slate-200 shadow-lg bg-white">
+                  <h3 className="text-2xl font-black text-brand-black mb-4">What rPET Actually Is</h3>
+                  <div className="space-y-4 text-base text-slate-600 font-medium leading-relaxed">
+                    <p>rPET is recycled PET resin. It is plastic reclaimed from used PET packaging, most commonly post-consumer bottles, which is collected, sorted, cleaned, and reprocessed into flake or pellet form. That reprocessed resin is then blended with, or used in place of, virgin PET resin when manufacturing new preforms.</p>
+                    <p>Not all rPET is equal. The resin's quality depends heavily on how clean and consistent the input material was. For food-contact packaging specifically, recycled resin has to meet dedicated food-grade safety standards before it can be used, meaning it isn't simply a matter of substituting one resin for another on the production line.</p>
+                  </div>
+                <//>
+              <//>
+
+              <${motion.div} variants=${itemVariants} className="max-w-5xl mx-auto">
+                <${TiltCard} className="p-8 md:p-12 rounded-xl border border-slate-200 shadow-lg bg-white">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <h3 className="text-2xl font-black text-brand-black mb-4">Our Position on rPET</h3>
+                      <div className="space-y-4 text-base text-slate-600 font-medium leading-relaxed">
+                        <p>Our standard catalog runs on 100% virgin PET. We've built our process around it because it gives us consistent optical clarity and dimensional precision, batch after batch, without depending on the variability of external recycled-resin supply.</p>
+                        <p>We also have the processing capability to run food-grade rPET blends for customers who need them. This flexibility helps you meet an approaching EPR recycled-content requirement or advance your own brand's sustainability commitments. Because rPET output depends on the specific recycled resin available at the time, we run it as a <strong className="text-brand-black">made-to-order production batch rather than a standing catalog item</strong>. If you have an rPET requirement, we'll work with you upfront on resin sourcing, minimum order quantities, and lead times before committing to a production slot.</p>
+                      </div>
+                    </div>
+                    <div className="relative h-64 md:h-full min-h-[250px] w-full flex items-center justify-center mix-blend-multiply mt-6 md:mt-0">
+                      <img 
+                        src="./assets/rpet_recycling.jpeg" 
+                        alt="rPET Recycling Process" 
+                        width="1376"
+                        height="768"
+                        className="w-full h-full object-contain rounded-xl contrast-[1.05] brightness-[1.02] [mask-image:radial-gradient(ellipse_at_center,_black_80%,_transparent_100%)] transition-transform duration-700 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                <//>
+              <//>
+
+              <${motion.div} variants=${itemVariants} className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                <div className="border-l-4 border-brand-green pl-6 py-2">
+                  <p className="text-3xl font-black text-brand-black mb-1">FY25–29</p>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Phased EPR Rollout</p>
+                </div>
+                <div className="border-l-4 border-brand-green pl-6 py-2">
+                  <p className="text-3xl font-black text-brand-black mb-1">Made-to-Order</p>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Food-grade rPET production</p>
+                </div>
+                <div className="border-l-4 border-brand-green pl-6 py-2">
+                  <p className="text-3xl font-black text-brand-black mb-1">100%</p>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Virgin PET (our standard catalog)</p>
+                </div>
+              <//>
+
+            <//>
+
+            <${motion.div} variants=${itemVariants} initial="hidden" whileInView="visible" viewport=${{ once: false, amount: 0.2 }} className="bg-brand-black text-white rounded-xl p-10 md:p-14 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+              <div className="relative z-10 max-w-2xl">
+                <h3 className="text-3xl font-black mb-4">Have an EPR deadline coming up, or need to discuss an rPET production run?</h3>
+                <p className="text-slate-300 font-medium text-lg">Talk to our engineering team about resin options, compliance timing, and lead times before you commit to a batch.</p>
+              </div>
+              <div className="relative z-10 mt-8 md:mt-0 w-full md:w-auto shrink-0">
+                <${MagneticLink} to="/brochure" className="block w-full">
+                  <div className="w-full md:w-auto px-8 py-4 bg-brand-green text-white rounded-xl font-extrabold text-lg shadow-[0_10px_20px_rgba(112,164,67,0.3)] hover:bg-white hover:text-brand-green transition-all cursor-pointer text-center">
+                    Consult Our Engineers
+                  </div>
+                <//>
+              </div>
+            <//>
+          </div>
+        </div>
+      `;
+    }
+
+    function ManufacturingPage() {
+      const { scrollYProgress } = useScroll();
+
+      useEffect(() => {
+        window.scrollTo(0, 0);
+        updateSEO("Manufacturing | Rainbow Polypack", "/manufacturing");
+      }, []);
+
+      const sections = [
+        {
+          id: 'step-1',
+          title: "Injection Molding",
+          subtitle: "100% Hot Runner Systems",
+          desc: "Our state-of-the-art injection molding machines utilize 100% hot runner systems to process molten Virgin PET with unparalleled precision. This eliminates gate-vestige, ensuring the highest optical clarity and structural integrity from the very first step.",
+          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-500 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#49326B]/20 to-transparent z-10 pointer-events-none"></div>
+            <img key="img-inj" src="./assets/Injection_Moulding_Machine_Process.jpg" alt="Injection Molding" width="2000" height="1450" className="w-full h-full object-contain bg-white relative z-20" />
+          </div>`
+        },
+        {
+          id: 'step-2',
+          title: "The Core Preform",
+          subtitle: "±0.15g Tolerances",
+          desc: "Each preform is engineered to exact dimensional specifications. We guarantee weight variances of ±0.15g, ensuring identical wall distribution so your high-speed blowing lines can operate without interruption. That same wall-distribution precision also means faster heating times and reduced energy consumption on your blowing lines. This provides a direct saving on your production line's power bill.",
+          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-500 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#039544]/10 to-transparent z-10 pointer-events-none"></div>
+            <img key="img-pref" src="./assets/PET_PREFORM_HERO.png" alt="The Core Preform" width="2752" height="1536" className="w-full h-full object-contain scale-[1.3] md:scale-[1.5] mix-blend-multiply bg-white relative z-20 pointer-events-none" />
+          </div>`
+        },
+        {
+          id: 'step-3',
+          title: "Stretch Blow Molding",
+          subtitle: "High-Speed Efficiency",
+          desc: "The final stretch blow molding phase transforms our precision preforms into perfect containers. With optimized heating profiles and superior top-load strength, our preforms deliver flawless performance at commercial scales. That translates to lower reject rates and consistent bottle weights at full production speed, ultimately protecting your margins on every run.",
+          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-500 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#fef111]/20 to-transparent z-10 pointer-events-none"></div>
+            <img key="img-blow" src="./assets/blow_molding_process.jpg" alt="Stretch Blow Molding" width="1600" height="900" className="w-full h-full object-contain bg-white relative z-20" />
+          </div>`
+        }
+      ];
+
+      const [activeStep, setActiveStep] = useState(0);
+
+      useEffect(() => {
+        const stepElements = document.querySelectorAll('.manufacturing-step');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const idx = parseInt(entry.target.getAttribute('data-step-index'), 10);
+              if (!isNaN(idx)) setActiveStep(idx);
+            }
+          });
+        }, {
+          rootMargin: '-50% 0px -50% 0px'
+        });
+
+        stepElements.forEach(el => observer.observe(el));
+        return () => observer.disconnect();
+      }, []);
+
+      return html`
+        <div className="bg-slate-50 w-full min-h-screen pt-32 pb-24 md:pt-40 font-sans">
+          <${motion.div} 
+            style=${{ scaleX: scrollYProgress }} 
+            className="fixed top-0 left-0 right-0 h-1.5 z-[100] origin-left bg-gradient-to-r from-[#49326B] via-[#039544] to-[#fef111]"
+          ><//>
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16 md:mb-24">
+              <span className="inline-block px-4 py-1.5 rounded-md bg-white border border-slate-200 text-brand-green font-bold text-xs uppercase tracking-widest mb-4 shadow-sm"><${TypewriterReveal} text="The Process" /></span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight"><${TypewriterReveal} text="Manufacturing Journey" delay=${0.1} /></h1>
+              <p className="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto">A cinematic look into our 3-step precision engineering process, from virgin resin to flawless preforms.</p>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-12 lg:gap-24 relative items-start">
+              <!-- Left Column: Scrolling Text -->
+              <div className="w-full md:w-1/2 flex flex-col pt-12 md:pb-[50vh]">
+                ${sections.map((step, idx) => html`
+                  <div key=${step.id} data-step-index=${idx} className="manufacturing-step min-h-[100vh] flex flex-col justify-center">
+                    <div
+                      className=${`transition-all duration-700 transform ${activeStep === idx ? 'opacity-100 translate-x-0' : 'opacity-30 -translate-x-8'}`}
+                    >
+                      <span className="text-brand-green font-black text-6xl opacity-20 mb-4 block">0${idx + 1}</span>
+                      <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-2">${step.title}</h2>
+                      <h3 className="text-xl font-bold text-brand-green mb-6">${step.subtitle}</h3>
+                      <div className="block md:hidden w-full h-[40vh] rounded-2xl overflow-hidden relative mb-8 shadow-inner border border-slate-100">
+                        ${step.media}
+                      </div>
+                      <p className="text-slate-600 text-lg leading-relaxed">${step.desc}</p>
+                    </div>
+                  </div>
+                `)}
+              </div>
+
+              <!-- Right Column: Sticky Media -->
+              <div className="hidden md:flex w-full md:w-1/2 md:sticky md:top-[20vh] h-[50vh] md:h-[60vh] rounded-2xl overflow-hidden relative mb-12 md:mb-0 items-center justify-center">
+                ${sections.map((step, index) => html`
+                  <div 
+                    key=${step.id + "-media"}
+                    className=${`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${activeStep === index ? 'opacity-100 z-20' : 'opacity-0 z-10 pointer-events-none'}`}
+                  >
+                    ${step.media}
+                  </div>
+                `)}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function App() {
+      const RouterComponent = window.location.protocol === 'file:' ? HashRouter : BrowserRouter;
+      const waText = encodeURIComponent("Hello Rainbow Polypack Team, I am interested in requesting samples/quotation for your PET preforms.");
+      const waLink = `https://wa.me/918735817667?text=${waText}`;
+      return html`
+        <${RouterComponent}>
+          <div className="flex flex-col min-h-screen selection:bg-brand-green/20 selection:text-brand-black">
+            <${CustomCursor} />
+            <${Navbar} />
+            <main className="flex-grow">
+              <${AnimatePresence} mode="wait">
+                <${Routes}>
+                  <${Route} path="/" element=${html`<${Home} />`} />
+                  <${Route} path="/products" element=${html`<${ProductsPage} />`} />
+                  <${Route} path="/manufacturing" element=${html`<${ManufacturingPage} />`} />
+                  <${Route} path="/about" element=${html`<${AboutUs} />`} />
+                  <${Route} path="/sustainability" element=${html`<${Sustainability} />`} />
+                  <${Route} path="/brochure" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/enquiry" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/quote" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/privacy" element=${html`<${PrivacyPolicy} />`} />
+                  <${Route} path="/terms" element=${html`<${TermsOfService} />`} />
+                <//>
+              <//>
+            </main>
+            <${Footer} />
+            <${MagneticButton} aria-label="Contact us on WhatsApp" onClick=${() => window.open(waLink, '_blank')} className="fixed bottom-6 md:bottom-8 right-6 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] group border border-[#25D366]/20 cursor-pointer">
+              <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+            <//>
+          </div>
+        <//>
+      `;
+    }
+    const root = createRoot(document.getElementById('root'));
+    root.render(html`
+      <${LanguageProvider}>
+        <${App} />
+      <//>
+    `);

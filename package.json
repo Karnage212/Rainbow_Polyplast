@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "autoprefixer": "^10.5.4",
+    "framer-motion": "^10.16.4",
+    "htm": "^3.1.1",
+    "postcss": "^8.5.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.1",
+    "tailwindcss": "^3.4.17",
+    "vite": "^8.2.2"
+  },
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}
