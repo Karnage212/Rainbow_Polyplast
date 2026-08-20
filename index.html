@@ -200,6 +200,7 @@
   <link rel="icon" type="image/png" href="./assets/logo_assets/PNG/icon-rp.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo_assets/PNG/icon-rp.png">
   <link rel="apple-touch-icon" href="./assets/logo_assets/PNG/icon-rp.png">
+  <link rel="preload" as="script" href="https://cdn.tailwindcss.com">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -349,6 +350,8 @@
         shortName: "CTC 29/21mm",
         image: "./assets/ctc-neck-image.jpeg",
         imageAlt: "CTC 29/21mm PET Preform",
+        imgWidth: 2400,
+        imgHeight: 1792,
         variants: [
           { weight: "15", usage: "250ml - 500ml", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
           { weight: "24", usage: "1000ml (1L)", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
@@ -361,6 +364,8 @@
         shortName: "Alaska Short Neck 28mm",
         image: "./assets/Alaska_28mm_Professional.jpg",
         imageAlt: "Alaska Short Neck 28mm PET Preform",
+        imgWidth: 1536,
+        imgHeight: 2048,
         variants: [
           { weight: "10.2", usage: "250-500ml", apps: "Water" },
           { weight: "6.6", usage: "150-250ml", apps: "Water" },
@@ -372,6 +377,8 @@
         shortName: "82mm",
         image: "./assets/preform-82mm.jpeg",
         imageAlt: "82mm PET Preform",
+        imgWidth: 1792,
+        imgHeight: 2400,
         variants: [
           { weight: "60", usage: "—", apps: "—" },
         ],
@@ -382,6 +389,8 @@
         shortName: "73mm",
         image: "./assets/preform-73mm.jpeg",
         imageAlt: "73mm PET Preform",
+        imgWidth: 1792,
+        imgHeight: 2400,
         variants: [
           { weight: "26", usage: "—", apps: "—" },
           { weight: "29", usage: "—", apps: "—" },
@@ -394,6 +403,8 @@
         shortName: "CTC 29/21mm HDPE Cap",
         image: "./assets/CTC_Double_Cap_Professionall.jpg",
         imageAlt: "CTC 29/21mm HDPE Cap",
+        imgWidth: 1536,
+        imgHeight: 2048,
         isCapGroup: true,
         variants: [
           { weight: "3.2", usage: "—", apps: "Edible Oils, Syrups, Honey, Soy Sauce" },
@@ -635,14 +646,21 @@
       const y = useMotionValue(0);
       const rotateX = useTransform(y, [-50, 50], [2, -2]);
       const rotateY = useTransform(x, [-200, 200], [-2, 2]);
+      const rafRef = useRef(null);
 
       const handleMouseMove = (e) => {
         if (isReduced || window.matchMedia('(hover: none)').matches) return;
-        const rect = e.currentTarget.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        x.set(e.clientX - centerX);
-        y.set(e.clientY - centerY);
+        const target = e.currentTarget;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          const rect = target.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          x.set(clientX - centerX);
+          y.set(clientY - centerY);
+        });
       };
 
       const handleMouseLeave = () => {
@@ -672,16 +690,23 @@
       const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
       const [position, setPosition] = useState({ x: 0, y: 0 });
       const [opacity, setOpacity] = useState(0);
+      const rafRef = useRef(null);
       const handleMouseMove = (e) => {
         if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        x.set(mouseX / width - 0.5);
-        y.set(mouseY / height - 0.5);
-        setPosition({ x: mouseX, y: mouseY });
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          if (!ref.current) return;
+          const rect = ref.current.getBoundingClientRect();
+          const width = rect.width;
+          const height = rect.height;
+          const mouseX = clientX - rect.left;
+          const mouseY = clientY - rect.top;
+          x.set(mouseX / width - 0.5);
+          y.set(mouseY / height - 0.5);
+          setPosition({ x: mouseX, y: mouseY });
+        });
       };
       const handleMouseLeave = () => {
         x.set(0);
@@ -854,7 +879,7 @@
               <div className="md:col-span-2">
                 <div className="flex items-center mb-8 relative">
                   <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 pointer-events-none"></div>
-                  <img src="./assets/logo_assets/PNG/FINAL LOGO.png" loading="lazy" className="w-40 md:w-48 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                  <img src="./assets/logo_assets/PNG/FINAL LOGO.png" width="7016" height="4961" loading="lazy" className="w-40 md:w-48 h-auto object-contain drop-shadow-md relative z-10" alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <p className="text-slate-300 mb-8 max-w-md leading-relaxed text-base md:text-lg font-medium">
                   ${t("footer_desc")}
@@ -1053,8 +1078,8 @@
               onClick=${() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
             >
-              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-24' : 'h-36'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
-              <img src="./assets/logo_assets/PNG/icon-rp.png" className=${`block md:hidden w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/PNG/FINAL LOGO.png" width="7016" height="4961" className=${`hidden md:block w-auto object-contain transition-all duration-300 ${scrolled ? 'h-24' : 'h-36'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+              <img src="./assets/logo_assets/PNG/icon-rp.png" width="3552" height="2245" className=${`block md:hidden w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`} alt="Rainbow Polypack Logo" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
 
             <!-- Desktop Inline Links -->
@@ -1231,6 +1256,7 @@
                 disablePictureInPicture
                 preload="none"
                 poster="./assets/frames/preform_mould_frames_1080p_webp/fram00001.webp"
+                fetchpriority="high"
                 className="w-full h-full object-cover"
                 style=${{ pointerEvents: 'none' }}
               ></video>
@@ -1287,6 +1313,8 @@
                     decoding="async"
                     src="./assets/PET_PREFORM_HERO.png" 
                     alt="PET Preform" 
+                    width="2752"
+                    height="1536"
                     className="h-full w-auto object-contain scale-[2.97] md:scale-100" 
                   />
                 <//>
@@ -1393,9 +1421,9 @@
                             </div>
                             <div className="w-full md:w-1/3 h-48 bg-slate-100 rounded-xl p-4 flex items-center justify-center border border-slate-200 shadow-inner">
                               ${group.image
-                                ? html`<img src=${group.image} alt=${group.imageAlt} loading="lazy" className="w-full h-full object-contain rounded-lg drop-shadow-md" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
+                                ? html`<img src=${group.image} alt=${group.imageAlt} width=${group.imgWidth} height=${group.imgHeight} loading="lazy" className="w-full h-full object-contain rounded-lg drop-shadow-md" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
                                 : html`
-                                  <div className="w-full h-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-2 text-slate-400 p-4">
+                                  <div className="w-full h-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-2 text-slate-500 p-4">
                                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     <span className="text-xs font-bold uppercase tracking-wider text-center">Image coming soon</span>
                                   </div>
@@ -1579,7 +1607,7 @@
                       ${group.image
                         ? html`<img src=${group.image} alt=${group.imageAlt} width="280" height="220" loading="lazy" className="w-full h-full object-contain rounded-lg" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
                         : html`
-                          <div className="w-full h-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-2 text-slate-400 p-4">
+                          <div className="w-full h-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-2 text-slate-500 p-4">
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             <span className="text-xs font-bold uppercase tracking-wider text-center">Image coming soon</span>
                           </div>
@@ -1596,9 +1624,9 @@
                   </div>
                   <div className="w-full aspect-[4/3] bg-slate-100 flex items-center justify-center border-b border-slate-200">
                     ${group.image
-                      ? html`<img src=${group.image} alt=${group.imageAlt} loading="lazy" className="w-full h-full object-contain p-4" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
+                      ? html`<img src=${group.image} alt=${group.imageAlt} width=${group.imgWidth} height=${group.imgHeight} loading="lazy" className="w-full h-full object-contain p-4" onError=${(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />`
                       : html`
-                        <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-400 p-4">
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-500 p-4">
                           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                           <span className="text-xs font-bold uppercase tracking-wider text-center">Image coming soon</span>
                         </div>
@@ -2104,6 +2132,8 @@ ${message}`);
                       <img 
                         src="./assets/rpet_recycling.jpeg" 
                         alt="rPET Recycling Process" 
+                        width="1376"
+                        height="768"
                         className="w-full h-full object-contain rounded-xl contrast-[1.05] brightness-[1.02] [mask-image:radial-gradient(ellipse_at_center,_black_80%,_transparent_100%)] transition-transform duration-700 hover:scale-105"
                       />
                     </div>
@@ -2162,7 +2192,7 @@ ${message}`);
           desc: "Our state-of-the-art injection molding machines utilize 100% hot runner systems to process molten Virgin PET with unparalleled precision. This eliminates gate-vestige, ensuring the highest optical clarity and structural integrity from the very first step.",
           media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-500 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#49326B]/20 to-transparent z-10 pointer-events-none"></div>
-            <img key="img-inj" src="./assets/Injection_Moulding_Machine_Process.jpg" alt="Injection Molding" className="w-full h-full object-contain bg-white relative z-20" />
+            <img key="img-inj" src="./assets/Injection_Moulding_Machine_Process.jpg" alt="Injection Molding" width="2000" height="1450" className="w-full h-full object-contain bg-white relative z-20" />
           </div>`
         },
         {
@@ -2170,9 +2200,9 @@ ${message}`);
           title: "The Core Preform",
           subtitle: "±0.15g Tolerances",
           desc: "Each preform is engineered to exact dimensional specifications. We guarantee weight variances of ±0.15g, ensuring identical wall distribution so your high-speed blowing lines can operate without interruption. That same wall-distribution precision also means faster heating times and reduced energy consumption on your blowing lines. This provides a direct saving on your production line's power bill.",
-          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-400 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
+          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-500 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#039544]/10 to-transparent z-10 pointer-events-none"></div>
-            <img key="img-pref" src="./assets/PET_PREFORM_HERO.png" alt="The Core Preform" className="w-full h-full object-contain scale-[1.3] md:scale-[1.5] mix-blend-multiply bg-white relative z-20 pointer-events-none" />
+            <img key="img-pref" src="./assets/PET_PREFORM_HERO.png" alt="The Core Preform" width="2752" height="1536" className="w-full h-full object-contain scale-[1.3] md:scale-[1.5] mix-blend-multiply bg-white relative z-20 pointer-events-none" />
           </div>`
         },
         {
@@ -2180,9 +2210,9 @@ ${message}`);
           title: "Stretch Blow Molding",
           subtitle: "High-Speed Efficiency",
           desc: "The final stretch blow molding phase transforms our precision preforms into perfect containers. With optimized heating profiles and superior top-load strength, our preforms deliver flawless performance at commercial scales. That translates to lower reject rates and consistent bottle weights at full production speed, ultimately protecting your margins on every run.",
-          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-400 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
+          media: html`<div className="w-full h-full bg-white flex items-center justify-center text-slate-500 font-bold text-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 relative p-8">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#fef111]/20 to-transparent z-10 pointer-events-none"></div>
-            <img key="img-blow" src="./assets/blow_molding_process.jpg" alt="Stretch Blow Molding" className="w-full h-full object-contain bg-white relative z-20" />
+            <img key="img-blow" src="./assets/blow_molding_process.jpg" alt="Stretch Blow Molding" width="1600" height="900" className="w-full h-full object-contain bg-white relative z-20" />
           </div>`
         }
       ];
