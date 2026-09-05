@@ -590,7 +590,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
                   }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_products")}</a></li>
                   <li><${Link} to="/sustainability" className="hover:text-brand-green transition-colors cursor-pointer">Sustainability<//></li>
                   <li><${Link} to="/manufacturing" className="hover:text-brand-green transition-colors cursor-pointer">Manufacturing<//></li>
-                  <li><${Link} to="/brochure" className="hover:text-brand-green transition-colors">${t("nav_enquiry")}<//></li>
+                  <li><${Link} to="/enquiry" className="hover:text-brand-green transition-colors">${t("nav_enquiry")}<//></li>
                 </ul>
               </div>
               <div>
@@ -768,7 +768,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
                 </div>
               `})}
               <${Link} 
-                to="/brochure" 
+                to="/enquiry" 
                 className="bg-brand-green text-white rounded-lg px-6 py-2.5 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green"
               >
                 ${t("nav_enquiry")}
@@ -778,7 +778,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
             <!-- Mobile Burger Menu -->
             <div className="flex md:hidden items-center gap-4">
               <${Link} 
-                to="/brochure" 
+                to="/enquiry" 
                 className="bg-brand-green text-white rounded-lg px-4 py-2 font-bold text-xs tracking-wider uppercase shadow-sm"
               >
                 Enquire
@@ -898,7 +898,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
             >
               <${motion.div} whileHover=${{ scale: 1.05 }} whileTap=${{ scale: 0.95 }} className="w-full sm:w-auto">
-                <${Link} to="/brochure" className="px-8 py-4 bg-brand-green text-white rounded-lg font-bold text-base hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green flex items-center justify-center w-full h-full">
+                <${Link} to="/enquiry" className="px-8 py-4 bg-brand-green text-white rounded-lg font-bold text-base hover:bg-white hover:text-brand-green transition-all shadow-lg shadow-brand-green/30 border border-transparent hover:border-brand-green flex items-center justify-center w-full h-full">
                   Request a Technical Quote
                 <//>
               <//>
@@ -1486,7 +1486,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        updateSEO("Enquiry & Technical Quote | Rainbow Polypack PET Preforms", "/brochure");
+        updateSEO("Enquiry & Technical Quote | Rainbow Polypack PET Preforms", "/enquiry");
       }, []);
       const [submitted, setSubmitted] = useState(false);
       const [selectedState, setSelectedState] = useState("");
@@ -1834,7 +1834,7 @@ ${message}`);
                 <p className="text-slate-300 font-medium text-lg">Talk to our engineering team about resin options, compliance timing, and lead times before you commit to a batch.</p>
               </div>
               <div className="relative z-10 mt-8 md:mt-0 w-full md:w-auto shrink-0">
-                <${MagneticLink} to="/brochure" className="block w-full">
+                <${MagneticLink} to="/enquiry" className="block w-full">
                   <div className="w-full md:w-auto px-8 py-4 bg-brand-green text-white rounded-xl font-extrabold text-lg shadow-[0_10px_20px_rgba(112,164,67,0.3)] hover:bg-white hover:text-brand-green transition-all cursor-pointer text-center">
                     Consult Our Engineers
                   </div>
@@ -1973,7 +1973,7 @@ ${message}`);
                   <${Route} path="/manufacturing" element=${html`<${ManufacturingPage} />`} />
                   <${Route} path="/about" element=${html`<${AboutUs} />`} />
                   <${Route} path="/sustainability" element=${html`<${Sustainability} />`} />
-                  <${Route} path="/brochure" element=${html`<${EBrochure} />`} />
+                  <${Route} path="/enquiry" element=${html`<${EBrochure} />`} />
                   <${Route} path="/enquiry" element=${html`<${EBrochure} />`} />
                   <${Route} path="/quote" element=${html`<${EBrochure} />`} />
                   <${Route} path="/privacy" element=${html`<${PrivacyPolicy} />`} />
