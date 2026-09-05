@@ -578,6 +578,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
                       window.dispatchEvent(new Event('cinematicScrollUp'));
                     }
                   }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_home")}</a></li>
+                  <li><${Link} to="/about" className="hover:text-brand-green transition-colors">${t("nav_about")}<//></li>
                   <li><a href="/#products" onClick=${(e) => {
                     e.preventDefault();
                     if (location.pathname !== '/') {
@@ -587,9 +588,8 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
                       window.dispatchEvent(new Event('cinematicScrollDown'));
                     }
                   }} className="hover:text-brand-green transition-colors cursor-pointer">${t("nav_products")}</a></li>
-                  <li><${Link} to="/about" className="hover:text-brand-green transition-colors">${t("nav_about")}<//></li>
-                  <li><${Link} to="/manufacturing" className="hover:text-brand-green transition-colors cursor-pointer">Manufacturing<//></li>
                   <li><${Link} to="/sustainability" className="hover:text-brand-green transition-colors cursor-pointer">Sustainability<//></li>
+                  <li><${Link} to="/manufacturing" className="hover:text-brand-green transition-colors cursor-pointer">Manufacturing<//></li>
                   <li><${Link} to="/brochure" className="hover:text-brand-green transition-colors">${t("nav_enquiry")}<//></li>
                 </ul>
               </div>
@@ -714,10 +714,10 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
 
       const links = [
         { path: '/', label: t("nav_home") },
+        { path: '/about', label: t("nav_about") },
         { path: '/products', label: "Products" },
-        { path: '/manufacturing', label: "Manufacturing" },
         { path: '/sustainability', label: "Sustainability" },
-        { path: '/about', label: t("nav_about") }
+        { path: '/manufacturing', label: "Manufacturing" }
       ];
 
       const handleNav = (path) => {
@@ -1225,7 +1225,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
       
       useEffect(() => {
         window.scrollTo(0, 0);
-        updateSEO("Technical Catalog | Rainbow Polypack", "/products");
+        updateSEO("Products | Rainbow Polypack", "/products");
       }, []);
       
 
@@ -1349,7 +1349,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        updateSEO("About Us | Rainbow Polypack - Backed by 35+ Years of Rainbow Group Heritage", "/about");
+        updateSEO("About Us | Rainbow Polypack", "/about");
       }, []);
       const containerVariants = {
         hidden: { opacity: 0 },
@@ -1740,7 +1740,7 @@ ${message}`);
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        updateSEO("Sustainability & rPET in Indian PET Packaging | Rainbow Polypack", "/sustainability");
+        updateSEO("Sustainability | Rainbow Polypack", "/sustainability");
       }, []);
       
       const containerVariants = {
