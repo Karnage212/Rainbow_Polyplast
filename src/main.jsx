@@ -6,11 +6,30 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
     import htm from 'htm';
     const html = htm.bind(React.createElement);
 
-    function updateSEO(title, path) {
+    function updateSEO(title, path, description) {
       document.title = title;
       const canonicalLink = document.querySelector('link[rel="canonical"]');
       if (canonicalLink) {
-        canonicalLink.setAttribute('href', 'https://www.rainbowpolypack.com' + path);
+        canonicalLink.setAttribute('href', 'https://www.rainbowpolypack.com' + (path === '/' ? '' : path));
+      }
+      if (description) {
+        const updateMeta = (name, content, isProperty = false) => {
+          const attr = isProperty ? 'property' : 'name';
+          let tag = document.querySelector(`meta[${attr}="${name}"]`);
+          if (tag) {
+            tag.setAttribute('content', content);
+          } else {
+            tag = document.createElement('meta');
+            tag.setAttribute(attr, name);
+            tag.setAttribute('content', content);
+            document.head.appendChild(tag);
+          }
+        };
+        updateMeta('description', description);
+        updateMeta('og:title', title, true);
+        updateMeta('og:description', description, true);
+        updateMeta('twitter:title', title);
+        updateMeta('twitter:description', description);
       }
     }
     const productGroups = [
@@ -836,7 +855,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
 
       useEffect(() => {
         window.scrollTo(0, 0);
-        updateSEO("Rainbow Polypack | Premium PET Preform Manufacturers | Chhatral, Gujarat", "/");
+        updateSEO("Rainbow Polypack | Premium PET Preform Manufacturers | Chhatral, Gujarat", "/", "Rainbow Polypack - Premium PET Preform manufacturers in Chhatral, Gujarat. Specializing in high-performance CTC 29/21mm preforms utilizing advanced 100% Hot Runner Moulds.");
       }, []);
 
       const features = [
@@ -1225,7 +1244,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
       
       useEffect(() => {
         window.scrollTo(0, 0);
-        updateSEO("Products | Rainbow Polypack", "/products");
+        updateSEO("Products | Rainbow Polypack", "/products", "Browse 15g, 24g, and 26g CTC 29/21mm neck finish PET preforms engineered for edible oils, sauces, vinegar, and liquids.");
       }, []);
       
 
@@ -1349,7 +1368,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        updateSEO("About Us | Rainbow Polypack", "/about");
+        updateSEO("About Us | Rainbow Polypack", "/about", "Learn about Rainbow Polypack's manufacturing plant in Chhatral GIDC, Gujarat, backed by the Rainbow Group's 35+ year multi-sector heritage, and zero-defect engineering.");
       }, []);
       const containerVariants = {
         hidden: { opacity: 0 },
@@ -1486,7 +1505,7 @@ import React, { useEffect, useState, useRef, useMemo, createContext, useContext 
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        updateSEO("Enquiry & Technical Quote | Rainbow Polypack PET Preforms", "/enquiry");
+        updateSEO("Enquiry & Technical Quote | Rainbow Polypack PET Preforms", "/enquiry", "Submit an RFQ, request physical trial sample kits, and download official PET preform Technical Data Sheets (TDS).");
       }, []);
       const [submitted, setSubmitted] = useState(false);
       const [selectedState, setSelectedState] = useState("");
@@ -1740,7 +1759,7 @@ ${message}`);
       const { t } = useLanguage();
       useEffect(() => { 
         window.scrollTo(0, 0); 
-        updateSEO("Sustainability | Rainbow Polypack", "/sustainability");
+        updateSEO("Sustainability | Rainbow Polypack", "/sustainability", "Discover our circular packaging commitments, EPR regulatory compliance, and on-demand food-grade rPET processing.");
       }, []);
       
       const containerVariants = {
@@ -1851,7 +1870,7 @@ ${message}`);
 
       useEffect(() => {
         window.scrollTo(0, 0);
-        updateSEO("Manufacturing | Rainbow Polypack", "/manufacturing");
+        updateSEO("Manufacturing | Rainbow Polypack", "/manufacturing", "A cinematic look into our 3-step precision engineering process, from virgin resin to flawless preforms.");
       }, []);
 
       const sections = [
